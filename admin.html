@@ -1329,53 +1329,51 @@ async function loadProducts() {
 
 /* TOGGLE AVAILABLE / SOLD */
 
-async function toggleAvailability(
-  id,
-  currentlyAvailable
-) {
+async function toggleAvailability(id, currentlyAvailable) {
 
-  const newStatus =
-    !currentlyAvailable;
+  const newStatus = !currentlyAvailable;
 
+  const actionText = newStatus
+    ? "mark this product as AVAILABLE"
+    : "mark this product as SOLD";
 
-  const actionText =
-    newStatus
-      ? "mark this product as AVAILABLE"
-      : "mark this product as SOLD";
-
-
-  const confirmed =
-    confirm(
-      `Are you sure you want to ${actionText}?`
-    );
-
+  const confirmed = confirm(
+    `Are you sure you want to ${actionText}?`
+  );
 
   if (!confirmed) return;
 
+  try {
 
-  const { error } =
-    await supabaseClient
+    const { data, error } = await supabaseClient
       .from("products")
       .update({
         available: newStatus
       })
-      .eq("id", id);
+      .eq("id", id)
+      .select();
 
+    if (error) {
+      console.error("Update error:", error);
+      alert(error.message);
+      return;
+    }
 
-  if (error) {
+    if (!data || data.length === 0) {
+      alert("Product was not updated. Please refresh and try again.");
+      return;
+    }
 
+    await loadProducts();
+
+  } catch (error) {
+
+    console.error(error);
     alert(error.message);
-
-    return;
 
   }
 
-
-  loadProducts();
-
 }
-
-
 /* EDIT PRODUCT */
 
 async function editProduct(id) {
