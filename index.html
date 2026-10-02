@@ -528,6 +528,11 @@ nav a:hover {
   gap:12px;
 }
 
+/*
+Main gallery image area.
+Swipe support is handled by JavaScript.
+*/
+
 .details-image {
   min-height:550px;
   border-radius:24px;
@@ -535,10 +540,16 @@ nav a:hover {
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
   background:
     radial-gradient(circle at 50% 45%,#e7dfcf,transparent 34%),
     linear-gradient(145deg,#f8f8f6,#e9e7e0);
+  touch-action:pan-y;
+  user-select:none;
+  -webkit-user-select:none;
 }
+
+/* MAIN IMAGE */
 
 .details-image img {
   width:100%;
@@ -547,6 +558,101 @@ nav a:hover {
   object-fit:contain;
   padding:35px;
   filter:drop-shadow(0 30px 30px rgba(0,0,0,.18));
+  transition:
+    opacity .22s ease,
+    transform .28s ease;
+}
+
+/* GALLERY ARROWS */
+
+.gallery-arrow {
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.7);
+  background:rgba(0,0,0,.55);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  line-height:1;
+  cursor:pointer;
+  z-index:5;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  transition:.2s;
+  opacity:.85;
+}
+
+.gallery-arrow:hover {
+  background:#0b0b0b;
+  color:var(--gold-light);
+  transform:translateY(-50%) scale(1.06);
+}
+
+.gallery-arrow-left {
+  left:14px;
+}
+
+.gallery-arrow-right {
+  right:14px;
+}
+
+/* PHOTO COUNTER */
+
+.gallery-counter {
+  position:absolute;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.65);
+  color:white;
+  padding:6px 11px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:800;
+  z-index:5;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+/* DOTS */
+
+.gallery-dots {
+  position:absolute;
+  left:50%;
+  bottom:16px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:6px;
+  align-items:center;
+  justify-content:center;
+  z-index:5;
+  max-width:80%;
+  overflow:hidden;
+}
+
+.gallery-dot {
+  width:6px;
+  height:6px;
+  min-width:6px;
+  border-radius:50%;
+  border:none;
+  padding:0;
+  background:rgba(255,255,255,.55);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.gallery-dot.active {
+  width:20px;
+  min-width:20px;
+  border-radius:10px;
+  background:white;
 }
 
 /* THUMBNAILS */
@@ -1172,6 +1278,32 @@ footer {
     min-width:62px;
   }
 
+  /* MOBILE GALLERY */
+
+  .gallery-arrow {
+    width:36px;
+    height:36px;
+    font-size:20px;
+  }
+
+  .gallery-arrow-left {
+    left:9px;
+  }
+
+  .gallery-arrow-right {
+    right:9px;
+  }
+
+  .gallery-counter {
+    top:10px;
+    font-size:9px;
+    padding:5px 9px;
+  }
+
+  .gallery-dots {
+    bottom:11px;
+  }
+
 }
 
 /* HIDE NORMAL SITE WHEN DETAILS IS OPEN */
@@ -1732,14 +1864,60 @@ onclick="closeProductDetails()">
 
 <div class="details-gallery">
 
-<div class="details-image">
+<div
+class="details-image"
+id="detailsImageArea">
+
+<!-- GALLERY COUNTER -->
+
+<div
+class="gallery-counter"
+id="galleryCounter">
+1 / 1
+</div>
+
+
+<!-- LEFT ARROW -->
+
+<button
+type="button"
+class="gallery-arrow gallery-arrow-left"
+id="galleryPrev"
+aria-label="Previous photo">
+‹
+</button>
+
+
+<!-- MAIN IMAGE -->
 
 <img
 id="detailsImage"
 src=""
 alt="Product">
 
+
+<!-- RIGHT ARROW -->
+
+<button
+type="button"
+class="gallery-arrow gallery-arrow-right"
+id="galleryNext"
+aria-label="Next photo">
+›
+</button>
+
+
+<!-- DOTS -->
+
+<div
+class="gallery-dots"
+id="galleryDots">
 </div>
+
+</div>
+
+
+<!-- THUMBNAILS -->
 
 <div
 id="detailsThumbnails"
@@ -1891,6 +2069,23 @@ SUPABASE_KEY
 let productsData = [];
 
 
+/*
+CURRENT PRODUCT GALLERY STATE
+*/
+
+let currentGalleryImages = [];
+
+let currentGalleryIndex = 0;
+
+
+/* TOUCH SWIPE STATE */
+
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+
 /* SAFE TEXT */
 
 function escapeHtml(value) {
@@ -1938,6 +2133,472 @@ return [product.image_url];
 return [];
 
 }
+
+
+/*
+UPDATE GALLERY UI
+
+Updates:
+- Main image
+- Counter
+- Dots
+- Active thumbnail
+*/
+
+function updateGallery(index, direction = 0) {
+
+if (!currentGalleryImages.length) {
+
+return;
+
+}
+
+
+/*
+LOOP GALLERY
+
+If user goes before first,
+jump to last.
+
+If user goes after last,
+jump to first.
+*/
+
+if (
+index < 0
+) {
+
+index =
+currentGalleryImages.length - 1;
+
+}
+
+if (
+index >= currentGalleryImages.length
+) {
+
+index = 0;
+
+}
+
+
+currentGalleryIndex =
+index;
+
+
+const image =
+document.getElementById(
+"detailsImage"
+);
+
+
+if (direction !== 0) {
+
+image.style.opacity = "0";
+
+image.style.transform =
+direction > 0
+? "translateX(-12px)"
+: "translateX(12px)";
+
+setTimeout(() => {
+
+image.src =
+currentGalleryImages[currentGalleryIndex];
+
+image.style.transform =
+direction > 0
+? "translateX(12px)"
+: "translateX(-12px)";
+
+requestAnimationFrame(() => {
+
+image.style.opacity = "1";
+
+image.style.transform =
+"translateX(0)";
+
+});
+
+},120);
+
+} else {
+
+image.src =
+currentGalleryImages[currentGalleryIndex];
+
+image.style.opacity = "1";
+
+image.style.transform =
+"translateX(0)";
+
+}
+
+
+/*
+COUNTER
+*/
+
+const counter =
+document.getElementById(
+"galleryCounter"
+);
+
+counter.textContent =
+`${currentGalleryIndex + 1} / ${currentGalleryImages.length}`;
+
+
+/*
+DOTS
+*/
+
+document
+.querySelectorAll(".gallery-dot")
+.forEach((dot,dotIndex) => {
+
+dot.classList.toggle(
+"active",
+dotIndex === currentGalleryIndex
+);
+
+});
+
+
+/*
+THUMBNAILS
+*/
+
+document
+.querySelectorAll(".details-thumbnail")
+.forEach((thumb,thumbIndex) => {
+
+thumb.classList.toggle(
+"active",
+thumbIndex === currentGalleryIndex
+);
+
+});
+
+
+/*
+KEEP ACTIVE THUMBNAIL
+VISIBLE
+*/
+
+const activeThumb =
+document.querySelector(
+".details-thumbnail.active"
+);
+
+if (activeThumb) {
+
+activeThumb.scrollIntoView({
+behavior:"smooth",
+block:"nearest",
+inline:"center"
+});
+
+}
+
+}
+
+
+/*
+NEXT PHOTO
+*/
+
+function nextGalleryImage() {
+
+if (
+currentGalleryImages.length <= 1
+) {
+
+return;
+
+}
+
+updateGallery(
+currentGalleryIndex + 1,
+1
+);
+
+}
+
+
+/*
+PREVIOUS PHOTO
+*/
+
+function previousGalleryImage() {
+
+if (
+currentGalleryImages.length <= 1
+) {
+
+return;
+
+}
+
+updateGallery(
+currentGalleryIndex - 1,
+-1
+);
+
+}
+
+
+/*
+BUILD GALLERY DOTS
+*/
+
+function buildGalleryDots() {
+
+const dots =
+document.getElementById(
+"galleryDots"
+);
+
+dots.innerHTML = "";
+
+
+currentGalleryImages.forEach(
+(url,index) => {
+
+const dot =
+document.createElement("button");
+
+dot.type =
+"button";
+
+dot.className =
+"gallery-dot" +
+(index === 0 ? " active" : "");
+
+dot.setAttribute(
+"aria-label",
+`View photo ${index + 1}`
+);
+
+
+dot.addEventListener(
+"click",
+function(event) {
+
+event.stopPropagation();
+
+const direction =
+index > currentGalleryIndex
+? 1
+: -1;
+
+updateGallery(
+index,
+direction
+);
+
+}
+);
+
+
+dots.appendChild(dot);
+
+}
+);
+
+}
+
+
+/*
+SETUP GALLERY CONTROLS
+*/
+
+function setupGalleryControls() {
+
+const previous =
+document.getElementById(
+"galleryPrev"
+);
+
+const next =
+document.getElementById(
+"galleryNext"
+);
+
+
+previous.onclick =
+function(event) {
+
+event.stopPropagation();
+
+previousGalleryImage();
+
+};
+
+
+next.onclick =
+function(event) {
+
+event.stopPropagation();
+
+nextGalleryImage();
+
+};
+
+
+const gallery =
+document.getElementById(
+"detailsImageArea"
+);
+
+
+/*
+TOUCH START
+*/
+
+gallery.addEventListener(
+"touchstart",
+function(event) {
+
+if (
+!currentGalleryImages.length
+) {
+
+return;
+
+}
+
+const touch =
+event.changedTouches[0];
+
+touchStartX =
+touch.clientX;
+
+touchStartY =
+touch.clientY;
+
+},
+{
+passive:true
+}
+);
+
+
+/*
+TOUCH END
+*/
+
+gallery.addEventListener(
+"touchend",
+function(event) {
+
+if (
+!currentGalleryImages.length
+) {
+
+return;
+
+}
+
+const touch =
+event.changedTouches[0];
+
+touchEndX =
+touch.clientX;
+
+touchEndY =
+touch.clientY;
+
+
+/*
+Calculate swipe distance
+*/
+
+const distanceX =
+touchEndX - touchStartX;
+
+const distanceY =
+touchEndY - touchStartY;
+
+
+/*
+Only treat it as a swipe
+if horizontal movement is
+stronger than vertical movement.
+*/
+
+if (
+Math.abs(distanceX) > 45 &&
+Math.abs(distanceX) > Math.abs(distanceY)
+) {
+
+if (distanceX < 0) {
+
+nextGalleryImage();
+
+} else {
+
+previousGalleryImage();
+
+}
+
+}
+
+},
+{
+passive:true
+}
+);
+
+}
+
+
+/*
+KEYBOARD GALLERY CONTROLS
+
+Desktop users can use
+left/right arrow keys.
+*/
+
+document.addEventListener(
+"keydown",
+function(event) {
+
+if (
+!document.body.classList.contains(
+"details-open"
+)
+) {
+
+return;
+
+}
+
+if (
+event.key === "ArrowRight"
+) {
+
+nextGalleryImage();
+
+}
+
+if (
+event.key === "ArrowLeft"
+) {
+
+previousGalleryImage();
+
+}
+
+if (
+event.key === "Escape"
+) {
+
+closeProductDetails();
+
+}
+
+}
+);
 
 
 /* LOAD PRODUCTS */
@@ -2147,16 +2808,33 @@ function openProductDetails(product) {
 if (!product) return;
 
 
-/* GET ALL IMAGES */
+/*
+GET ALL IMAGES
+*/
 
 const imageUrls =
 getProductImages(product);
 
 
-/* MAIN IMAGE */
+/*
+STORE GALLERY STATE
+*/
+
+currentGalleryImages =
+imageUrls;
+
+currentGalleryIndex =
+0;
+
+
+/*
+MAIN IMAGE
+*/
 
 const image =
-document.getElementById("detailsImage");
+document.getElementById(
+"detailsImage"
+);
 
 image.src =
 imageUrls[0] || "";
@@ -2165,7 +2843,87 @@ image.alt =
 product.name || "Product";
 
 
-/* THUMBNAILS */
+/*
+RESET IMAGE ANIMATION
+*/
+
+image.style.opacity =
+"1";
+
+image.style.transform =
+"translateX(0)";
+
+
+/*
+BUILD GALLERY DOTS
+*/
+
+buildGalleryDots();
+
+
+/*
+UPDATE COUNTER
+*/
+
+const counter =
+document.getElementById(
+"galleryCounter"
+);
+
+counter.textContent =
+`1 / ${imageUrls.length || 1}`;
+
+
+/*
+SHOW/HIDE ARROWS
+
+Only show navigation
+when there is more than
+one image.
+*/
+
+const previous =
+document.getElementById(
+"galleryPrev"
+);
+
+const next =
+document.getElementById(
+"galleryNext"
+);
+
+
+const hasMultipleImages =
+imageUrls.length > 1;
+
+
+previous.style.display =
+hasMultipleImages
+? "flex"
+: "none";
+
+next.style.display =
+hasMultipleImages
+? "flex"
+: "none";
+
+
+/*
+SHOW/HIDE COUNTER
+
+Keep counter for multiple
+photos.
+*/
+
+counter.style.display =
+hasMultipleImages
+? "block"
+: "none";
+
+
+/*
+THUMBNAILS
+*/
 
 const thumbnails =
 document.getElementById(
@@ -2204,20 +2962,16 @@ function(event) {
 event.stopPropagation();
 
 
-image.src =
-url;
+const direction =
+index > currentGalleryIndex
+? 1
+: -1;
 
 
-/* Update active thumbnail */
-
-document
-.querySelectorAll(".details-thumbnail")
-.forEach(
-thumb =>
-thumb.classList.remove("active")
+updateGallery(
+index,
+direction
 );
-
-button.classList.add("active");
 
 }
 );
@@ -2229,7 +2983,10 @@ thumbnails.appendChild(button);
 );
 
 
-/* Hide thumbnail row if only one photo */
+/*
+Hide thumbnail row if only
+one photo.
+*/
 
 thumbnails.style.display =
 imageUrls.length > 1
@@ -2411,12 +3168,30 @@ document.getElementById(
 "active"
 );
 
+
+/*
+Clear gallery state
+when leaving product.
+*/
+
+currentGalleryImages = [];
+
+currentGalleryIndex = 0;
+
+
 window.scrollTo({
 top:0,
 behavior:"instant"
 });
 
 }
+
+
+/*
+START GALLERY CONTROLS
+*/
+
+setupGalleryControls();
 
 
 /* START */
