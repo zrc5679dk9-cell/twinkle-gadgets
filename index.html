@@ -379,6 +379,21 @@ nav a:hover {
   transform:scale(1.06) translateY(-4px);
 }
 
+/* MULTI PHOTO COUNT */
+
+.product-photo-count {
+  position:absolute;
+  right:12px;
+  top:12px;
+  background:rgba(0,0,0,.72);
+  color:white;
+  padding:6px 9px;
+  border-radius:15px;
+  font-size:9px;
+  font-weight:800;
+  z-index:3;
+}
+
 .product-image::after {
   content:"TWINKLE GADGET";
   position:absolute;
@@ -505,6 +520,14 @@ nav a:hover {
   -webkit-backdrop-filter:blur(22px);
 }
 
+/* DETAILS GALLERY */
+
+.details-gallery {
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
 .details-image {
   min-height:550px;
   border-radius:24px;
@@ -524,6 +547,43 @@ nav a:hover {
   object-fit:contain;
   padding:35px;
   filter:drop-shadow(0 30px 30px rgba(0,0,0,.18));
+}
+
+/* THUMBNAILS */
+
+.details-thumbnails {
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  padding:2px 1px 5px;
+  scrollbar-width:none;
+}
+
+.details-thumbnails::-webkit-scrollbar {
+  display:none;
+}
+
+.details-thumbnail {
+  width:70px;
+  height:70px;
+  min-width:70px;
+  border-radius:14px;
+  overflow:hidden;
+  border:2px solid transparent;
+  background:#eee;
+  padding:0;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.details-thumbnail img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.details-thumbnail.active {
+  border-color:var(--accent);
 }
 
 .details-info {
@@ -602,6 +662,28 @@ nav a:hover {
 .detail-value {
   font-weight:700;
   text-align:right;
+}
+
+/* DESCRIPTION */
+
+.details-description {
+  margin-bottom:25px;
+}
+
+.details-description-title {
+  font-size:10px;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-weight:800;
+  margin-bottom:9px;
+}
+
+.details-description-text {
+  color:#666;
+  font-size:14px;
+  line-height:1.7;
+  white-space:pre-line;
 }
 
 .details-actions {
@@ -1082,6 +1164,12 @@ footer {
 
   .details-price {
     font-size:23px;
+  }
+
+  .details-thumbnail {
+    width:62px;
+    height:62px;
+    min-width:62px;
   }
 
 }
@@ -1640,12 +1728,23 @@ onclick="closeProductDetails()">
 
 <div class="details-card">
 
+<!-- GALLERY -->
+
+<div class="details-gallery">
+
 <div class="details-image">
 
 <img
 id="detailsImage"
 src=""
 alt="Product">
+
+</div>
+
+<div
+id="detailsThumbnails"
+class="details-thumbnails">
+</div>
 
 </div>
 
@@ -1724,6 +1823,25 @@ id="detailsCondition">
 </div>
 
 
+<!-- FULL DESCRIPTION -->
+
+<div
+class="details-description"
+id="detailsDescriptionBox">
+
+<div class="details-description-title">
+Description
+</div>
+
+<div
+class="details-description-text"
+id="detailsDescription">
+—
+</div>
+
+</div>
+
+
 <div class="details-actions">
 
 <a
@@ -1788,6 +1906,40 @@ return div.innerHTML;
 }
 
 
+/*
+GET ALL PRODUCT IMAGES
+
+Uses image_urls first.
+Falls back to image_url for
+older products.
+*/
+
+function getProductImages(product) {
+
+if (
+Array.isArray(product.image_urls) &&
+product.image_urls.length
+) {
+
+return product.image_urls.filter(
+url => typeof url === "string" && url.trim()
+);
+
+}
+
+if (
+product.image_url
+) {
+
+return [product.image_url];
+
+}
+
+return [];
+
+}
+
+
 /* LOAD PRODUCTS */
 
 async function loadProducts() {
@@ -1822,8 +1974,6 @@ return;
 /*
 Only show available products
 on the public collection.
-Sold products remain in
-Supabase for the admin/history.
 */
 
 productsData =
@@ -1864,12 +2014,38 @@ card.className =
 "product";
 
 
+/* GET ALL IMAGES */
+
+const imageUrls =
+getProductImages(product);
+
+
+const mainImage =
+imageUrls.length
+? imageUrls[0]
+: "";
+
+
+/* MAIN CARD IMAGE */
+
 const image =
-product.image_url
+mainImage
 ? `<img
-src="${escapeHtml(product.image_url)}"
+src="${escapeHtml(mainImage)}"
 alt="${escapeHtml(product.name)}"
 loading="lazy">`
+: "";
+
+
+/* PHOTO COUNT */
+
+const photoCount =
+imageUrls.length > 1
+? `
+<div class="product-photo-count">
+📸 ${imageUrls.length} photos
+</div>
+`
 : "";
 
 
@@ -1889,6 +2065,8 @@ card.innerHTML = `
 <div class="product-image">
 
 ${image}
+
+${photoCount}
 
 </div>
 
@@ -1932,12 +2110,8 @@ View Details
 
 
 /*
-IMPORTANT:
-The entire card opens
-the details page.
-
-The button does NOT
-go to WhatsApp anymore.
+Entire card opens
+product details.
 */
 
 card.addEventListener(
@@ -1973,16 +2147,94 @@ function openProductDetails(product) {
 if (!product) return;
 
 
-/* IMAGE */
+/* GET ALL IMAGES */
+
+const imageUrls =
+getProductImages(product);
+
+
+/* MAIN IMAGE */
 
 const image =
 document.getElementById("detailsImage");
 
 image.src =
-product.image_url || "";
+imageUrls[0] || "";
 
 image.alt =
 product.name || "Product";
+
+
+/* THUMBNAILS */
+
+const thumbnails =
+document.getElementById(
+"detailsThumbnails"
+);
+
+thumbnails.innerHTML = "";
+
+
+imageUrls.forEach(
+(url,index) => {
+
+const button =
+document.createElement("button");
+
+button.type =
+"button";
+
+button.className =
+"details-thumbnail" +
+(index === 0 ? " active" : "");
+
+
+button.innerHTML = `
+<img
+src="${escapeHtml(url)}"
+alt="${escapeHtml(product.name || "Product")}"
+>
+`;
+
+
+button.addEventListener(
+"click",
+function(event) {
+
+event.stopPropagation();
+
+
+image.src =
+url;
+
+
+/* Update active thumbnail */
+
+document
+.querySelectorAll(".details-thumbnail")
+.forEach(
+thumb =>
+thumb.classList.remove("active")
+);
+
+button.classList.add("active");
+
+}
+);
+
+
+thumbnails.appendChild(button);
+
+}
+);
+
+
+/* Hide thumbnail row if only one photo */
+
+thumbnails.style.display =
+imageUrls.length > 1
+? "flex"
+: "none";
 
 
 /* NAME */
@@ -2033,6 +2285,41 @@ document.getElementById(
 "detailsCondition"
 ).textContent =
 product.condition || "Not specified";
+
+
+/* FULL DESCRIPTION */
+
+const descriptionBox =
+document.getElementById(
+"detailsDescriptionBox"
+);
+
+const description =
+document.getElementById(
+"detailsDescription"
+);
+
+
+if (
+product.description &&
+product.description.trim()
+) {
+
+description.textContent =
+product.description;
+
+descriptionBox.style.display =
+"block";
+
+} else {
+
+description.textContent =
+"";
+
+descriptionBox.style.display =
+"none";
+
+}
 
 
 /* STATUS */
@@ -2161,7 +2448,6 @@ window.addEventListener(
 closeProductDetails();
 
 });
-
 
 </script>
 
