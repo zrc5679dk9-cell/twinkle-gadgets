@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Twinkle Gadgets | Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+:root {
+  --black: #0b0b0b;
+  --cream: #f7f6f2;
+  --gold: #b08a32;
+  --gold-light: #d4b35a;
+  --muted: #777;
+  --line: rgba(0,0,0,.09);
+  --white: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(176,138,50,.12),
+      transparent 30%
+    ),
+    var(--cream);
+
+  color: var(--black);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+/* HEADER */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.brand {
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: -.5px;
+}
+
+.brand span {
+  color: var(--gold);
+}
+
+.logout {
+  border: 0;
+  background: #111;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+/* LOGIN */
+
+.login {
+  max-width: 430px;
+  margin: 80px auto;
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: 0 25px 80px rgba(0,0,0,.08);
+}
+
+.login h1 {
+  font-size: 32px;
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+}
+
+.login p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+/* FORM */
+
+.card {
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255,255,255,.75);
+  border-radius: 28px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 20px 70px rgba(0,0,0,.06);
+}
+
+.card h2 {
+  font-size: 22px;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 7px;
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.85);
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 16px;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(176,138,50,.1);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.file-box {
+  border: 1.5px dashed rgba(176,138,50,.5);
+  border-radius: 18px;
+  padding: 25px 15px;
+  text-align: center;
+  margin-bottom: 18px;
+  background: rgba(176,138,50,.04);
+}
+
+.file-box input {
+  margin: 10px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.preview {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 18px;
+  margin-top: 12px;
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.primary {
+  width: 100%;
+  border: 0;
+  border-radius: 25px;
+  padding: 15px;
+  background: #0b0b0b;
+  color: white;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.primary:hover {
+  color: var(--gold-light);
+}
+
+.message {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* PRODUCTS */
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.product {
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0,0,0,.05);
+}
+
+.product img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.product-info {
+  padding: 15px;
+}
+
+.product-name {
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.product-meta {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.product-price {
+  font-weight: 900;
+  margin-top: 10px;
+}
+
+.product-actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.edit,
+.delete {
+  flex: 1;
+  border: 0;
+  padding: 9px;
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.edit {
+  background: #111;
+  color: white;
+}
+
+.delete {
+  background: #eee;
+  color: #111;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.available {
+  background: rgba(0,150,70,.1);
+  color: #087a3b;
+}
+
+.sold {
+  background: rgba(200,0,0,.08);
+  color: #a00000;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media(max-width:600px) {
+
+  body {
+    padding: 14px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .product-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .product img {
+    height: 170px;
+  }
+
+  .card {
+    padding: 20px;
+    border-radius: 23px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<!-- LOGIN -->
+
+<div id="loginScreen" class="login">
+
+  <h1>Twinkle Gadgets<span>.</span></h1>
+
+  <p>
+    Private product management
+  </p>
+
+  <form id="loginForm">
+
+    <label>Email</label>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Your admin email"
+      required
+    >
+
+    <label>Password</label>
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Your password"
+      required
+    >
+
+    <button class="primary">
+      Login
+    </button>
+
+    <div
+      id="loginMessage"
+      class="message">
+    </div>
+
+  </form>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminScreen" class="hidden">
+
+  <div class="header">
+
+    <div class="brand">
+      TWINKLE GADGET<span>.</span>
+    </div>
+
+    <button
+      class="logout"
+      id="logoutBtn">
+      Logout
+    </button>
+
+  </div>
+
+
+  <!-- ADD PRODUCT -->
+
+  <div class="card">
+
+    <h2 id="formTitle">
+      Add Product
+    </h2>
+
+    <form id="productForm">
+
+      <div class="file-box">
+
+        <strong>
+          📸 Product Photo
+        </strong>
+
+        <p
+          style="font-size:12px;color:#777;margin-top:5px;">
+          Choose a photo from your iPhone
+        </p>
+
+        <input
+          type="file"
+          id="image"
+          accept="image/*"
+        >
+
+        <img
+          id="preview"
+          class="preview"
+        >
+
+      </div>
+
+
+      <label>
+        Product Name
+      </label>
+
+      <input
+        id="name"
+        placeholder="e.g. iPhone 15 Pro Max"
+        required
+      >
+
+
+      <div class="row">
+
+        <div>
+
+          <label>
+            Storage
+          </label>
+
+          <input
+            id="storage"
+            placeholder="256GB"
+          >
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Battery
+          </label>
+
+          <input
+            id="battery"
+            placeholder="91%"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div>
+
+          <label>
+            Condition
+          </label>
+
+          <select id="condition">
+
+            <option>
+              UK Used
+            </option>
+
+            <option>
+              Brand New
+            </option>
+
+            <option>
+              Nigerian Used
+            </option>
+
+            <option>
+              Refurbished
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Category
+          </label>
+
+          <select id="category">
+
+            <option>
+              iPhone
+            </option>
+
+            <option>
+              Samsung
+            </option>
+
+            <option>
+              Android
+            </option>
+
+            <option>
+              Gadget
+            </option>
+
+            <option>
+              Accessory
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <label>
+        Price
+      </label>
+
+      <input
+        type="number"
+        id="price"
+        placeholder="350000"
+        required
+      >
+
+
+      <label>
+        Availability
+      </label>
+
+      <select id="available">
+
+        <option value="true">
+          Available
+        </option>
+
+        <option value="false">
+          Sold
+        </option>
+
+      </select>
+
+
+      <button
+        class="primary"
+        id="saveButton">
+        Publish Product
+      </button>
+
+      <div
+        id="productMessage"
+        class="message">
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- PRODUCT LIST -->
+
+  <div class="card">
+
+    <h2>
+      Your Products
+    </h2>
+
+    <div
+      id="productList"
+      class="product-list">
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://tpasjsjofhxpslomciqd.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_T23aVAQOy6JSldACQSNkFQ_TGQSEVMX";
+
+const supabaseClient =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+let editingId = null;
+let editingImageUrl = null;
+
+
+/* LOGIN */
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", async function(e) {
+
+  e.preventDefault();
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  const message =
+    document.getElementById("loginMessage");
+
+  message.textContent =
+    "Logging in...";
+
+  const { error } =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  if (error) {
+
+    message.textContent =
+      error.message;
+
+    return;
+
+  }
+
+  message.textContent = "";
+
+  showAdmin();
+
+});
+
+
+/* AUTH CHECK */
+
+async function checkUser() {
+
+  const {
+    data: { session }
+  } =
+    await supabaseClient.auth.getSession();
+
+  if (session) {
+
+    showAdmin();
+
+  }
+
+}
+
+
+function showAdmin() {
+
+  document
+    .getElementById("loginScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("adminScreen")
+    .classList.remove("hidden");
+
+  loadProducts();
+
+}
+
+
+/* LOGOUT */
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async function() {
+
+  await supabaseClient.auth.signOut();
+
+  location.reload();
+
+});
+
+
+/* IMAGE PREVIEW */
+
+document
+.getElementById("image")
+.addEventListener("change", function() {
+
+  const file = this.files[0];
+
+  if (!file) return;
+
+  const preview =
+    document.getElementById("preview");
+
+  preview.src =
+    URL.createObjectURL(file);
+
+  preview.style.display =
+    "block";
+
+});
+
+
+/* UPLOAD IMAGE */
+
+async function uploadImage(file) {
+
+  const extension =
+    file.name.split(".").pop();
+
+  const fileName =
+    crypto.randomUUID() +
+    "." +
+    extension;
+
+  const path =
+    "products/" + fileName;
+
+  const { error } =
+    await supabaseClient
+      .storage
+      .from("product-images")
+      .upload(path, file, {
+        cacheControl: "3600",
+        upsert: false
+      });
+
+  if (error) {
+
+    throw error;
+
+  }
+
+  const { data } =
+    supabaseClient
+      .storage
+      .from("product-images")
+      .getPublicUrl(path);
+
+  return data.publicUrl;
+
+}
+
+
+/* SAVE PRODUCT */
+
+document
+.getElementById("productForm")
+.addEventListener("submit", async function(e) {
+
+  e.preventDefault();
+
+  const message =
+    document.getElementById("productMessage");
+
+  const button =
+    document.getElementById("saveButton");
+
+  button.disabled = true;
+
+  button.textContent =
+    "Saving...";
+
+  message.textContent = "";
+
+
+  try {
+
+    let imageUrl =
+      editingImageUrl;
+
+
+    const file =
+      document.getElementById("image").files[0];
+
+
+    if (file) {
+
+      imageUrl =
+        await uploadImage(file);
+
+    }
+
+
+    const product = {
+
+      name:
+        document.getElementById("name").value,
+
+      storage:
+        document.getElementById("storage").value,
+
+      condition:
+        document.getElementById("condition").value,
+
+      battery:
+        document.getElementById("battery").value,
+
+      price:
+        Number(
+          document.getElementById("price").value
+        ),
+
+      category:
+        document.getElementById("category").value,
+
+      image_url:
+        imageUrl,
+
+      available:
+        document.getElementById("available").value
+        === "true"
+
+    };
+
+
+    let error;
+
+
+    if (editingId) {
+
+      const result =
+        await supabaseClient
+          .from("products")
+          .update(product)
+          .eq("id", editingId);
+
+      error =
+        result.error;
+
+    } else {
+
+      const result =
+        await supabaseClient
+          .from("products")
+          .insert(product);
+
+      error =
+        result.error;
+
+    }
+
+
+    if (error) {
+
+      throw error;
+
+    }
+
+
+    message.textContent =
+      editingId
+        ? "Product updated successfully."
+        : "Product published successfully.";
+
+
+    resetForm();
+
+    loadProducts();
+
+
+  } catch(error) {
+
+    message.textContent =
+      error.message;
+
+  }
+
+
+  button.disabled = false;
+
+  button.textContent =
+    "Publish Product";
+
+});
+
+
+/* LOAD PRODUCTS */
+
+async function loadProducts() {
+
+  const list =
+    document.getElementById("productList");
+
+  list.innerHTML =
+    "<p>Loading products...</p>";
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .order("created_at", {
+        ascending: false
+      });
+
+
+  if (error) {
+
+    list.innerHTML =
+      "<p>" + error.message + "</p>";
+
+    return;
+
+  }
+
+
+  if (!data.length) {
+
+    list.innerHTML =
+      "<p style='color:#777;font-size:13px;'>No products yet. Add your first product above.</p>";
+
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  data.forEach(product => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "product";
+
+
+    const image =
+      product.image_url
+        ? `<img src="${product.image_url}" alt="${product.name}">`
+        : `<div style="height:210px;background:#eee;display:flex;align-items:center;justify-content:center;">No photo</div>`;
+
+
+    card.innerHTML = `
+
+      ${image}
+
+      <div class="product-info">
+
+        <div class="product-name">
+          ${escapeHtml(product.name)}
+        </div>
+
+        <div class="product-meta">
+          ${escapeHtml(product.storage || "")}
+          •
+          ${escapeHtml(product.condition || "")}
+        </div>
+
+        <div class="product-price">
+          ₦${Number(product.price || 0).toLocaleString()}
+        </div>
+
+        <div
+          class="status ${product.available ? "available" : "sold"}">
+
+          ${product.available ? "AVAILABLE" : "SOLD"}
+
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            class="edit"
+            onclick="editProduct('${product.id}')">
+
+            Edit
+
+          </button>
+
+          <button
+            class="delete"
+            onclick="deleteProduct('${product.id}')">
+
+            Delete
+
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    list.appendChild(card);
+
+  });
+
+}
+
+
+/* EDIT */
+
+async function editProduct(id) {
+
+  const { data, error } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+
+  if (error) {
+
+    alert(error.message);
+
+    return;
+
+  }
+
+
+  editingId =
+    data.id;
+
+  editingImageUrl =
+    data.image_url;
+
+
+  document
+    .getElementById("name")
+    .value =
+    data.name || "";
+
+
+  document
+    .getElementById("storage")
+    .value =
+    data.storage || "";
+
+
+  document
+    .getElementById("battery")
+    .value =
+    data.battery || "";
+
+
+  document
+    .getElementById("condition")
+    .value =
+    data.condition || "UK Used";
+
+
+  document
+    .getElementById("category")
+    .value =
+    data.category || "iPhone";
+
+
+  document
+    .getElementById("price")
+    .value =
+    data.price || "";
+
+
+  document
+    .getElementById("available")
+    .value =
+    data.available ? "true" : "false";
+
+
+  document
+    .getElementById("formTitle")
+    .textContent =
+    "Edit Product";
+
+
+  document
+    .getElementById("saveButton")
+    .textContent =
+    "Update Product";
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* DELETE */
+
+async function deleteProduct(id) {
+
+  const confirmDelete =
+    confirm(
+      "Delete this product?"
+    );
+
+
+  if (!confirmDelete) return;
+
+
+  const { error } =
+    await supabaseClient
+      .from("products")
+      .delete()
+      .eq("id", id);
+
+
+  if (error) {
+
+    alert(error.message);
+
+    return;
+
+  }
+
+
+  loadProducts();
+
+}
+
+
+/* RESET */
+
+function resetForm() {
+
+  editingId = null;
+
+  editingImageUrl = null;
+
+  document
+    .getElementById("productForm")
+    .reset();
+
+  document
+    .getElementById("preview")
+    .style.display =
+    "none";
+
+  document
+    .getElementById("formTitle")
+    .textContent =
+    "Add Product";
+
+  document
+    .getElementById("saveButton")
+    .textContent =
+    "Publish Product";
+
+}
+
+
+/* SECURITY */
+
+function escapeHtml(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    text;
+
+  return div.innerHTML;
+
+}
+
+
+/* START */
+
+checkUser();
+
+</script>
+
+</body>
+
+</html>
