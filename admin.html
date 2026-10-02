@@ -59,6 +59,8 @@ body {
   margin: auto;
 }
 
+/* HEADER */
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -84,6 +86,8 @@ body {
   border-radius: 20px;
   font-weight: 700;
 }
+
+/* LOGIN */
 
 .login {
   max-width: 430px;
@@ -112,6 +116,8 @@ body {
   font-size: 13px;
   margin-bottom: 25px;
 }
+
+/* FORM */
 
 .card {
   background: rgba(255,255,255,.72);
@@ -172,6 +178,8 @@ textarea:focus {
   gap: 12px;
 }
 
+/* IMAGE UPLOAD */
+
 .file-box {
   border: 1.5px dashed rgba(176,138,50,.5);
   border-radius: 18px;
@@ -188,22 +196,22 @@ textarea:focus {
   background: transparent;
 }
 
-.photo-previews {
+.photo-preview-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 10px;
   margin-top: 15px;
 }
 
-.photo-preview-box {
+.photo-preview {
   position: relative;
-  border-radius: 14px;
+  border-radius: 15px;
   overflow: hidden;
-  background: #eee;
   aspect-ratio: 1;
+  background: #eee;
 }
 
-.photo-preview-box img {
+.photo-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -211,14 +219,32 @@ textarea:focus {
 
 .photo-number {
   position: absolute;
-  left: 6px;
-  top: 6px;
+  left: 7px;
+  top: 7px;
   background: rgba(0,0,0,.7);
   color: white;
   border-radius: 10px;
   padding: 4px 7px;
   font-size: 9px;
   font-weight: 800;
+}
+
+.existing-photo {
+  position: relative;
+}
+
+.remove-photo {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  width: 25px;
+  height: 25px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,.75);
+  color: white;
+  font-weight: 900;
+  cursor: pointer;
 }
 
 .primary {
@@ -247,6 +273,8 @@ textarea:focus {
   font-size: 13px;
   color: var(--muted);
 }
+
+/* INVENTORY SUMMARY */
 
 .inventory-summary {
   display: grid;
@@ -277,6 +305,8 @@ textarea:focus {
   margin-top: 3px;
 }
 
+/* PRODUCTS */
+
 .product-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -296,13 +326,32 @@ textarea:focus {
 
 .product:hover {
   transform: translateY(-3px);
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.08),
+    0 0 25px rgba(176,138,50,.08);
 }
 
-.product img {
+.product-main-image {
   width: 100%;
   height: 210px;
   object-fit: cover;
   background: #eee;
+}
+
+.product-photo-count {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background: rgba(0,0,0,.72);
+  color: white;
+  padding: 5px 9px;
+  border-radius: 12px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.product-image-wrap {
+  position: relative;
 }
 
 .product-info {
@@ -326,23 +375,16 @@ textarea:focus {
   margin-top: 3px;
 }
 
-.product-price {
-  font-weight: 900;
-  margin-top: 10px;
-}
-
 .product-description {
   color: #666;
   font-size: 11px;
-  line-height: 1.45;
+  line-height: 1.4;
   margin-top: 8px;
 }
 
-.photo-count {
-  color: var(--gold);
-  font-size: 10px;
-  font-weight: 800;
-  margin-top: 7px;
+.product-price {
+  font-weight: 900;
+  margin-top: 10px;
 }
 
 .status {
@@ -440,8 +482,12 @@ textarea:focus {
     gap: 10px;
   }
 
-  .product img {
+  .product-main-image {
     height: 170px;
+  }
+
+  .photo-preview-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .card {
@@ -449,8 +495,8 @@ textarea:focus {
     border-radius: 23px;
   }
 
-  .photo-previews {
-    grid-template-columns: repeat(3, 1fr);
+  .product-actions {
+    grid-template-columns: 1fr 1fr;
   }
 
 }
@@ -462,6 +508,8 @@ textarea:focus {
 <body>
 
 <div class="container">
+
+<!-- LOGIN -->
 
 <div id="loginScreen" class="login">
 
@@ -503,6 +551,9 @@ textarea:focus {
 
 </div>
 
+
+<!-- ADMIN -->
+
 <div id="adminScreen" class="hidden">
 
   <div class="header">
@@ -517,24 +568,57 @@ textarea:focus {
 
   </div>
 
+
+  <!-- INVENTORY SUMMARY -->
+
   <div class="inventory-summary">
 
     <div class="summary-box">
-      <div class="summary-number" id="totalCount">0</div>
-      <div class="summary-label">Total</div>
+
+      <div
+        class="summary-number"
+        id="totalCount">
+        0
+      </div>
+
+      <div class="summary-label">
+        Total
+      </div>
+
     </div>
 
     <div class="summary-box">
-      <div class="summary-number" id="availableCount">0</div>
-      <div class="summary-label">Available</div>
+
+      <div
+        class="summary-number"
+        id="availableCount">
+        0
+      </div>
+
+      <div class="summary-label">
+        Available
+      </div>
+
     </div>
 
     <div class="summary-box">
-      <div class="summary-number" id="soldCount">0</div>
-      <div class="summary-label">Sold</div>
+
+      <div
+        class="summary-number"
+        id="soldCount">
+        0
+      </div>
+
+      <div class="summary-label">
+        Sold
+      </div>
+
     </div>
 
   </div>
+
+
+  <!-- ADD / EDIT PRODUCT -->
 
   <div class="card">
 
@@ -544,29 +628,34 @@ textarea:focus {
 
     <form id="productForm">
 
+
+      <!-- MULTIPLE PHOTOS -->
+
       <div class="file-box">
 
         <strong>
           📸 Product Photos
         </strong>
 
-        <p style="font-size:12px;color:#777;margin-top:5px;">
+        <p
+          style="font-size:12px;color:#777;margin-top:5px;">
           Select multiple photos from your iPhone
         </p>
 
         <input
           type="file"
-          id="image"
+          id="images"
           accept="image/*"
           multiple
         >
 
         <div
-          id="photoPreviews"
-          class="photo-previews">
+          id="photoPreviewGrid"
+          class="photo-preview-grid">
         </div>
 
       </div>
+
 
       <label>
         Product Name
@@ -577,6 +666,7 @@ textarea:focus {
         placeholder="e.g. iPhone 15 Pro Max"
         required
       >
+
 
       <div class="row">
 
@@ -608,6 +698,7 @@ textarea:focus {
 
       </div>
 
+
       <div class="row">
 
         <div>
@@ -626,6 +717,7 @@ textarea:focus {
           </select>
 
         </div>
+
 
         <div>
 
@@ -647,6 +739,27 @@ textarea:focus {
 
       </div>
 
+
+      <!-- DESCRIPTION -->
+
+      <label>
+        Description
+      </label>
+
+      <textarea
+        id="description"
+        placeholder="Describe the phone and point out important details...
+
+Example:
+Clean UK used device.
+Face ID working perfectly.
+True Tone available.
+No repairs.
+Small scratch on the frame.
+Everything works perfectly."
+      ></textarea>
+
+
       <label>
         Price
       </label>
@@ -658,14 +771,6 @@ textarea:focus {
         required
       >
 
-      <label>
-        Product Description
-      </label>
-
-      <textarea
-        id="description"
-        placeholder="Write the full product details here...&#10;&#10;Example:&#10;• Face ID working&#10;• True Tone working&#10;• No cracks&#10;• Original screen&#10;• Camera fully working&#10;• Comes with box"
-      ></textarea>
 
       <label>
         Availability
@@ -683,6 +788,7 @@ textarea:focus {
 
       </select>
 
+
       <button
         class="primary"
         id="saveButton">
@@ -697,6 +803,9 @@ textarea:focus {
     </form>
 
   </div>
+
+
+  <!-- PRODUCT LIST -->
 
   <div class="card">
 
@@ -715,7 +824,10 @@ textarea:focus {
 
 </div>
 
+
 <script>
+
+/* SUPABASE */
 
 const SUPABASE_URL =
 "https://tpasjsjofhxpslomciqd.supabase.co";
@@ -729,8 +841,8 @@ supabase.createClient(
   SUPABASE_KEY
 );
 
+
 let editingId = null;
-let editingImageUrl = null;
 let editingImageUrls = [];
 
 
@@ -754,11 +866,13 @@ document
   message.textContent =
     "Logging in...";
 
+
   const { error } =
     await supabaseClient.auth.signInWithPassword({
       email,
       password
     });
+
 
   if (error) {
 
@@ -785,8 +899,11 @@ async function checkUser() {
   } =
     await supabaseClient.auth.getSession();
 
+
   if (session) {
+
     showAdmin();
+
   }
 
 }
@@ -822,18 +939,20 @@ document
 });
 
 
-/* MULTIPLE PHOTO PREVIEW */
+/* MULTIPLE IMAGE PREVIEW */
 
 document
-.getElementById("image")
+.getElementById("images")
 .addEventListener("change", function() {
 
-  const files = Array.from(this.files);
+  const files =
+    Array.from(this.files);
 
-  const previewContainer =
-    document.getElementById("photoPreviews");
+  const grid =
+    document.getElementById("photoPreviewGrid");
 
-  previewContainer.innerHTML = "";
+  grid.innerHTML = "";
+
 
   files.forEach((file, index) => {
 
@@ -842,15 +961,18 @@ document
 
     reader.onload = function(e) {
 
-      const box =
+      const wrapper =
         document.createElement("div");
 
-      box.className =
-        "photo-preview-box";
+      wrapper.className =
+        "photo-preview";
 
-      box.innerHTML = `
+      wrapper.innerHTML = `
 
-        <img src="${e.target.result}">
+        <img
+          src="${e.target.result}"
+          alt="Product photo"
+        >
 
         <div class="photo-number">
           ${index + 1}
@@ -858,7 +980,7 @@ document
 
       `;
 
-      previewContainer.appendChild(box);
+      grid.appendChild(wrapper);
 
     };
 
@@ -869,7 +991,7 @@ document
 });
 
 
-/* UPLOAD IMAGE */
+/* UPLOAD ONE IMAGE */
 
 async function uploadImage(file) {
 
@@ -884,6 +1006,7 @@ async function uploadImage(file) {
   const path =
     "products/" + fileName;
 
+
   const { error } =
     await supabaseClient
       .storage
@@ -893,9 +1016,13 @@ async function uploadImage(file) {
         upsert: false
       });
 
+
   if (error) {
+
     throw error;
+
   }
+
 
   const { data } =
     supabaseClient
@@ -903,7 +1030,28 @@ async function uploadImage(file) {
       .from("product-images")
       .getPublicUrl(path);
 
+
   return data.publicUrl;
+
+}
+
+
+/* UPLOAD MULTIPLE IMAGES */
+
+async function uploadImages(files) {
+
+  const urls = [];
+
+  for (const file of files) {
+
+    const url =
+      await uploadImage(file);
+
+    urls.push(url);
+
+  }
+
+  return urls;
 
 }
 
@@ -916,11 +1064,13 @@ document
 
   e.preventDefault();
 
+
   const message =
     document.getElementById("productMessage");
 
   const button =
     document.getElementById("saveButton");
+
 
   button.disabled = true;
 
@@ -931,68 +1081,74 @@ document
 
   message.textContent = "";
 
+
   try {
+
+    const files =
+      Array.from(
+        document.getElementById("images").files
+      );
+
 
     let imageUrls =
       [...editingImageUrls];
 
-    const files =
-      Array.from(
-        document
-          .getElementById("image")
-          .files
-      );
+
+    /* Upload new photos */
 
     if (files.length) {
 
-      imageUrls = [];
+      const newUrls =
+        await uploadImages(files);
 
-      for (const file of files) {
-
-        const uploadedUrl =
-          await uploadImage(file);
-
-        imageUrls.push(uploadedUrl);
-
-      }
+      imageUrls =
+        [
+          ...imageUrls,
+          ...newUrls
+        ];
 
     }
 
-    const firstImage =
+
+    /* Keep first image compatible
+       with the existing public site */
+
+    const mainImage =
       imageUrls.length
         ? imageUrls[0]
-        : editingImageUrl;
+        : null;
+
 
     const product = {
 
       name:
-        document.getElementById("name").value,
+        document.getElementById("name").value.trim(),
 
       storage:
-        document.getElementById("storage").value,
+        document.getElementById("storage").value.trim(),
 
       condition:
         document.getElementById("condition").value,
 
       battery:
-        document.getElementById("battery").value,
+        document.getElementById("battery").value.trim(),
+
+      category:
+        document.getElementById("category").value,
+
+      description:
+        document.getElementById("description").value.trim(),
 
       price:
         Number(
           document.getElementById("price").value
         ),
 
-      category:
-        document.getElementById("category").value,
-
       image_url:
-        firstImage || null,
+        mainImage,
 
       image_urls:
         imageUrls,
-
-      description:
-        document.getElementById("description").value,
 
       available:
         document.getElementById("available").value
@@ -1000,7 +1156,9 @@ document
 
     };
 
+
     let error;
+
 
     if (editingId) {
 
@@ -1025,18 +1183,24 @@ document
 
     }
 
+
     if (error) {
+
       throw error;
+
     }
+
 
     message.textContent =
       editingId
         ? "Product updated successfully."
         : "Product published successfully.";
 
+
     resetForm();
 
-    loadProducts();
+    await loadProducts();
+
 
   } catch(error) {
 
@@ -1046,6 +1210,7 @@ document
       error.message;
 
   }
+
 
   button.disabled = false;
 
@@ -1065,6 +1230,7 @@ async function loadProducts() {
   list.innerHTML =
     "<p>Loading products...</p>";
 
+
   try {
 
     const { data, error } =
@@ -1075,7 +1241,10 @@ async function loadProducts() {
           ascending: false
         });
 
+
     if (error) {
+
+      console.error(error);
 
       list.innerHTML =
         "<p>" +
@@ -1086,8 +1255,10 @@ async function loadProducts() {
 
     }
 
+
     const total =
       data.length;
+
 
     const available =
       data.filter(
@@ -1095,26 +1266,31 @@ async function loadProducts() {
           product.available === true
       ).length;
 
+
     const sold =
       data.filter(
         product =>
           product.available === false
       ).length;
 
+
     document
       .getElementById("totalCount")
       .textContent =
       total;
+
 
     document
       .getElementById("availableCount")
       .textContent =
       available;
 
+
     document
       .getElementById("soldCount")
       .textContent =
       sold;
+
 
     if (!data.length) {
 
@@ -1130,44 +1306,69 @@ async function loadProducts() {
 
     }
 
+
     list.innerHTML = "";
+
 
     data.forEach(product => {
 
-      let images = [];
+      let imageUrls = [];
 
-      if (Array.isArray(product.image_urls)) {
 
-        images =
+      if (
+        Array.isArray(product.image_urls)
+      ) {
+
+        imageUrls =
           product.image_urls;
 
       }
 
+
       if (
-        !images.length &&
+        !imageUrls.length &&
         product.image_url
       ) {
 
-        images = [
-          product.image_url
-        ];
+        imageUrls =
+          [product.image_url];
 
       }
 
+
       const mainImage =
-        images[0];
+        imageUrls[0];
+
 
       const image =
         mainImage
 
         ? `
-          <img
-            src="${escapeHtml(mainImage)}"
-            alt="${escapeHtml(product.name)}"
-          >
+
+          <div class="product-image-wrap">
+
+            <img
+              class="product-main-image"
+              src="${escapeHtml(mainImage)}"
+              alt="${escapeHtml(product.name)}"
+            >
+
+            ${
+              imageUrls.length > 1
+              ? `
+                <div class="product-photo-count">
+                  📸 ${imageUrls.length} photos
+                </div>
+                `
+              : ""
+            }
+
+          </div>
+
           `
 
         : `
+
           <div
             style="
               height:210px;
@@ -1181,19 +1382,23 @@ async function loadProducts() {
           >
             No photo
           </div>
+
           `;
+
 
       const status =
         product.available === true;
 
-      const description =
-        product.description || "";
+
+      cardRender:
 
       const card =
         document.createElement("div");
 
+
       card.className =
         "product";
+
 
       card.innerHTML = `
 
@@ -1205,9 +1410,12 @@ async function loadProducts() {
             ${escapeHtml(product.name)}
           </div>
 
+
           <div class="product-meta">
 
-            ${escapeHtml(product.storage || "")}
+            ${escapeHtml(
+              product.storage || ""
+            )}
 
             ${
               product.storage
@@ -1215,9 +1423,12 @@ async function loadProducts() {
                 : ""
             }
 
-            ${escapeHtml(product.condition || "")}
+            ${escapeHtml(
+              product.condition || ""
+            )}
 
           </div>
+
 
           ${
             product.battery
@@ -1230,31 +1441,24 @@ async function loadProducts() {
               : ""
           }
 
+
           ${
-            description
+            product.description
               ? `
                 <div class="product-description">
                   ${escapeHtml(
-                    description
-                  ).replace(/\n/g, "<br>")}
-                </div>
-                `
-              : ""
-          }
-
-          ${
-            images.length
-              ? `
-                <div class="photo-count">
-                  📸 ${images.length} photo${
-                    images.length === 1
-                      ? ""
-                      : "s"
+                    product.description
+                  ).substring(0, 120)}
+                  ${
+                    product.description.length > 120
+                      ? "..."
+                      : ""
                   }
                 </div>
                 `
               : ""
           }
+
 
           <div class="product-price">
 
@@ -1263,6 +1467,7 @@ async function loadProducts() {
             ).toLocaleString("en-NG")}
 
           </div>
+
 
           <div
             class="status ${
@@ -1280,6 +1485,7 @@ async function loadProducts() {
 
           </div>
 
+
           <div class="product-actions">
 
             <button
@@ -1289,12 +1495,14 @@ async function loadProducts() {
               Edit
             </button>
 
+
             <button
               class="delete"
               onclick="deleteProduct('${product.id}')"
             >
               Delete
             </button>
+
 
             <button
               class="toggle ${
@@ -1322,11 +1530,15 @@ async function loadProducts() {
 
       `;
 
+
       list.appendChild(card);
 
     });
 
+
   } catch (error) {
+
+    console.error(error);
 
     list.innerHTML =
       `
@@ -1340,7 +1552,7 @@ async function loadProducts() {
 }
 
 
-/* TOGGLE */
+/* TOGGLE AVAILABLE / SOLD */
 
 async function toggleAvailability(
   id,
@@ -1350,17 +1562,21 @@ async function toggleAvailability(
   const newStatus =
     !currentlyAvailable;
 
+
   const actionText =
     newStatus
       ? "mark this product as AVAILABLE"
       : "mark this product as SOLD";
+
 
   const confirmed =
     confirm(
       `Are you sure you want to ${actionText}?`
     );
 
+
   if (!confirmed) return;
+
 
   try {
 
@@ -1373,6 +1589,7 @@ async function toggleAvailability(
         }
       );
 
+
     if (error) {
 
       alert(error.message);
@@ -1380,6 +1597,7 @@ async function toggleAvailability(
       return;
 
     }
+
 
     if (!data) {
 
@@ -1391,9 +1609,13 @@ async function toggleAvailability(
 
     }
 
+
     await loadProducts();
 
+
   } catch (error) {
+
+    console.error(error);
 
     alert(error.message);
 
@@ -1413,6 +1635,7 @@ async function editProduct(id) {
       .eq("id", id)
       .single();
 
+
   if (error) {
 
     alert(error.message);
@@ -1421,53 +1644,75 @@ async function editProduct(id) {
 
   }
 
+
   editingId =
     data.id;
 
-  editingImageUrl =
-    data.image_url || null;
 
-  editingImageUrls =
+  /* Load existing photos */
+
+  if (
     Array.isArray(data.image_urls)
-      ? data.image_urls
-      : data.image_url
-        ? [data.image_url]
-        : [];
+  ) {
+
+    editingImageUrls =
+      [...data.image_urls];
+
+  } else if (
+    data.image_url
+  ) {
+
+    editingImageUrls =
+      [data.image_url];
+
+  } else {
+
+    editingImageUrls = [];
+
+  }
+
 
   document
     .getElementById("name")
     .value =
     data.name || "";
 
+
   document
     .getElementById("storage")
     .value =
     data.storage || "";
+
 
   document
     .getElementById("battery")
     .value =
     data.battery || "";
 
+
   document
     .getElementById("condition")
     .value =
     data.condition || "UK Used";
+
 
   document
     .getElementById("category")
     .value =
     data.category || "iPhone";
 
-  document
-    .getElementById("price")
-    .value =
-    data.price || "";
 
   document
     .getElementById("description")
     .value =
     data.description || "";
+
+
+  document
+    .getElementById("price")
+    .value =
+    data.price || "";
+
 
   document
     .getElementById("available")
@@ -1476,44 +1721,21 @@ async function editProduct(id) {
       ? "true"
       : "false";
 
+
   document
     .getElementById("formTitle")
     .textContent =
     "Edit Product";
+
 
   document
     .getElementById("saveButton")
     .textContent =
     "Update Product";
 
-  const previewContainer =
-    document.getElementById("photoPreviews");
 
-  previewContainer.innerHTML = "";
+  renderExistingPhotos();
 
-  editingImageUrls.forEach(
-    (url, index) => {
-
-      const box =
-        document.createElement("div");
-
-      box.className =
-        "photo-preview-box";
-
-      box.innerHTML = `
-
-        <img src="${escapeHtml(url)}">
-
-        <div class="photo-number">
-          ${index + 1}
-        </div>
-
-      `;
-
-      previewContainer.appendChild(box);
-
-    }
-  );
 
   window.scrollTo({
     top: 0,
@@ -1523,7 +1745,74 @@ async function editProduct(id) {
 }
 
 
-/* DELETE */
+/* SHOW EXISTING PHOTOS */
+
+function renderExistingPhotos() {
+
+  const grid =
+    document.getElementById(
+      "photoPreviewGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  editingImageUrls.forEach(
+    (url, index) => {
+
+      const wrapper =
+        document.createElement("div");
+
+      wrapper.className =
+        "photo-preview existing-photo";
+
+
+      wrapper.innerHTML = `
+
+        <img
+          src="${escapeHtml(url)}"
+          alt="Product photo"
+        >
+
+        <div class="photo-number">
+          ${index + 1}
+        </div>
+
+        <button
+          type="button"
+          class="remove-photo"
+          onclick="removeExistingPhoto(${index})"
+        >
+          ×
+        </button>
+
+      `;
+
+
+      grid.appendChild(wrapper);
+
+    }
+  );
+
+}
+
+
+/* REMOVE EXISTING PHOTO */
+
+function removeExistingPhoto(index) {
+
+  editingImageUrls.splice(
+    index,
+    1
+  );
+
+  renderExistingPhotos();
+
+}
+
+
+/* DELETE PRODUCT */
 
 async function deleteProduct(id) {
 
@@ -1532,13 +1821,16 @@ async function deleteProduct(id) {
       "Delete this product permanently?"
     );
 
+
   if (!confirmed) return;
+
 
   const { error } =
     await supabaseClient
       .from("products")
       .delete()
       .eq("id", id);
+
 
   if (error) {
 
@@ -1548,33 +1840,37 @@ async function deleteProduct(id) {
 
   }
 
-  loadProducts();
+
+  await loadProducts();
 
 }
 
 
-/* RESET */
+/* RESET FORM */
 
 function resetForm() {
 
   editingId = null;
 
-  editingImageUrl = null;
-
   editingImageUrls = [];
+
 
   document
     .getElementById("productForm")
     .reset();
 
+
   document
-    .getElementById("photoPreviews")
-    .innerHTML = "";
+    .getElementById("photoPreviewGrid")
+    .innerHTML =
+    "";
+
 
   document
     .getElementById("formTitle")
     .textContent =
     "Add Product";
+
 
   document
     .getElementById("saveButton")
@@ -1584,7 +1880,7 @@ function resetForm() {
 }
 
 
-/* ESCAPE */
+/* ESCAPE HTML */
 
 function escapeHtml(text) {
 
