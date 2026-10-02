@@ -1332,24 +1332,24 @@ async function loadProducts() {
 async function toggleAvailability(id, currentlyAvailable) {
 
   const {
-    data: { session },
-    error: sessionError
-  } = await supabaseClient.auth.getSession();
+    data: { user },
+    error
+  } = await supabaseClient.auth.getUser();
 
-  if (sessionError) {
-    alert("Session error: " + sessionError.message);
+  if (error) {
+    alert("AUTH ERROR:\n\n" + error.message);
     return;
   }
 
-  if (!session) {
-    alert("NO ACTIVE SESSION — Supabase sees you as logged out.");
+  if (!user) {
+    alert("SUPABASE DOES NOT SEE YOU AS LOGGED IN");
     return;
   }
 
   alert(
-    "SESSION FOUND\n\n" +
-    "Email: " + session.user.email + "\n\n" +
-    "User ID: " + session.user.id
+    "SUPABASE AUTHENTICATED YOU\n\n" +
+    "Email: " + user.email + "\n\n" +
+    "User ID: " + user.id
   );
 
 }
