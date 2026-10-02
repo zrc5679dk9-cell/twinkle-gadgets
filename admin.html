@@ -59,8 +59,6 @@ body {
   margin: auto;
 }
 
-/* HEADER */
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -86,8 +84,6 @@ body {
   border-radius: 20px;
   font-weight: 700;
 }
-
-/* LOGIN */
 
 .login {
   max-width: 430px;
@@ -117,8 +113,6 @@ body {
   margin-bottom: 25px;
 }
 
-/* FORM */
-
 .card {
   background: rgba(255,255,255,.72);
   backdrop-filter: blur(25px);
@@ -146,7 +140,8 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   border: 1px solid var(--line);
   background: rgba(255,255,255,.85);
@@ -155,10 +150,18 @@ select {
   font-size: 14px;
   outline: none;
   margin-bottom: 16px;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.5;
 }
 
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(176,138,50,.1);
 }
@@ -185,17 +188,37 @@ select:focus {
   background: transparent;
 }
 
-.preview {
-  width: 100%;
-  max-height: 280px;
-  object-fit: contain;
-  border-radius: 18px;
-  margin-top: 12px;
-  display: none;
+.photo-previews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 15px;
 }
 
-button {
-  cursor: pointer;
+.photo-preview-box {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #eee;
+  aspect-ratio: 1;
+}
+
+.photo-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-number {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  background: rgba(0,0,0,.7);
+  color: white;
+  border-radius: 10px;
+  padding: 4px 7px;
+  font-size: 9px;
+  font-weight: 800;
 }
 
 .primary {
@@ -224,8 +247,6 @@ button {
   font-size: 13px;
   color: var(--muted);
 }
-
-/* INVENTORY SUMMARY */
 
 .inventory-summary {
   display: grid;
@@ -256,8 +277,6 @@ button {
   margin-top: 3px;
 }
 
-/* PRODUCTS */
-
 .product-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -277,9 +296,6 @@ button {
 
 .product:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 20px 55px rgba(0,0,0,.08),
-    0 0 25px rgba(176,138,50,.08);
 }
 
 .product img {
@@ -313,6 +329,20 @@ button {
 .product-price {
   font-weight: 900;
   margin-top: 10px;
+}
+
+.product-description {
+  color: #666;
+  font-size: 11px;
+  line-height: 1.45;
+  margin-top: 8px;
+}
+
+.photo-count {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  margin-top: 7px;
 }
 
 .status {
@@ -419,8 +449,8 @@ button {
     border-radius: 23px;
   }
 
-  .product-actions {
-    grid-template-columns: 1fr 1fr;
+  .photo-previews {
+    grid-template-columns: repeat(3, 1fr);
   }
 
 }
@@ -429,13 +459,9 @@ button {
 
 </head>
 
-
 <body>
 
 <div class="container">
-
-
-<!-- LOGIN -->
 
 <div id="loginScreen" class="login">
 
@@ -449,9 +475,7 @@ button {
 
   <form id="loginForm">
 
-    <label>
-      Email
-    </label>
+    <label>Email</label>
 
     <input
       type="email"
@@ -460,9 +484,7 @@ button {
       required
     >
 
-    <label>
-      Password
-    </label>
+    <label>Password</label>
 
     <input
       type="password"
@@ -475,20 +497,13 @@ button {
       Login
     </button>
 
-    <div
-      id="loginMessage"
-      class="message">
-    </div>
+    <div id="loginMessage" class="message"></div>
 
   </form>
 
 </div>
 
-
-<!-- ADMIN -->
-
 <div id="adminScreen" class="hidden">
-
 
   <div class="header">
 
@@ -496,67 +511,30 @@ button {
       TWINKLE GADGET<span>.</span>
     </div>
 
-    <button
-      class="logout"
-      id="logoutBtn">
+    <button class="logout" id="logoutBtn">
       Logout
     </button>
 
   </div>
 
-
-  <!-- INVENTORY SUMMARY -->
-
   <div class="inventory-summary">
 
     <div class="summary-box">
-
-      <div
-        class="summary-number"
-        id="totalCount">
-        0
-      </div>
-
-      <div class="summary-label">
-        Total
-      </div>
-
+      <div class="summary-number" id="totalCount">0</div>
+      <div class="summary-label">Total</div>
     </div>
 
-
     <div class="summary-box">
-
-      <div
-        class="summary-number"
-        id="availableCount">
-        0
-      </div>
-
-      <div class="summary-label">
-        Available
-      </div>
-
+      <div class="summary-number" id="availableCount">0</div>
+      <div class="summary-label">Available</div>
     </div>
 
-
     <div class="summary-box">
-
-      <div
-        class="summary-number"
-        id="soldCount">
-        0
-      </div>
-
-      <div class="summary-label">
-        Sold
-      </div>
-
+      <div class="summary-number" id="soldCount">0</div>
+      <div class="summary-label">Sold</div>
     </div>
 
   </div>
-
-
-  <!-- ADD / EDIT PRODUCT -->
 
   <div class="card">
 
@@ -566,31 +544,29 @@ button {
 
     <form id="productForm">
 
-
       <div class="file-box">
 
         <strong>
-          📸 Product Photo
+          📸 Product Photos
         </strong>
 
-        <p
-          style="font-size:12px;color:#777;margin-top:5px;">
-          Choose a photo from your iPhone
+        <p style="font-size:12px;color:#777;margin-top:5px;">
+          Select multiple photos from your iPhone
         </p>
 
         <input
           type="file"
           id="image"
           accept="image/*"
+          multiple
         >
 
-        <img
-          id="preview"
-          class="preview"
-        >
+        <div
+          id="photoPreviews"
+          class="photo-previews">
+        </div>
 
       </div>
-
 
       <label>
         Product Name
@@ -601,7 +577,6 @@ button {
         placeholder="e.g. iPhone 15 Pro Max"
         required
       >
-
 
       <div class="row">
 
@@ -618,7 +593,6 @@ button {
 
         </div>
 
-
         <div>
 
           <label>
@@ -634,7 +608,6 @@ button {
 
       </div>
 
-
       <div class="row">
 
         <div>
@@ -645,26 +618,14 @@ button {
 
           <select id="condition">
 
-            <option>
-              UK Used
-            </option>
-
-            <option>
-              Brand New
-            </option>
-
-            <option>
-              Nigerian Used
-            </option>
-
-            <option>
-              Refurbished
-            </option>
+            <option>UK Used</option>
+            <option>Brand New</option>
+            <option>Nigerian Used</option>
+            <option>Refurbished</option>
 
           </select>
 
         </div>
-
 
         <div>
 
@@ -674,32 +635,17 @@ button {
 
           <select id="category">
 
-            <option>
-              iPhone
-            </option>
-
-            <option>
-              Samsung
-            </option>
-
-            <option>
-              Android
-            </option>
-
-            <option>
-              Gadget
-            </option>
-
-            <option>
-              Accessory
-            </option>
+            <option>iPhone</option>
+            <option>Samsung</option>
+            <option>Android</option>
+            <option>Gadget</option>
+            <option>Accessory</option>
 
           </select>
 
         </div>
 
       </div>
-
 
       <label>
         Price
@@ -712,6 +658,14 @@ button {
         required
       >
 
+      <label>
+        Product Description
+      </label>
+
+      <textarea
+        id="description"
+        placeholder="Write the full product details here...&#10;&#10;Example:&#10;• Face ID working&#10;• True Tone working&#10;• No cracks&#10;• Original screen&#10;• Camera fully working&#10;• Comes with box"
+      ></textarea>
 
       <label>
         Availability
@@ -729,7 +683,6 @@ button {
 
       </select>
 
-
       <button
         class="primary"
         id="saveButton">
@@ -744,9 +697,6 @@ button {
     </form>
 
   </div>
-
-
-  <!-- PRODUCT LIST -->
 
   <div class="card">
 
@@ -765,11 +715,7 @@ button {
 
 </div>
 
-
 <script>
-
-
-/* SUPABASE */
 
 const SUPABASE_URL =
 "https://tpasjsjofhxpslomciqd.supabase.co";
@@ -783,9 +729,9 @@ supabase.createClient(
   SUPABASE_KEY
 );
 
-
 let editingId = null;
 let editingImageUrl = null;
+let editingImageUrls = [];
 
 
 /* LOGIN */
@@ -808,13 +754,11 @@ document
   message.textContent =
     "Logging in...";
 
-
   const { error } =
     await supabaseClient.auth.signInWithPassword({
       email,
       password
     });
-
 
   if (error) {
 
@@ -824,7 +768,6 @@ document
     return;
 
   }
-
 
   message.textContent = "";
 
@@ -842,11 +785,8 @@ async function checkUser() {
   } =
     await supabaseClient.auth.getSession();
 
-
   if (session) {
-
     showAdmin();
-
   }
 
 }
@@ -860,11 +800,9 @@ function showAdmin() {
     .getElementById("loginScreen")
     .classList.add("hidden");
 
-
   document
     .getElementById("adminScreen")
     .classList.remove("hidden");
-
 
   loadProducts();
 
@@ -884,27 +822,49 @@ document
 });
 
 
-/* IMAGE PREVIEW */
+/* MULTIPLE PHOTO PREVIEW */
 
 document
 .getElementById("image")
 .addEventListener("change", function() {
 
-  const file = this.files[0];
+  const files = Array.from(this.files);
 
-  if (!file) return;
+  const previewContainer =
+    document.getElementById("photoPreviews");
 
+  previewContainer.innerHTML = "";
 
-  const preview =
-    document.getElementById("preview");
+  files.forEach((file, index) => {
 
+    const reader =
+      new FileReader();
 
-  preview.src =
-    URL.createObjectURL(file);
+    reader.onload = function(e) {
 
+      const box =
+        document.createElement("div");
 
-  preview.style.display =
-    "block";
+      box.className =
+        "photo-preview-box";
+
+      box.innerHTML = `
+
+        <img src="${e.target.result}">
+
+        <div class="photo-number">
+          ${index + 1}
+        </div>
+
+      `;
+
+      previewContainer.appendChild(box);
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
 
 });
 
@@ -916,16 +876,13 @@ async function uploadImage(file) {
   const extension =
     file.name.split(".").pop();
 
-
   const fileName =
     crypto.randomUUID() +
     "." +
     extension;
 
-
   const path =
     "products/" + fileName;
-
 
   const { error } =
     await supabaseClient
@@ -936,20 +893,15 @@ async function uploadImage(file) {
         upsert: false
       });
 
-
   if (error) {
-
     throw error;
-
   }
-
 
   const { data } =
     supabaseClient
       .storage
       .from("product-images")
       .getPublicUrl(path);
-
 
   return data.publicUrl;
 
@@ -964,13 +916,11 @@ document
 
   e.preventDefault();
 
-
   const message =
     document.getElementById("productMessage");
 
   const button =
     document.getElementById("saveButton");
-
 
   button.disabled = true;
 
@@ -979,29 +929,39 @@ document
       ? "Updating..."
       : "Publishing...";
 
-
   message.textContent = "";
-
 
   try {
 
-    let imageUrl =
-      editingImageUrl;
+    let imageUrls =
+      [...editingImageUrls];
 
+    const files =
+      Array.from(
+        document
+          .getElementById("image")
+          .files
+      );
 
-    const file =
-      document
-        .getElementById("image")
-        .files[0];
+    if (files.length) {
 
+      imageUrls = [];
 
-    if (file) {
+      for (const file of files) {
 
-      imageUrl =
-        await uploadImage(file);
+        const uploadedUrl =
+          await uploadImage(file);
+
+        imageUrls.push(uploadedUrl);
+
+      }
 
     }
 
+    const firstImage =
+      imageUrls.length
+        ? imageUrls[0]
+        : editingImageUrl;
 
     const product = {
 
@@ -1026,7 +986,13 @@ document
         document.getElementById("category").value,
 
       image_url:
-        imageUrl,
+        firstImage || null,
+
+      image_urls:
+        imageUrls,
+
+      description:
+        document.getElementById("description").value,
 
       available:
         document.getElementById("available").value
@@ -1034,9 +1000,7 @@ document
 
     };
 
-
     let error;
-
 
     if (editingId) {
 
@@ -1061,32 +1025,27 @@ document
 
     }
 
-
     if (error) {
-
       throw error;
-
     }
-
 
     message.textContent =
       editingId
         ? "Product updated successfully."
         : "Product published successfully.";
 
-
     resetForm();
 
     loadProducts();
 
-
   } catch(error) {
+
+    console.error(error);
 
     message.textContent =
       error.message;
 
   }
-
 
   button.disabled = false;
 
@@ -1106,7 +1065,6 @@ async function loadProducts() {
   list.innerHTML =
     "<p>Loading products...</p>";
 
-
   try {
 
     const { data, error } =
@@ -1117,13 +1075,7 @@ async function loadProducts() {
           ascending: false
         });
 
-
     if (error) {
-
-      console.error(
-        "PRODUCT LOAD ERROR:",
-        error
-      );
 
       list.innerHTML =
         "<p>" +
@@ -1134,16 +1086,8 @@ async function loadProducts() {
 
     }
 
-
-    console.log(
-      "ALL ADMIN PRODUCTS:",
-      data
-    );
-
-
     const total =
       data.length;
-
 
     const available =
       data.filter(
@@ -1151,42 +1095,32 @@ async function loadProducts() {
           product.available === true
       ).length;
 
-
     const sold =
       data.filter(
         product =>
           product.available === false
       ).length;
 
-
     document
       .getElementById("totalCount")
       .textContent =
       total;
-
 
     document
       .getElementById("availableCount")
       .textContent =
       available;
 
-
     document
       .getElementById("soldCount")
       .textContent =
       sold;
 
-
     if (!data.length) {
 
       list.innerHTML =
         `
-        <p
-          style="
-            color:#777;
-            font-size:13px;
-          "
-        >
+        <p style="color:#777;font-size:13px;">
           No products yet.
           Add your first product above.
         </p>
@@ -1196,31 +1130,40 @@ async function loadProducts() {
 
     }
 
-
     list.innerHTML = "";
-
 
     data.forEach(product => {
 
-      const card =
-        document.createElement("div");
+      let images = [];
 
+      if (Array.isArray(product.image_urls)) {
 
-      card.className =
-        "product";
+        images =
+          product.image_urls;
 
+      }
+
+      if (
+        !images.length &&
+        product.image_url
+      ) {
+
+        images = [
+          product.image_url
+        ];
+
+      }
+
+      const mainImage =
+        images[0];
 
       const image =
-        product.image_url
+        mainImage
 
         ? `
           <img
-            src="${escapeHtml(
-              product.image_url
-            )}"
-            alt="${escapeHtml(
-              product.name
-            )}"
+            src="${escapeHtml(mainImage)}"
+            alt="${escapeHtml(product.name)}"
           >
           `
 
@@ -1240,10 +1183,17 @@ async function loadProducts() {
           </div>
           `;
 
-
       const status =
         product.available === true;
 
+      const description =
+        product.description || "";
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "product";
 
       card.innerHTML = `
 
@@ -1252,17 +1202,12 @@ async function loadProducts() {
         <div class="product-info">
 
           <div class="product-name">
-            ${escapeHtml(
-              product.name
-            )}
+            ${escapeHtml(product.name)}
           </div>
-
 
           <div class="product-meta">
 
-            ${escapeHtml(
-              product.storage || ""
-            )}
+            ${escapeHtml(product.storage || "")}
 
             ${
               product.storage
@@ -1270,26 +1215,46 @@ async function loadProducts() {
                 : ""
             }
 
-            ${escapeHtml(
-              product.condition || ""
-            )}
+            ${escapeHtml(product.condition || "")}
 
           </div>
-
 
           ${
             product.battery
               ? `
                 <div class="product-battery">
                   Battery:
-                  ${escapeHtml(
-                    product.battery
-                  )}
+                  ${escapeHtml(product.battery)}
                 </div>
                 `
               : ""
           }
 
+          ${
+            description
+              ? `
+                <div class="product-description">
+                  ${escapeHtml(
+                    description
+                  ).replace(/\n/g, "<br>")}
+                </div>
+                `
+              : ""
+          }
+
+          ${
+            images.length
+              ? `
+                <div class="photo-count">
+                  📸 ${images.length} photo${
+                    images.length === 1
+                      ? ""
+                      : "s"
+                  }
+                </div>
+                `
+              : ""
+          }
 
           <div class="product-price">
 
@@ -1298,7 +1263,6 @@ async function loadProducts() {
             ).toLocaleString("en-NG")}
 
           </div>
-
 
           <div
             class="status ${
@@ -1316,29 +1280,21 @@ async function loadProducts() {
 
           </div>
 
-
           <div class="product-actions">
-
 
             <button
               class="edit"
-              onclick="editProduct(
-                '${product.id}'
-              )"
+              onclick="editProduct('${product.id}')"
             >
               Edit
             </button>
 
-
             <button
               class="delete"
-              onclick="deleteProduct(
-                '${product.id}'
-              )"
+              onclick="deleteProduct('${product.id}')"
             >
               Delete
             </button>
-
 
             <button
               class="toggle ${
@@ -1360,32 +1316,22 @@ async function loadProducts() {
 
             </button>
 
-
           </div>
 
         </div>
 
       `;
 
-
       list.appendChild(card);
 
     });
 
-
   } catch (error) {
-
-    console.error(
-      "Unexpected product error:",
-      error
-    );
 
     list.innerHTML =
       `
       <p>
-        ${escapeHtml(
-          error.message
-        )}
+        ${escapeHtml(error.message)}
       </p>
       `;
 
@@ -1394,19 +1340,25 @@ async function loadProducts() {
 }
 
 
-/* TOGGLE AVAILABLE / SOLD */
+/* TOGGLE */
 
-async function toggleAvailability(id, currentlyAvailable) {
+async function toggleAvailability(
+  id,
+  currentlyAvailable
+) {
 
-  const newStatus = !currentlyAvailable;
+  const newStatus =
+    !currentlyAvailable;
 
-  const actionText = newStatus
-    ? "mark this product as AVAILABLE"
-    : "mark this product as SOLD";
+  const actionText =
+    newStatus
+      ? "mark this product as AVAILABLE"
+      : "mark this product as SOLD";
 
-  const confirmed = confirm(
-    `Are you sure you want to ${actionText}?`
-  );
+  const confirmed =
+    confirm(
+      `Are you sure you want to ${actionText}?`
+    );
 
   if (!confirmed) return;
 
@@ -1423,8 +1375,6 @@ async function toggleAvailability(id, currentlyAvailable) {
 
     if (error) {
 
-      console.error("Availability error:", error);
-
       alert(error.message);
 
       return;
@@ -1433,7 +1383,9 @@ async function toggleAvailability(id, currentlyAvailable) {
 
     if (!data) {
 
-      alert("The product could not be updated.");
+      alert(
+        "The product could not be updated."
+      );
 
       return;
 
@@ -1443,13 +1395,13 @@ async function toggleAvailability(id, currentlyAvailable) {
 
   } catch (error) {
 
-    console.error(error);
-
     alert(error.message);
 
   }
 
 }
+
+
 /* EDIT PRODUCT */
 
 async function editProduct(id) {
@@ -1461,7 +1413,6 @@ async function editProduct(id) {
       .eq("id", id)
       .single();
 
-
   if (error) {
 
     alert(error.message);
@@ -1470,50 +1421,53 @@ async function editProduct(id) {
 
   }
 
-
   editingId =
     data.id;
 
-
   editingImageUrl =
-    data.image_url;
+    data.image_url || null;
 
+  editingImageUrls =
+    Array.isArray(data.image_urls)
+      ? data.image_urls
+      : data.image_url
+        ? [data.image_url]
+        : [];
 
   document
     .getElementById("name")
     .value =
     data.name || "";
 
-
   document
     .getElementById("storage")
     .value =
     data.storage || "";
-
 
   document
     .getElementById("battery")
     .value =
     data.battery || "";
 
-
   document
     .getElementById("condition")
     .value =
     data.condition || "UK Used";
-
 
   document
     .getElementById("category")
     .value =
     data.category || "iPhone";
 
-
   document
     .getElementById("price")
     .value =
     data.price || "";
 
+  document
+    .getElementById("description")
+    .value =
+    data.description || "";
 
   document
     .getElementById("available")
@@ -1522,34 +1476,44 @@ async function editProduct(id) {
       ? "true"
       : "false";
 
-
   document
     .getElementById("formTitle")
     .textContent =
     "Edit Product";
-
 
   document
     .getElementById("saveButton")
     .textContent =
     "Update Product";
 
+  const previewContainer =
+    document.getElementById("photoPreviews");
 
-  if (data.image_url) {
+  previewContainer.innerHTML = "";
 
-    const preview =
-      document.getElementById("preview");
+  editingImageUrls.forEach(
+    (url, index) => {
 
+      const box =
+        document.createElement("div");
 
-    preview.src =
-      data.image_url;
+      box.className =
+        "photo-preview-box";
 
+      box.innerHTML = `
 
-    preview.style.display =
-      "block";
+        <img src="${escapeHtml(url)}">
 
-  }
+        <div class="photo-number">
+          ${index + 1}
+        </div>
 
+      `;
+
+      previewContainer.appendChild(box);
+
+    }
+  );
 
   window.scrollTo({
     top: 0,
@@ -1559,7 +1523,7 @@ async function editProduct(id) {
 }
 
 
-/* DELETE PRODUCT */
+/* DELETE */
 
 async function deleteProduct(id) {
 
@@ -1568,16 +1532,13 @@ async function deleteProduct(id) {
       "Delete this product permanently?"
     );
 
-
   if (!confirmed) return;
-
 
   const { error } =
     await supabaseClient
       .from("products")
       .delete()
       .eq("id", id);
-
 
   if (error) {
 
@@ -1587,13 +1548,12 @@ async function deleteProduct(id) {
 
   }
 
-
   loadProducts();
 
 }
 
 
-/* RESET FORM */
+/* RESET */
 
 function resetForm() {
 
@@ -1601,23 +1561,20 @@ function resetForm() {
 
   editingImageUrl = null;
 
+  editingImageUrls = [];
 
   document
     .getElementById("productForm")
     .reset();
 
-
   document
-    .getElementById("preview")
-    .style.display =
-    "none";
-
+    .getElementById("photoPreviews")
+    .innerHTML = "";
 
   document
     .getElementById("formTitle")
     .textContent =
     "Add Product";
-
 
   document
     .getElementById("saveButton")
@@ -1627,17 +1584,15 @@ function resetForm() {
 }
 
 
-/* ESCAPE HTML */
+/* ESCAPE */
 
 function escapeHtml(text) {
 
   const div =
     document.createElement("div");
 
-
   div.textContent =
     text ?? "";
-
 
   return div.innerHTML;
 
