@@ -48,6 +48,10 @@ a {
   text-decoration:none;
 }
 
+button {
+  font-family:inherit;
+}
+
 /* GLASS */
 
 .glass {
@@ -227,6 +231,7 @@ nav a:hover {
   font-size:13px;
   font-weight:800;
   transition:.25s;
+  border:none;
   cursor:pointer;
 }
 
@@ -433,6 +438,8 @@ nav a:hover {
   font-size:10px;
   font-weight:800;
   white-space:nowrap;
+  border:none;
+  cursor:pointer;
 }
 
 .product-button:hover {
@@ -451,10 +458,8 @@ nav a:hover {
 .product-details {
   display:none;
   min-height:100vh;
-  padding:130px 22px 90px;
-  background:
-    radial-gradient(circle at 80% 25%,rgba(176,138,50,.12),transparent 30%),
-    var(--cream);
+  padding:140px 22px 100px;
+  background:var(--cream);
 }
 
 .product-details.active {
@@ -466,25 +471,11 @@ nav a:hover {
   margin:auto;
 }
 
-.back-button {
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:30px;
-  color:#555;
-  font-size:13px;
-  font-weight:800;
-  cursor:pointer;
-  border:0;
-  background:transparent;
-  padding:10px 0;
+.product-details-back {
+  margin-bottom:35px;
 }
 
-.back-button:hover {
-  color:var(--accent);
-}
-
-.details-card {
+.product-details-layout {
   display:grid;
   grid-template-columns:1.05fr .95fr;
   gap:45px;
@@ -511,57 +502,62 @@ nav a:hover {
   max-height:620px;
   object-fit:contain;
   padding:35px;
-  filter:drop-shadow(0 30px 30px rgba(0,0,0,.16));
+  filter:drop-shadow(0 30px 35px rgba(0,0,0,.18));
 }
 
 .details-info {
-  padding:10px 0;
+  padding:20px 0;
 }
 
 .details-tag {
   color:var(--accent);
-  font-size:10px;
-  letter-spacing:2.5px;
-  font-weight:800;
   text-transform:uppercase;
-  margin-bottom:12px;
+  letter-spacing:2.5px;
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:14px;
 }
 
-.details-info h1 {
-  font-size:clamp(38px,6vw,70px);
+.details-info h2 {
+  font-size:clamp(42px,6vw,72px);
   line-height:.95;
   letter-spacing:-4px;
   margin-bottom:25px;
 }
 
 .details-price {
-  font-size:30px;
-  font-weight:900;
+  font-size:28px;
+  font-weight:800;
   margin-bottom:25px;
 }
 
 .details-status {
   display:inline-flex;
   align-items:center;
-  gap:7px;
+  gap:8px;
   padding:8px 13px;
   border-radius:30px;
-  background:rgba(34,160,84,.10);
-  color:#168044;
+  background:rgba(0,0,0,.06);
   font-size:11px;
   font-weight:800;
-  margin-bottom:25px;
+  margin-bottom:30px;
 }
 
-.details-status.sold {
-  background:rgba(190,40,40,.10);
-  color:#b32828;
+.status-dot {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#22a447;
+}
+
+.status-dot.sold {
+  background:#d83232;
 }
 
 .details-specs {
-  border-top:1px solid rgba(0,0,0,.09);
-  border-bottom:1px solid rgba(0,0,0,.09);
-  margin-bottom:28px;
+  border-top:1px solid rgba(0,0,0,.10);
+  border-bottom:1px solid rgba(0,0,0,.10);
+  margin-bottom:30px;
 }
 
 .detail-row {
@@ -569,20 +565,20 @@ nav a:hover {
   justify-content:space-between;
   gap:20px;
   padding:15px 0;
-  border-bottom:1px solid rgba(0,0,0,.06);
+  border-bottom:1px solid rgba(0,0,0,.07);
   font-size:13px;
 }
 
 .detail-row:last-child {
-  border-bottom:0;
+  border-bottom:none;
 }
 
-.detail-label {
+.detail-row span:first-child {
   color:#777;
 }
 
-.detail-value {
-  font-weight:800;
+.detail-row span:last-child {
+  font-weight:700;
   text-align:right;
 }
 
@@ -593,19 +589,7 @@ nav a:hover {
 }
 
 .details-actions .button {
-  min-width:190px;
-}
-
-.details-note {
-  color:#777;
-  font-size:12px;
-  margin-top:15px;
-}
-
-/* HIDDEN COLLECTION */
-
-.collection-hidden {
-  display:none !important;
+  min-width:180px;
 }
 
 /* STATEMENT */
@@ -911,7 +895,7 @@ footer {
     font-size:72px;
   }
 
-  .details-card {
+  .product-details-layout {
     grid-template-columns:1fr;
     gap:30px;
   }
@@ -1008,12 +992,12 @@ footer {
     font-size:9px;
   }
 
-  .details-card {
-    display:block;
+  .product-details {
+    padding:120px 16px 70px;
   }
 
-  .product-details {
-    padding:115px 16px 70px;
+  .product-details-layout {
+    gap:20px;
   }
 
   .details-image {
@@ -1025,26 +1009,22 @@ footer {
     padding:20px;
   }
 
-  .details-info {
-    padding-top:28px;
-  }
-
-  .details-info h1 {
-    font-size:42px;
+  .details-info h2 {
+    font-size:44px;
     letter-spacing:-3px;
   }
 
   .details-price {
-    font-size:25px;
+    font-size:24px;
   }
 
   .details-actions {
-    display:block;
+    display:grid;
+    grid-template-columns:1fr;
   }
 
   .details-actions .button {
     width:100%;
-    margin-bottom:10px;
   }
 
   .services {
@@ -1137,11 +1117,9 @@ Contact
 </header>
 
 
-<main>
+<main id="mainContent">
 
-<!-- HERO -->
-
-<section class="hero" id="home">
+<section class="hero">
 
 <div class="hero-inner">
 
@@ -1181,7 +1159,7 @@ WhatsApp Us
 </section>
 
 
-<!-- PRODUCT COLLECTION -->
+<!-- LIVE PRODUCTS -->
 
 <section class="section" id="phones">
 
@@ -1220,31 +1198,6 @@ Loading available devices...
 </section>
 
 
-<!-- PRODUCT DETAILS VIEW -->
-
-<section
-class="product-details"
-id="productDetails">
-
-<div class="product-details-inner">
-
-<button
-class="back-button"
-onclick="closeProductDetails()">
-← Back to Collection
-</button>
-
-<div
-class="details-card"
-id="detailsCard">
-
-</div>
-
-</div>
-
-</section>
-
-
 <div class="statement">
 
 <div class="statement-inner">
@@ -1262,8 +1215,6 @@ Phones worth buying.
 
 </div>
 
-
-<!-- SERVICES -->
 
 <section class="section" id="services">
 
@@ -1383,8 +1334,6 @@ your setup.
 </section>
 
 
-<!-- TRUST -->
-
 <section class="trust-section">
 
 <div class="trust-inner section">
@@ -1472,8 +1421,6 @@ We arrange delivery to customers across Nigeria.
 </section>
 
 
-<!-- LOCATION -->
-
 <section class="section" id="location">
 
 <div class="section-header">
@@ -1556,8 +1503,6 @@ Start a Conversation
 </section>
 
 
-<!-- CTA -->
-
 <div class="cta">
 
 <div class="cta-label">
@@ -1595,7 +1540,160 @@ target="_blank">
 </main>
 
 
-<!-- FOOTER -->
+<!-- PRODUCT DETAILS VIEW -->
+
+<section
+class="product-details"
+id="productDetails">
+
+<div class="product-details-inner">
+
+<div class="product-details-back">
+
+<button
+class="button button-outline"
+onclick="backToCollection()">
+← Back to Collection
+</button>
+
+</div>
+
+
+<div class="product-details-layout">
+
+<div class="details-image">
+
+<img
+id="detailsImage"
+src=""
+alt="Product">
+
+</div>
+
+
+<div class="details-info">
+
+<div
+class="details-tag"
+id="detailsCategory">
+Available
+</div>
+
+<h2
+id="detailsName">
+Product
+</h2>
+
+<div
+class="details-price"
+id="detailsPrice">
+₦0
+</div>
+
+
+<div
+class="details-status"
+id="detailsStatus">
+
+<span
+class="status-dot"
+id="statusDot">
+</span>
+
+<span
+id="statusText">
+Available
+</span>
+
+</div>
+
+
+<div class="details-specs">
+
+<div class="detail-row">
+
+<span>
+Storage
+</span>
+
+<span
+id="detailsStorage">
+—
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span>
+Battery Health
+</span>
+
+<span
+id="detailsBattery">
+—
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span>
+Condition
+</span>
+
+<span
+id="detailsCondition">
+—
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span>
+Availability
+</span>
+
+<span
+id="detailsAvailability">
+Available
+</span>
+
+</div>
+
+</div>
+
+
+<div class="details-actions">
+
+<a
+class="button button-light"
+id="detailsWhatsapp"
+href="#"
+target="_blank">
+Enquire on WhatsApp
+</a>
+
+<button
+class="button button-outline"
+onclick="backToCollection()">
+Back to Collection
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
 
 <footer>
 
@@ -1644,9 +1742,7 @@ WhatsApp
 
 <script>
 
-/* =========================================
-   SUPABASE CONNECTION
-========================================= */
+/* SUPABASE CONNECTION */
 
 const SUPABASE_URL =
 "https://tpasjsjofhxpslomciqd.supabase.co";
@@ -1661,16 +1757,12 @@ SUPABASE_KEY
 );
 
 
-/* =========================================
-   PRODUCT STORAGE
-========================================= */
+/* KEEP PRODUCTS AVAILABLE FOR DETAILS VIEW */
 
 let allProducts = [];
 
 
-/* =========================================
-   LOAD PRODUCTS
-========================================= */
+/* LOAD PRODUCTS */
 
 async function loadProducts() {
 
@@ -1710,13 +1802,11 @@ if (!data || data.length === 0) {
 container.innerHTML = `
 <div class="empty-products">
 No devices available right now.<br>
-
 <a
 href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
 style="color:#b08a32;font-weight:800;">
 Contact us for current stock
 </a>
-
 </div>
 `;
 
@@ -1737,6 +1827,17 @@ card.className =
 "product";
 
 
+/*
+CLICKING THE CARD OPENS DETAILS.
+*/
+
+card.onclick = function() {
+
+openProductDetails(product);
+
+};
+
+
 const image =
 product.image_url
 ? `<img
@@ -1755,12 +1856,6 @@ const battery =
 product.battery
 ? escapeHtml(product.battery)
 : "";
-
-
-const message =
-encodeURIComponent(
-`Hello Twinkle Gadgets, I'm interested in the ${product.name}${product.storage ? " " + product.storage : ""}.`
-);
 
 
 card.innerHTML = `
@@ -1796,13 +1891,11 @@ ${battery}
 ₦${price}
 </div>
 
-<a
+<button
 class="product-button"
-href="https://wa.me/2349049388119?text=${message}"
-target="_blank"
-onclick="event.stopPropagation();">
-Enquire
-</a>
+type="button">
+View Details
+</button>
 
 </div>
 
@@ -1810,16 +1903,22 @@ Enquire
 `;
 
 
-/* OPEN DETAILS WHEN CARD IS CLICKED */
+/*
+IMPORTANT:
+BUTTON ALSO OPENS DETAILS.
+It does NOT go to WhatsApp.
+*/
 
-card.addEventListener(
-"click",
-() => {
+const viewButton =
+card.querySelector(".product-button");
+
+viewButton.onclick = function(event) {
+
+event.stopPropagation();
 
 openProductDetails(product);
 
-}
-);
+};
 
 
 container.appendChild(card);
@@ -1838,264 +1937,202 @@ card.classList.add("show");
 }
 
 
-/* =========================================
-   OPEN PRODUCT DETAILS
-========================================= */
+/* OPEN PRODUCT DETAILS */
 
 function openProductDetails(product) {
 
-const collection =
-document.getElementById("phones");
+if (!product) return;
+
+
+/* SAVE PRODUCT */
+
+window.currentProduct =
+product;
+
+
+/* HIDE MAIN SITE */
+
+document.getElementById("mainContent").style.display =
+"none";
+
+
+/* HIDE FOOTER */
+
+document.querySelector("footer").style.display =
+"none";
+
+
+/* SHOW DETAILS */
 
 const details =
 document.getElementById("productDetails");
-
-const detailsCard =
-document.getElementById("detailsCard");
-
-
-const image =
-product.image_url
-? `<img
-src="${escapeHtml(product.image_url)}"
-alt="${escapeHtml(product.name)}">`
-: `
-<div style="
-color:#999;
-font-size:13px;
-">
-No product image available
-</div>
-`;
-
-
-const price =
-Number(product.price || 0)
-.toLocaleString("en-NG");
-
-
-/*
-   The public collection only loads available products,
-   so products opened from here are currently available.
-*/
-
-const available =
-product.available !== false;
-
-
-const statusClass =
-available ? "" : "sold";
-
-
-const statusText =
-available
-? "🟢 Available"
-: "🔴 Sold";
-
-
-const whatsappMessage =
-encodeURIComponent(
-`Hello Twinkle Gadgets, I'm interested in the ${product.name}${product.storage ? " " + product.storage : ""}. The listed price is ₦${price}.`
-);
-
-
-detailsCard.innerHTML = `
-
-<div class="details-image">
-
-${image}
-
-</div>
-
-
-<div class="details-info">
-
-<div class="details-tag">
-${escapeHtml(product.category || "Product")}
-</div>
-
-
-<h1>
-${escapeHtml(product.name)}
-</h1>
-
-
-<div class="details-price">
-₦${price}
-</div>
-
-
-<div class="details-status ${statusClass}">
-${statusText}
-</div>
-
-
-<div class="details-specs">
-
-<div class="detail-row">
-
-<div class="detail-label">
-Storage
-</div>
-
-<div class="detail-value">
-${escapeHtml(product.storage || "—")}
-</div>
-
-</div>
-
-
-<div class="detail-row">
-
-<div class="detail-label">
-Battery Health
-</div>
-
-<div class="detail-value">
-${escapeHtml(product.battery || "—")}
-</div>
-
-</div>
-
-
-<div class="detail-row">
-
-<div class="detail-label">
-Condition
-</div>
-
-<div class="detail-value">
-${escapeHtml(product.condition || "—")}
-</div>
-
-</div>
-
-
-<div class="detail-row">
-
-<div class="detail-label">
-Price
-</div>
-
-<div class="detail-value">
-₦${price}
-</div>
-
-</div>
-
-
-<div class="detail-row">
-
-<div class="detail-label">
-Availability
-</div>
-
-<div class="detail-value">
-${available ? "Available" : "Sold"}
-</div>
-
-</div>
-
-</div>
-
-
-<div class="details-actions">
-
-${
-available
-?
-`
-<a
-class="button button-light"
-href="https://wa.me/2349049388119?text=${whatsappMessage}"
-target="_blank">
-WhatsApp Enquiry
-</a>
-`
-:
-`
-<button
-class="button button-light"
-disabled
-style="opacity:.45;cursor:not-allowed;">
-Currently Sold
-</button>
-`
-}
-
-
-<button
-class="button button-outline"
-onclick="closeProductDetails()">
-Back to Collection
-</button>
-
-</div>
-
-
-<div class="details-note">
-
-Ask us about delivery, swaps, availability or
-additional product information on WhatsApp.
-
-</div>
-
-</div>
-
-`;
-
-
-/*
-   Hide the normal collection and show
-   the product details screen.
-*/
-
-collection.classList.add("collection-hidden");
 
 details.classList.add("active");
 
 
+/* IMAGE */
+
+const image =
+document.getElementById("detailsImage");
+
+if (product.image_url) {
+
+image.src =
+product.image_url;
+
+image.style.display =
+"block";
+
+} else {
+
+image.removeAttribute("src");
+
+image.style.display =
+"none";
+
+}
+
+
+image.alt =
+product.name || "Product";
+
+
+/* CATEGORY */
+
+document.getElementById("detailsCategory").textContent =
+product.category || "Available";
+
+
+/* NAME */
+
+document.getElementById("detailsName").textContent =
+product.name || "Product";
+
+
+/* PRICE */
+
+document.getElementById("detailsPrice").textContent =
+"₦" +
+Number(product.price || 0)
+.toLocaleString("en-NG");
+
+
+/* STORAGE */
+
+document.getElementById("detailsStorage").textContent =
+product.storage || "Not specified";
+
+
+/* BATTERY */
+
+document.getElementById("detailsBattery").textContent =
+product.battery || "Not specified";
+
+
+/* CONDITION */
+
+document.getElementById("detailsCondition").textContent =
+product.condition || "Not specified";
+
+
+/*
+AVAILABLE / SOLD
+
+The public collection only loads available products,
+but this also supports sold products if one is opened
+from another source in the future.
+*/
+
+const available =
+product.available === true;
+
+
+const statusText =
+document.getElementById("statusText");
+
+const statusDot =
+document.getElementById("statusDot");
+
+const detailsAvailability =
+document.getElementById("detailsAvailability");
+
+
+if (available) {
+
+statusText.textContent =
+"Available";
+
+detailsAvailability.textContent =
+"Available";
+
+statusDot.classList.remove("sold");
+
+} else {
+
+statusText.textContent =
+"Sold";
+
+detailsAvailability.textContent =
+"Sold";
+
+statusDot.classList.add("sold");
+
+}
+
+
+/* WHATSAPP */
+
+const message =
+encodeURIComponent(
+`Hello Twinkle Gadgets, I'm interested in the ${product.name}${product.storage ? " " + product.storage : ""}. Price: ₦${Number(product.price || 0).toLocaleString("en-NG")}.`
+);
+
+
+const whatsapp =
+document.getElementById("detailsWhatsapp");
+
+whatsapp.href =
+"https://wa.me/2349049388119?text=" +
+message;
+
+
+/* START AT TOP */
+
 window.scrollTo({
 top:0,
-behavior:"smooth"
+behavior:"instant"
 });
 
 }
 
 
-/* =========================================
-   CLOSE PRODUCT DETAILS
-========================================= */
+/* BACK TO COLLECTION */
 
-function closeProductDetails() {
+function backToCollection() {
 
-const collection =
-document.getElementById("phones");
-
-const details =
-document.getElementById("productDetails");
+document.getElementById("productDetails")
+.classList.remove("active");
 
 
-details.classList.remove("active");
+document.getElementById("mainContent")
+.style.display =
+"block";
 
-collection.classList.remove("collection-hidden");
+
+document.querySelector("footer")
+.style.display =
+"block";
 
 
-setTimeout(() => {
-
-collection.scrollIntoView({
-behavior:"smooth",
-block:"start"
+window.scrollTo({
+top:0,
+behavior:"instant"
 });
-
-},50);
 
 }
 
 
-/* =========================================
-   SAFE HTML
-========================================= */
+/* SAFE TEXT */
 
 function escapeHtml(value) {
 
@@ -2110,16 +2147,12 @@ return div.innerHTML;
 }
 
 
-/* =========================================
-   START
-========================================= */
+/* START */
 
 loadProducts();
 
 
-/* =========================================
-   REFRESH WHEN USER RETURNS TO PAGE
-========================================= */
+/* REFRESH WHEN USER RETURNS TO PAGE */
 
 document.addEventListener(
 "visibilitychange",
@@ -2133,6 +2166,27 @@ loadProducts();
 
 });
 
+
+/*
+ALLOW BROWSER BACK BUTTON TO RETURN
+TO COLLECTION AFTER DETAILS VIEW.
+*/
+
+window.addEventListener(
+"popstate",
+() => {
+
+if (
+document
+.getElementById("productDetails")
+.classList.contains("active")
+) {
+
+backToCollection();
+
+}
+
+});
 
 </script>
 
