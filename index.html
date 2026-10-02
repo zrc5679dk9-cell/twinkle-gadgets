@@ -634,7 +634,7 @@ nav a:hover{
 }
 
 
-/* ================= EASY BUY AD ================= */
+/* ================= AIRPODS AD ================= */
 
 .airpods-ad{
   position:relative;
@@ -674,15 +674,15 @@ nav a:hover{
   background:
     linear-gradient(
       180deg,
-      rgba(0,0,0,.20),
-      rgba(0,0,0,.78)
+      rgba(0,0,0,.12),
+      rgba(0,0,0,.72)
     );
 }
 
 .airpods-content{
   position:relative;
   z-index:2;
-  max-width:700px;
+  max-width:650px;
   color:#fff;
 }
 
@@ -691,57 +691,25 @@ nav a:hover{
   align-items:center;
   justify-content:center;
   gap:14px;
-  font-size:clamp(45px,7vw,78px);
+  font-size:clamp(52px,7vw,88px);
   line-height:1;
   font-weight:900;
-  letter-spacing:-4px;
+  letter-spacing:-5px;
   text-shadow:0 5px 25px rgba(0,0,0,.35);
 }
 
 .apple-logo{
-  font-size:.7em;
+  font-size:.78em;
   font-weight:400;
   letter-spacing:0;
 }
 
 .airpods-description{
-  max-width:570px;
+  max-width:500px;
   margin:25px auto 0;
-  color:rgba(255,255,255,.88);
-  font-size:18px;
-  line-height:1.55;
-  font-weight:500;
-}
-
-.easy-buy-highlight{
-  display:inline-block;
-  margin-bottom:14px;
-  color:var(--gold2);
-  text-transform:uppercase;
-  letter-spacing:3px;
-  font-size:11px;
-  font-weight:900;
-}
-
-.easy-buy-text{
-  max-width:600px;
-  margin:0 auto;
-  font-size:clamp(25px,4vw,42px);
-  line-height:1.08;
-  letter-spacing:-2px;
-  font-weight:800;
-}
-
-.easy-buy-text span{
-  color:var(--gold2);
-}
-
-.easy-buy-small{
-  max-width:520px;
-  margin:20px auto 0;
-  color:rgba(255,255,255,.78);
-  font-size:14px;
-  line-height:1.65;
+  color:rgba(255,255,255,.82);
+  font-size:16px;
+  line-height:1.7;
 }
 
 .airpods-price{
@@ -752,6 +720,113 @@ nav a:hover{
 
 .airpods-button{
   margin-top:25px;
+  background:#fff;
+  color:#111;
+}
+
+
+/* ================= EASY BUY AD ================= */
+
+.easybuy-ad{
+  position:relative;
+  overflow:hidden;
+  min-height:560px;
+  margin:0 auto 80px;
+  max-width:1280px;
+  border-radius:45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:80px 24px;
+  color:#fff;
+  background:#080808;
+}
+
+.easybuy-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+  transform:scale(1.02);
+  transition:transform 8s ease;
+}
+
+.easybuy-ad:hover .easybuy-bg{
+  transform:scale(1.06);
+}
+
+.easybuy-overlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.16),
+      rgba(0,0,0,.78)
+    );
+}
+
+.easybuy-content{
+  position:relative;
+  z-index:2;
+  max-width:720px;
+  color:#fff;
+}
+
+.easybuy-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 14px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);
+  border-radius:30px;
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+
+.easybuy-content h2{
+  font-size:clamp(40px,6vw,72px);
+  line-height:.95;
+  letter-spacing:-4px;
+  max-width:700px;
+  margin:0 auto;
+}
+
+.easybuy-content h2 span{
+  color:var(--gold2);
+}
+
+.easybuy-description{
+  max-width:570px;
+  margin:25px auto 0;
+  color:rgba(255,255,255,.84);
+  font-size:16px;
+  line-height:1.7;
+}
+
+.easybuy-description strong{
+  color:#fff;
+}
+
+.easybuy-note{
+  margin-top:18px;
+  color:rgba(255,255,255,.62);
+  font-size:11px;
+  letter-spacing:.2px;
+}
+
+.easybuy-button{
+  margin-top:26px;
   background:#fff;
   color:#111;
 }
@@ -1241,7 +1316,7 @@ body.details-open .normal-site{
 
   .airpods-ad{
     min-height:500px;
-    margin:0 10px 60px;
+    margin:0 10px 40px;
     border-radius:30px;
     padding:60px 20px;
   }
@@ -1255,13 +1330,20 @@ body.details-open .normal-site{
     font-size:14px;
   }
 
-  .easy-buy-text{
-    font-size:31px;
-    letter-spacing:-1.5px;
+  .easybuy-ad{
+    min-height:500px;
+    margin:0 10px 60px;
+    border-radius:30px;
+    padding:60px 20px;
   }
 
-  .easy-buy-small{
-    font-size:13px;
+  .easybuy-content h2{
+    font-size:45px;
+    letter-spacing:-3px;
+  }
+
+  .easybuy-description{
+    font-size:14px;
   }
 
 }
@@ -1640,14 +1722,14 @@ Loading available devices...
 
 
 
-<!-- ================= EASY BUY AD ================= -->
+<!-- ================= AIRPODS AD ================= -->
 
 <section class="airpods-ad">
 
 
 <img
-src="https://tpasjsjofhxpslomciqd.supabase.co/storage/v1/object/public/homepage-images/Untitled%20folder/IMG_1449.webp"
-alt="Easy Buy at Twinkle Gadgets"
+src="https://tpasjsjofhxpslomciqd.supabase.co/storage/v1/object/public/homepage-images/Untitled%20folder/IMG_1446.webp"
+alt="AirPods"
 class="airpods-bg"
 >
 
@@ -1659,41 +1741,108 @@ class="airpods-bg"
 <div class="airpods-content">
 
 
-<div class="easy-buy-highlight">
-Easy Buy
+<div class="airpods-brand">
+
+<span class="apple-logo">
+
+</span>
+
+<span>
+AirPods
+</span>
+
 </div>
 
 
-<div class="easy-buy-text">
+<p class="airpods-description">
 
-Get your Apple device and
-<span>pay small-small</span>
-at Twinkle Gadgets.
-
-</div>
-
-
-<p class="easy-buy-small">
-
-4 affordable monthly repayments with
-10% interest.
-
-<br>
-
-With only <strong>50% initial payment.</strong>
+Crystal-clear sound, a sleek design,
+and seamless switching between devices.
 
 </p>
 
 
 <div class="airpods-price">
 
-Terms & Conditions Apply
+From ₦299,000
 
 </div>
 
 
 <a
 class="btn airpods-button"
+href="#collection">
+
+Shop now
+
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================= EASY BUY AD ================= -->
+
+<section class="easybuy-ad">
+
+
+<img
+src="https://tpasjsjofhxpslomciqd.supabase.co/storage/v1/object/public/homepage-images/Untitled%20folder/IMG_1449.webp"
+alt="Easy Buy at Twinkle Gadgets"
+class="easybuy-bg"
+>
+
+
+<div class="easybuy-overlay">
+</div>
+
+
+<div class="easybuy-content">
+
+
+<div class="easybuy-label">
+Easy Buy
+</div>
+
+
+<h2>
+
+Get your Apple device and
+<span>pay small-small.</span>
+
+</h2>
+
+
+<p class="easybuy-description">
+
+Get your Apple device and pay small-small
+at Twinkle Gadgets with
+<strong>4 affordable monthly repayments</strong>
+with <strong>10% interest.</strong>
+
+</p>
+
+
+<p class="easybuy-description">
+
+With only <strong>50% initial payment.</strong>
+
+</p>
+
+
+<p class="easybuy-note">
+
+Terms and conditions apply.
+
+</p>
+
+
+<a
+class="btn easybuy-button"
 href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'm%20interested%20in%20the%20Easy%20Buy%20payment%20plan."
 target="_blank">
 
