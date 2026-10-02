@@ -5,10 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Twinkle Gadgets | Admin</title>
 
@@ -17,486 +14,456 @@
 <style>
 
 :root {
-  --black: #0b0b0b;
-  --cream: #f7f6f2;
-  --gold: #b08a32;
-  --gold-light: #d4b35a;
-  --muted: #777;
-  --line: rgba(0,0,0,.09);
-  --white: #fff;
+  --black:#0b0b0b;
+  --cream:#f7f6f2;
+  --gold:#b08a32;
+  --gold-light:#d4b35a;
+  --muted:#777;
+  --line:rgba(0,0,0,.09);
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Display",
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
+  "Helvetica Neue",Arial,sans-serif;
 
   background:
-    radial-gradient(
-      circle at 20% 0%,
-      rgba(176,138,50,.12),
-      transparent 30%
-    ),
+    radial-gradient(circle at 20% 0%,rgba(176,138,50,.12),transparent 30%),
     var(--cream);
 
-  color: var(--black);
-  min-height: 100vh;
-  padding: 20px;
+  color:var(--black);
+  min-height:100vh;
+  padding:20px;
 }
 
 .container {
-  max-width: 900px;
-  margin: auto;
+  max-width:900px;
+  margin:auto;
 }
 
-/* HEADER */
-
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
 }
 
 .brand {
-  font-weight: 900;
-  font-size: 20px;
-  letter-spacing: -.5px;
+  font-weight:900;
+  font-size:20px;
+  letter-spacing:-.5px;
 }
 
 .brand span {
-  color: var(--gold);
+  color:var(--gold);
 }
 
 .logout {
-  border: 0;
-  background: #111;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 20px;
-  font-weight: 700;
+  border:0;
+  background:#111;
+  color:white;
+  padding:10px 15px;
+  border-radius:20px;
+  font-weight:700;
 }
 
-/* LOGIN */
-
 .login {
-  max-width: 430px;
-  margin: 80px auto;
-  background: rgba(255,255,255,.72);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255,255,255,.7);
-  border-radius: 28px;
-  padding: 30px;
-  box-shadow: 0 25px 80px rgba(0,0,0,.08);
+  max-width:430px;
+  margin:80px auto;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+  border:1px solid rgba(255,255,255,.7);
+  border-radius:28px;
+  padding:30px;
+  box-shadow:0 25px 80px rgba(0,0,0,.08);
 }
 
 .login h1 {
-  font-size: 32px;
-  letter-spacing: -1.5px;
-  margin-bottom: 8px;
+  font-size:32px;
+  letter-spacing:-1.5px;
+  margin-bottom:8px;
 }
 
 .login h1 span {
-  color: var(--gold);
+  color:var(--gold);
 }
 
 .login p {
-  color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 25px;
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:25px;
 }
 
-/* FORM */
-
 .card {
-  background: rgba(255,255,255,.72);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255,255,255,.75);
-  border-radius: 28px;
-  padding: 25px;
-  margin-bottom: 20px;
-  box-shadow: 0 20px 70px rgba(0,0,0,.06);
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+  border:1px solid rgba(255,255,255,.75);
+  border-radius:28px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 20px 70px rgba(0,0,0,.06);
 }
 
 .card h2 {
-  font-size: 22px;
-  letter-spacing: -1px;
-  margin-bottom: 20px;
+  font-size:22px;
+  letter-spacing:-1px;
+  margin-bottom:20px;
 }
 
 label {
-  display: block;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 7px;
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:7px;
 }
 
 input,
 select,
 textarea {
-  width: 100%;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.85);
-  border-radius: 14px;
-  padding: 14px;
-  font-size: 14px;
-  outline: none;
-  margin-bottom: 16px;
-  font-family: inherit;
+  width:100%;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.85);
+  border-radius:14px;
+  padding:14px;
+  font-size:14px;
+  outline:none;
+  margin-bottom:16px;
+  font-family:inherit;
 }
 
 textarea {
-  min-height: 130px;
-  resize: vertical;
-  line-height: 1.5;
+  min-height:130px;
+  resize:vertical;
+  line-height:1.5;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(176,138,50,.1);
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(176,138,50,.1);
 }
 
 .row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-/* IMAGE UPLOAD */
-
 .file-box {
-  border: 1.5px dashed rgba(176,138,50,.5);
-  border-radius: 18px;
-  padding: 25px 15px;
-  text-align: center;
-  margin-bottom: 18px;
-  background: rgba(176,138,50,.04);
+  border:1.5px dashed rgba(176,138,50,.5);
+  border-radius:18px;
+  padding:25px 15px;
+  text-align:center;
+  margin-bottom:18px;
+  background:rgba(176,138,50,.04);
 }
 
 .file-box input {
-  margin: 10px 0 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  margin:10px 0 0;
+  padding:0;
+  border:0;
+  background:transparent;
 }
 
 .photo-preview-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 15px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:15px;
 }
 
 .photo-preview {
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-  aspect-ratio: 1;
-  background: #eee;
+  position:relative;
+  border-radius:15px;
+  overflow:hidden;
+  aspect-ratio:1;
+  background:#eee;
 }
 
 .photo-preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .photo-number {
-  position: absolute;
-  left: 7px;
-  top: 7px;
-  background: rgba(0,0,0,.7);
-  color: white;
-  border-radius: 10px;
-  padding: 4px 7px;
-  font-size: 9px;
-  font-weight: 800;
+  position:absolute;
+  left:7px;
+  top:7px;
+  background:rgba(0,0,0,.7);
+  color:white;
+  border-radius:10px;
+  padding:4px 7px;
+  font-size:9px;
+  font-weight:800;
 }
 
 .existing-photo {
-  position: relative;
+  position:relative;
 }
 
 .remove-photo {
-  position: absolute;
-  right: 7px;
-  top: 7px;
-  width: 25px;
-  height: 25px;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(0,0,0,.75);
-  color: white;
-  font-weight: 900;
-  cursor: pointer;
+  position:absolute;
+  right:7px;
+  top:7px;
+  width:25px;
+  height:25px;
+  border:0;
+  border-radius:50%;
+  background:rgba(0,0,0,.75);
+  color:white;
+  font-weight:900;
+  cursor:pointer;
 }
 
 .primary {
-  width: 100%;
-  border: 0;
-  border-radius: 25px;
-  padding: 15px;
-  background: #0b0b0b;
-  color: white;
-  font-size: 14px;
-  font-weight: 800;
+  width:100%;
+  border:0;
+  border-radius:25px;
+  padding:15px;
+  background:#0b0b0b;
+  color:white;
+  font-size:14px;
+  font-weight:800;
 }
 
 .primary:hover {
-  color: var(--gold-light);
+  color:var(--gold-light);
 }
 
 .primary:disabled {
-  opacity: .6;
-  cursor: not-allowed;
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 .message {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
+  margin-top:12px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
 }
 
-/* INVENTORY SUMMARY */
-
 .inventory-summary {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:20px;
 }
 
 .summary-box {
-  background: rgba(255,255,255,.72);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,.75);
-  border-radius: 20px;
-  padding: 17px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.75);
+  border-radius:20px;
+  padding:17px;
 }
 
 .summary-number {
-  font-size: 25px;
-  font-weight: 900;
+  font-size:25px;
+  font-weight:900;
 }
 
 .summary-label {
-  color: var(--muted);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 3px;
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-top:3px;
 }
 
-/* PRODUCTS */
-
 .product-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
 }
 
 .product {
-  background: rgba(255,255,255,.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,.8);
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 15px 50px rgba(0,0,0,.05);
-  transition: .3s;
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 15px 50px rgba(0,0,0,.05);
+  transition:.3s;
 }
 
 .product:hover {
-  transform: translateY(-3px);
+  transform:translateY(-3px);
   box-shadow:
     0 20px 55px rgba(0,0,0,.08),
     0 0 25px rgba(176,138,50,.08);
 }
 
 .product-main-image {
-  width: 100%;
-  height: 210px;
-  object-fit: cover;
-  background: #eee;
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  background:#eee;
 }
 
 .product-photo-count {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  background: rgba(0,0,0,.72);
-  color: white;
-  padding: 5px 9px;
-  border-radius: 12px;
-  font-size: 9px;
-  font-weight: 800;
+  position:absolute;
+  left:10px;
+  bottom:10px;
+  background:rgba(0,0,0,.72);
+  color:white;
+  padding:5px 9px;
+  border-radius:12px;
+  font-size:9px;
+  font-weight:800;
 }
 
 .product-image-wrap {
-  position: relative;
+  position:relative;
 }
 
 .product-info {
-  padding: 15px;
+  padding:15px;
 }
 
 .product-name {
-  font-weight: 800;
-  font-size: 16px;
+  font-weight:800;
+  font-size:16px;
 }
 
 .product-meta {
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 4px;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
 }
 
 .product-battery {
-  color: var(--muted);
-  font-size: 10px;
-  margin-top: 3px;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
 }
 
 .product-description {
-  color: #666;
-  font-size: 11px;
-  line-height: 1.4;
-  margin-top: 8px;
+  color:#666;
+  font-size:11px;
+  line-height:1.4;
+  margin-top:8px;
 }
 
 .product-price {
-  font-weight: 900;
-  margin-top: 10px;
+  font-weight:900;
+  margin-top:10px;
 }
 
 .status {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 5px 9px;
-  border-radius: 10px;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: .4px;
+  display:inline-block;
+  margin-top:8px;
+  padding:5px 9px;
+  border-radius:10px;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.4px;
 }
 
 .available {
-  background: rgba(0,150,70,.1);
-  color: #087a3b;
+  background:rgba(0,150,70,.1);
+  color:#087a3b;
 }
 
 .sold {
-  background: rgba(200,0,0,.08);
-  color: #a00000;
+  background:rgba(200,0,0,.08);
+  color:#a00000;
 }
 
 .product-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7px;
-  margin-top: 12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:12px;
 }
 
 .edit,
 .delete,
 .toggle {
-  border: 0;
-  padding: 9px;
-  border-radius: 15px;
-  font-size: 10px;
-  font-weight: 800;
+  border:0;
+  padding:9px;
+  border-radius:15px;
+  font-size:10px;
+  font-weight:800;
 }
 
 .edit {
-  background: #111;
-  color: white;
+  background:#111;
+  color:white;
 }
 
 .delete {
-  background: #eee;
-  color: #111;
+  background:#eee;
+  color:#111;
 }
 
 .toggle {
-  grid-column: 1 / -1;
-  background: rgba(176,138,50,.12);
-  color: #8b681e;
+  grid-column:1/-1;
+  background:rgba(176,138,50,.12);
+  color:#8b681e;
 }
 
 .toggle.sold-button {
-  background: rgba(0,150,70,.10);
-  color: #087a3b;
+  background:rgba(0,150,70,.10);
+  color:#087a3b;
 }
 
 .hidden {
-  display: none !important;
+  display:none!important;
 }
 
 @media(max-width:600px) {
 
   body {
-    padding: 14px;
+    padding:14px;
   }
 
   .row {
-    grid-template-columns: 1fr;
-    gap: 0;
+    grid-template-columns:1fr;
+    gap:0;
   }
 
   .inventory-summary {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 7px;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
   }
 
   .summary-box {
-    padding: 13px 10px;
+    padding:13px 10px;
   }
 
   .summary-number {
-    font-size: 20px;
+    font-size:20px;
   }
 
   .summary-label {
-    font-size: 8px;
+    font-size:8px;
   }
 
   .product-list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
   }
 
   .product-main-image {
-    height: 170px;
-  }
-
-  .photo-preview-grid {
-    grid-template-columns: repeat(3, 1fr);
+    height:170px;
   }
 
   .card {
-    padding: 20px;
-    border-radius: 23px;
-  }
-
-  .product-actions {
-    grid-template-columns: 1fr 1fr;
+    padding:20px;
+    border-radius:23px;
   }
 
 }
@@ -508,8 +475,6 @@ textarea:focus {
 <body>
 
 <div class="container">
-
-<!-- LOGIN -->
 
 <div id="loginScreen" class="login">
 
@@ -529,6 +494,7 @@ textarea:focus {
       type="email"
       id="email"
       placeholder="Your admin email"
+      autocomplete="username"
       required
     >
 
@@ -538,10 +504,15 @@ textarea:focus {
       type="password"
       id="password"
       placeholder="Your password"
+      autocomplete="current-password"
       required
     >
 
-    <button class="primary">
+    <button
+      type="submit"
+      class="primary"
+      id="loginButton"
+    >
       Login
     </button>
 
@@ -552,8 +523,6 @@ textarea:focus {
 </div>
 
 
-<!-- ADMIN -->
-
 <div id="adminScreen" class="hidden">
 
   <div class="header">
@@ -562,22 +531,22 @@ textarea:focus {
       TWINKLE GADGET<span>.</span>
     </div>
 
-    <button class="logout" id="logoutBtn">
+    <button
+      type="button"
+      class="logout"
+      id="logoutBtn"
+    >
       Logout
     </button>
 
   </div>
 
 
-  <!-- INVENTORY SUMMARY -->
-
   <div class="inventory-summary">
 
     <div class="summary-box">
 
-      <div
-        class="summary-number"
-        id="totalCount">
+      <div class="summary-number" id="totalCount">
         0
       </div>
 
@@ -589,9 +558,7 @@ textarea:focus {
 
     <div class="summary-box">
 
-      <div
-        class="summary-number"
-        id="availableCount">
+      <div class="summary-number" id="availableCount">
         0
       </div>
 
@@ -603,9 +570,7 @@ textarea:focus {
 
     <div class="summary-box">
 
-      <div
-        class="summary-number"
-        id="soldCount">
+      <div class="summary-number" id="soldCount">
         0
       </div>
 
@@ -618,8 +583,6 @@ textarea:focus {
   </div>
 
 
-  <!-- ADD / EDIT PRODUCT -->
-
   <div class="card">
 
     <h2 id="formTitle">
@@ -628,17 +591,13 @@ textarea:focus {
 
     <form id="productForm">
 
-
-      <!-- MULTIPLE PHOTOS -->
-
       <div class="file-box">
 
         <strong>
           📸 Product Photos
         </strong>
 
-        <p
-          style="font-size:12px;color:#777;margin-top:5px;">
+        <p style="font-size:12px;color:#777;margin-top:5px;">
           Select multiple photos from your iPhone
         </p>
 
@@ -657,9 +616,7 @@ textarea:focus {
       </div>
 
 
-      <label>
-        Product Name
-      </label>
+      <label>Product Name</label>
 
       <input
         id="name"
@@ -672,9 +629,7 @@ textarea:focus {
 
         <div>
 
-          <label>
-            Storage
-          </label>
+          <label>Storage</label>
 
           <input
             id="storage"
@@ -685,9 +640,7 @@ textarea:focus {
 
         <div>
 
-          <label>
-            Battery
-          </label>
+          <label>Battery</label>
 
           <input
             id="battery"
@@ -703,36 +656,27 @@ textarea:focus {
 
         <div>
 
-          <label>
-            Condition
-          </label>
+          <label>Condition</label>
 
           <select id="condition">
-
             <option>UK Used</option>
             <option>Brand New</option>
             <option>Nigerian Used</option>
             <option>Refurbished</option>
-
           </select>
 
         </div>
 
-
         <div>
 
-          <label>
-            Category
-          </label>
+          <label>Category</label>
 
           <select id="category">
-
             <option>iPhone</option>
             <option>Samsung</option>
             <option>Android</option>
             <option>Gadget</option>
             <option>Accessory</option>
-
           </select>
 
         </div>
@@ -740,29 +684,15 @@ textarea:focus {
       </div>
 
 
-      <!-- DESCRIPTION -->
-
-      <label>
-        Description
-      </label>
+      <label>Description</label>
 
       <textarea
         id="description"
-        placeholder="Describe the phone and point out important details...
-
-Example:
-Clean UK used device.
-Face ID working perfectly.
-True Tone available.
-No repairs.
-Small scratch on the frame.
-Everything works perfectly."
+        placeholder="Describe the phone and point out important details..."
       ></textarea>
 
 
-      <label>
-        Price
-      </label>
+      <label>Price</label>
 
       <input
         type="number"
@@ -772,9 +702,7 @@ Everything works perfectly."
       >
 
 
-      <label>
-        Availability
-      </label>
+      <label>Availability</label>
 
       <select id="available">
 
@@ -790,8 +718,10 @@ Everything works perfectly."
 
 
       <button
+        type="submit"
         class="primary"
-        id="saveButton">
+        id="saveButton"
+      >
         Publish Product
       </button>
 
@@ -804,8 +734,6 @@ Everything works perfectly."
 
   </div>
 
-
-  <!-- PRODUCT LIST -->
 
   <div class="card">
 
@@ -827,8 +755,6 @@ Everything works perfectly."
 
 <script>
 
-/* SUPABASE */
-
 const SUPABASE_URL =
 "https://tpasjsjofhxpslomciqd.supabase.co";
 
@@ -840,7 +766,6 @@ supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
-
 
 let editingId = null;
 let editingImageUrls = [];
@@ -854,38 +779,70 @@ document
 
   e.preventDefault();
 
-  const email =
-    document.getElementById("email").value;
-
-  const password =
-    document.getElementById("password").value;
+  const button =
+    document.getElementById("loginButton");
 
   const message =
     document.getElementById("loginMessage");
 
-  message.textContent =
-    "Logging in...";
+  const email =
+    document.getElementById("email").value.trim();
 
+  const password =
+    document.getElementById("password").value;
 
-  const { error } =
-    await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-
-  if (error) {
-
+  if (!email || !password) {
     message.textContent =
-      error.message;
-
+      "Enter your email and password.";
     return;
-
   }
 
+  button.disabled = true;
+  button.textContent = "Logging in...";
   message.textContent = "";
 
-  showAdmin();
+  try {
+
+    const result =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+    if (result.error) {
+      message.textContent =
+        result.error.message;
+
+      return;
+    }
+
+    if (!result.data || !result.data.session) {
+
+      message.textContent =
+        "Login failed. No session was created.";
+
+      return;
+    }
+
+    showAdmin();
+
+  } catch(error) {
+
+    console.error(
+      "LOGIN ERROR:",
+      error
+    );
+
+    message.textContent =
+      error.message ||
+      "Login failed. Please try again.";
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "Login";
+
+  }
 
 });
 
@@ -894,15 +851,37 @@ document
 
 async function checkUser() {
 
-  const {
-    data: { session }
-  } =
-    await supabaseClient.auth.getSession();
+  try {
 
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.getSession();
 
-  if (session) {
+    if (error) {
 
-    showAdmin();
+      console.error(
+        "SESSION ERROR:",
+        error
+      );
+
+      return;
+
+    }
+
+    if (data && data.session) {
+
+      showAdmin();
+
+    }
+
+  } catch(error) {
+
+    console.error(
+      "CHECK USER ERROR:",
+      error
+    );
 
   }
 
@@ -934,7 +913,13 @@ document
 
   await supabaseClient.auth.signOut();
 
-  location.reload();
+  document
+    .getElementById("adminScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginScreen")
+    .classList.remove("hidden");
 
 });
 
@@ -953,8 +938,7 @@ document
 
   grid.innerHTML = "";
 
-
-  files.forEach((file, index) => {
+  files.forEach((file,index) => {
 
     const reader =
       new FileReader();
@@ -991,7 +975,7 @@ document
 });
 
 
-/* UPLOAD ONE IMAGE */
+/* UPLOAD IMAGE */
 
 async function uploadImage(file) {
 
@@ -1006,23 +990,22 @@ async function uploadImage(file) {
   const path =
     "products/" + fileName;
 
-
   const { error } =
     await supabaseClient
       .storage
       .from("product-images")
-      .upload(path, file, {
-        cacheControl: "3600",
-        upsert: false
-      });
-
+      .upload(
+        path,
+        file,
+        {
+          cacheControl:"3600",
+          upsert:false
+        }
+      );
 
   if (error) {
-
     throw error;
-
   }
-
 
   const { data } =
     supabaseClient
@@ -1030,13 +1013,12 @@ async function uploadImage(file) {
       .from("product-images")
       .getPublicUrl(path);
 
-
   return data.publicUrl;
 
 }
 
 
-/* UPLOAD MULTIPLE IMAGES */
+/* UPLOAD MULTIPLE */
 
 async function uploadImages(files) {
 
@@ -1044,10 +1026,9 @@ async function uploadImages(files) {
 
   for (const file of files) {
 
-    const url =
-      await uploadImage(file);
-
-    urls.push(url);
+    urls.push(
+      await uploadImage(file)
+    );
 
   }
 
@@ -1064,13 +1045,11 @@ document
 
   e.preventDefault();
 
-
   const message =
     document.getElementById("productMessage");
 
   const button =
     document.getElementById("saveButton");
-
 
   button.disabled = true;
 
@@ -1081,7 +1060,6 @@ document
 
   message.textContent = "";
 
-
   try {
 
     const files =
@@ -1089,12 +1067,8 @@ document
         document.getElementById("images").files
       );
 
-
     let imageUrls =
       [...editingImageUrls];
-
-
-    /* Upload new photos */
 
     if (files.length) {
 
@@ -1109,113 +1083,102 @@ document
 
     }
 
-
-    /* Keep first image compatible
-       with the existing public site */
-
-    const mainImage =
-      imageUrls.length
-        ? imageUrls[0]
-        : null;
-
-
     const product = {
 
       name:
-        document.getElementById("name").value.trim(),
+        document.getElementById("name")
+          .value.trim(),
 
       storage:
-        document.getElementById("storage").value.trim(),
+        document.getElementById("storage")
+          .value.trim(),
 
       condition:
-        document.getElementById("condition").value,
+        document.getElementById("condition")
+          .value,
 
       battery:
-        document.getElementById("battery").value.trim(),
+        document.getElementById("battery")
+          .value.trim(),
 
       category:
-        document.getElementById("category").value,
+        document.getElementById("category")
+          .value,
 
       description:
-        document.getElementById("description").value.trim(),
+        document.getElementById("description")
+          .value.trim(),
 
       price:
         Number(
-          document.getElementById("price").value
+          document.getElementById("price")
+            .value
         ),
 
       image_url:
-        mainImage,
+        imageUrls.length
+          ? imageUrls[0]
+          : null,
 
       image_urls:
         imageUrls,
 
       available:
-        document.getElementById("available").value
-        === "true"
+        document.getElementById("available")
+          .value === "true"
 
     };
 
-
-    let error;
-
+    let result;
 
     if (editingId) {
 
-      const result =
+      result =
         await supabaseClient
           .from("products")
           .update(product)
-          .eq("id", editingId);
-
-      error =
-        result.error;
+          .eq("id",editingId);
 
     } else {
 
-      const result =
+      result =
         await supabaseClient
           .from("products")
           .insert(product);
 
-      error =
-        result.error;
-
     }
 
-
-    if (error) {
-
-      throw error;
-
+    if (result.error) {
+      throw result.error;
     }
-
 
     message.textContent =
       editingId
         ? "Product updated successfully."
         : "Product published successfully.";
 
-
     resetForm();
 
     await loadProducts();
 
-
   } catch(error) {
 
-    console.error(error);
+    console.error(
+      "PRODUCT SAVE ERROR:",
+      error
+    );
 
     message.textContent =
       error.message;
 
+  } finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      "Publish Product";
+
   }
-
-
-  button.disabled = false;
-
-  button.textContent =
-    "Publish Product";
 
 });
 
@@ -1230,115 +1193,80 @@ async function loadProducts() {
   list.innerHTML =
     "<p>Loading products...</p>";
 
-
   try {
 
-    const { data, error } =
+    const { data,error } =
       await supabaseClient
         .from("products")
         .select("*")
-        .order("created_at", {
-          ascending: false
-        });
-
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        );
 
     if (error) {
-
-      console.error(error);
-
-      list.innerHTML =
-        "<p>" +
-        escapeHtml(error.message) +
-        "</p>";
-
-      return;
-
+      throw error;
     }
-
 
     const total =
       data.length;
 
-
     const available =
       data.filter(
-        product =>
-          product.available === true
+        p => p.available === true
       ).length;
-
 
     const sold =
       data.filter(
-        product =>
-          product.available === false
+        p => p.available === false
       ).length;
-
 
     document
       .getElementById("totalCount")
-      .textContent =
-      total;
-
+      .textContent = total;
 
     document
       .getElementById("availableCount")
-      .textContent =
-      available;
-
+      .textContent = available;
 
     document
       .getElementById("soldCount")
-      .textContent =
-      sold;
-
+      .textContent = sold;
 
     if (!data.length) {
 
       list.innerHTML =
-        `
-        <p style="color:#777;font-size:13px;">
-          No products yet.
-          Add your first product above.
-        </p>
-        `;
+        "<p style='color:#777;font-size:13px;'>No products yet. Add your first product above.</p>";
 
       return;
 
     }
 
-
     list.innerHTML = "";
-
 
     data.forEach(product => {
 
       let imageUrls = [];
 
-
       if (
         Array.isArray(product.image_urls)
       ) {
-
         imageUrls =
           product.image_urls;
-
       }
-
 
       if (
         !imageUrls.length &&
         product.image_url
       ) {
-
         imageUrls =
           [product.image_url];
-
       }
-
 
       const mainImage =
         imageUrls[0];
-
 
       const image =
         mainImage
@@ -1359,13 +1287,13 @@ async function loadProducts() {
                 <div class="product-photo-count">
                   📸 ${imageUrls.length} photos
                 </div>
-                `
+              `
               : ""
             }
 
           </div>
 
-          `
+        `
 
         : `
 
@@ -1383,22 +1311,16 @@ async function loadProducts() {
             No photo
           </div>
 
-          `;
-
+        `;
 
       const status =
         product.available === true;
 
-
-      cardRender:
-
       const card =
         document.createElement("div");
 
-
       card.className =
         "product";
-
 
       card.innerHTML = `
 
@@ -1410,12 +1332,9 @@ async function loadProducts() {
             ${escapeHtml(product.name)}
           </div>
 
-
           <div class="product-meta">
 
-            ${escapeHtml(
-              product.storage || ""
-            )}
+            ${escapeHtml(product.storage || "")}
 
             ${
               product.storage
@@ -1423,51 +1342,40 @@ async function loadProducts() {
                 : ""
             }
 
-            ${escapeHtml(
-              product.condition || ""
-            )}
+            ${escapeHtml(product.condition || "")}
 
           </div>
-
 
           ${
             product.battery
-              ? `
-                <div class="product-battery">
-                  Battery:
-                  ${escapeHtml(product.battery)}
-                </div>
-                `
-              : ""
+            ? `
+              <div class="product-battery">
+                Battery:
+                ${escapeHtml(product.battery)}
+              </div>
+            `
+            : ""
           }
-
 
           ${
             product.description
-              ? `
-                <div class="product-description">
-                  ${escapeHtml(
-                    product.description
-                  ).substring(0, 120)}
-                  ${
-                    product.description.length > 120
-                      ? "..."
-                      : ""
-                  }
-                </div>
-                `
-              : ""
+            ? `
+              <div class="product-description">
+                ${escapeHtml(product.description).substring(0,120)}
+                ${
+                  product.description.length > 120
+                    ? "..."
+                    : ""
+                }
+              </div>
+            `
+            : ""
           }
 
-
           <div class="product-price">
-
-            ₦${Number(
-              product.price || 0
-            ).toLocaleString("en-NG")}
-
+            ₦${Number(product.price || 0)
+              .toLocaleString("en-NG")}
           </div>
-
 
           <div
             class="status ${
@@ -1476,35 +1384,33 @@ async function loadProducts() {
                 : "sold"
             }"
           >
-
             ${
               status
                 ? "● AVAILABLE"
                 : "● SOLD"
             }
-
           </div>
-
 
           <div class="product-actions">
 
             <button
+              type="button"
               class="edit"
               onclick="editProduct('${product.id}')"
             >
               Edit
             </button>
 
-
             <button
+              type="button"
               class="delete"
               onclick="deleteProduct('${product.id}')"
             >
               Delete
             </button>
 
-
             <button
+              type="button"
               class="toggle ${
                 status
                   ? ""
@@ -1515,13 +1421,11 @@ async function loadProducts() {
                 ${status}
               )"
             >
-
               ${
                 status
                   ? "Mark as Sold"
                   : "Mark as Available"
               }
-
             </button>
 
           </div>
@@ -1530,29 +1434,26 @@ async function loadProducts() {
 
       `;
 
-
       list.appendChild(card);
 
     });
 
+  } catch(error) {
 
-  } catch (error) {
-
-    console.error(error);
+    console.error(
+      "LOAD PRODUCTS ERROR:",
+      error
+    );
 
     list.innerHTML =
-      `
-      <p>
-        ${escapeHtml(error.message)}
-      </p>
-      `;
+      `<p>${escapeHtml(error.message)}</p>`;
 
   }
 
 }
 
 
-/* TOGGLE AVAILABLE / SOLD */
+/* TOGGLE */
 
 async function toggleAvailability(
   id,
@@ -1562,60 +1463,43 @@ async function toggleAvailability(
   const newStatus =
     !currentlyAvailable;
 
-
   const actionText =
     newStatus
       ? "mark this product as AVAILABLE"
       : "mark this product as SOLD";
 
-
-  const confirmed =
-    confirm(
+  if (
+    !confirm(
       `Are you sure you want to ${actionText}?`
-    );
-
-
-  if (!confirmed) return;
-
+    )
+  ) return;
 
   try {
 
-    const { data, error } =
+    const { data,error } =
       await supabaseClient.rpc(
         "set_product_availability",
         {
-          product_id: id,
-          new_status: newStatus
+          product_id:id,
+          new_status:newStatus
         }
       );
 
-
     if (error) {
-
       alert(error.message);
-
       return;
-
     }
 
-
     if (!data) {
-
       alert(
         "The product could not be updated."
       );
-
       return;
-
     }
-
 
     await loadProducts();
 
-
-  } catch (error) {
-
-    console.error(error);
+  } catch(error) {
 
     alert(error.message);
 
@@ -1624,32 +1508,24 @@ async function toggleAvailability(
 }
 
 
-/* EDIT PRODUCT */
+/* EDIT */
 
 async function editProduct(id) {
 
-  const { data, error } =
+  const { data,error } =
     await supabaseClient
       .from("products")
       .select("*")
-      .eq("id", id)
+      .eq("id",id)
       .single();
 
-
   if (error) {
-
     alert(error.message);
-
     return;
-
   }
-
 
   editingId =
     data.id;
-
-
-  /* Load existing photos */
 
   if (
     Array.isArray(data.image_urls)
@@ -1671,81 +1547,51 @@ async function editProduct(id) {
 
   }
 
-
-  document
-    .getElementById("name")
-    .value =
+  document.getElementById("name").value =
     data.name || "";
 
-
-  document
-    .getElementById("storage")
-    .value =
+  document.getElementById("storage").value =
     data.storage || "";
 
-
-  document
-    .getElementById("battery")
-    .value =
+  document.getElementById("battery").value =
     data.battery || "";
 
-
-  document
-    .getElementById("condition")
-    .value =
+  document.getElementById("condition").value =
     data.condition || "UK Used";
 
-
-  document
-    .getElementById("category")
-    .value =
+  document.getElementById("category").value =
     data.category || "iPhone";
 
-
-  document
-    .getElementById("description")
-    .value =
+  document.getElementById("description").value =
     data.description || "";
 
-
-  document
-    .getElementById("price")
-    .value =
+  document.getElementById("price").value =
     data.price || "";
 
-
-  document
-    .getElementById("available")
-    .value =
+  document.getElementById("available").value =
     data.available
       ? "true"
       : "false";
 
-
-  document
-    .getElementById("formTitle")
+  document.getElementById("formTitle")
     .textContent =
     "Edit Product";
 
-
-  document
-    .getElementById("saveButton")
+  document.getElementById("saveButton")
     .textContent =
     "Update Product";
 
-
   renderExistingPhotos();
 
-
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+    top:0,
+    behavior:"smooth"
   });
 
 }
 
 
-/* SHOW EXISTING PHOTOS */
+/* EXISTING PHOTOS */
 
 function renderExistingPhotos() {
 
@@ -1754,19 +1600,16 @@ function renderExistingPhotos() {
       "photoPreviewGrid"
     );
 
-
   grid.innerHTML = "";
 
-
   editingImageUrls.forEach(
-    (url, index) => {
+    (url,index) => {
 
       const wrapper =
         document.createElement("div");
 
       wrapper.className =
         "photo-preview existing-photo";
-
 
       wrapper.innerHTML = `
 
@@ -1789,7 +1632,6 @@ function renderExistingPhotos() {
 
       `;
 
-
       grid.appendChild(wrapper);
 
     }
@@ -1798,7 +1640,7 @@ function renderExistingPhotos() {
 }
 
 
-/* REMOVE EXISTING PHOTO */
+/* REMOVE PHOTO */
 
 function removeExistingPhoto(index) {
 
@@ -1812,41 +1654,33 @@ function removeExistingPhoto(index) {
 }
 
 
-/* DELETE PRODUCT */
+/* DELETE */
 
 async function deleteProduct(id) {
 
-  const confirmed =
-    confirm(
+  if (
+    !confirm(
       "Delete this product permanently?"
-    );
-
-
-  if (!confirmed) return;
-
+    )
+  ) return;
 
   const { error } =
     await supabaseClient
       .from("products")
       .delete()
-      .eq("id", id);
-
+      .eq("id",id);
 
   if (error) {
-
     alert(error.message);
-
     return;
-
   }
-
 
   await loadProducts();
 
 }
 
 
-/* RESET FORM */
+/* RESET */
 
 function resetForm() {
 
@@ -1854,23 +1688,18 @@ function resetForm() {
 
   editingImageUrls = [];
 
-
   document
     .getElementById("productForm")
     .reset();
 
-
   document
     .getElementById("photoPreviewGrid")
-    .innerHTML =
-    "";
-
+    .innerHTML = "";
 
   document
     .getElementById("formTitle")
     .textContent =
     "Add Product";
-
 
   document
     .getElementById("saveButton")
@@ -1880,7 +1709,7 @@ function resetForm() {
 }
 
 
-/* ESCAPE HTML */
+/* ESCAPE */
 
 function escapeHtml(text) {
 
