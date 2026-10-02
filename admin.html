@@ -107,6 +107,10 @@ body {
   margin-bottom: 8px;
 }
 
+.login h1 span {
+  color: var(--gold);
+}
+
 .login p {
   color: var(--muted);
   font-size: 13px;
@@ -209,11 +213,47 @@ button {
   color: var(--gold-light);
 }
 
+.primary:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
 .message {
   margin-top: 12px;
   text-align: center;
   font-size: 13px;
   color: var(--muted);
+}
+
+/* INVENTORY SUMMARY */
+
+.inventory-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.summary-box {
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,.75);
+  border-radius: 20px;
+  padding: 17px;
+}
+
+.summary-number {
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.summary-label {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 3px;
 }
 
 /* PRODUCTS */
@@ -232,6 +272,14 @@ button {
   border-radius: 22px;
   overflow: hidden;
   box-shadow: 0 15px 50px rgba(0,0,0,.05);
+  transition: .3s;
+}
+
+.product:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.08),
+    0 0 25px rgba(176,138,50,.08);
 }
 
 .product img {
@@ -256,24 +304,51 @@ button {
   margin-top: 4px;
 }
 
+.product-battery {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 3px;
+}
+
 .product-price {
   font-weight: 900;
   margin-top: 10px;
 }
 
+.status {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 9px;
+  border-radius: 10px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .4px;
+}
+
+.available {
+  background: rgba(0,150,70,.1);
+  color: #087a3b;
+}
+
+.sold {
+  background: rgba(200,0,0,.08);
+  color: #a00000;
+}
+
 .product-actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 7px;
   margin-top: 12px;
 }
 
 .edit,
-.delete {
-  flex: 1;
+.delete,
+.toggle {
   border: 0;
   padding: 9px;
   border-radius: 15px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
 }
 
@@ -287,23 +362,15 @@ button {
   color: #111;
 }
 
-.status {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 4px 8px;
-  border-radius: 10px;
-  font-size: 9px;
-  font-weight: 800;
+.toggle {
+  grid-column: 1 / -1;
+  background: rgba(176,138,50,.12);
+  color: #8b681e;
 }
 
-.available {
-  background: rgba(0,150,70,.1);
+.toggle.sold-button {
+  background: rgba(0,150,70,.10);
   color: #087a3b;
-}
-
-.sold {
-  background: rgba(200,0,0,.08);
-  color: #a00000;
 }
 
 .hidden {
@@ -321,6 +388,23 @@ button {
     gap: 0;
   }
 
+  .inventory-summary {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+  }
+
+  .summary-box {
+    padding: 13px 10px;
+  }
+
+  .summary-number {
+    font-size: 20px;
+  }
+
+  .summary-label {
+    font-size: 8px;
+  }
+
   .product-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -333,6 +417,10 @@ button {
   .card {
     padding: 20px;
     border-radius: 23px;
+  }
+
+  .product-actions {
+    grid-template-columns: 1fr 1fr;
   }
 
 }
@@ -351,7 +439,9 @@ button {
 
 <div id="loginScreen" class="login">
 
-  <h1>Twinkle Gadgets<span>.</span></h1>
+  <h1>
+    Twinkle Gadgets<span>.</span>
+  </h1>
 
   <p>
     Private product management
@@ -359,7 +449,9 @@ button {
 
   <form id="loginForm">
 
-    <label>Email</label>
+    <label>
+      Email
+    </label>
 
     <input
       type="email"
@@ -368,7 +460,9 @@ button {
       required
     >
 
-    <label>Password</label>
+    <label>
+      Password
+    </label>
 
     <input
       type="password"
@@ -395,6 +489,7 @@ button {
 
 <div id="adminScreen" class="hidden">
 
+
   <div class="header">
 
     <div class="brand">
@@ -410,7 +505,58 @@ button {
   </div>
 
 
-  <!-- ADD PRODUCT -->
+  <!-- INVENTORY SUMMARY -->
+
+  <div class="inventory-summary">
+
+    <div class="summary-box">
+
+      <div
+        class="summary-number"
+        id="totalCount">
+        0
+      </div>
+
+      <div class="summary-label">
+        Total
+      </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+      <div
+        class="summary-number"
+        id="availableCount">
+        0
+      </div>
+
+      <div class="summary-label">
+        Available
+      </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+      <div
+        class="summary-number"
+        id="soldCount">
+        0
+      </div>
+
+      <div class="summary-label">
+        Sold
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ADD / EDIT PRODUCT -->
 
   <div class="card">
 
@@ -419,6 +565,7 @@ button {
     </h2>
 
     <form id="productForm">
+
 
       <div class="file-box">
 
@@ -621,6 +768,9 @@ button {
 
 <script>
 
+
+/* SUPABASE */
+
 const SUPABASE_URL =
 "https://tpasjsjofhxpslomciqd.supabase.co";
 
@@ -658,11 +808,13 @@ document
   message.textContent =
     "Logging in...";
 
+
   const { error } =
     await supabaseClient.auth.signInWithPassword({
       email,
       password
     });
+
 
   if (error) {
 
@@ -673,6 +825,7 @@ document
 
   }
 
+
   message.textContent = "";
 
   showAdmin();
@@ -680,7 +833,7 @@ document
 });
 
 
-/* AUTH CHECK */
+/* CHECK LOGIN */
 
 async function checkUser() {
 
@@ -688,6 +841,7 @@ async function checkUser() {
     data: { session }
   } =
     await supabaseClient.auth.getSession();
+
 
   if (session) {
 
@@ -698,15 +852,19 @@ async function checkUser() {
 }
 
 
+/* SHOW ADMIN */
+
 function showAdmin() {
 
   document
     .getElementById("loginScreen")
     .classList.add("hidden");
 
+
   document
     .getElementById("adminScreen")
     .classList.remove("hidden");
+
 
   loadProducts();
 
@@ -736,11 +894,14 @@ document
 
   if (!file) return;
 
+
   const preview =
     document.getElementById("preview");
 
+
   preview.src =
     URL.createObjectURL(file);
+
 
   preview.style.display =
     "block";
@@ -755,13 +916,16 @@ async function uploadImage(file) {
   const extension =
     file.name.split(".").pop();
 
+
   const fileName =
     crypto.randomUUID() +
     "." +
     extension;
 
+
   const path =
     "products/" + fileName;
+
 
   const { error } =
     await supabaseClient
@@ -772,17 +936,20 @@ async function uploadImage(file) {
         upsert: false
       });
 
+
   if (error) {
 
     throw error;
 
   }
 
+
   const { data } =
     supabaseClient
       .storage
       .from("product-images")
       .getPublicUrl(path);
+
 
   return data.publicUrl;
 
@@ -797,16 +964,21 @@ document
 
   e.preventDefault();
 
+
   const message =
     document.getElementById("productMessage");
 
   const button =
     document.getElementById("saveButton");
 
+
   button.disabled = true;
 
   button.textContent =
-    "Saving...";
+    editingId
+      ? "Updating..."
+      : "Publishing...";
+
 
   message.textContent = "";
 
@@ -818,7 +990,9 @@ document
 
 
     const file =
-      document.getElementById("image").files[0];
+      document
+        .getElementById("image")
+        .files[0];
 
 
     if (file) {
@@ -929,6 +1103,7 @@ async function loadProducts() {
   const list =
     document.getElementById("productList");
 
+
   list.innerHTML =
     "<p>Loading products...</p>";
 
@@ -945,11 +1120,45 @@ async function loadProducts() {
   if (error) {
 
     list.innerHTML =
-      "<p>" + error.message + "</p>";
+      "<p>" +
+      escapeHtml(error.message) +
+      "</p>";
 
     return;
 
   }
+
+
+  const total =
+    data.length;
+
+
+  const available =
+    data.filter(
+      product => product.available === true
+    ).length;
+
+
+  const sold =
+    total - available;
+
+
+  document
+    .getElementById("totalCount")
+    .textContent =
+    total;
+
+
+  document
+    .getElementById("availableCount")
+    .textContent =
+    available;
+
+
+  document
+    .getElementById("soldCount")
+    .textContent =
+    sold;
 
 
   if (!data.length) {
@@ -970,14 +1179,40 @@ async function loadProducts() {
     const card =
       document.createElement("div");
 
+
     card.className =
       "product";
 
 
     const image =
       product.image_url
-        ? `<img src="${product.image_url}" alt="${product.name}">`
-        : `<div style="height:210px;background:#eee;display:flex;align-items:center;justify-content:center;">No photo</div>`;
+
+      ? `
+        <img
+          src="${escapeHtml(product.image_url)}"
+          alt="${escapeHtml(product.name)}"
+        >
+        `
+
+      : `
+        <div
+          style="
+            height:210px;
+            background:#eee;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#777;
+            font-size:12px;
+          "
+        >
+          No photo
+        </div>
+        `;
+
+
+    const status =
+      product.available;
 
 
     card.innerHTML = `
@@ -991,39 +1226,92 @@ async function loadProducts() {
         </div>
 
         <div class="product-meta">
+
           ${escapeHtml(product.storage || "")}
-          •
+
+          ${product.storage ? " • " : ""}
+
           ${escapeHtml(product.condition || "")}
+
         </div>
+
+
+        ${
+          product.battery
+          ? `
+            <div class="product-battery">
+              Battery: ${escapeHtml(product.battery)}
+            </div>
+            `
+          : ""
+        }
+
 
         <div class="product-price">
-          ₦${Number(product.price || 0).toLocaleString()}
+
+          ₦${Number(
+            product.price || 0
+          ).toLocaleString("en-NG")}
+
         </div>
+
 
         <div
-          class="status ${product.available ? "available" : "sold"}">
+          class="status ${
+            status
+              ? "available"
+              : "sold"
+          }"
+        >
 
-          ${product.available ? "AVAILABLE" : "SOLD"}
+          ${
+            status
+              ? "● AVAILABLE"
+              : "● SOLD"
+          }
 
         </div>
+
 
         <div class="product-actions">
 
+
           <button
             class="edit"
-            onclick="editProduct('${product.id}')">
-
+            onclick="editProduct('${product.id}')"
+          >
             Edit
-
           </button>
+
 
           <button
             class="delete"
-            onclick="deleteProduct('${product.id}')">
-
+            onclick="deleteProduct('${product.id}')"
+          >
             Delete
+          </button>
+
+
+          <button
+            class="toggle ${
+              status
+                ? ""
+                : "sold-button"
+            }"
+            onclick="toggleAvailability(
+              '${product.id}',
+              ${status}
+            )"
+          >
+
+            ${
+              status
+                ? "Mark as Sold"
+                : "Mark as Available"
+            }
 
           </button>
+
 
         </div>
 
@@ -1039,7 +1327,56 @@ async function loadProducts() {
 }
 
 
-/* EDIT */
+/* TOGGLE AVAILABLE / SOLD */
+
+async function toggleAvailability(
+  id,
+  currentlyAvailable
+) {
+
+  const newStatus =
+    !currentlyAvailable;
+
+
+  const actionText =
+    newStatus
+      ? "mark this product as AVAILABLE"
+      : "mark this product as SOLD";
+
+
+  const confirmed =
+    confirm(
+      `Are you sure you want to ${actionText}?`
+    );
+
+
+  if (!confirmed) return;
+
+
+  const { error } =
+    await supabaseClient
+      .from("products")
+      .update({
+        available: newStatus
+      })
+      .eq("id", id);
+
+
+  if (error) {
+
+    alert(error.message);
+
+    return;
+
+  }
+
+
+  loadProducts();
+
+}
+
+
+/* EDIT PRODUCT */
 
 async function editProduct(id) {
 
@@ -1062,6 +1399,7 @@ async function editProduct(id) {
 
   editingId =
     data.id;
+
 
   editingImageUrl =
     data.image_url;
@@ -1106,7 +1444,9 @@ async function editProduct(id) {
   document
     .getElementById("available")
     .value =
-    data.available ? "true" : "false";
+    data.available
+      ? "true"
+      : "false";
 
 
   document
@@ -1121,6 +1461,22 @@ async function editProduct(id) {
     "Update Product";
 
 
+  if (data.image_url) {
+
+    const preview =
+      document.getElementById("preview");
+
+
+    preview.src =
+      data.image_url;
+
+
+    preview.style.display =
+      "block";
+
+  }
+
+
   window.scrollTo({
     top: 0,
     behavior: "smooth"
@@ -1129,17 +1485,17 @@ async function editProduct(id) {
 }
 
 
-/* DELETE */
+/* DELETE PRODUCT */
 
 async function deleteProduct(id) {
 
-  const confirmDelete =
+  const confirmed =
     confirm(
-      "Delete this product?"
+      "Delete this product permanently?"
     );
 
 
-  if (!confirmDelete) return;
+  if (!confirmed) return;
 
 
   const { error } =
@@ -1163,7 +1519,7 @@ async function deleteProduct(id) {
 }
 
 
-/* RESET */
+/* RESET FORM */
 
 function resetForm() {
 
@@ -1171,19 +1527,23 @@ function resetForm() {
 
   editingImageUrl = null;
 
+
   document
     .getElementById("productForm")
     .reset();
+
 
   document
     .getElementById("preview")
     .style.display =
     "none";
 
+
   document
     .getElementById("formTitle")
     .textContent =
     "Add Product";
+
 
   document
     .getElementById("saveButton")
@@ -1193,15 +1553,17 @@ function resetForm() {
 }
 
 
-/* SECURITY */
+/* ESCAPE HTML */
 
 function escapeHtml(text) {
 
   const div =
     document.createElement("div");
 
+
   div.textContent =
-    text;
+    text ?? "";
+
 
   return div.innerHTML;
 
