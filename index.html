@@ -298,50 +298,45 @@ nav a:hover {
   font-size:14px;
 }
 
-/* =========================================================
-   SEARCH + CATEGORY FILTERS
-========================================================= */
+/* =========================
+   SEARCH + FILTERS
+========================= */
 
 .collection-tools {
-  display:flex;
-  gap:12px;
   margin-bottom:28px;
-  flex-wrap:wrap;
-  align-items:center;
 }
 
 .search-box {
-  flex:1;
-  min-width:220px;
   position:relative;
+  margin-bottom:14px;
 }
 
 .search-box input {
   width:100%;
-  height:48px;
+  height:54px;
+  border-radius:18px;
   border:1px solid rgba(0,0,0,.10);
-  border-radius:25px;
-  padding:0 20px 0 45px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  padding:0 20px 0 48px;
   outline:none;
-  background:rgba(255,255,255,.65);
-  backdrop-filter:blur(15px);
-  -webkit-backdrop-filter:blur(15px);
-  font-size:13px;
+  font-size:14px;
   color:#111;
-  transition:.25s;
+  box-shadow:0 8px 30px rgba(0,0,0,.035);
 }
 
 .search-box input:focus {
-  border-color:rgba(176,138,50,.55);
-  box-shadow:0 0 0 3px rgba(176,138,50,.08);
+  border-color:rgba(176,138,50,.65);
+  box-shadow:0 8px 30px rgba(176,138,50,.08);
 }
 
 .search-icon {
   position:absolute;
-  left:17px;
+  left:18px;
   top:50%;
   transform:translateY(-50%);
-  font-size:15px;
+  font-size:18px;
   color:#777;
   pointer-events:none;
 }
@@ -350,65 +345,60 @@ nav a:hover {
   display:flex;
   gap:8px;
   overflow-x:auto;
+  padding:2px 1px 8px;
   scrollbar-width:none;
-  padding:2px;
 }
 
 .category-filters::-webkit-scrollbar {
   display:none;
 }
 
-.category-button {
+.filter-button {
+  flex:0 0 auto;
   border:1px solid rgba(0,0,0,.10);
   background:rgba(255,255,255,.55);
-  color:#666;
-  padding:10px 16px;
-  border-radius:22px;
+  color:#555;
+  padding:9px 15px;
+  border-radius:30px;
   font-size:11px;
   font-weight:800;
   cursor:pointer;
-  white-space:nowrap;
   transition:.25s;
 }
 
-.category-button:hover {
-  border-color:rgba(176,138,50,.45);
+.filter-button:hover {
+  border-color:var(--accent);
   color:var(--accent);
 }
 
-.category-button.active {
+.filter-button.active {
   background:#0b0b0b;
-  color:white;
   border-color:#0b0b0b;
+  color:white;
 }
 
-.collection-result {
-  color:#888;
-  font-size:11px;
-  margin-bottom:20px;
+/* FEATURED */
+
+.featured-section {
+  margin-bottom:55px;
 }
 
-/* FEATURED / NEWEST */
-
-.featured-heading {
+.featured-header {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px;
-  margin-bottom:18px;
+  gap:20px;
+  margin-bottom:20px;
 }
 
-.featured-heading h3 {
-  font-size:16px;
-  letter-spacing:-.3px;
+.featured-title {
+  font-size:24px;
+  letter-spacing:-1px;
 }
 
-.featured-heading span {
-  color:var(--accent);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
+.featured-subtitle {
+  color:#888;
+  font-size:12px;
 }
 
 /* PRODUCTS */
@@ -507,24 +497,6 @@ nav a:hover {
   z-index:3;
 }
 
-.product-badge {
-  position:absolute;
-  left:12px;
-  top:12px;
-  background:#0b0b0b;
-  color:white;
-  padding:7px 10px;
-  border-radius:15px;
-  font-size:8px;
-  font-weight:900;
-  letter-spacing:.8px;
-  z-index:4;
-}
-
-.product-badge.featured {
-  background:var(--accent);
-}
-
 .product-image::after {
   content:"TWINKLE GADGET";
   position:absolute;
@@ -533,6 +505,21 @@ nav a:hover {
   color:rgba(0,0,0,.16);
   font-size:9px;
   letter-spacing:3px;
+}
+
+.product-badge {
+  position:absolute;
+  top:12px;
+  left:12px;
+  z-index:4;
+  background:#0b0b0b;
+  color:white;
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
 }
 
 .product-info {
@@ -576,12 +563,6 @@ nav a:hover {
   font-weight:800;
 }
 
-.product-actions {
-  display:flex;
-  gap:6px;
-  align-items:center;
-}
-
 .product-button {
   background:#0b0b0b;
   color:white;
@@ -598,22 +579,16 @@ nav a:hover {
   color:var(--gold-light);
 }
 
-.whatsapp-product-button {
-  background:#218c4b;
+.product-whatsapp {
+  background:#188c4a;
   color:white;
   padding:9px 11px;
   border-radius:20px;
   font-size:10px;
   font-weight:800;
   white-space:nowrap;
-  cursor:pointer;
   border:none;
-  transition:.25s;
-}
-
-.whatsapp-product-button:hover {
-  transform:translateY(-2px);
-  background:#176b38;
+  cursor:pointer;
 }
 
 .empty-products {
@@ -621,6 +596,20 @@ nav a:hover {
   text-align:center;
   padding:60px 20px;
   color:#777;
+}
+
+.no-results {
+  grid-column:1/-1;
+  text-align:center;
+  padding:60px 20px;
+  color:#777;
+}
+
+.no-results strong {
+  display:block;
+  color:#111;
+  font-size:18px;
+  margin-bottom:7px;
 }
 
 /* PRODUCT DETAILS */
@@ -674,8 +663,6 @@ nav a:hover {
   backdrop-filter:blur(22px);
   -webkit-backdrop-filter:blur(22px);
 }
-
-/* DETAILS GALLERY */
 
 .details-gallery {
   display:flex;
@@ -817,8 +804,6 @@ nav a:hover {
   text-align:right;
 }
 
-/* DESCRIPTION */
-
 .details-description {
   margin-bottom:25px;
 }
@@ -848,11 +833,6 @@ nav a:hover {
 .details-whatsapp {
   flex:1;
   min-width:180px;
-}
-
-.details-sold {
-  opacity:.5;
-  pointer-events:none;
 }
 
 /* STATEMENT */
@@ -988,51 +968,47 @@ nav a:hover {
 /* CUSTOMER TRUST */
 
 .customer-trust {
-  margin-top:45px;
+  background:#fff;
+  border-top:1px solid rgba(0,0,0,.07);
+  border-bottom:1px solid rgba(0,0,0,.07);
 }
 
-.customer-trust-title {
-  color:#999;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:2.5px;
-  font-weight:800;
-  margin-bottom:18px;
-}
-
-.customer-trust-grid {
+.trust-proof-grid {
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
+  gap:16px;
 }
 
-.customer-trust-card {
-  padding:25px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.025);
-  border-radius:18px;
-  transition:.35s;
+.trust-proof {
+  padding:30px;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:22px;
+  background:rgba(247,246,242,.7);
 }
 
-.customer-trust-card:hover {
-  border-color:rgba(176,138,50,.35);
-  transform:translateY(-4px);
-}
-
-.customer-trust-icon {
-  font-size:22px;
-  margin-bottom:14px;
-}
-
-.customer-trust-card h4 {
+.stars {
+  color:var(--gold-light);
+  letter-spacing:2px;
   font-size:15px;
-  margin-bottom:6px;
+  margin-bottom:17px;
 }
 
-.customer-trust-card p {
+.trust-proof h3 {
+  font-size:17px;
+  margin-bottom:7px;
+}
+
+.trust-proof p {
   color:#777;
-  font-size:12px;
-  line-height:1.6;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.trust-proof-name {
+  margin-top:18px;
+  color:#111;
+  font-size:11px;
+  font-weight:800;
 }
 
 /* LOCATION */
@@ -1216,7 +1192,7 @@ footer {
     min-height:450px;
   }
 
-  .customer-trust-grid {
+  .trust-proof-grid {
     grid-template-columns:1fr;
   }
 
@@ -1256,18 +1232,6 @@ footer {
 
   .section-description {
     margin-top:15px;
-  }
-
-  .collection-tools {
-    display:block;
-  }
-
-  .search-box {
-    margin-bottom:10px;
-  }
-
-  .category-filters {
-    width:100%;
   }
 
   .products {
@@ -1313,19 +1277,14 @@ footer {
     margin-bottom:10px;
   }
 
-  .product-actions {
-    display:grid;
-    grid-template-columns:1fr;
-    gap:5px;
-  }
-
   .product-button,
-  .whatsapp-product-button {
+  .product-whatsapp {
     display:block;
     text-align:center;
-    padding:9px 5px;
-    font-size:8px;
     width:100%;
+    padding:9px 5px;
+    font-size:9px;
+    margin-top:5px;
   }
 
   .services {
@@ -1399,9 +1358,15 @@ footer {
     min-width:62px;
   }
 
-}
+  .featured-header {
+    display:block;
+  }
 
-/* HIDE NORMAL SITE WHEN DETAILS IS OPEN */
+  .featured-subtitle {
+    margin-top:5px;
+  }
+
+}
 
 body.details-open .normal-site {
   display:none;
@@ -1466,8 +1431,6 @@ Contact
 </header>
 
 
-<!-- NORMAL WEBSITE -->
-
 <div class="normal-site">
 
 <main>
@@ -1492,9 +1455,7 @@ Buy, sell or swap with a business built on 10 years of experience.
 
 <div class="hero-actions">
 
-<a
-class="button button-light"
-href="#phones">
+<a class="button button-light" href="#phones">
 Explore Collection
 </a>
 
@@ -1530,13 +1491,13 @@ Current picks.
 
 <p class="section-description">
 Browse our latest available devices. Search by name,
-filter by category and contact us directly about any product.
+filter by category or open any product for full details.
 </p>
 
 </div>
 
 
-<!-- SEARCH + FILTERS -->
+<!-- SEARCH -->
 
 <div class="collection-tools">
 
@@ -1547,9 +1508,9 @@ filter by category and contact us directly about any product.
 </span>
 
 <input
-type="search"
 id="productSearch"
-placeholder="Search phones, gadgets..."
+type="search"
+placeholder="Search phones, gadgets, models..."
 autocomplete="off">
 
 </div>
@@ -1559,9 +1520,9 @@ class="category-filters"
 id="categoryFilters">
 
 <button
-class="category-button active"
-type="button"
-data-category="all">
+class="filter-button active"
+data-category="all"
+type="button">
 All
 </button>
 
@@ -1570,28 +1531,30 @@ All
 </div>
 
 
-<div
-class="collection-result"
-id="collectionResult">
-Loading collection...
-</div>
-
-
-<!-- FEATURED -->
+<!-- FEATURED / NEWEST -->
 
 <div
+class="featured-section"
 id="featuredSection"
 style="display:none;">
 
-<div class="featured-heading">
+<div class="featured-header">
 
-<h3>
-❤️ Featured stock
+<div>
+
+<div class="section-label">
+Featured
+</div>
+
+<h3 class="featured-title">
+Newest arrivals.
 </h3>
 
-<span>
-Handpicked
-</span>
+</div>
+
+<div class="featured-subtitle">
+Fresh stock from Twinkle Gadgets
+</div>
 
 </div>
 
@@ -1603,23 +1566,7 @@ id="featuredProducts">
 </div>
 
 
-<!-- NEWEST / ALL PRODUCTS -->
-
-<div
-class="featured-heading"
-id="newestHeading"
-style="display:none;margin-top:42px;">
-
-<h3>
-🆕 Newest stock
-</h3>
-
-<span>
-Latest arrivals
-</span>
-
-</div>
-
+<!-- ALL PRODUCTS -->
 
 <div
 class="products"
@@ -1679,90 +1626,47 @@ we've got your device covered.
 <div class="services">
 
 <div class="service">
-
-<div class="service-number">
-01
-</div>
-
+<div class="service-number">01</div>
 <div>
-
-<h3>
-Smartphones
-</h3>
-
+<h3>Smartphones</h3>
 <p>
 Quality smartphones selected for everyday use,
 work, lifestyle and everything in between.
 </p>
-
 </div>
-
 </div>
-
 
 <div class="service">
-
-<div class="service-number">
-02
-</div>
-
+<div class="service-number">02</div>
 <div>
-
-<h3>
-Buy • Sell • Swap
-</h3>
-
+<h3>Buy • Sell • Swap</h3>
 <p>
 Looking to upgrade? Trade in, sell or swap
 your current device.
 </p>
-
 </div>
-
 </div>
-
 
 <div class="service">
-
-<div class="service-number">
-03
-</div>
-
+<div class="service-number">03</div>
 <div>
-
-<h3>
-Repairs
-</h3>
-
+<h3>Repairs</h3>
 <p>
 Professional phone and gadget repair services
 from an experienced technician.
 </p>
-
 </div>
-
 </div>
-
 
 <div class="service">
-
-<div class="service-number">
-04
-</div>
-
+<div class="service-number">04</div>
 <div>
-
-<h3>
-Gadgets
-</h3>
-
+<h3>Gadgets</h3>
 <p>
 Useful accessories and gadgets to complete
 your setup.
 </p>
-
 </div>
-
 </div>
 
 </div>
@@ -1852,68 +1756,104 @@ We arrange delivery to customers across Nigeria.
 
 </div>
 
+</div>
+
+</section>
+
 
 <!-- CUSTOMER TRUST -->
 
-<div class="customer-trust">
+<section class="customer-trust">
 
-<div class="customer-trust-title">
-Shop with confidence
+<div class="section">
+
+<div class="section-header">
+
+<div>
+
+<div class="section-label">
+Customer Trust
 </div>
 
-<div class="customer-trust-grid">
+<h2 class="section-title">
+Why customers come back.
+</h2>
 
-<div class="customer-trust-card">
-
-<div class="customer-trust-icon">
-🔍
 </div>
 
-<h4>
-Product Details
-</h4>
-
-<p>
-See the available product information,
-condition, storage and battery details before enquiring.
+<p class="section-description">
+A simple look at what matters when you're
+buying your next device.
 </p>
 
 </div>
 
 
-<div class="customer-trust-card">
+<div class="trust-proof-grid">
 
-<div class="customer-trust-icon">
-💬
+<div class="trust-proof">
+
+<div class="stars">
+★★★★★
 </div>
 
-<h4>
-Direct WhatsApp Enquiry
-</h4>
+<h3>
+Experience you can rely on.
+</h3>
 
 <p>
-Ask about any device directly through WhatsApp
-without going through complicated forms.
+With years of hands-on experience with phones
+and gadgets, we understand what to look for
+before a device reaches a customer.
 </p>
 
+<div class="trust-proof-name">
+10+ YEARS EXPERIENCE
+</div>
+
 </div>
 
 
-<div class="customer-trust-card">
+<div class="trust-proof">
 
-<div class="customer-trust-icon">
-🚚
+<div class="stars">
+★★★★★
 </div>
 
-<h4>
-Delivery Across Nigeria
-</h4>
+<h3>
+Clear product information.
+</h3>
 
 <p>
-Based in Lagos Island with delivery arrangements
-available for customers across Nigeria.
+Every listed device can show its condition,
+storage, battery information, price and photos
+before you make an enquiry.
 </p>
 
+<div class="trust-proof-name">
+TRANSPARENT STOCK
+</div>
+
+</div>
+
+
+<div class="trust-proof">
+
+<div class="stars">
+★★★★★
+</div>
+
+<h3>
+We're easy to reach.
+</h3>
+
+<p>
+Have a question about a phone, swap, repair
+or delivery? Reach us directly through WhatsApp.
+</p>
+
+<div class="trust-proof-name">
+DIRECT WHATSAPP SUPPORT
 </div>
 
 </div>
@@ -2054,17 +1994,9 @@ TWINKLE GADGET<span>.</span>
 
 <div class="footer-links">
 
-<a href="#phones">
-Collection
-</a>
-
-<a href="#services">
-Services
-</a>
-
-<a href="#location">
-Location
-</a>
+<a href="#phones">Collection</a>
+<a href="#services">Services</a>
+<a href="#location">Location</a>
 
 <a
 href="https://instagram.com/twinkle_gadget"
@@ -2091,7 +2023,7 @@ WhatsApp
 </div>
 
 
-<!-- PRODUCT DETAILS VIEW -->
+<!-- PRODUCT DETAILS -->
 
 <section
 class="product-details"
@@ -2107,6 +2039,7 @@ onclick="closeProductDetails()">
 
 
 <div class="details-card">
+
 
 <div class="details-gallery">
 
@@ -2225,7 +2158,7 @@ id="detailsWhatsapp"
 class="button button-light details-whatsapp"
 href="#"
 target="_blank">
-🟢 Enquire on WhatsApp
+Enquire on WhatsApp
 </a>
 
 <button
@@ -2247,9 +2180,9 @@ Back to Collection
 
 <script>
 
-/* =========================================================
-   SUPABASE CONNECTION
-========================================================= */
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://tpasjsjofhxpslomciqd.supabase.co";
@@ -2264,18 +2197,20 @@ SUPABASE_KEY
 );
 
 
-/* =========================================================
-   STORE PRODUCTS
-========================================================= */
+/* =========================
+   GLOBAL DATA
+========================= */
 
 let productsData = [];
-let selectedCategory = "all";
-let searchTerm = "";
+
+let currentCategory = "all";
+
+let currentSearch = "";
 
 
-/* =========================================================
+/* =========================
    SAFE TEXT
-========================================================= */
+========================= */
 
 function escapeHtml(value) {
 
@@ -2290,9 +2225,9 @@ return div.innerHTML;
 }
 
 
-/* =========================================================
-   GET PRODUCT IMAGES
-========================================================= */
+/* =========================
+   PRODUCT IMAGES
+========================= */
 
 function getProductImages(product) {
 
@@ -2309,7 +2244,10 @@ url.trim()
 
 }
 
-if (product.image_url) {
+if (
+typeof product.image_url === "string" &&
+product.image_url.trim()
+) {
 
 return [product.image_url];
 
@@ -2320,27 +2258,45 @@ return [];
 }
 
 
-/* =========================================================
+/* =========================
    WHATSAPP LINK
-========================================================= */
+========================= */
 
-function getWhatsappLink(product) {
+function getWhatsAppLink(product) {
+
+const price =
+Number(product.price || 0)
+.toLocaleString("en-NG");
 
 const message =
-encodeURIComponent(
-`Hello Twinkle Gadgets, I'm interested in the ${product.name}${product.storage ? " " + product.storage : ""} listed for ₦${Number(product.price || 0).toLocaleString("en-NG")}. Is it still available?`
-);
+`Hello Twinkle Gadgets, I'm interested in the ${product.name || "device"}${product.storage ? " " + product.storage : ""} listed for ₦${price}. Is it still available?`;
 
-return "https://wa.me/2349049388119?text=" + message;
+return (
+"https://wa.me/2349049388119?text=" +
+encodeURIComponent(message)
+);
 
 }
 
 
-/* =========================================================
-   CREATE PRODUCT CARD
-========================================================= */
+/* =========================
+   CATEGORY
+========================= */
 
-function createProductCard(product) {
+function getCategory(product) {
+
+return String(
+product.category || "Other"
+).trim();
+
+}
+
+
+/* =========================
+   CREATE PRODUCT CARD
+========================= */
+
+function createProductCard(product,index) {
 
 const card =
 document.createElement("article");
@@ -2360,37 +2316,27 @@ imageUrls.length
 
 const image =
 mainImage
-? `<img
+
+? `
+<img
 src="${escapeHtml(mainImage)}"
-alt="${escapeHtml(product.name)}"
-loading="lazy">`
+alt="${escapeHtml(product.name || "Product")}"
+loading="lazy"
+onerror="this.style.display='none'">
+`
+
 : "";
 
 
 const photoCount =
 imageUrls.length > 1
+
 ? `
 <div class="product-photo-count">
 📸 ${imageUrls.length} photos
 </div>
 `
-: "";
 
-
-/*
-Featured support.
-
-If the admin product has a "featured"
-field set to true, it receives the badge.
-*/
-
-const featuredBadge =
-product.featured === true
-? `
-<div class="product-badge featured">
-❤️ FEATURED
-</div>
-`
 : "";
 
 
@@ -2402,7 +2348,32 @@ Number(product.price || 0)
 const battery =
 product.battery
 ? escapeHtml(product.battery)
-: "Not specified";
+: "Battery not specified";
+
+
+/*
+Newest products get a badge.
+*/
+
+const createdTime =
+product.created_at
+? new Date(product.created_at).getTime()
+: 0;
+
+const isNewest =
+index < 3 && createdTime > 0;
+
+
+const badge =
+isNewest
+
+? `
+<div class="product-badge">
+NEW
+</div>
+`
+
+: "";
 
 
 card.innerHTML = `
@@ -2411,20 +2382,21 @@ card.innerHTML = `
 
 ${image}
 
-${featuredBadge}
+${badge}
 
 ${photoCount}
 
 </div>
 
+
 <div class="product-info">
 
 <div class="product-tag">
-${escapeHtml(product.category || "Available")}
+${escapeHtml(getCategory(product))}
 </div>
 
 <h3>
-${escapeHtml(product.name)}
+${escapeHtml(product.name || "Unnamed Product")}
 </h3>
 
 <div class="product-condition">
@@ -2444,24 +2416,30 @@ ${battery}
 ₦${price}
 </div>
 
-<div class="product-actions">
+</div>
+
+
+<div
+style="
+display:flex;
+gap:6px;
+margin-top:8px;
+">
 
 <button
 class="product-button"
-type="button">
-View
+type="button"
+style="flex:1;">
+View Details
 </button>
 
-<a
-class="whatsapp-product-button"
-href="${getWhatsappLink(product)}"
-target="_blank"
-rel="noopener"
-onclick="event.stopPropagation()">
-WhatsApp
-</a>
 
-</div>
+<button
+class="product-whatsapp"
+type="button"
+style="flex:1;">
+WhatsApp
+</button>
 
 </div>
 
@@ -2470,8 +2448,46 @@ WhatsApp
 
 
 /*
-Clicking the card opens details.
-Clicking WhatsApp does not open details.
+View details.
+*/
+
+card
+.querySelector(".product-button")
+.addEventListener(
+"click",
+function(event) {
+
+event.stopPropagation();
+
+openProductDetails(product);
+
+}
+);
+
+
+/*
+WhatsApp directly from card.
+*/
+
+card
+.querySelector(".product-whatsapp")
+.addEventListener(
+"click",
+function(event) {
+
+event.stopPropagation();
+
+window.open(
+getWhatsAppLink(product),
+"_blank"
+);
+
+}
+);
+
+
+/*
+Click anywhere else on card.
 */
 
 card.addEventListener(
@@ -2489,227 +2505,45 @@ return card;
 }
 
 
-/* =========================================================
-   BUILD CATEGORY FILTERS
-========================================================= */
+/* =========================
+   DISPLAY PRODUCTS
+========================= */
 
-function buildCategoryFilters() {
-
-const filters =
-document.getElementById(
-"categoryFilters"
-);
-
-filters.innerHTML = "";
-
-
-/* ALL BUTTON */
-
-const allButton =
-document.createElement("button");
-
-allButton.type =
-"button";
-
-allButton.className =
-"category-button active";
-
-allButton.dataset.category =
-"all";
-
-allButton.textContent =
-"All";
-
-filters.appendChild(allButton);
-
-
-/* GET UNIQUE CATEGORIES */
-
-const categories =
-[
-...new Set(
-productsData
-.map(product =>
-(product.category || "").trim()
-)
-)
-.filter(Boolean)
-.sort();
-
-
-categories.forEach(
-category => {
-
-const button =
-document.createElement("button");
-
-button.type =
-"button";
-
-button.className =
-"category-button";
-
-button.dataset.category =
-category;
-
-button.textContent =
-category;
-
-filters.appendChild(button);
-
-}
-);
-
-
-/* EVENTS */
-
-filters
-.querySelectorAll(".category-button")
-.forEach(button => {
-
-button.addEventListener(
-"click",
-function() {
-
-selectedCategory =
-this.dataset.category;
-
-filters
-.querySelectorAll(".category-button")
-.forEach(
-btn =>
-btn.classList.remove("active")
-);
-
-this.classList.add("active");
-
-renderProducts();
-
-}
-);
-
-});
-
-}
-
-
-/* =========================================================
-   FILTER PRODUCTS
-========================================================= */
-
-function getFilteredProducts() {
-
-return productsData.filter(
-product => {
-
-const matchesCategory =
-selectedCategory === "all" ||
-(product.category || "").toLowerCase() ===
-selectedCategory.toLowerCase();
-
-
-const search =
-searchTerm.toLowerCase().trim();
-
-
-if (!search) {
-
-return matchesCategory;
-
-}
-
-
-const searchableText =
-[
-product.name,
-product.category,
-product.storage,
-product.condition,
-product.battery,
-product.description
-]
-.filter(Boolean)
-.join(" ")
-.toLowerCase();
-
-
-return (
-matchesCategory &&
-searchableText.includes(search)
-);
-
-}
-);
-
-}
-
-
-/* =========================================================
-   RENDER PRODUCTS
-========================================================= */
-
-function renderProducts() {
+function displayProducts(list) {
 
 const container =
 document.getElementById("products");
 
-const featuredSection =
-document.getElementById("featuredSection");
 
-const featuredContainer =
-document.getElementById("featuredProducts");
-
-const newestHeading =
-document.getElementById("newestHeading");
-
-const result =
-document.getElementById("collectionResult");
+container.innerHTML = "";
 
 
-const filtered =
-getFilteredProducts();
-
-
-/* RESULT TEXT */
-
-if (searchTerm || selectedCategory !== "all") {
-
-result.textContent =
-`${filtered.length} device${filtered.length === 1 ? "" : "s"} found`;
-
-} else {
-
-result.textContent =
-`${productsData.length} device${productsData.length === 1 ? "" : "s"} available`;
-
-}
-
-
-/* NO RESULTS */
-
-if (!filtered.length) {
-
-featuredSection.style.display =
-"none";
-
-newestHeading.style.display =
-"none";
+if (!list.length) {
 
 container.innerHTML = `
-<div class="empty-products">
 
-No devices match your search.
+<div class="no-results">
+
+<strong>
+No devices found
+</strong>
+
+Try another search or category.
 
 <br><br>
 
-<button
-class="button button-outline"
-type="button"
-onclick="clearFilters()">
-Clear Search
-</button>
+<a
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
+target="_blank"
+style="
+color:#b08a32;
+font-weight:800;
+">
+Ask us for current stock
+</a>
 
 </div>
+
 `;
 
 return;
@@ -2717,84 +2551,85 @@ return;
 }
 
 
-/* =========================================================
-   FEATURED PRODUCTS
-========================================================= */
-
-const featured =
-filtered.filter(
-product =>
-product.featured === true
-);
-
-
-if (
-featured.length &&
-!searchTerm &&
-selectedCategory === "all"
-) {
-
-featuredSection.style.display =
-"block";
-
-featuredContainer.innerHTML =
-"";
-
-
-featured
-.slice(0,3)
-.forEach(
+list.forEach(
 (product,index) => {
 
 const card =
-createProductCard(product);
+createProductCard(product,index);
 
-featuredContainer.appendChild(card);
+container.appendChild(card);
+
 
 setTimeout(
-() =>
-card.classList.add("show"),
-index * 100
+() => {
+
+card.classList.add("show");
+
+},
+index * 70
 );
 
-}
-);
-
-} else {
-
-featuredSection.style.display =
-"none";
-
-featuredContainer.innerHTML =
-"";
+});
 
 }
 
 
-/* =========================================================
-   NEWEST PRODUCTS
-========================================================= */
+/* =========================
+   FEATURED / NEWEST
+========================= */
 
-const newest =
-[...filtered]
-.sort(
-(a,b) =>
-new Date(b.created_at || 0) -
-new Date(a.created_at || 0)
+function displayFeatured() {
+
+const section =
+document.getElementById(
+"featuredSection"
+);
+
+const container =
+document.getElementById(
+"featuredProducts"
 );
 
 
 /*
-If featured section is visible,
-the newest section contains the
-full filtered collection.
-
-Otherwise it simply shows the
-filtered collection.
+Sort by newest first.
 */
 
-newestHeading.style.display =
-"flex";
+const newest =
+[...productsData]
+.sort(
+(a,b) => {
+
+const aTime =
+a.created_at
+? new Date(a.created_at).getTime()
+: 0;
+
+const bTime =
+b.created_at
+? new Date(b.created_at).getTime()
+: 0;
+
+return bTime - aTime;
+
+}
+)
+.slice(0,3);
+
+
+if (!newest.length) {
+
+section.style.display =
+"none";
+
+return;
+
+}
+
+
+section.style.display =
+"block";
+
 
 container.innerHTML =
 "";
@@ -2804,121 +2639,297 @@ newest.forEach(
 (product,index) => {
 
 const card =
-createProductCard(product);
+createProductCard(
+product,
+index
+);
 
 container.appendChild(card);
 
 setTimeout(
-() =>
-card.classList.add("show"),
-index * 70
+() => {
+card.classList.add("show");
+},
+index * 100
 );
 
-}
-);
+});
 
 }
 
 
-/* =========================================================
-   CLEAR SEARCH / FILTERS
-========================================================= */
+/* =========================
+   FILTER PRODUCTS
+========================= */
 
-function clearFilters() {
+function filterProducts() {
 
-searchTerm = "";
-
-selectedCategory =
-"all";
-
-
-document.getElementById(
-"productSearch"
-).value =
-"";
+const search =
+currentSearch
+.toLowerCase()
+.trim();
 
 
-document
-.querySelectorAll(
-"#categoryFilters .category-button"
+const filtered =
+productsData.filter(
+product => {
+
+const category =
+getCategory(product)
+.toLowerCase();
+
+
+const name =
+String(
+product.name || ""
 )
-.forEach(
-button =>
-button.classList.remove("active")
+.toLowerCase();
+
+
+const storage =
+String(
+product.storage || ""
+)
+.toLowerCase();
+
+
+const condition =
+String(
+product.condition || ""
+)
+.toLowerCase();
+
+
+const matchesCategory =
+currentCategory === "all" ||
+category ===
+currentCategory.toLowerCase();
+
+
+const matchesSearch =
+!search ||
+name.includes(search) ||
+category.includes(search) ||
+storage.includes(search) ||
+condition.includes(search);
+
+
+return (
+matchesCategory &&
+matchesSearch
 );
+
+}
+);
+
+
+displayProducts(filtered);
+
+}
+
+
+/* =========================
+   CATEGORY BUTTONS
+========================= */
+
+function buildCategories() {
+
+const filterContainer =
+document.getElementById(
+"categoryFilters"
+);
+
+
+filterContainer.innerHTML = "";
 
 
 const allButton =
-document.querySelector(
-'#categoryFilters .category-button[data-category="all"]'
+document.createElement("button");
+
+allButton.className =
+"filter-button active";
+
+allButton.type =
+"button";
+
+allButton.dataset.category =
+"all";
+
+allButton.textContent =
+"All";
+
+
+filterContainer.appendChild(
+allButton
 );
 
-if (allButton) {
 
-allButton.classList.add("active");
+const categories =
+[...new Set(
+productsData
+.map(product =>
+getCategory(product)
+)
+)]
+.filter(
+category =>
+category &&
+category !== "Other"
+);
+
+
+categories
+.sort()
+.forEach(
+category => {
+
+const button =
+document.createElement("button");
+
+button.className =
+"filter-button";
+
+button.type =
+"button";
+
+button.dataset.category =
+category;
+
+button.textContent =
+category;
+
+
+filterContainer.appendChild(
+button
+);
 
 }
+);
 
 
-renderProducts();
+/*
+Category clicks.
+*/
 
-}
+filterContainer
+.querySelectorAll(".filter-button")
+.forEach(
+button => {
 
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-document
-.getElementById("productSearch")
-.addEventListener(
-"input",
+button.addEventListener(
+"click",
 function() {
 
-searchTerm =
-this.value;
+filterContainer
+.querySelectorAll(
+".filter-button"
+)
+.forEach(
+item =>
+item.classList.remove(
+"active"
+)
+);
 
-renderProducts();
+
+button.classList.add(
+"active"
+);
+
+
+currentCategory =
+button.dataset.category;
+
+
+filterProducts();
+
+}
+);
 
 }
 );
 
 
-/* =========================================================
+/*
+If previous category
+doesn't exist anymore,
+reset it.
+*/
+
+currentCategory =
+"all";
+
+}
+
+
+/* =========================
    LOAD PRODUCTS
-========================================================= */
+========================= */
 
 async function loadProducts() {
 
 const container =
-document.getElementById("products");
+document.getElementById(
+"products"
+);
 
 
-const { data, error } =
+container.innerHTML = `
+
+<div class="empty-products">
+Loading available devices...
+</div>
+
+`;
+
+
+try {
+
+const result =
 await supabaseClient
 .from("products")
 .select("*")
-.order("created_at", {
+.order(
+"created_at",
+{
 ascending:false
-});
+}
+);
+
+
+const data =
+result.data;
+
+const error =
+result.error;
 
 
 if (error) {
 
-console.error(error);
+console.error(
+"SUPABASE PRODUCT ERROR:",
+error
+);
+
 
 container.innerHTML = `
+
 <div class="empty-products">
+
 Unable to load products right now.
+
 <br><br>
 
-<a
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
-style="color:#b08a32;font-weight:800;">
-Contact us for current stock
-</a>
+<span
+style="
+font-size:11px;
+color:#aaa;
+">
+Please refresh the page.
+</span>
 
 </div>
+
 `;
 
 return;
@@ -2927,76 +2938,112 @@ return;
 
 
 /*
-Only available products are shown
-on the public collection.
+Only publicly available
+products appear.
 */
 
 productsData =
-(data || []).filter(
+(data || [])
+.filter(
 product =>
 product.available === true
 );
 
 
-/* BUILD CATEGORIES */
+/*
+Build filters.
+*/
 
-buildCategoryFilters();
+buildCategories();
 
 
-/* RENDER */
+/*
+Show newest products.
+*/
 
-if (!productsData.length) {
+displayFeatured();
+
+
+/*
+Show all products.
+*/
+
+filterProducts();
+
+
+}
+catch(error) {
+
+console.error(
+"PRODUCT LOAD FAILED:",
+error
+);
+
 
 container.innerHTML = `
+
 <div class="empty-products">
-No devices available right now.
+
+Unable to load products right now.
+
 <br><br>
 
 <a
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
-style="color:#b08a32;font-weight:800;">
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available phones."
+target="_blank"
+style="
+color:#b08a32;
+font-weight:800;
+">
 Contact us for current stock
 </a>
 
 </div>
+
 `;
 
-document.getElementById(
-"collectionResult"
-).textContent =
-"";
-
-return;
+}
 
 }
 
 
-renderProducts();
+/* =========================
+   SEARCH
+========================= */
+
+document
+.getElementById("productSearch")
+.addEventListener(
+"input",
+function(event) {
+
+currentSearch =
+event.target.value;
+
+filterProducts();
 
 }
+);
 
 
-/* =========================================================
-   OPEN PRODUCT DETAILS
-========================================================= */
+/* =========================
+   PRODUCT DETAILS
+========================= */
 
 function openProductDetails(product) {
 
 if (!product) return;
 
 
-/* GET ALL IMAGES */
-
 const imageUrls =
 getProductImages(product);
 
-
-/* MAIN IMAGE */
 
 const image =
 document.getElementById(
 "detailsImage"
 );
+
 
 image.src =
 imageUrls[0] || "";
@@ -3005,12 +3052,15 @@ image.alt =
 product.name || "Product";
 
 
-/* THUMBNAILS */
+/*
+THUMBNAILS
+*/
 
 const thumbnails =
 document.getElementById(
 "detailsThumbnails"
 );
+
 
 thumbnails.innerHTML =
 "";
@@ -3020,21 +3070,27 @@ imageUrls.forEach(
 (url,index) => {
 
 const button =
-document.createElement("button");
+document.createElement(
+"button"
+);
 
 button.type =
 "button";
 
 button.className =
 "details-thumbnail" +
-(index === 0 ? " active" : "");
+(index === 0
+? " active"
+: "");
 
 
 button.innerHTML = `
+
 <img
 src="${escapeHtml(url)}"
 alt="${escapeHtml(product.name || "Product")}"
 >
+
 `;
 
 
@@ -3043,6 +3099,7 @@ button.addEventListener(
 function(event) {
 
 event.stopPropagation();
+
 
 image.src =
 url;
@@ -3054,22 +3111,27 @@ document
 )
 .forEach(
 thumb =>
-thumb.classList.remove("active")
+thumb.classList.remove(
+"active"
+)
 );
 
-button.classList.add("active");
+
+button.classList.add(
+"active"
+);
 
 }
 );
 
 
-thumbnails.appendChild(button);
+thumbnails.appendChild(
+button
+);
 
 }
 );
 
-
-/* HIDE THUMBNAILS IF ONE PHOTO */
 
 thumbnails.style.display =
 imageUrls.length > 1
@@ -3077,7 +3139,9 @@ imageUrls.length > 1
 : "none";
 
 
-/* NAME */
+/*
+NAME
+*/
 
 document.getElementById(
 "detailsName"
@@ -3085,49 +3149,68 @@ document.getElementById(
 product.name || "Product";
 
 
-/* CATEGORY */
+/*
+CATEGORY
+*/
 
 document.getElementById(
 "detailsCategory"
 ).textContent =
-product.category || "AVAILABLE";
+product.category ||
+"AVAILABLE";
 
 
-/* PRICE */
+/*
+PRICE
+*/
 
 document.getElementById(
 "detailsPrice"
 ).textContent =
 "₦" +
-Number(product.price || 0)
-.toLocaleString("en-NG");
+Number(
+product.price || 0
+).toLocaleString(
+"en-NG"
+);
 
 
-/* STORAGE */
+/*
+STORAGE
+*/
 
 document.getElementById(
 "detailsStorage"
 ).textContent =
-product.storage || "Not specified";
+product.storage ||
+"Not specified";
 
 
-/* BATTERY */
+/*
+BATTERY
+*/
 
 document.getElementById(
 "detailsBattery"
 ).textContent =
-product.battery || "Not specified";
+product.battery ||
+"Not specified";
 
 
-/* CONDITION */
+/*
+CONDITION
+*/
 
 document.getElementById(
 "detailsCondition"
 ).textContent =
-product.condition || "Not specified";
+product.condition ||
+"Not specified";
 
 
-/* DESCRIPTION */
+/*
+DESCRIPTION
+*/
 
 const descriptionBox =
 document.getElementById(
@@ -3142,7 +3225,9 @@ document.getElementById(
 
 if (
 product.description &&
-product.description.trim()
+String(
+product.description
+).trim()
 ) {
 
 description.textContent =
@@ -3162,18 +3247,18 @@ descriptionBox.style.display =
 }
 
 
-/* STATUS */
+/*
+STATUS
+*/
 
 const status =
 document.getElementById(
 "detailsStatus"
 );
 
-const isAvailable =
-product.available === true;
-
-
-if (isAvailable) {
+if (
+product.available === true
+) {
 
 status.textContent =
 "🟢 Available";
@@ -3192,19 +3277,19 @@ status.className =
 }
 
 
-/* WHATSAPP */
+/*
+WHATSAPP
+*/
 
-const whatsapp =
 document.getElementById(
 "detailsWhatsapp"
-);
+).href =
+getWhatsAppLink(product);
 
 
-whatsapp.href =
-getWhatsappLink(product);
-
-
-/* SHOW DETAILS */
+/*
+OPEN DETAILS
+*/
 
 document.body.classList.add(
 "details-open"
@@ -3217,8 +3302,6 @@ document.getElementById(
 );
 
 
-/* START AT TOP */
-
 window.scrollTo({
 top:0,
 behavior:"instant"
@@ -3227,9 +3310,9 @@ behavior:"instant"
 }
 
 
-/* =========================================================
-   CLOSE PRODUCT DETAILS
-========================================================= */
+/* =========================
+   CLOSE DETAILS
+========================= */
 
 function closeProductDetails() {
 
@@ -3251,20 +3334,20 @@ behavior:"instant"
 }
 
 
-/* =========================================================
+/* =========================
    START
-========================================================= */
+========================= */
 
 loadProducts();
 
 
-/* =========================================================
-   REFRESH WHEN USER RETURNS
-========================================================= */
+/* =========================
+   REFRESH WHEN RETURNING
+========================= */
 
 document.addEventListener(
 "visibilitychange",
-() => {
+function() {
 
 if (!document.hidden) {
 
@@ -3275,13 +3358,13 @@ loadProducts();
 });
 
 
-/* =========================================================
-   BACK BUTTON SUPPORT
-========================================================= */
+/* =========================
+   BACK BUTTON
+========================= */
 
 window.addEventListener(
 "popstate",
-() => {
+function() {
 
 closeProductDetails();
 
