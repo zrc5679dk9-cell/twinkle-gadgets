@@ -12,1089 +12,777 @@ content="Twinkle Gadgets — premium smartphones, gadgets and professional repai
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-:root {
-  --black:#0b0b0b;
-  --dark:#151515;
+:root{
+  --black:#080808;
   --white:#fff;
-  --muted:#777;
-  --line:rgba(0,0,0,.10);
-  --accent:#b08a32;
-  --gold-light:#d4b35a;
-  --cream:#f7f6f2;
+  --cream:#f5f5f2;
+  --muted:#707070;
+  --line:#e5e5e0;
+  --gold:#b08a32;
+  --gold2:#d4b35a;
 }
 
-* {
+*{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-html {
+html{
   scroll-behavior:smooth;
 }
 
-body {
+body{
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
   "Helvetica Neue",Arial,sans-serif;
-  background:var(--cream);
-  color:#0b0b0b;
-  line-height:1.5;
+  background:var(--white);
+  color:#111;
   overflow-x:hidden;
 }
 
-a {
+a{
   color:inherit;
   text-decoration:none;
 }
 
-button {
-  font-family:inherit;
+button,input{
+  font:inherit;
 }
 
-/* GLASS */
+/* ================= HEADER ================= */
 
-.glass {
-  background:rgba(255,255,255,.55);
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-  border:1px solid rgba(255,255,255,.72);
-  box-shadow:0 15px 60px rgba(0,0,0,.055);
-}
-
-/* NAV */
-
-header {
+header{
   position:fixed;
   top:0;
   left:0;
   width:100%;
   z-index:1000;
-  background:rgba(247,246,242,.72);
+  background:rgba(255,255,255,.82);
   backdrop-filter:blur(22px);
   -webkit-backdrop-filter:blur(22px);
   border-bottom:1px solid rgba(0,0,0,.07);
 }
 
-.nav {
-  max-width:1200px;
+.nav{
+  max-width:1280px;
   margin:auto;
-  padding:17px 22px;
+  height:68px;
+  padding:0 24px;
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:center;
 }
 
-.brand {
+.brand{
   display:flex;
   align-items:center;
-  gap:11px;
-}
-
-.logo {
-  width:39px;
-  height:39px;
-  border:1px solid rgba(176,138,50,.5);
-  border-radius:12px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:-1px;
-  background:#0b0b0b;
-  color:var(--gold-light);
-  box-shadow:0 5px 15px rgba(0,0,0,.12);
-}
-
-.brand-name {
-  font-size:17px;
+  gap:10px;
   font-weight:800;
-  letter-spacing:.5px;
+  letter-spacing:.4px;
 }
 
-.brand-name span {
-  color:var(--accent);
-}
-
-nav {
+.logo{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:#080808;
+  color:var(--gold2);
   display:flex;
-  gap:28px;
   align-items:center;
+  justify-content:center;
+  font-size:11px;
+  border:1px solid rgba(176,138,50,.5);
 }
 
-nav a {
-  color:#555;
+.brand span{
+  color:var(--gold);
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+
+nav a{
   font-size:13px;
-  transition:.2s;
+  color:#555;
 }
 
-nav a:hover {
-  color:var(--accent);
+nav a:hover{
+  color:#000;
 }
 
-.nav-button {
+.nav-whatsapp{
+  background:#080808;
+  color:#fff!important;
   padding:10px 17px;
   border-radius:30px;
-  background:#0b0b0b;
-  color:white;
-  font-weight:700;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 
-.hero {
-  min-height:100vh;
-  position:relative;
+.hero{
+  min-height:92vh;
+  padding:125px 24px 70px;
+  background:
+    radial-gradient(circle at 75% 30%,rgba(176,138,50,.16),transparent 27%),
+    linear-gradient(#fafaf8,#f2f2ef);
   display:flex;
   align-items:center;
   overflow:hidden;
-  padding:150px 22px 90px;
-
-  background:
-    radial-gradient(circle at 78% 35%,rgba(176,138,50,.14),transparent 28%),
-    radial-gradient(circle at 25% 70%,rgba(0,0,0,.04),transparent 28%),
-    var(--cream);
 }
 
-.hero::before {
-  content:"";
-  position:absolute;
-  width:600px;
-  height:600px;
-  border-radius:50%;
-  border:1px solid rgba(176,138,50,.10);
-  right:-220px;
-  top:120px;
-}
-
-.hero::after {
-  content:"";
-  position:absolute;
-  width:430px;
-  height:430px;
-  border-radius:50%;
-  border:1px solid rgba(176,138,50,.10);
-  right:-130px;
-  top:205px;
-}
-
-.hero-inner {
-  max-width:1200px;
+.hero-inner{
+  max-width:1280px;
   width:100%;
   margin:auto;
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  align-items:center;
+  gap:30px;
+}
+
+.hero-copy{
   position:relative;
   z-index:2;
 }
 
-.eyebrow {
-  color:var(--accent);
-  font-size:11px;
-  letter-spacing:3px;
-  font-weight:800;
+.eyebrow{
+  color:var(--gold);
   text-transform:uppercase;
-  margin-bottom:23px;
+  letter-spacing:3px;
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:22px;
 }
 
-.hero h1 {
-  max-width:850px;
-  font-size:clamp(52px,9vw,105px);
+.hero h1{
+  font-size:clamp(55px,7vw,100px);
   line-height:.9;
   letter-spacing:-6px;
-  font-weight:800;
+  max-width:720px;
 }
 
-.hero h1 span {
-  color:var(--accent);
-  display:block;
+.hero h1 span{
+  color:var(--gold);
 }
 
-.hero-text {
-  max-width:510px;
+.hero p{
+  max-width:500px;
   color:#666;
   font-size:16px;
-  margin:30px 0;
+  line-height:1.7;
+  margin:28px 0;
 }
 
-.hero-actions {
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.button {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:14px 22px;
-  border-radius:30px;
-  font-size:13px;
-  font-weight:800;
-  transition:.25s;
-  cursor:pointer;
-  border:none;
-}
-
-.button:hover {
-  transform:translateY(-2px);
-}
-
-.button-light {
-  background:#0b0b0b;
-  color:white;
-}
-
-.button-light:hover {
-  color:var(--gold-light);
-}
-
-.button-outline {
-  border:1px solid rgba(0,0,0,.16);
-  color:#111;
-  background:rgba(255,255,255,.45);
-}
-
-.button-outline:hover {
-  border-color:var(--accent);
-  color:var(--accent);
-}
-
-/* SECTIONS */
-
-.section {
-  max-width:1200px;
-  margin:auto;
-  padding:110px 22px;
-}
-
-.section-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:30px;
-  margin-bottom:45px;
-}
-
-.section-label {
-  color:var(--accent);
-  font-size:10px;
-  letter-spacing:2.5px;
-  font-weight:800;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-
-.section-title {
-  font-size:clamp(34px,5vw,58px);
-  letter-spacing:-3px;
-  line-height:1;
-}
-
-.section-description {
-  color:#777;
-  max-width:420px;
-  font-size:14px;
-}
-
-/* COLLECTION CONTROLS */
-
-.collection-controls {
+.hero-buttons{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  margin-bottom:25px;
 }
 
-.search-box {
-  flex:1;
-  min-width:220px;
-  position:relative;
-}
-
-.search-box input {
-  width:100%;
-  padding:14px 18px;
+.btn{
+  border:none;
   border-radius:30px;
-  border:1px solid rgba(0,0,0,.10);
-  background:rgba(255,255,255,.68);
+  padding:14px 23px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn-black{
+  background:#080808;
+  color:#fff;
+}
+
+.btn-outline{
+  border:1px solid #ccc;
+  background:rgba(255,255,255,.7);
+}
+
+.hero-visual{
+  min-height:580px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero-circle{
+  width:min(520px,80vw);
+  height:min(520px,80vw);
+  border-radius:50%;
+  background:
+    radial-gradient(circle,#fff 0%,#e9e7df 65%,#d9d5ca 100%);
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.12),
+    inset 0 0 70px rgba(255,255,255,.9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero-phone{
+  width:58%;
+  max-height:500px;
+  object-fit:contain;
+  filter:drop-shadow(0 35px 30px rgba(0,0,0,.25));
+  transform:rotate(-7deg);
+}
+
+/* ================= SECTIONS ================= */
+
+.section{
+  max-width:1280px;
+  margin:auto;
+  padding:100px 24px;
+}
+
+.section-top{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:25px;
+  margin-bottom:40px;
+}
+
+.section-label{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:2.5px;
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.section-title{
+  font-size:clamp(36px,5vw,64px);
+  line-height:.95;
+  letter-spacing:-4px;
+}
+
+.section-description{
+  max-width:430px;
+  color:#777;
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* ================= CATEGORY SCROLLER ================= */
+
+.category-scroll{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding:5px 0 15px;
+  scrollbar-width:none;
+}
+
+.category-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+.category{
+  min-width:145px;
+  height:150px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:#fafaf8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:12px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.category:hover,
+.category.active{
+  background:#080808;
+  color:#fff;
+  transform:translateY(-4px);
+}
+
+.category-icon{
+  font-size:34px;
+}
+
+.category-name{
+  font-size:12px;
+  font-weight:800;
+}
+
+/* ================= PRODUCT CONTROLS ================= */
+
+.controls{
+  display:flex;
+  gap:10px;
+  margin-bottom:25px;
+  flex-wrap:wrap;
+}
+
+.search{
+  flex:1;
+  min-width:230px;
+  padding:15px 20px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  background:#fafaf8;
   outline:none;
-  font-size:13px;
-  color:#111;
-  backdrop-filter:blur(15px);
-  -webkit-backdrop-filter:blur(15px);
 }
 
-.search-box input:focus {
-  border-color:rgba(176,138,50,.65);
-  box-shadow:0 0 0 3px rgba(176,138,50,.08);
+.search:focus{
+  border-color:var(--gold);
 }
 
-.category-filters {
+.filters{
   display:flex;
   gap:8px;
   overflow-x:auto;
   scrollbar-width:none;
-  padding-bottom:3px;
 }
 
-.category-filters::-webkit-scrollbar {
+.filters::-webkit-scrollbar{
   display:none;
 }
 
-.filter-button {
+.filter{
   white-space:nowrap;
-  padding:11px 15px;
+  border:1px solid var(--line);
+  background:#fff;
+  padding:12px 16px;
   border-radius:30px;
-  border:1px solid rgba(0,0,0,.10);
-  background:rgba(255,255,255,.55);
-  color:#666;
   font-size:11px;
   font-weight:800;
   cursor:pointer;
-  transition:.2s;
 }
 
-.filter-button:hover,
-.filter-button.active {
-  background:#0b0b0b;
-  color:white;
-  border-color:#0b0b0b;
+.filter.active{
+  background:#080808;
+  color:#fff;
+  border-color:#080808;
 }
 
-/* PRODUCTS */
+/* ================= PRODUCTS ================= */
 
-.products {
+.products{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
 }
 
-.product {
-  position:relative;
+.product{
+  background:#f7f7f5;
+  border-radius:25px;
   overflow:hidden;
-  background:rgba(255,255,255,.72);
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-  border:1px solid rgba(255,255,255,.8);
-  border-radius:24px;
-  box-shadow:0 10px 40px rgba(0,0,0,.045);
-  transition:
-    transform .45s cubic-bezier(.2,.8,.2,1),
-    box-shadow .45s,
-    border-color .45s;
-  opacity:0;
-  transform:translateY(45px) scale(.97);
+  position:relative;
+  transition:.4s;
   cursor:pointer;
-}
-
-.product.show {
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
-
-.product:hover {
-  transform:translateY(-8px) scale(1.015);
-  border-color:rgba(176,138,50,.5);
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.10),
-    0 0 35px rgba(176,138,50,.13);
-}
-
-.product::before {
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  background:rgba(176,138,50,.13);
-  filter:blur(45px);
-  top:-90px;
-  right:-80px;
   opacity:0;
-  transition:.5s;
-  pointer-events:none;
+  transform:translateY(25px);
 }
 
-.product:hover::before {
+.product.show{
   opacity:1;
+  transform:translateY(0);
 }
 
-.product-image {
-  height:350px;
+.product:hover{
+  transform:translateY(-7px);
+  box-shadow:0 25px 60px rgba(0,0,0,.1);
+}
+
+.product-image{
+  height:330px;
   background:
-    radial-gradient(circle at 50% 45%,#e7dfcf,transparent 34%),
-    linear-gradient(145deg,#f8f8f6,#e9e7e0);
+    radial-gradient(circle at 50% 45%,#e9e3d7,transparent 38%),
+    linear-gradient(145deg,#fafaf8,#e8e7e1);
+  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
-  position:relative;
   overflow:hidden;
 }
 
-.product-image img {
+.product-image img{
   width:100%;
   height:100%;
   object-fit:contain;
-  padding:18px;
-  transition:transform .5s cubic-bezier(.2,.8,.2,1);
-  filter:drop-shadow(0 25px 25px rgba(0,0,0,.15));
+  padding:25px;
+  filter:drop-shadow(0 25px 20px rgba(0,0,0,.17));
+  transition:.5s;
 }
 
-.product:hover .product-image img {
-  transform:scale(1.06) translateY(-4px);
+.product:hover .product-image img{
+  transform:scale(1.06);
 }
 
-.product-photo-count {
+.badge{
   position:absolute;
-  right:12px;
-  top:12px;
-  background:rgba(0,0,0,.72);
-  color:white;
-  padding:6px 9px;
-  border-radius:15px;
-  font-size:9px;
-  font-weight:800;
+  top:14px;
+  left:14px;
   z-index:3;
-}
-
-.product-image::after {
-  content:"TWINKLE GADGET";
-  position:absolute;
-  bottom:17px;
-  left:20px;
-  color:rgba(0,0,0,.16);
-  font-size:9px;
-  letter-spacing:3px;
-}
-
-.product-info {
-  padding:20px;
-}
-
-.product-tag {
-  color:var(--accent);
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  font-size:9px;
-  font-weight:800;
-}
-
-.product h3 {
-  font-size:19px;
-  margin:6px 0 3px;
-}
-
-.product-condition {
-  color:#777;
-  font-size:11px;
-}
-
-.product-battery {
-  color:#777;
-  font-size:10px;
-  margin-top:3px;
-}
-
-.product-bottom {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-top:17px;
-  gap:7px;
-}
-
-.price {
-  font-size:16px;
-  font-weight:800;
-}
-
-.product-actions {
-  display:flex;
-  gap:6px;
-  align-items:center;
-}
-
-.product-button {
-  background:#0b0b0b;
-  color:white;
-  padding:9px 11px;
+  background:#080808;
+  color:var(--gold2);
+  padding:7px 10px;
   border-radius:20px;
-  font-size:10px;
-  font-weight:800;
-  white-space:nowrap;
-  cursor:pointer;
-  border:none;
-}
-
-.product-button:hover {
-  color:var(--gold-light);
-}
-
-.whatsapp-product-button {
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  border:1px solid rgba(0,0,0,.10);
-  background:#fff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:15px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.whatsapp-product-button:hover {
-  transform:scale(1.08);
-  border-color:#25d366;
-}
-
-.featured-badge {
-  position:absolute;
-  left:12px;
-  top:12px;
-  z-index:5;
-  background:#0b0b0b;
-  color:var(--gold-light);
-  padding:6px 10px;
-  border-radius:15px;
   font-size:8px;
   font-weight:800;
   letter-spacing:1px;
   text-transform:uppercase;
 }
 
-.empty-products {
-  grid-column:1/-1;
-  text-align:center;
-  padding:60px 20px;
-  color:#777;
+.product-info{
+  padding:20px;
 }
 
-/* PRODUCT DETAILS */
-
-.product-details {
-  display:none;
-  min-height:100vh;
-  padding:125px 22px 90px;
-  background:var(--cream);
-}
-
-.product-details.active {
-  display:block;
-}
-
-.product-details-inner {
-  max-width:1200px;
-  margin:auto;
-}
-
-.back-button {
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  border:1px solid rgba(0,0,0,.14);
-  background:rgba(255,255,255,.55);
-  padding:11px 17px;
-  border-radius:30px;
-  font-size:12px;
+.product-category{
+  color:var(--gold);
+  font-size:9px;
   font-weight:800;
-  cursor:pointer;
-  margin-bottom:35px;
-  transition:.25s;
-}
-
-.back-button:hover {
-  border-color:var(--accent);
-  color:var(--accent);
-  transform:translateX(-3px);
-}
-
-.details-card {
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:40px;
-  background:rgba(255,255,255,.58);
-  border:1px solid rgba(255,255,255,.8);
-  border-radius:30px;
-  padding:25px;
-  box-shadow:0 20px 70px rgba(0,0,0,.06);
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-}
-
-.details-gallery {
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.details-image {
-  min-height:550px;
-  border-radius:24px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle at 50% 45%,#e7dfcf,transparent 34%),
-    linear-gradient(145deg,#f8f8f6,#e9e7e0);
-
-  /* SWIPE SUPPORT */
-  touch-action:pan-y;
-  user-select:none;
-  -webkit-user-select:none;
-  -webkit-touch-callout:none;
-}
-
-.details-image img {
-  width:100%;
-  height:100%;
-  max-height:650px;
-  object-fit:contain;
-  padding:35px;
-  filter:drop-shadow(0 30px 30px rgba(0,0,0,.18));
-  pointer-events:none;
-  -webkit-user-drag:none;
-}
-
-.details-thumbnails {
-  display:flex;
-  gap:9px;
-  overflow-x:auto;
-  padding:2px 1px 5px;
-  scrollbar-width:none;
-}
-
-.details-thumbnails::-webkit-scrollbar {
-  display:none;
-}
-
-.details-thumbnail {
-  width:70px;
-  height:70px;
-  min-width:70px;
-  border-radius:14px;
-  overflow:hidden;
-  border:2px solid transparent;
-  background:#eee;
-  padding:0;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.details-thumbnail img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.details-thumbnail.active {
-  border-color:var(--accent);
-}
-
-.details-info {
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:20px 15px;
-}
-
-.details-tag {
-  color:var(--accent);
+  letter-spacing:1.5px;
   text-transform:uppercase;
-  letter-spacing:2px;
-  font-size:10px;
-  font-weight:800;
-  margin-bottom:10px;
 }
 
-.details-info h1 {
-  font-size:clamp(36px,5vw,64px);
-  line-height:.95;
-  letter-spacing:-3px;
-  margin-bottom:20px;
+.product h3{
+  font-size:19px;
+  margin:6px 0;
 }
 
-.details-price {
-  font-size:28px;
-  font-weight:800;
-  margin-bottom:25px;
+.product-meta{
+  color:#777;
+  font-size:11px;
 }
 
-.details-status {
-  display:inline-flex;
-  align-items:center;
-  width:max-content;
-  padding:7px 12px;
-  border-radius:30px;
-  font-size:10px;
-  font-weight:800;
-  margin-bottom:25px;
-}
-
-.status-available {
-  background:rgba(35,150,75,.10);
-  color:#218c4b;
-}
-
-.status-sold {
-  background:rgba(190,50,50,.10);
-  color:#b43131;
-}
-
-.details-specs {
-  border-top:1px solid rgba(0,0,0,.09);
-  border-bottom:1px solid rgba(0,0,0,.09);
-  margin-bottom:25px;
-}
-
-.detail-row {
+.product-bottom{
+  margin-top:18px;
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  gap:20px;
-  padding:14px 0;
-  border-bottom:1px solid rgba(0,0,0,.06);
-  font-size:13px;
+  gap:8px;
 }
 
-.detail-row:last-child {
-  border-bottom:none;
-}
-
-.detail-label {
-  color:#777;
-}
-
-.detail-value {
-  font-weight:700;
-  text-align:right;
-}
-
-.details-description {
-  margin-bottom:25px;
-}
-
-.details-description-title {
-  font-size:10px;
-  color:var(--accent);
-  text-transform:uppercase;
-  letter-spacing:2px;
+.price{
   font-weight:800;
-  margin-bottom:9px;
+  font-size:16px;
 }
 
-.details-description-text {
-  color:#666;
-  font-size:14px;
-  line-height:1.7;
-  white-space:pre-line;
-}
-
-.details-actions {
+.product-actions{
   display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+  gap:7px;
 }
 
-.details-whatsapp {
-  flex:1;
-  min-width:180px;
+.view{
+  border:0;
+  background:#080808;
+  color:#fff;
+  border-radius:20px;
+  padding:9px 12px;
+  font-size:9px;
+  font-weight:800;
+  cursor:pointer;
 }
 
-.details-sold {
-  opacity:.5;
-  pointer-events:none;
-}
-
-/* STATEMENT */
-
-.statement {
-  border-top:1px solid rgba(0,0,0,.09);
-  border-bottom:1px solid rgba(0,0,0,.09);
-  padding:105px 22px;
+.wa{
+  width:35px;
+  height:35px;
+  border-radius:50%;
   background:#fff;
+  border:1px solid #ddd;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:16px;
 }
 
-.statement-inner {
-  max-width:1200px;
+/* ================= STATEMENT ================= */
+
+.statement{
+  background:#080808;
+  color:#fff;
+  padding:120px 24px;
+}
+
+.statement-inner{
+  max-width:1280px;
   margin:auto;
 }
 
-.statement h2 {
+.statement h2{
   max-width:1050px;
-  font-size:clamp(35px,6vw,70px);
-  line-height:1;
-  letter-spacing:-4px;
+  font-size:clamp(42px,6vw,78px);
+  line-height:.95;
+  letter-spacing:-5px;
 }
 
-.statement h2 span {
-  color:var(--accent);
+.statement h2 span{
+  color:var(--gold2);
 }
 
-/* SERVICES */
+/* ================= TRUST ================= */
 
-.services {
+.trust{
+  background:#f5f5f2;
+}
+
+.trust-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:14px;
 }
 
-.service {
-  min-height:220px;
-  padding:26px;
-  background:rgba(255,255,255,.7);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,.75);
-  border-radius:22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  box-shadow:0 8px 30px rgba(0,0,0,.025);
-  transition:.45s;
-}
-
-.service:hover {
-  transform:translateY(-6px);
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.08),
-    0 0 30px rgba(176,138,50,.10);
-}
-
-.service-number {
-  color:var(--accent);
-  font-size:12px;
-  font-weight:700;
-}
-
-.service h3 {
-  font-size:20px;
-  margin-bottom:7px;
-}
-
-.service p {
-  color:#777;
-  font-size:13px;
-}
-
-/* TRUST */
-
-.trust-section {
-  background:#0b0b0b;
-  color:white;
-  max-width:none;
-}
-
-.trust-inner {
-  max-width:1200px;
-  margin:auto;
-}
-
-.trust-section .section-title {
-  color:white;
-}
-
-.trust-section .section-description {
-  color:#999;
-}
-
-.trust-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.12);
-}
-
-.trust-item {
-  background:#0b0b0b;
-  padding:38px;
-  transition:.4s;
-}
-
-.trust-item:hover {
-  background:#111;
-  box-shadow:inset 0 0 50px rgba(176,138,50,.06);
-}
-
-.trust-number {
-  color:var(--gold-light);
-  font-size:50px;
-  line-height:1;
-  font-weight:800;
-  letter-spacing:-3px;
-  margin-bottom:15px;
-}
-
-.trust-item h3 {
-  font-size:18px;
-  margin-bottom:5px;
-}
-
-.trust-item p {
-  color:#888;
-  font-size:13px;
-}
-
-/* CUSTOMER TRUST */
-
-.customer-trust {
+.trust-card{
   background:#fff;
-  border-top:1px solid rgba(0,0,0,.08);
-  border-bottom:1px solid rgba(0,0,0,.08);
-}
-
-.customer-trust-inner {
-  max-width:1200px;
-  margin:auto;
-}
-
-.trust-points {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.trust-point {
-  padding:28px;
   border-radius:22px;
-  background:rgba(247,246,242,.8);
-  border:1px solid rgba(0,0,0,.07);
+  padding:30px;
+  min-height:210px;
+  border:1px solid #e7e7e2;
 }
 
-.trust-icon {
-  font-size:24px;
-  margin-bottom:18px;
+.trust-icon{
+  font-size:27px;
+  margin-bottom:30px;
 }
 
-.trust-point h3 {
+.trust-card h3{
   font-size:18px;
-  margin-bottom:7px;
+  margin-bottom:8px;
 }
 
-.trust-point p {
+.trust-card p{
   color:#777;
   font-size:13px;
+  line-height:1.6;
 }
 
-/* LOCATION */
+/* ================= STORE ================= */
 
-.location-grid {
+.store{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:18px;
+  gap:16px;
 }
 
-.location-card {
-  min-height:280px;
-  border:1px solid rgba(255,255,255,.7);
-  border-radius:25px;
-  padding:32px;
-  background:rgba(255,255,255,.65);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+.store-card{
+  min-height:340px;
+  padding:35px;
+  border-radius:28px;
+  background:#f5f5f2;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  box-shadow:0 8px 30px rgba(0,0,0,.035);
-  transition:.4s;
 }
 
-.location-card:hover {
-  transform:translateY(-5px);
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.08),
-    0 0 30px rgba(176,138,50,.10);
-}
-
-.location-card .label {
-  color:var(--accent);
-  text-transform:uppercase;
-  letter-spacing:2px;
+.store-label{
+  color:var(--gold);
   font-size:10px;
   font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
 
-.location-card h3 {
-  font-size:30px;
-  letter-spacing:-1px;
-  margin:15px 0 7px;
+.store-card h3{
+  font-size:35px;
+  letter-spacing:-2px;
+  margin:15px 0 8px;
 }
 
-.location-card p {
+.store-card p{
   color:#777;
   font-size:13px;
 }
 
-/* CTA */
+/* ================= CTA ================= */
 
-.cta {
-  max-width:1200px;
-  margin:0 auto 100px;
-  padding:90px 30px;
+.cta{
+  margin:0 auto 80px;
+  max-width:1280px;
+  padding:100px 25px;
+  border-radius:32px;
   text-align:center;
-  border-radius:30px;
-
   background:
-    radial-gradient(circle at 50% 0%,rgba(176,138,50,.22),transparent 35%),
-    #0b0b0b;
-
-  border:1px solid rgba(176,138,50,.22);
-  box-shadow:0 25px 80px rgba(0,0,0,.08);
+    radial-gradient(circle at 50% 0,rgba(176,138,50,.3),transparent 35%),
+    #080808;
+  color:#fff;
 }
 
-.cta-label {
-  color:var(--gold-light);
-  font-size:10px;
-  letter-spacing:2.5px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.cta h2 {
-  color:white;
-  font-size:clamp(40px,7vw,75px);
-  line-height:.95;
-  letter-spacing:-4px;
-  margin:18px auto;
+.cta h2{
+  font-size:clamp(45px,7vw,80px);
+  line-height:.9;
+  letter-spacing:-5px;
   max-width:800px;
+  margin:20px auto;
 }
 
-.cta p {
+.cta p{
   color:#888;
   margin-bottom:28px;
 }
 
-.cta-actions {
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
+/* ================= DETAILS ================= */
+
+.details{
+  display:none;
+  min-height:100vh;
+  padding:110px 24px 80px;
+  background:#fff;
 }
 
-.cta .button-light {
-  background:white;
-  color:#111;
+.details.active{
+  display:block;
 }
 
-.cta .button-outline {
-  border-color:rgba(255,255,255,.2);
-  color:white;
-  background:transparent;
-}
-
-/* FOOTER */
-
-footer {
-  background:#0b0b0b;
-  border-top:1px solid rgba(255,255,255,.1);
-  padding:40px 22px;
-  color:white;
-}
-
-.footer-inner {
+.details-inner{
   max-width:1200px;
+  margin:auto;
+}
+
+.back{
+  border:1px solid #ddd;
+  background:#fff;
+  padding:11px 17px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+  margin-bottom:30px;
+}
+
+.details-card{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:45px;
+}
+
+.details-main-image{
+  height:600px;
+  border-radius:30px;
+  background:#f5f5f2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.details-main-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:40px;
+  filter:drop-shadow(0 30px 30px rgba(0,0,0,.18));
+}
+
+.thumbs{
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  padding-top:12px;
+}
+
+.thumb{
+  width:65px;
+  height:65px;
+  min-width:65px;
+  border-radius:12px;
+  border:2px solid transparent;
+  overflow:hidden;
+  cursor:pointer;
+  background:#eee;
+}
+
+.thumb.active{
+  border-color:var(--gold);
+}
+
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.details-info{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.details-info .category{
+  width:auto;
+  height:auto;
+  min-width:0;
+  background:none;
+  border:0;
+  display:block;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:10px;
+  text-align:left;
+}
+
+.details-info h1{
+  font-size:clamp(45px,6vw,75px);
+  line-height:.9;
+  letter-spacing:-5px;
+  margin:10px 0 20px;
+}
+
+.details-price{
+  font-size:27px;
+  font-weight:800;
+  margin-bottom:25px;
+}
+
+.specs{
+  border-top:1px solid #ddd;
+  border-bottom:1px solid #ddd;
+  margin-bottom:25px;
+}
+
+.spec{
+  display:flex;
+  justify-content:space-between;
+  padding:14px 0;
+  border-bottom:1px solid #eee;
+  font-size:13px;
+}
+
+.spec:last-child{
+  border-bottom:0;
+}
+
+.spec span:first-child{
+  color:#777;
+}
+
+.details-description{
+  color:#666;
+  font-size:14px;
+  line-height:1.7;
+  margin-bottom:25px;
+  white-space:pre-line;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  background:#080808;
+  color:#fff;
+  padding:45px 24px;
+}
+
+.footer-inner{
+  max-width:1280px;
   margin:auto;
   display:flex;
   justify-content:space-between;
@@ -1102,345 +790,280 @@ footer {
   gap:25px;
 }
 
-.footer-brand {
-  font-size:18px;
+.footer-brand{
   font-weight:800;
 }
 
-.footer-brand span {
-  color:var(--gold-light);
+.footer-brand span{
+  color:var(--gold2);
 }
 
-.footer-links {
+.footer-links{
   display:flex;
   gap:22px;
   flex-wrap:wrap;
 }
 
-.footer-links a {
+.footer-links a{
   color:#888;
   font-size:12px;
 }
 
-.copyright {
+.copy{
   width:100%;
-  border-top:1px solid rgba(255,255,255,.1);
+  border-top:1px solid #222;
   padding-top:20px;
-  margin-top:10px;
   color:#555;
-  font-size:11px;
+  font-size:10px;
 }
 
-/* RESPONSIVE */
+/* ================= HIDDEN NORMAL SITE ================= */
 
-@media(max-width:900px) {
+body.details-open .normal-site{
+  display:none;
+}
 
-  nav {
+/* ================= MOBILE ================= */
+
+@media(max-width:950px){
+
+  nav{
     display:none;
   }
 
-  .products {
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .services {
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .hero h1 {
-    font-size:72px;
-  }
-
-  .details-card {
+  .hero-inner{
     grid-template-columns:1fr;
   }
 
-  .details-image {
-    min-height:450px;
+  .hero{
+    padding-top:120px;
   }
 
+  .hero-visual{
+    min-height:420px;
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .trust-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .details-card{
+    grid-template-columns:1fr;
+  }
+
+  .details-main-image{
+    height:450px;
+  }
 }
 
-@media(max-width:600px) {
+@media(max-width:600px){
 
-  .nav {
-    padding:14px 17px;
+  .nav{
+    padding:0 17px;
   }
 
-  .nav-button {
-    display:none;
+  .hero{
+    min-height:auto;
+    padding:120px 18px 50px;
   }
 
-  .hero {
-    min-height:100vh;
-    padding:145px 20px 70px;
-  }
-
-  .hero h1 {
+  .hero h1{
     font-size:57px;
     letter-spacing:-4px;
   }
 
-  .hero-text {
-    font-size:15px;
+  .hero p{
+    font-size:14px;
   }
 
-  .section {
-    padding:75px 16px;
+  .hero-visual{
+    min-height:350px;
   }
 
-  .section-header {
+  .hero-circle{
+    width:320px;
+    height:320px;
+  }
+
+  .section{
+    padding:70px 16px;
+  }
+
+  .section-top{
     display:block;
   }
 
-  .section-description {
+  .section-description{
     margin-top:15px;
   }
 
-  .collection-controls {
-    display:block;
+  .category{
+    min-width:125px;
+    height:125px;
   }
 
-  .search-box {
-    min-width:0;
-    margin-bottom:10px;
-  }
-
-  .products {
+  .products{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
+    gap:9px;
   }
 
-  .product {
+  .product{
     border-radius:17px;
   }
 
-  .product-image {
-    height:210px;
+  .product-image{
+    height:205px;
   }
 
-  .product-info {
+  .product-image img{
     padding:14px;
   }
 
-  .product-tag {
-    font-size:7px;
+  .product-info{
+    padding:13px;
   }
 
-  .product h3 {
-    font-size:16px;
+  .product h3{
+    font-size:15px;
   }
 
-  .product-condition {
+  .product-meta{
     font-size:9px;
   }
 
-  .product-battery {
-    font-size:8px;
-  }
-
-  .product-bottom {
+  .product-bottom{
     display:block;
-    margin-top:13px;
   }
 
-  .price {
-    font-size:14px;
-    margin-bottom:10px;
+  .price{
+    font-size:13px;
+    margin-bottom:9px;
   }
 
-  .product-actions {
+  .product-actions{
     width:100%;
   }
 
-  .product-button {
+  .view{
     flex:1;
-    display:block;
-    text-align:center;
-    padding:9px 5px;
-    font-size:9px;
   }
 
-  .whatsapp-product-button {
-    width:34px;
-    min-width:34px;
-  }
-
-  .services {
-    grid-template-columns:1fr;
-  }
-
-  .trust-grid {
-    grid-template-columns:1fr;
-  }
-
-  .trust-points {
-    grid-template-columns:1fr;
-  }
-
-  .location-grid {
-    grid-template-columns:1fr;
-  }
-
-  .statement {
+  .statement{
     padding:80px 20px;
   }
 
-  .statement h2 {
-    letter-spacing:-2px;
+  .statement h2{
+    letter-spacing:-3px;
   }
 
-  .cta {
-    margin:0 10px 70px;
-    padding:70px 22px;
+  .trust-grid{
+    grid-template-columns:1fr;
   }
 
-  .footer-inner {
-    display:block;
+  .store{
+    grid-template-columns:1fr;
   }
 
-  .footer-links {
-    margin-top:25px;
+  .store-card{
+    min-height:270px;
   }
 
-  .product-details {
-    padding:110px 16px 70px;
+  .cta{
+    margin:0 10px 60px;
+    padding:75px 20px;
   }
 
-  .details-card {
-    padding:10px;
-    border-radius:22px;
-    gap:10px;
+  .cta h2{
+    letter-spacing:-3px;
   }
 
-  .details-image {
-    min-height:330px;
-    border-radius:18px;
+  .details{
+    padding:100px 16px 60px;
   }
 
-  .details-image img {
+  .details-main-image{
+    height:350px;
+  }
+
+  .details-main-image img{
     padding:20px;
   }
 
-  .details-info {
-    padding:20px 10px 25px;
+  .details-info h1{
+    font-size:44px;
+    letter-spacing:-3px;
   }
-
-  .details-info h1 {
-    font-size:40px;
-    letter-spacing:-2px;
-  }
-
-  .details-price {
-    font-size:23px;
-  }
-
-  .details-thumbnail {
-    width:62px;
-    height:62px;
-    min-width:62px;
-  }
-
 }
-
-/* HIDE NORMAL SITE WHEN DETAILS IS OPEN */
-
-body.details-open .normal-site {
-  display:none;
-}
-
-body.details-open header {
-  position:fixed;
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-
 <div class="nav">
 
-<a href="#" class="brand" onclick="closeProductDetails()">
-
-<div class="logo">
-TG
-</div>
-
-<div class="brand-name">
-TWINKLE GADGET<span>.</span>
-</div>
-
+<a href="#" class="brand" onclick="closeDetails()">
+<div class="logo">TG</div>
+<div>TWINKLE GADGET<span>.</span></div>
 </a>
 
 <nav>
-
-<a href="#phones" onclick="closeProductDetails()">
-Collection
-</a>
-
-<a href="#services" onclick="closeProductDetails()">
-Services
-</a>
-
-<a href="#location" onclick="closeProductDetails()">
-Visit
-</a>
+<a href="#iphone">iPhone</a>
+<a href="#collection">Collection</a>
+<a href="#trust">Why Twinkle</a>
+<a href="#location">Visit</a>
 
 <a
-href="https://instagram.com/twinkle_gadget"
+class="nav-whatsapp"
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'd%20like%20to%20make%20an%20enquiry."
 target="_blank">
-Instagram
+WhatsApp
 </a>
-
-<a
-class="nav-button"
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27d%20like%20to%20make%20an%20enquiry."
-target="_blank">
-Contact
-</a>
-
 </nav>
 
 </div>
-
 </header>
 
 
 <div class="normal-site">
 
-<main>
+<!-- HERO -->
 
-<section class="hero">
+<section class="hero" id="iphone">
 
 <div class="hero-inner">
 
+<div class="hero-copy">
+
 <div class="eyebrow">
-TWINKLE GADGETS • LAGOS
+TWINKLE GADGETS • LAGOS ISLAND
 </div>
 
 <h1>
-YOUR NEXT DEVICE.
-<span>UNBOX POSSIBILITIES.</span>
+Your next
+<span>iPhone.</span>
 </h1>
 
-<p class="hero-text">
-Premium smartphones, gadgets and professional repairs.
-Buy, sell or swap with a business built on 10 years of experience.
+<p>
+Premium smartphones and gadgets,
+carefully selected for you.
+Buy, sell, swap or upgrade with
+Twinkle Gadgets.
 </p>
 
-<div class="hero-actions">
+<div class="hero-buttons">
 
-<a
-class="button button-light"
-href="#phones">
-Explore Collection
+<a class="btn btn-black" href="#collection">
+Shop Collection
 </a>
 
 <a
-class="button button-outline"
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27m%20interested%20in%20a%20phone."
+class="btn btn-outline"
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'm%20looking%20for%20an%20iPhone."
 target="_blank">
 WhatsApp Us
 </a>
@@ -1449,66 +1072,132 @@ WhatsApp Us
 
 </div>
 
+
+<div class="hero-visual">
+
+<div class="hero-circle">
+
+<img
+class="hero-phone"
+id="heroPhone"
+src=""
+alt="Twinkle Gadgets iPhone">
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
 
-<section class="section" id="phones">
+<!-- CATEGORIES -->
 
-<div class="section-header">
+<section class="section">
+
+<div class="section-top">
 
 <div>
-
-<div class="section-label">
-Live Collection
-</div>
+<div class="section-label">Explore</div>
 
 <h2 class="section-title">
-Current picks.
+Shop by category.
 </h2>
-
 </div>
 
 <p class="section-description">
-Browse our latest available devices. Search by model
-or filter the collection by category.
+Find your next device by category,
+then explore the latest stock available.
 </p>
 
 </div>
 
 
-<div class="collection-controls">
+<div class="category-scroll">
 
-<div class="search-box">
+<div class="category active" onclick="chooseCategory('all')">
+<div class="category-icon">✦</div>
+<div class="category-name">All Products</div>
+</div>
+
+<div class="category" onclick="chooseCategory('iphone')">
+<div class="category-icon"></div>
+<div class="category-name">iPhone</div>
+</div>
+
+<div class="category" onclick="chooseCategory('samsung')">
+<div class="category-icon">S</div>
+<div class="category-name">Samsung</div>
+</div>
+
+<div class="category" onclick="chooseCategory('android')">
+<div class="category-icon">◉</div>
+<div class="category-name">Android</div>
+</div>
+
+<div class="category" onclick="chooseCategory('gadgets')">
+<div class="category-icon">⌁</div>
+<div class="category-name">Gadgets</div>
+</div>
+
+<div class="category" onclick="chooseCategory('accessories')">
+<div class="category-icon">◌</div>
+<div class="category-name">Accessories</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- COLLECTION -->
+
+<section class="section" id="collection">
+
+<div class="section-top">
+
+<div>
+
+<div class="section-label">
+Available Now
+</div>
+
+<h2 class="section-title">
+Latest arrivals.
+</h2>
+
+</div>
+
+<p class="section-description">
+Our current available stock.
+Tap any device to see the full details.
+</p>
+
+</div>
+
+
+<div class="controls">
 
 <input
+class="search"
 id="productSearch"
 type="search"
-placeholder="Search phones, gadgets..."
+placeholder="Search iPhone, Samsung, gadgets..."
 autocomplete="off">
 
-</div>
+<div class="filters" id="filters"></div>
 
 </div>
 
 
-<div
-class="category-filters"
-id="categoryFilters">
+<div class="products" id="products">
 
-<button
-class="filter-button active"
-data-category="all">
-All
-</button>
-
-</div>
-
-
-<div
-class="products"
-id="products">
-
-<div class="empty-products">
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:70px;
+color:#777;">
 Loading available devices...
 </div>
 
@@ -1517,7 +1206,9 @@ Loading available devices...
 </section>
 
 
-<div class="statement">
+<!-- STATEMENT -->
+
+<section class="statement">
 
 <div class="statement-inner">
 
@@ -1526,154 +1217,37 @@ The Twinkle Standard
 </div>
 
 <h2>
-Phones worth buying.
-<span>Service worth remembering.</span>
+Good phones.
+Great choices.
+<span>Zero guesswork.</span>
 </h2>
-
-</div>
-
-</div>
-
-
-<section class="section" id="services">
-
-<div class="section-header">
-
-<div>
-
-<div class="section-label">
-What We Do
-</div>
-
-<h2 class="section-title">
-More than a phone shop.
-</h2>
-
-</div>
-
-<p class="section-description">
-From your next smartphone to repairs and upgrades,
-we've got your device covered.
-</p>
-
-</div>
-
-
-<div class="services">
-
-<div class="service">
-
-<div class="service-number">
-01
-</div>
-
-<div>
-
-<h3>
-Smartphones
-</h3>
-
-<p>
-Quality smartphones selected for everyday use,
-work, lifestyle and everything in between.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="service">
-
-<div class="service-number">
-02
-</div>
-
-<div>
-
-<h3>
-Buy • Sell • Swap
-</h3>
-
-<p>
-Looking to upgrade? Trade in, sell or swap
-your current device.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="service">
-
-<div class="service-number">
-03
-</div>
-
-<div>
-
-<h3>
-Repairs
-</h3>
-
-<p>
-Professional phone and gadget repair services
-from an experienced technician.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="service">
-
-<div class="service-number">
-04
-</div>
-
-<div>
-
-<h3>
-Gadgets
-</h3>
-
-<p>
-Useful accessories and gadgets to complete
-your setup.
-</p>
-
-</div>
-
-</div>
 
 </div>
 
 </section>
 
 
-<section class="trust-section">
+<!-- TRUST -->
 
-<div class="trust-inner section">
+<section class="section trust" id="trust">
 
-<div class="section-header">
+<div class="section-top">
 
 <div>
 
 <div class="section-label">
-Why Twinkle
+Shop With Confidence
 </div>
 
 <h2 class="section-title">
-Built on experience.
+Why Twinkle.
 </h2>
 
 </div>
 
 <p class="section-description">
-A decade of working with phones and gadgets
-in Lagos.
+A decade of experience helping customers
+find the right devices.
 </p>
 
 </div>
@@ -1681,33 +1255,25 @@ in Lagos.
 
 <div class="trust-grid">
 
-<div class="trust-item">
+<div class="trust-card">
 
-<div class="trust-number">
-10+
-</div>
+<div class="trust-icon">◉</div>
 
-<h3>
-Years in Business
-</h3>
+<h3>10+ Years</h3>
 
 <p>
-A decade of experience in phones, gadgets
-and repairs.
+A decade of experience in smartphones,
+gadgets, repairs and device trading.
 </p>
 
 </div>
 
 
-<div class="trust-item">
+<div class="trust-card">
 
-<div class="trust-number">
-📍
-</div>
+<div class="trust-icon">⌂</div>
 
-<h3>
-Lagos Island
-</h3>
+<h3>Lagos Island</h3>
 
 <p>
 Visit us at Sangrous Shopping Plaza,
@@ -1717,21 +1283,30 @@ Lagos Island.
 </div>
 
 
-<div class="trust-item">
+<div class="trust-card">
 
-<div class="trust-number">
-🇳🇬
-</div>
+<div class="trust-icon">↗</div>
 
-<h3>
-Nationwide Delivery
-</h3>
+<h3>Nationwide Delivery</h3>
 
 <p>
-We arrange delivery to customers across Nigeria.
+We arrange delivery to customers
+across Nigeria.
 </p>
 
 </div>
+
+
+<div class="trust-card">
+
+<div class="trust-icon">💬</div>
+
+<h3>Direct Support</h3>
+
+<p>
+Ask about any device directly through
+WhatsApp before making your decision.
+</p>
 
 </div>
 
@@ -1740,106 +1315,20 @@ We arrange delivery to customers across Nigeria.
 </section>
 
 
-<section class="customer-trust">
-
-<div class="customer-trust-inner section">
-
-<div class="section-header">
-
-<div>
-
-<div class="section-label">
-Shop With Confidence
-</div>
-
-<h2 class="section-title">
-Why customers choose us.
-</h2>
-
-</div>
-
-<p class="section-description">
-Straightforward service, real communication
-and devices you can confidently enquire about.
-</p>
-
-</div>
-
-
-<div class="trust-points">
-
-<div class="trust-point">
-
-<div class="trust-icon">
-✓
-</div>
-
-<h3>
-Clear Product Details
-</h3>
-
-<p>
-See the price, storage, battery health,
-condition and description before enquiring.
-</p>
-
-</div>
-
-
-<div class="trust-point">
-
-<div class="trust-icon">
-💬
-</div>
-
-<h3>
-Direct WhatsApp Support
-</h3>
-
-<p>
-Ask about any device directly and get
-help choosing what fits your needs.
-</p>
-
-</div>
-
-
-<div class="trust-point">
-
-<div class="trust-icon">
-🇳🇬
-</div>
-
-<h3>
-Nigeria-Wide Delivery
-</h3>
-
-<p>
-Customers outside Lagos can arrange
-delivery across Nigeria.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
+<!-- STORE -->
 
 <section class="section" id="location">
 
-<div class="section-header">
+<div class="section-top">
 
 <div>
 
 <div class="section-label">
-Visit Twinkle
+Visit Us
 </div>
 
 <h2 class="section-title">
-Come see us.
+See you in Lagos.
 </h2>
 
 </div>
@@ -1847,13 +1336,13 @@ Come see us.
 </div>
 
 
-<div class="location-grid">
+<div class="store">
 
-<div class="location-card">
+<div class="store-card">
 
 <div>
 
-<div class="label">
+<div class="store-label">
 Our Store
 </div>
 
@@ -1868,7 +1357,7 @@ Lagos Island, Lagos, Nigeria
 </div>
 
 <a
-class="button button-light"
+class="btn btn-black"
 href="https://www.google.com/maps/search/?api=1&query=Sangrous%20Shopping%20Plaza%20Lagos%20Island"
 target="_blank">
 Open Maps
@@ -1877,30 +1366,30 @@ Open Maps
 </div>
 
 
-<div class="location-card">
+<div class="store-card">
 
 <div>
 
-<div class="label">
-Direct Contact
+<div class="store-label">
+Need a device?
 </div>
 
 <h3>
-Let's talk gadgets.
+Let's talk.
 </h3>
 
 <p>
-WhatsApp us about a phone, repair,
-gadget or swap.
+Tell us what you're looking for
+and we'll help you find it.
 </p>
 
 </div>
 
 <a
-class="button button-light"
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27d%20like%20to%20make%20an%20enquiry."
+class="btn btn-black"
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'm%20looking%20for%20a%20device."
 target="_blank">
-Start a Conversation
+Chat on WhatsApp
 </a>
 
 </div>
@@ -1910,9 +1399,11 @@ Start a Conversation
 </section>
 
 
-<div class="cta">
+<!-- CTA -->
 
-<div class="cta-label">
+<section class="cta">
+
+<div class="section-label">
 Twinkle Gadgets
 </div>
 
@@ -1924,27 +1415,15 @@ Your next device starts here.
 Phones • Gadgets • Repairs • Buy • Sell • Swap
 </p>
 
-<div class="cta-actions">
-
 <a
-class="button button-light"
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27m%20looking%20for%20a%20phone."
+class="btn"
+style="background:#fff;color:#111;"
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'd%20like%20to%20make%20an%20enquiry."
 target="_blank">
-WhatsApp Us
+Start a WhatsApp Enquiry
 </a>
 
-<a
-class="button button-outline"
-href="https://instagram.com/twinkle_gadget"
-target="_blank">
-@twinkle_gadget
-</a>
-
-</div>
-
-</div>
-
-</main>
+</section>
 
 
 <footer>
@@ -1957,17 +1436,10 @@ TWINKLE GADGET<span>.</span>
 
 <div class="footer-links">
 
-<a href="#phones">
-Collection
-</a>
-
-<a href="#services">
-Services
-</a>
-
-<a href="#location">
-Location
-</a>
+<a href="#iphone">iPhone</a>
+<a href="#collection">Collection</a>
+<a href="#trust">Why Twinkle</a>
+<a href="#location">Location</a>
 
 <a
 href="https://instagram.com/twinkle_gadget"
@@ -1983,7 +1455,7 @@ WhatsApp
 
 </div>
 
-<div class="copyright">
+<div class="copy">
 © 2026 Twinkle Gadgets • Lagos Island, Nigeria • All rights reserved.
 </div>
 
@@ -1994,26 +1466,21 @@ WhatsApp
 </div>
 
 
-<!-- PRODUCT DETAILS VIEW -->
+<!-- PRODUCT DETAILS -->
 
-<section
-class="product-details"
-id="productDetails">
+<section class="details" id="details">
 
-<div class="product-details-inner">
+<div class="details-inner">
 
-<button
-class="back-button"
-onclick="closeProductDetails()">
+<button class="back" onclick="closeDetails()">
 ← Back to Collection
 </button>
 
-
 <div class="details-card">
 
-<div class="details-gallery">
+<div>
 
-<div class="details-image">
+<div class="details-main-image">
 
 <img
 id="detailsImage"
@@ -2022,19 +1489,14 @@ alt="Product">
 
 </div>
 
-<div
-id="detailsThumbnails"
-class="details-thumbnails">
-</div>
+<div class="thumbs" id="thumbs"></div>
 
 </div>
 
 
 <div class="details-info">
 
-<div
-class="details-tag"
-id="detailsCategory">
+<div class="category" id="detailsCategory">
 AVAILABLE
 </div>
 
@@ -2042,102 +1504,41 @@ AVAILABLE
 Product
 </h1>
 
-<div
-class="details-price"
-id="detailsPrice">
+<div class="details-price" id="detailsPrice">
 ₦0
 </div>
 
-<div
-class="details-status status-available"
-id="detailsStatus">
-🟢 Available
+<div class="specs">
+
+<div class="spec">
+<span>Storage</span>
+<strong id="detailsStorage">—</strong>
 </div>
 
-
-<div class="details-specs">
-
-<div class="detail-row">
-
-<span class="detail-label">
-Storage
-</span>
-
-<span
-class="detail-value"
-id="detailsStorage">
-—
-</span>
-
+<div class="spec">
+<span>Battery Health</span>
+<strong id="detailsBattery">—</strong>
 </div>
 
-
-<div class="detail-row">
-
-<span class="detail-label">
-Battery Health
-</span>
-
-<span
-class="detail-value"
-id="detailsBattery">
-—
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-Condition
-</span>
-
-<span
-class="detail-value"
-id="detailsCondition">
-—
-</span>
-
+<div class="spec">
+<span>Condition</span>
+<strong id="detailsCondition">—</strong>
 </div>
 
 </div>
-
 
 <div
 class="details-description"
-id="detailsDescriptionBox">
-
-<div class="details-description-title">
-Description
-</div>
-
-<div
-class="details-description-text"
 id="detailsDescription">
-—
 </div>
-
-</div>
-
-
-<div class="details-actions">
 
 <a
 id="detailsWhatsapp"
-class="button button-light details-whatsapp"
+class="btn btn-black"
 href="#"
 target="_blank">
-Enquire on WhatsApp
+💬 Enquire on WhatsApp
 </a>
-
-<button
-class="button button-outline"
-onclick="closeProductDetails()">
-Back to Collection
-</button>
-
-</div>
 
 </div>
 
@@ -2150,7 +1551,7 @@ Back to Collection
 
 <script>
 
-/* SUPABASE */
+/* ================= SUPABASE ================= */
 
 const SUPABASE_URL =
 "https://tpasjsjofhxpslomciqd.supabase.co";
@@ -2165,27 +1566,16 @@ SUPABASE_KEY
 );
 
 
-/* STATE */
+/* ================= STATE ================= */
 
 let productsData = [];
-
 let selectedCategory = "all";
-
 let searchTerm = "";
 
-let isLoadingProducts = false;
 
+/* ================= HELPERS ================= */
 
-/* PRODUCT DETAILS SLIDER STATE */
-
-let currentDetailImages = [];
-
-let currentDetailImageIndex = 0;
-
-
-/* SAFE TEXT */
-
-function escapeHtml(value) {
+function escapeHtml(value){
 
 const div =
 document.createElement("div");
@@ -2198,58 +1588,23 @@ return div.innerHTML;
 }
 
 
-/* PRODUCT ID */
+function getImages(product){
 
-function getProductId(product) {
-
-if (
-product.id !== undefined &&
-product.id !== null
-) {
-
-return String(product.id);
-
-}
-
-if (
-product.uuid !== undefined &&
-product.uuid !== null
-) {
-
-return String(product.uuid);
-
-}
-
-return [
-product.name || "",
-product.price || "",
-product.created_at || ""
-].join("|");
-
-}
-
-
-/* IMAGES */
-
-function getProductImages(product) {
-
-if (
+if(
 Array.isArray(product.image_urls) &&
 product.image_urls.length
-) {
+){
 
 return product.image_urls.filter(
-url =>
-typeof url === "string" &&
-url.trim()
+x => typeof x === "string" && x.trim()
 );
 
 }
 
-if (
+if(
 typeof product.image_url === "string" &&
 product.image_url.trim()
-) {
+){
 
 return [product.image_url];
 
@@ -2260,9 +1615,24 @@ return [];
 }
 
 
-/* WHATSAPP URL */
+function getProductId(product){
 
-function getWhatsappUrl(product) {
+if(product.id != null)
+return String(product.id);
+
+if(product.uuid != null)
+return String(product.uuid);
+
+return [
+product.name || "",
+product.price || "",
+product.created_at || ""
+].join("|");
+
+}
+
+
+function whatsapp(product){
 
 const price =
 Number(product.price || 0)
@@ -2271,20 +1641,18 @@ Number(product.price || 0)
 const message =
 `Hello Twinkle Gadgets, I'm interested in the ${product.name || "device"}${product.storage ? " " + product.storage : ""} listed for ₦${price}.`;
 
-return (
-"https://wa.me/2349049388119?text=" +
-encodeURIComponent(message)
-);
+return "https://wa.me/2349049388119?text=" +
+encodeURIComponent(message);
 
 }
 
 
-/* BUILD CATEGORY FILTERS */
+/* ================= FILTERS ================= */
 
-function buildCategoryFilters() {
+function buildFilters(){
 
-const container =
-document.getElementById("categoryFilters");
+const box =
+document.getElementById("filters");
 
 const categories = [];
 
@@ -2294,14 +1662,12 @@ const category =
 String(product.category || "")
 .trim();
 
-if (
+if(
 category &&
 !categories.some(
-item =>
-item.toLowerCase() ===
-category.toLowerCase()
+x => x.toLowerCase() === category.toLowerCase()
 )
-) {
+){
 
 categories.push(category);
 
@@ -2309,105 +1675,69 @@ categories.push(category);
 
 });
 
+box.innerHTML = "";
 
-container.innerHTML = "";
-
-
-/* ALL */
-
-const allButton =
+const all =
 document.createElement("button");
 
-allButton.className =
-"filter-button" +
-(
-selectedCategory === "all"
-? " active"
-: ""
-);
+all.className =
+"filter active";
 
-allButton.dataset.category =
-"all";
-
-allButton.textContent =
+all.textContent =
 "All";
 
-allButton.addEventListener(
-"click",
-() => {
+all.onclick = () => {
 
-selectedCategory =
-"all";
+selectedCategory = "all";
 
 updateFilters();
 
 renderProducts();
 
-}
-);
+};
 
-container.appendChild(allButton);
+box.appendChild(all);
 
-
-/* CATEGORIES */
-
-categories
-.sort()
-.forEach(category => {
+categories.sort().forEach(category => {
 
 const button =
 document.createElement("button");
 
 button.className =
-"filter-button" +
-(
-selectedCategory.toLowerCase() ===
-category.toLowerCase()
-? " active"
-: ""
-);
-
-button.dataset.category =
-category;
+"filter";
 
 button.textContent =
 category;
 
-button.addEventListener(
-"click",
-() => {
+button.onclick = () => {
 
-selectedCategory =
-category;
+selectedCategory = category;
 
 updateFilters();
 
 renderProducts();
 
-}
-);
+};
 
-container.appendChild(button);
+box.appendChild(button);
 
 });
 
 }
 
 
-/* UPDATE ACTIVE FILTER */
-
-function updateFilters() {
+function updateFilters(){
 
 document
-.querySelectorAll(".filter-button")
+.querySelectorAll(".filter")
 .forEach(button => {
-
-const category =
-button.dataset.category;
 
 button.classList.toggle(
 "active",
-category === selectedCategory
+selectedCategory === "all"
+? button.textContent === "All"
+: button.textContent.toLowerCase() ===
+String(selectedCategory).toLowerCase()
 );
 
 });
@@ -2415,16 +1745,56 @@ category === selectedCategory
 }
 
 
-/* FILTER PRODUCTS */
+function chooseCategory(category){
 
-function getFilteredProducts() {
+selectedCategory =
+category === "all"
+? "all"
+: category;
+
+document
+.querySelectorAll(".category")
+.forEach(item =>
+item.classList.remove("active")
+);
+
+const categories =
+document.querySelectorAll(".category");
+
+categories.forEach(item => {
+
+if(
+item.textContent
+.toLowerCase()
+.includes(category.toLowerCase())
+){
+
+item.classList.add("active");
+
+}
+
+});
+
+renderProducts();
+
+document
+.getElementById("collection")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* ================= FILTER PRODUCTS ================= */
+
+function filteredProducts(){
 
 return productsData.filter(product => {
 
 const category =
 String(product.category || "")
-.toLowerCase()
-.trim();
+.toLowerCase();
 
 const name =
 String(product.name || "")
@@ -2438,54 +1808,52 @@ const condition =
 String(product.condition || "")
 .toLowerCase();
 
-
-const matchesCategory =
-selectedCategory === "all" ||
-category ===
-selectedCategory.toLowerCase();
-
-
-const matchesSearch =
+const searchMatch =
 !searchTerm ||
 name.includes(searchTerm) ||
+category.includes(searchTerm) ||
 storage.includes(searchTerm) ||
-condition.includes(searchTerm) ||
-category.includes(searchTerm);
+condition.includes(searchTerm);
 
+const categoryMatch =
+selectedCategory === "all" ||
+category === selectedCategory.toLowerCase() ||
+category.includes(selectedCategory.toLowerCase());
 
-return (
-matchesCategory &&
-matchesSearch
-);
+return searchMatch && categoryMatch;
 
 });
 
 }
 
 
-/* RENDER PRODUCTS */
+/* ================= RENDER ================= */
 
-function renderProducts() {
+function renderProducts(){
 
 const container =
 document.getElementById("products");
 
 container.innerHTML = "";
 
-
 const products =
-getFilteredProducts();
+filteredProducts();
 
-
-if (!products.length) {
+if(!products.length){
 
 container.innerHTML = `
-<div class="empty-products">
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:70px 20px;
+color:#777;">
+
 No devices match your search.
+
 <br><br>
 
 <a
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20stock."
 target="_blank"
 style="color:#b08a32;font-weight:800;">
 Ask us for available stock
@@ -2499,10 +1867,9 @@ return;
 }
 
 
-/* FEATURED PRODUCTS */
+/* newest first */
 
-products.forEach(
-(product,index) => {
+products.forEach((product,index) => {
 
 const card =
 document.createElement("article");
@@ -2511,53 +1878,11 @@ card.className =
 "product";
 
 
-const imageUrls =
-getProductImages(product);
-
-
-const mainImage =
-imageUrls.length
-? imageUrls[0]
-: "";
-
+const images =
+getImages(product);
 
 const image =
-mainImage
-? `<img
-src="${escapeHtml(mainImage)}"
-alt="${escapeHtml(product.name)}"
-loading="lazy">`
-: `
-<div
-style="
-color:#999;
-font-size:11px;
-text-align:center;
-padding:20px;">
-Image unavailable
-</div>
-`;
-
-
-const photoCount =
-imageUrls.length > 1
-? `
-<div class="product-photo-count">
-📸 ${imageUrls.length} photos
-</div>
-`
-: "";
-
-
-const featuredBadge =
-index < 3 &&
-selectedCategory === "all"
-? `
-<div class="featured-badge">
-★ Featured
-</div>
-`
-: "";
+images[0] || "";
 
 
 const price =
@@ -2565,55 +1890,60 @@ Number(product.price || 0)
 .toLocaleString("en-NG");
 
 
-const battery =
-product.battery
-? escapeHtml(product.battery)
-: "Not specified";
-
-
 card.innerHTML = `
 
 <div class="product-image">
 
-${featuredBadge}
+${index < 3 && selectedCategory === "all"
+? `<div class="badge">★ New Arrival</div>`
+: ""}
 
-${image}
-
-${photoCount}
+${
+image
+? `<img
+src="${escapeHtml(image)}"
+alt="${escapeHtml(product.name || "Product")}"
+loading="lazy">`
+: `<div style="color:#999;font-size:11px;">
+Image unavailable
+</div>`
+}
 
 </div>
+
 
 <div class="product-info">
 
-<div class="product-tag">
-${escapeHtml(
-product.category ||
-"Available"
-)}
+<div class="product-category">
+${escapeHtml(product.category || "Available")}
 </div>
 
 <h3>
-${escapeHtml(
-product.name ||
-"Unnamed device"
-)}
+${escapeHtml(product.name || "Unnamed device")}
 </h3>
 
-<div class="product-condition">
+<div class="product-meta">
+
 ${escapeHtml(
 product.condition ||
 "Condition not specified"
 )}
 
 ${product.storage
-? " • " +
-escapeHtml(product.storage)
+? " • " + escapeHtml(product.storage)
 : ""}
+
 </div>
 
-<div class="product-battery">
-${battery}
+<div class="product-meta">
+
+${escapeHtml(
+product.battery ||
+"Battery not specified"
+)}
+
 </div>
+
 
 <div class="product-bottom">
 
@@ -2624,17 +1954,17 @@ ${battery}
 <div class="product-actions">
 
 <button
-class="product-button"
+class="view"
 type="button">
-View Details
+View
 </button>
 
 <a
-class="whatsapp-product-button"
-href="${getWhatsappUrl(product)}"
+class="wa"
+href="${whatsapp(product)}"
 target="_blank"
 rel="noopener"
-title="Enquire on WhatsApp">
+title="WhatsApp enquiry">
 💬
 </a>
 
@@ -2646,23 +1976,17 @@ title="Enquire on WhatsApp">
 `;
 
 
-/* CARD CLICK */
+card.addEventListener("click",event => {
 
-card.addEventListener(
-"click",
-function(event) {
-
-if (
-event.target.closest(
-".whatsapp-product-button"
-)
-) {
+if(
+event.target.closest(".wa")
+){
 
 return;
 
 }
 
-openProductDetails(product);
+openDetails(product);
 
 });
 
@@ -2670,13 +1994,10 @@ openProductDetails(product);
 container.appendChild(card);
 
 
-/* ANIMATION */
-
 requestAnimationFrame(() => {
 
 setTimeout(
-() =>
-card.classList.add("show"),
+() => card.classList.add("show"),
 index * 70
 );
 
@@ -2687,137 +2008,120 @@ index * 70
 }
 
 
-/* LOAD PRODUCTS */
+/* ================= LOAD PRODUCTS ================= */
 
-async function loadProducts() {
-
-if (isLoadingProducts) {
-return;
-}
-
-isLoadingProducts = true;
-
+async function loadProducts(){
 
 const container =
 document.getElementById("products");
 
+try{
 
-try {
-
-container.innerHTML = `
-<div class="empty-products">
-Loading available devices...
-</div>
-`;
-
-
-const { data, error } =
+const {data,error} =
 await supabaseClient
 .from("products")
 .select("*")
-.eq("available", true)
-.order("created_at", {
+.eq("available",true)
+.order("created_at",{
 ascending:false
 });
 
 
-if (error) {
-
-console.error(
-"Supabase product error:",
-error
-);
-
-container.innerHTML = `
-<div class="empty-products">
-Unable to load products right now.
-<br><br>
-
-<a
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
-target="_blank"
-style="color:#b08a32;font-weight:800;">
-Contact us for current stock
-</a>
-
-</div>
-`;
-
-return;
-
-}
+if(error)
+throw error;
 
 
-/* DEDUPLICATION */
+/*
+Remove duplicate database rows
+using their actual ID.
+*/
 
-const uniqueProducts = [];
+const seen =
+new Set();
 
-const seenIds = new Set();
-
+productsData = [];
 
 (data || []).forEach(product => {
 
 const id =
 getProductId(product);
 
-
-if (seenIds.has(id)) {
+if(seen.has(id))
 return;
-}
 
+seen.add(id);
 
-seenIds.add(id);
-
-uniqueProducts.push(product);
+productsData.push(product);
 
 });
 
 
-productsData =
-uniqueProducts;
-
-
-buildCategoryFilters();
+buildFilters();
 
 renderProducts();
 
 
-} catch(error) {
+/*
+Use first available product
+image for hero.
+*/
 
-console.error(
-"Unexpected product loading error:",
-error
-);
+if(productsData.length){
+
+const firstImages =
+getImages(productsData[0]);
+
+if(firstImages[0]){
+
+document.getElementById(
+"heroPhone"
+).src =
+firstImages[0];
+
+}
+
+}
+
+}catch(error){
+
+console.error(error);
 
 container.innerHTML = `
-<div class="empty-products">
-Something went wrong while loading
-the collection.
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:70px 20px;
+color:#777;">
+
+Unable to load products right now.
+
+<br><br>
+
+<a
+href="https://wa.me/2349049388119"
+target="_blank"
+style="color:#b08a32;font-weight:800;">
+Contact Twinkle Gadgets
+</a>
+
 </div>
 `;
 
-} finally {
-
-isLoadingProducts = false;
-
 }
 
 }
 
 
-/* SEARCH */
+/* ================= SEARCH ================= */
 
-const searchInput =
-document.getElementById(
-"productSearch"
-);
-
-searchInput.addEventListener(
+document
+.getElementById("productSearch")
+.addEventListener(
 "input",
-function() {
+event => {
 
 searchTerm =
-this.value
+event.target.value
 .toLowerCase()
 .trim();
 
@@ -2827,118 +2131,64 @@ renderProducts();
 );
 
 
-/* =====================================================
-   PRODUCT DETAILS
-   ===================================================== */
+/* ================= DETAILS ================= */
 
+function openDetails(product){
 
-/* OPEN DETAILS */
+const images =
+getImages(product);
 
-function openProductDetails(product) {
-
-if (!product) return;
-
-
-/* PRODUCT IMAGES */
-
-const imageUrls =
-getProductImages(product);
-
-
-/*
-Store the images globally
-for the swipe controls.
-*/
-
-currentDetailImages =
-imageUrls;
-
-currentDetailImageIndex =
-0;
-
-
-const image =
+const main =
 document.getElementById(
 "detailsImage"
 );
 
+main.src =
+images[0] || "";
 
-image.src =
-imageUrls[0] || "";
-
-image.alt =
+main.alt =
 product.name || "Product";
 
 
-/* THUMBNAILS */
+const thumbs =
+document.getElementById("thumbs");
 
-const thumbnails =
-document.getElementById(
-"detailsThumbnails"
-);
+thumbs.innerHTML = "";
 
-thumbnails.innerHTML = "";
-
-
-imageUrls.forEach(
-(url,index) => {
+images.forEach((url,index) => {
 
 const button =
 document.createElement("button");
 
-button.type =
-"button";
-
 button.className =
-"details-thumbnail" +
-(
-index === 0
-? " active"
-: ""
-);
-
+"thumb" +
+(index === 0 ? " active" : "");
 
 button.innerHTML = `
 <img
 src="${escapeHtml(url)}"
-alt="${escapeHtml(
-product.name || "Product"
-)}">
+alt="">
 `;
 
-
-button.addEventListener(
-"click",
-function(event) {
+button.onclick = event => {
 
 event.stopPropagation();
 
-showDetailImage(index);
+main.src = url;
 
-}
+document
+.querySelectorAll(".thumb")
+.forEach(x =>
+x.classList.remove("active")
 );
 
+button.classList.add("active");
 
-thumbnails.appendChild(
-button
-);
+};
+
+thumbs.appendChild(button);
 
 });
-
-
-thumbnails.style.display =
-imageUrls.length > 1
-? "flex"
-: "none";
-
-
-/* DETAILS */
-
-document.getElementById(
-"detailsName"
-).textContent =
-product.name ||
-"Product";
 
 
 document.getElementById(
@@ -2949,12 +2199,18 @@ product.category ||
 
 
 document.getElementById(
+"detailsName"
+).textContent =
+product.name ||
+"Product";
+
+
+document.getElementById(
 "detailsPrice"
 ).textContent =
 "₦" +
-Number(
-product.price || 0
-).toLocaleString("en-NG");
+Number(product.price || 0)
+.toLocaleString("en-NG");
 
 
 document.getElementById(
@@ -2978,88 +2234,28 @@ product.condition ||
 "Not specified";
 
 
-/* DESCRIPTION */
-
-const descriptionBox =
-document.getElementById(
-"detailsDescriptionBox"
-);
-
-const description =
 document.getElementById(
 "detailsDescription"
-);
-
-
-if (
-product.description &&
-String(product.description).trim()
-) {
-
-description.textContent =
-product.description;
-
-descriptionBox.style.display =
-"block";
-
-} else {
-
-description.textContent =
+).textContent =
+product.description ||
 "";
 
-descriptionBox.style.display =
-"none";
-
-}
-
-
-/* STATUS */
-
-const status =
-document.getElementById(
-"detailsStatus"
-);
-
-
-if (product.available === true) {
-
-status.textContent =
-"🟢 Available";
-
-status.className =
-"details-status status-available";
-
-} else {
-
-status.textContent =
-"🔴 Sold";
-
-status.className =
-"details-status status-sold";
-
-}
-
-
-/* WHATSAPP */
 
 document.getElementById(
 "detailsWhatsapp"
 ).href =
-getWhatsappUrl(product);
+whatsapp(product);
 
-
-/* SHOW DETAILS */
 
 document.body.classList.add(
 "details-open"
 );
 
 document.getElementById(
-"productDetails"
+"details"
 ).classList.add(
 "active"
 );
-
 
 window.scrollTo({
 top:0,
@@ -3069,237 +2265,19 @@ behavior:"instant"
 }
 
 
-/* =====================================================
-   CHANGE DETAIL IMAGE
-   ===================================================== */
+/* ================= CLOSE ================= */
 
-function showDetailImage(index) {
-
-if (!currentDetailImages.length) {
-return;
-}
-
-
-/* LOOP FROM LAST TO FIRST */
-
-if (index < 0) {
-
-index =
-currentDetailImages.length - 1;
-
-}
-
-
-/* LOOP FROM FIRST TO LAST */
-
-if (
-index >=
-currentDetailImages.length
-) {
-
-index = 0;
-
-}
-
-
-currentDetailImageIndex =
-index;
-
-
-const image =
-document.getElementById(
-"detailsImage"
-);
-
-
-image.src =
-currentDetailImages[index];
-
-
-/* UPDATE ACTIVE THUMBNAIL */
-
-const thumbnails =
-document.querySelectorAll(
-".details-thumbnail"
-);
-
-
-thumbnails.forEach(
-(thumb,i) => {
-
-thumb.classList.toggle(
-"active",
-i === index
-);
-
-});
-
-
-/*
-Automatically scroll the
-selected thumbnail into view.
-*/
-
-if (thumbnails[index]) {
-
-thumbnails[index].scrollIntoView({
-behavior:"smooth",
-block:"nearest",
-inline:"center"
-});
-
-}
-
-}
-
-
-/* =====================================================
-   MOBILE SWIPE
-   ===================================================== */
-
-let detailTouchStartX = 0;
-
-let detailTouchStartY = 0;
-
-let detailTouchEndX = 0;
-
-let detailTouchEndY = 0;
-
-
-const detailImageArea =
-document.querySelector(
-".details-image"
-);
-
-
-/* TOUCH START */
-
-detailImageArea.addEventListener(
-"touchstart",
-function(event) {
-
-if (
-!currentDetailImages.length
-) {
-
-return;
-
-}
-
-
-detailTouchStartX =
-event.changedTouches[0].screenX;
-
-detailTouchStartY =
-event.changedTouches[0].screenY;
-
-},
-{
-passive:true
-}
-);
-
-
-/* TOUCH END */
-
-detailImageArea.addEventListener(
-"touchend",
-function(event) {
-
-if (
-!currentDetailImages.length
-) {
-
-return;
-
-}
-
-
-detailTouchEndX =
-event.changedTouches[0].screenX;
-
-detailTouchEndY =
-event.changedTouches[0].screenY;
-
-
-const deltaX =
-detailTouchEndX -
-detailTouchStartX;
-
-const deltaY =
-detailTouchEndY -
-detailTouchStartY;
-
-
-/*
-Ignore tiny movements.
-
-Also ignore vertical swipes,
-so normal page scrolling still
-works properly.
-*/
-
-if (
-Math.abs(deltaX) < 45 ||
-Math.abs(deltaX) < Math.abs(deltaY)
-) {
-
-return;
-
-}
-
-
-/* SWIPE LEFT = NEXT PHOTO */
-
-if (deltaX < 0) {
-
-showDetailImage(
-currentDetailImageIndex + 1
-);
-
-}
-
-
-/* SWIPE RIGHT = PREVIOUS PHOTO */
-
-else {
-
-showDetailImage(
-currentDetailImageIndex - 1
-);
-
-}
-
-},
-{
-passive:true
-}
-);
-
-
-/* =====================================================
-   CLOSE DETAILS
-   ===================================================== */
-
-function closeProductDetails() {
+function closeDetails(){
 
 document.body.classList.remove(
 "details-open"
 );
 
 document.getElementById(
-"productDetails"
+"details"
 ).classList.remove(
 "active"
 );
-
-
-/* Reset slider state */
-
-currentDetailImages = [];
-
-currentDetailImageIndex = 0;
-
 
 window.scrollTo({
 top:0,
@@ -3309,45 +2287,9 @@ behavior:"instant"
 }
 
 
-/* INITIAL LOAD */
+/* ================= START ================= */
 
 loadProducts();
-
-
-/*
-Refresh when user returns
-to the browser tab.
-*/
-
-document.addEventListener(
-"visibilitychange",
-() => {
-
-if (
-!document.hidden &&
-!document.body.classList.contains(
-"details-open"
-)
-) {
-
-loadProducts();
-
-}
-
-});
-
-
-/*
-Back button support.
-*/
-
-window.addEventListener(
-"popstate",
-() => {
-
-closeProductDetails();
-
-});
 
 </script>
 
