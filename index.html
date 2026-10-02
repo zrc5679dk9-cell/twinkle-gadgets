@@ -725,6 +725,102 @@ nav a:hover{
 }
 
 
+/* ================= SWAP & UPGRADE AD ================= */
+
+.swap-ad{
+  position:relative;
+  overflow:hidden;
+  min-height:560px;
+  margin:0 auto 80px;
+  max-width:1280px;
+  border-radius:45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:80px 24px;
+  color:#fff;
+  background:#080808;
+}
+
+.swap-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+  transform:scale(1.02);
+  transition:transform 8s ease;
+}
+
+.swap-ad:hover .swap-bg{
+  transform:scale(1.06);
+}
+
+.swap-overlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.12),
+      rgba(0,0,0,.76)
+    );
+}
+
+.swap-content{
+  position:relative;
+  z-index:2;
+  max-width:720px;
+  color:#fff;
+}
+
+.swap-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 14px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);
+  border-radius:30px;
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+
+.swap-content h2{
+  font-size:clamp(40px,6vw,72px);
+  line-height:.95;
+  letter-spacing:-4px;
+  max-width:700px;
+  margin:0 auto;
+}
+
+.swap-content h2 span{
+  color:var(--gold2);
+}
+
+.swap-description{
+  max-width:570px;
+  margin:25px auto 0;
+  color:rgba(255,255,255,.84);
+  font-size:16px;
+  line-height:1.7;
+}
+
+.swap-button{
+  margin-top:26px;
+  background:#fff;
+  color:#111;
+}
+
+
 /* ================= EASY BUY AD ================= */
 
 .easybuy-ad{
@@ -1330,6 +1426,22 @@ body.details-open .normal-site{
     font-size:14px;
   }
 
+  .swap-ad{
+    min-height:500px;
+    margin:0 10px 40px;
+    border-radius:30px;
+    padding:60px 20px;
+  }
+
+  .swap-content h2{
+    font-size:45px;
+    letter-spacing:-3px;
+  }
+
+  .swap-description{
+    font-size:14px;
+  }
+
   .easybuy-ad{
     min-height:500px;
     margin:0 10px 60px;
@@ -1774,6 +1886,63 @@ class="btn airpods-button"
 href="#collection">
 
 Shop now
+
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================= SWAP & UPGRADE AD ================= -->
+
+<section class="swap-ad">
+
+
+<img
+src="https://tpasjsjofhxpslomciqd.supabase.co/storage/v1/object/public/homepage-images/Untitled%20folder/IMG_1451.jpeg"
+alt="Swap your old iPhone for a newer device"
+class="swap-bg"
+>
+
+
+<div class="swap-overlay">
+</div>
+
+
+<div class="swap-content">
+
+
+<div class="swap-label">
+Swap & Upgrade
+</div>
+
+
+<h2>
+
+Save up to
+<span>30%</span> when you swap your old device to newer ones.
+
+</h2>
+
+
+<p class="swap-description">
+
+Trade in your old iPhone and upgrade to a newer device
+with Twinkle Gadgets.
+
+</p>
+
+
+<a
+class="btn swap-button"
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'm%20interested%20in%20swapping%20my%20old%20iPhone%20for%20a%20newer%20one."
+target="_blank">
+
+Learn more
 
 </a>
 
