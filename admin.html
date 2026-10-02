@@ -1331,26 +1331,56 @@ async function loadProducts() {
 
 async function toggleAvailability(id, currentlyAvailable) {
 
-  const {
-    data: { user },
-    error
-  } = await supabaseClient.auth.getUser();
+  const newStatus = !currentlyAvailable;
 
-  if (error) {
-    alert("AUTH ERROR:\n\n" + error.message);
-    return;
-  }
+  const actionText = newStatus
+    ? "mark this product as AVAILABLE"
+    : "mark this product as SOLD";
 
-  if (!user) {
-    alert("SUPABASE DOES NOT SEE YOU AS LOGGED IN");
-    return;
-  }
-
-  alert(
-    "SUPABASE AUTHENTICATED YOU\n\n" +
-    "Email: " + user.email + "\n\n" +
-    "User ID: " + user.id
+  const confirmed = confirm(
+    `Are you sure you want to ${actionText}?`
   );
+
+  if (!confirmed) return;
+
+  try {
+
+    const { data, error } =
+      await supabaseClient.rpc(
+        "set_product_availability",
+        {
+          product_id: id,
+          new_status: newStatus
+        }
+      );
+
+    if (error) {
+
+      console.error("Availability error:", error);
+
+      alert(error.message);
+
+      return;
+
+    }
+
+    if (!data) {
+
+      alert("The product could not be updated.");
+
+      return;
+
+    }
+
+    await loadProducts();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(error.message);
+
+  }
 
 }
 /* EDIT PRODUCT */
