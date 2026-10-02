@@ -48,9 +48,7 @@ a {
   text-decoration:none;
 }
 
-button,
-input,
-select {
+button {
   font-family:inherit;
 }
 
@@ -298,55 +296,45 @@ nav a:hover {
   font-size:14px;
 }
 
-/* =========================
-   SEARCH + FILTERS
-========================= */
+/* COLLECTION CONTROLS */
 
-.collection-tools {
-  margin-bottom:28px;
+.collection-controls {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
 }
 
 .search-box {
+  flex:1;
+  min-width:220px;
   position:relative;
-  margin-bottom:14px;
 }
 
 .search-box input {
   width:100%;
-  height:54px;
-  border-radius:18px;
+  padding:14px 18px;
+  border-radius:30px;
   border:1px solid rgba(0,0,0,.10);
-  background:rgba(255,255,255,.72);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  padding:0 20px 0 48px;
+  background:rgba(255,255,255,.68);
   outline:none;
-  font-size:14px;
+  font-size:13px;
   color:#111;
-  box-shadow:0 8px 30px rgba(0,0,0,.035);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
 }
 
 .search-box input:focus {
   border-color:rgba(176,138,50,.65);
-  box-shadow:0 8px 30px rgba(176,138,50,.08);
-}
-
-.search-icon {
-  position:absolute;
-  left:18px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:18px;
-  color:#777;
-  pointer-events:none;
+  box-shadow:0 0 0 3px rgba(176,138,50,.08);
 }
 
 .category-filters {
   display:flex;
   gap:8px;
   overflow-x:auto;
-  padding:2px 1px 8px;
   scrollbar-width:none;
+  padding-bottom:3px;
 }
 
 .category-filters::-webkit-scrollbar {
@@ -354,51 +342,23 @@ nav a:hover {
 }
 
 .filter-button {
-  flex:0 0 auto;
+  white-space:nowrap;
+  padding:11px 15px;
+  border-radius:30px;
   border:1px solid rgba(0,0,0,.10);
   background:rgba(255,255,255,.55);
-  color:#555;
-  padding:9px 15px;
-  border-radius:30px;
+  color:#666;
   font-size:11px;
   font-weight:800;
   cursor:pointer;
-  transition:.25s;
+  transition:.2s;
 }
 
-.filter-button:hover {
-  border-color:var(--accent);
-  color:var(--accent);
-}
-
+.filter-button:hover,
 .filter-button.active {
   background:#0b0b0b;
-  border-color:#0b0b0b;
   color:white;
-}
-
-/* FEATURED */
-
-.featured-section {
-  margin-bottom:55px;
-}
-
-.featured-header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  margin-bottom:20px;
-}
-
-.featured-title {
-  font-size:24px;
-  letter-spacing:-1px;
-}
-
-.featured-subtitle {
-  color:#888;
-  font-size:12px;
+  border-color:#0b0b0b;
 }
 
 /* PRODUCTS */
@@ -507,21 +467,6 @@ nav a:hover {
   letter-spacing:3px;
 }
 
-.product-badge {
-  position:absolute;
-  top:12px;
-  left:12px;
-  z-index:4;
-  background:#0b0b0b;
-  color:white;
-  padding:7px 10px;
-  border-radius:20px;
-  font-size:8px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
 .product-info {
   padding:20px;
 }
@@ -563,6 +508,12 @@ nav a:hover {
   font-weight:800;
 }
 
+.product-actions {
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+
 .product-button {
   background:#0b0b0b;
   color:white;
@@ -579,16 +530,38 @@ nav a:hover {
   color:var(--gold-light);
 }
 
-.product-whatsapp {
-  background:#188c4a;
-  color:white;
-  padding:9px 11px;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:800;
-  white-space:nowrap;
-  border:none;
+.whatsapp-product-button {
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  border:1px solid rgba(0,0,0,.10);
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:15px;
   cursor:pointer;
+  transition:.2s;
+}
+
+.whatsapp-product-button:hover {
+  transform:scale(1.08);
+  border-color:#25d366;
+}
+
+.featured-badge {
+  position:absolute;
+  left:12px;
+  top:12px;
+  z-index:5;
+  background:#0b0b0b;
+  color:var(--gold-light);
+  padding:6px 10px;
+  border-radius:15px;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
 }
 
 .empty-products {
@@ -596,20 +569,6 @@ nav a:hover {
   text-align:center;
   padding:60px 20px;
   color:#777;
-}
-
-.no-results {
-  grid-column:1/-1;
-  text-align:center;
-  padding:60px 20px;
-  color:#777;
-}
-
-.no-results strong {
-  display:block;
-  color:#111;
-  font-size:18px;
-  margin-bottom:7px;
 }
 
 /* PRODUCT DETAILS */
@@ -835,6 +794,11 @@ nav a:hover {
   min-width:180px;
 }
 
+.details-sold {
+  opacity:.5;
+  pointer-events:none;
+}
+
 /* STATEMENT */
 
 .statement {
@@ -969,46 +933,41 @@ nav a:hover {
 
 .customer-trust {
   background:#fff;
-  border-top:1px solid rgba(0,0,0,.07);
-  border-bottom:1px solid rgba(0,0,0,.07);
+  border-top:1px solid rgba(0,0,0,.08);
+  border-bottom:1px solid rgba(0,0,0,.08);
 }
 
-.trust-proof-grid {
+.customer-trust-inner {
+  max-width:1200px;
+  margin:auto;
+}
+
+.trust-points {
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:16px;
+  gap:15px;
 }
 
-.trust-proof {
-  padding:30px;
-  border:1px solid rgba(0,0,0,.08);
+.trust-point {
+  padding:28px;
   border-radius:22px;
-  background:rgba(247,246,242,.7);
+  background:rgba(247,246,242,.8);
+  border:1px solid rgba(0,0,0,.07);
 }
 
-.stars {
-  color:var(--gold-light);
-  letter-spacing:2px;
-  font-size:15px;
-  margin-bottom:17px;
+.trust-icon {
+  font-size:24px;
+  margin-bottom:18px;
 }
 
-.trust-proof h3 {
-  font-size:17px;
+.trust-point h3 {
+  font-size:18px;
   margin-bottom:7px;
 }
 
-.trust-proof p {
+.trust-point p {
   color:#777;
   font-size:13px;
-  line-height:1.7;
-}
-
-.trust-proof-name {
-  margin-top:18px;
-  color:#111;
-  font-size:11px;
-  font-weight:800;
 }
 
 /* LOCATION */
@@ -1192,10 +1151,6 @@ footer {
     min-height:450px;
   }
 
-  .trust-proof-grid {
-    grid-template-columns:1fr;
-  }
-
 }
 
 @media(max-width:600px) {
@@ -1232,6 +1187,15 @@ footer {
 
   .section-description {
     margin-top:15px;
+  }
+
+  .collection-controls {
+    display:block;
+  }
+
+  .search-box {
+    min-width:0;
+    margin-bottom:10px;
   }
 
   .products {
@@ -1277,14 +1241,21 @@ footer {
     margin-bottom:10px;
   }
 
-  .product-button,
-  .product-whatsapp {
+  .product-actions {
+    width:100%;
+  }
+
+  .product-button {
+    flex:1;
     display:block;
     text-align:center;
-    width:100%;
     padding:9px 5px;
     font-size:9px;
-    margin-top:5px;
+  }
+
+  .whatsapp-product-button {
+    width:34px;
+    min-width:34px;
   }
 
   .services {
@@ -1292,6 +1263,10 @@ footer {
   }
 
   .trust-grid {
+    grid-template-columns:1fr;
+  }
+
+  .trust-points {
     grid-template-columns:1fr;
   }
 
@@ -1358,15 +1333,9 @@ footer {
     min-width:62px;
   }
 
-  .featured-header {
-    display:block;
-  }
-
-  .featured-subtitle {
-    margin-top:5px;
-  }
-
 }
+
+/* HIDE NORMAL SITE WHEN DETAILS IS OPEN */
 
 body.details-open .normal-site {
   display:none;
@@ -1455,7 +1424,9 @@ Buy, sell or swap with a business built on 10 years of experience.
 
 <div class="hero-actions">
 
-<a class="button button-light" href="#phones">
+<a
+class="button button-light"
+href="#phones">
 Explore Collection
 </a>
 
@@ -1490,30 +1461,29 @@ Current picks.
 </div>
 
 <p class="section-description">
-Browse our latest available devices. Search by name,
-filter by category or open any product for full details.
+Browse our latest available devices. Search by model
+or filter the collection by category.
 </p>
 
 </div>
 
 
-<!-- SEARCH -->
+<!-- SEARCH + FILTERS -->
 
-<div class="collection-tools">
+<div class="collection-controls">
 
 <div class="search-box">
-
-<span class="search-icon">
-⌕
-</span>
 
 <input
 id="productSearch"
 type="search"
-placeholder="Search phones, gadgets, models..."
+placeholder="Search phones, gadgets..."
 autocomplete="off">
 
 </div>
+
+</div>
+
 
 <div
 class="category-filters"
@@ -1521,52 +1491,12 @@ id="categoryFilters">
 
 <button
 class="filter-button active"
-data-category="all"
-type="button">
+data-category="all">
 All
 </button>
 
 </div>
 
-</div>
-
-
-<!-- FEATURED / NEWEST -->
-
-<div
-class="featured-section"
-id="featuredSection"
-style="display:none;">
-
-<div class="featured-header">
-
-<div>
-
-<div class="section-label">
-Featured
-</div>
-
-<h3 class="featured-title">
-Newest arrivals.
-</h3>
-
-</div>
-
-<div class="featured-subtitle">
-Fresh stock from Twinkle Gadgets
-</div>
-
-</div>
-
-<div
-class="products"
-id="featuredProducts">
-</div>
-
-</div>
-
-
-<!-- ALL PRODUCTS -->
 
 <div
 class="products"
@@ -1626,47 +1556,90 @@ we've got your device covered.
 <div class="services">
 
 <div class="service">
-<div class="service-number">01</div>
+
+<div class="service-number">
+01
+</div>
+
 <div>
-<h3>Smartphones</h3>
+
+<h3>
+Smartphones
+</h3>
+
 <p>
 Quality smartphones selected for everyday use,
 work, lifestyle and everything in between.
 </p>
-</div>
+
 </div>
 
+</div>
+
+
 <div class="service">
-<div class="service-number">02</div>
+
+<div class="service-number">
+02
+</div>
+
 <div>
-<h3>Buy • Sell • Swap</h3>
+
+<h3>
+Buy • Sell • Swap
+</h3>
+
 <p>
 Looking to upgrade? Trade in, sell or swap
 your current device.
 </p>
-</div>
+
 </div>
 
+</div>
+
+
 <div class="service">
-<div class="service-number">03</div>
+
+<div class="service-number">
+03
+</div>
+
 <div>
-<h3>Repairs</h3>
+
+<h3>
+Repairs
+</h3>
+
 <p>
 Professional phone and gadget repair services
 from an experienced technician.
 </p>
-</div>
+
 </div>
 
+</div>
+
+
 <div class="service">
-<div class="service-number">04</div>
+
+<div class="service-number">
+04
+</div>
+
 <div>
-<h3>Gadgets</h3>
+
+<h3>
+Gadgets
+</h3>
+
 <p>
 Useful accessories and gadgets to complete
 your setup.
 </p>
+
 </div>
+
 </div>
 
 </div>
@@ -1765,96 +1738,82 @@ We arrange delivery to customers across Nigeria.
 
 <section class="customer-trust">
 
-<div class="section">
+<div class="customer-trust-inner section">
 
 <div class="section-header">
 
 <div>
 
 <div class="section-label">
-Customer Trust
+Shop With Confidence
 </div>
 
 <h2 class="section-title">
-Why customers come back.
+Why customers choose us.
 </h2>
 
 </div>
 
 <p class="section-description">
-A simple look at what matters when you're
-buying your next device.
+Straightforward service, real communication
+and devices you can confidently enquire about.
 </p>
 
 </div>
 
 
-<div class="trust-proof-grid">
+<div class="trust-points">
 
-<div class="trust-proof">
+<div class="trust-point">
 
-<div class="stars">
-★★★★★
+<div class="trust-icon">
+✓
 </div>
 
 <h3>
-Experience you can rely on.
+Clear Product Details
 </h3>
 
 <p>
-With years of hands-on experience with phones
-and gadgets, we understand what to look for
-before a device reaches a customer.
+See the price, storage, battery health,
+condition and description before enquiring.
 </p>
 
-<div class="trust-proof-name">
-10+ YEARS EXPERIENCE
-</div>
-
 </div>
 
 
-<div class="trust-proof">
+<div class="trust-point">
 
-<div class="stars">
-★★★★★
+<div class="trust-icon">
+💬
 </div>
 
 <h3>
-Clear product information.
+Direct WhatsApp Support
 </h3>
 
 <p>
-Every listed device can show its condition,
-storage, battery information, price and photos
-before you make an enquiry.
+Ask about any device directly and get
+help choosing what fits your needs.
 </p>
 
-<div class="trust-proof-name">
-TRANSPARENT STOCK
-</div>
-
 </div>
 
 
-<div class="trust-proof">
+<div class="trust-point">
 
-<div class="stars">
-★★★★★
+<div class="trust-icon">
+🇳🇬
 </div>
 
 <h3>
-We're easy to reach.
+Nigeria-Wide Delivery
 </h3>
 
 <p>
-Have a question about a phone, swap, repair
-or delivery? Reach us directly through WhatsApp.
+Customers outside Lagos can arrange
+delivery across Nigeria.
 </p>
-
-<div class="trust-proof-name">
-DIRECT WHATSAPP SUPPORT
-</div>
 
 </div>
 
@@ -1994,9 +1953,17 @@ TWINKLE GADGET<span>.</span>
 
 <div class="footer-links">
 
-<a href="#phones">Collection</a>
-<a href="#services">Services</a>
-<a href="#location">Location</a>
+<a href="#phones">
+Collection
+</a>
+
+<a href="#services">
+Services
+</a>
+
+<a href="#location">
+Location
+</a>
 
 <a
 href="https://instagram.com/twinkle_gadget"
@@ -2023,7 +1990,7 @@ WhatsApp
 </div>
 
 
-<!-- PRODUCT DETAILS -->
+<!-- PRODUCT DETAILS VIEW -->
 
 <section
 class="product-details"
@@ -2039,7 +2006,6 @@ onclick="closeProductDetails()">
 
 
 <div class="details-card">
-
 
 <div class="details-gallery">
 
@@ -2180,9 +2146,7 @@ Back to Collection
 
 <script>
 
-/* =========================
-   SUPABASE
-========================= */
+/* SUPABASE */
 
 const SUPABASE_URL =
 "https://tpasjsjofhxpslomciqd.supabase.co";
@@ -2197,20 +2161,18 @@ SUPABASE_KEY
 );
 
 
-/* =========================
-   GLOBAL DATA
-========================= */
+/* STATE */
 
 let productsData = [];
 
-let currentCategory = "all";
+let selectedCategory = "all";
 
-let currentSearch = "";
+let searchTerm = "";
+
+let isLoadingProducts = false;
 
 
-/* =========================
-   SAFE TEXT
-========================= */
+/* SAFE TEXT */
 
 function escapeHtml(value) {
 
@@ -2225,9 +2187,28 @@ return div.innerHTML;
 }
 
 
-/* =========================
-   PRODUCT IMAGES
-========================= */
+/* PRODUCT ID */
+
+function getProductId(product) {
+
+if (product.id !== undefined && product.id !== null) {
+return String(product.id);
+}
+
+if (product.uuid !== undefined && product.uuid !== null) {
+return String(product.uuid);
+}
+
+return [
+product.name || "",
+product.price || "",
+product.created_at || ""
+].join("|");
+
+}
+
+
+/* IMAGES */
 
 function getProductImages(product) {
 
@@ -2258,18 +2239,16 @@ return [];
 }
 
 
-/* =========================
-   WHATSAPP LINK
-========================= */
+/* WHATSAPP URL */
 
-function getWhatsAppLink(product) {
+function getWhatsappUrl(product) {
 
 const price =
 Number(product.price || 0)
 .toLocaleString("en-NG");
 
 const message =
-`Hello Twinkle Gadgets, I'm interested in the ${product.name || "device"}${product.storage ? " " + product.storage : ""} listed for ₦${price}. Is it still available?`;
+`Hello Twinkle Gadgets, I'm interested in the ${product.name || "device"}${product.storage ? " " + product.storage : ""} listed for ₦${price}.`;
 
 return (
 "https://wa.me/2349049388119?text=" +
@@ -2279,24 +2258,237 @@ encodeURIComponent(message)
 }
 
 
-/* =========================
-   CATEGORY
-========================= */
+/* BUILD CATEGORY FILTERS */
 
-function getCategory(product) {
+function buildCategoryFilters() {
 
-return String(
-product.category || "Other"
-).trim();
+const container =
+document.getElementById("categoryFilters");
+
+const categories = [];
+
+productsData.forEach(product => {
+
+const category =
+String(product.category || "")
+.trim();
+
+if (
+category &&
+!categories.some(
+item =>
+item.toLowerCase() === category.toLowerCase()
+)
+) {
+
+categories.push(category);
+
+}
+
+});
+
+
+container.innerHTML = "";
+
+
+/* ALL */
+
+const allButton =
+document.createElement("button");
+
+allButton.className =
+"filter-button" +
+(selectedCategory === "all"
+? " active"
+: "");
+
+allButton.dataset.category =
+"all";
+
+allButton.textContent =
+"All";
+
+allButton.addEventListener(
+"click",
+() => {
+
+selectedCategory =
+"all";
+
+updateFilters();
+
+renderProducts();
+
+}
+);
+
+container.appendChild(allButton);
+
+
+/* CATEGORIES */
+
+categories
+.sort()
+.forEach(category => {
+
+const button =
+document.createElement("button");
+
+button.className =
+"filter-button" +
+(
+selectedCategory.toLowerCase() ===
+category.toLowerCase()
+? " active"
+: ""
+);
+
+button.dataset.category =
+category;
+
+button.textContent =
+category;
+
+button.addEventListener(
+"click",
+() => {
+
+selectedCategory =
+category;
+
+updateFilters();
+
+renderProducts();
+
+}
+);
+
+container.appendChild(button);
+
+});
 
 }
 
 
-/* =========================
-   CREATE PRODUCT CARD
-========================= */
+/* UPDATE ACTIVE FILTER */
 
-function createProductCard(product,index) {
+function updateFilters() {
+
+document
+.querySelectorAll(".filter-button")
+.forEach(button => {
+
+const category =
+button.dataset.category;
+
+button.classList.toggle(
+"active",
+category === selectedCategory
+);
+
+});
+
+}
+
+
+/* FILTER PRODUCTS */
+
+function getFilteredProducts() {
+
+return productsData.filter(product => {
+
+const category =
+String(product.category || "")
+.toLowerCase()
+.trim();
+
+const name =
+String(product.name || "")
+.toLowerCase();
+
+const storage =
+String(product.storage || "")
+.toLowerCase();
+
+const condition =
+String(product.condition || "")
+.toLowerCase();
+
+const matchesCategory =
+selectedCategory === "all" ||
+category ===
+selectedCategory.toLowerCase();
+
+
+const matchesSearch =
+!searchTerm ||
+name.includes(searchTerm) ||
+storage.includes(searchTerm) ||
+condition.includes(searchTerm) ||
+category.includes(searchTerm);
+
+
+return (
+matchesCategory &&
+matchesSearch
+);
+
+});
+
+}
+
+
+/* RENDER PRODUCTS */
+
+function renderProducts() {
+
+const container =
+document.getElementById("products");
+
+
+/*
+IMPORTANT:
+Always completely clear the
+existing product cards before
+rendering again.
+*/
+
+container.innerHTML = "";
+
+
+const products =
+getFilteredProducts();
+
+
+if (!products.length) {
+
+container.innerHTML = `
+<div class="empty-products">
+No devices match your search.
+<br><br>
+
+<a
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
+target="_blank"
+style="color:#b08a32;font-weight:800;">
+Ask us for available stock
+</a>
+
+</div>
+`;
+
+return;
+
+}
+
+
+/*
+The first three newest products
+receive a Featured badge.
+*/
+
+products.forEach(
+(product,index) => {
 
 const card =
 document.createElement("article");
@@ -2308,6 +2500,7 @@ card.className =
 const imageUrls =
 getProductImages(product);
 
+
 const mainImage =
 imageUrls.length
 ? imageUrls[0]
@@ -2316,27 +2509,39 @@ imageUrls.length
 
 const image =
 mainImage
-
-? `
-<img
+? `<img
 src="${escapeHtml(mainImage)}"
-alt="${escapeHtml(product.name || "Product")}"
-loading="lazy"
-onerror="this.style.display='none'">
-`
-
-: "";
+alt="${escapeHtml(product.name)}"
+loading="lazy">`
+: `
+<div
+style="
+color:#999;
+font-size:11px;
+text-align:center;
+padding:20px;">
+Image unavailable
+</div>
+`;
 
 
 const photoCount =
 imageUrls.length > 1
-
 ? `
 <div class="product-photo-count">
 📸 ${imageUrls.length} photos
 </div>
 `
+: "";
 
+
+const featuredBadge =
+index < 3 && selectedCategory === "all"
+? `
+<div class="featured-badge">
+★ Featured
+</div>
+`
 : "";
 
 
@@ -2348,61 +2553,40 @@ Number(product.price || 0)
 const battery =
 product.battery
 ? escapeHtml(product.battery)
-: "Battery not specified";
-
-
-/*
-Newest products get a badge.
-*/
-
-const createdTime =
-product.created_at
-? new Date(product.created_at).getTime()
-: 0;
-
-const isNewest =
-index < 3 && createdTime > 0;
-
-
-const badge =
-isNewest
-
-? `
-<div class="product-badge">
-NEW
-</div>
-`
-
-: "";
+: "Not specified";
 
 
 card.innerHTML = `
 
 <div class="product-image">
 
-${image}
+${featuredBadge}
 
-${badge}
+${image}
 
 ${photoCount}
 
 </div>
 
-
 <div class="product-info">
 
 <div class="product-tag">
-${escapeHtml(getCategory(product))}
+${escapeHtml(product.category || "Available")}
 </div>
 
 <h3>
-${escapeHtml(product.name || "Unnamed Product")}
+${escapeHtml(product.name || "Unnamed device")}
 </h3>
 
 <div class="product-condition">
-${escapeHtml(product.condition || "Condition not specified")}
+${escapeHtml(
+product.condition ||
+"Condition not specified"
+)}
+
 ${product.storage
-? " • " + escapeHtml(product.storage)
+? " • " +
+escapeHtml(product.storage)
 : ""}
 </div>
 
@@ -2416,520 +2600,138 @@ ${battery}
 ₦${price}
 </div>
 
-</div>
-
-
-<div
-style="
-display:flex;
-gap:6px;
-margin-top:8px;
-">
+<div class="product-actions">
 
 <button
 class="product-button"
-type="button"
-style="flex:1;">
+type="button">
 View Details
 </button>
 
-
-<button
-class="product-whatsapp"
-type="button"
-style="flex:1;">
-WhatsApp
-</button>
-
-</div>
-
-</div>
-`;
-
-
-/*
-View details.
-*/
-
-card
-.querySelector(".product-button")
-.addEventListener(
-"click",
-function(event) {
-
-event.stopPropagation();
-
-openProductDetails(product);
-
-}
-);
-
-
-/*
-WhatsApp directly from card.
-*/
-
-card
-.querySelector(".product-whatsapp")
-.addEventListener(
-"click",
-function(event) {
-
-event.stopPropagation();
-
-window.open(
-getWhatsAppLink(product),
-"_blank"
-);
-
-}
-);
-
-
-/*
-Click anywhere else on card.
-*/
-
-card.addEventListener(
-"click",
-function() {
-
-openProductDetails(product);
-
-}
-);
-
-
-return card;
-
-}
-
-
-/* =========================
-   DISPLAY PRODUCTS
-========================= */
-
-function displayProducts(list) {
-
-const container =
-document.getElementById("products");
-
-
-container.innerHTML = "";
-
-
-if (!list.length) {
-
-container.innerHTML = `
-
-<div class="no-results">
-
-<strong>
-No devices found
-</strong>
-
-Try another search or category.
-
-<br><br>
-
 <a
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
+class="whatsapp-product-button"
+href="${getWhatsappUrl(product)}"
 target="_blank"
-style="
-color:#b08a32;
-font-weight:800;
-">
-Ask us for current stock
+rel="noopener"
+title="Enquire on WhatsApp">
+💬
 </a>
 
 </div>
 
+</div>
+
+</div>
 `;
+
+
+/*
+Card opens details.
+*/
+
+card.addEventListener(
+"click",
+function(event) {
+
+/*
+Don't open product details
+when WhatsApp is clicked.
+*/
+
+if (
+event.target.closest(
+".whatsapp-product-button"
+)
+) {
 
 return;
 
 }
 
+openProductDetails(product);
 
-list.forEach(
-(product,index) => {
+});
 
-const card =
-createProductCard(product,index);
 
 container.appendChild(card);
 
 
+/* Animation */
+
+requestAnimationFrame(() => {
+
 setTimeout(
-() => {
-
-card.classList.add("show");
-
-},
+() => card.classList.add("show"),
 index * 70
 );
 
 });
 
-}
-
-
-/* =========================
-   FEATURED / NEWEST
-========================= */
-
-function displayFeatured() {
-
-const section =
-document.getElementById(
-"featuredSection"
-);
-
-const container =
-document.getElementById(
-"featuredProducts"
-);
-
-
-/*
-Sort by newest first.
-*/
-
-const newest =
-[...productsData]
-.sort(
-(a,b) => {
-
-const aTime =
-a.created_at
-? new Date(a.created_at).getTime()
-: 0;
-
-const bTime =
-b.created_at
-? new Date(b.created_at).getTime()
-: 0;
-
-return bTime - aTime;
-
-}
-)
-.slice(0,3);
-
-
-if (!newest.length) {
-
-section.style.display =
-"none";
-
-return;
-
-}
-
-
-section.style.display =
-"block";
-
-
-container.innerHTML =
-"";
-
-
-newest.forEach(
-(product,index) => {
-
-const card =
-createProductCard(
-product,
-index
-);
-
-container.appendChild(card);
-
-setTimeout(
-() => {
-card.classList.add("show");
-},
-index * 100
-);
-
 });
 
 }
 
 
-/* =========================
-   FILTER PRODUCTS
-========================= */
-
-function filterProducts() {
-
-const search =
-currentSearch
-.toLowerCase()
-.trim();
-
-
-const filtered =
-productsData.filter(
-product => {
-
-const category =
-getCategory(product)
-.toLowerCase();
-
-
-const name =
-String(
-product.name || ""
-)
-.toLowerCase();
-
-
-const storage =
-String(
-product.storage || ""
-)
-.toLowerCase();
-
-
-const condition =
-String(
-product.condition || ""
-)
-.toLowerCase();
-
-
-const matchesCategory =
-currentCategory === "all" ||
-category ===
-currentCategory.toLowerCase();
-
-
-const matchesSearch =
-!search ||
-name.includes(search) ||
-category.includes(search) ||
-storage.includes(search) ||
-condition.includes(search);
-
-
-return (
-matchesCategory &&
-matchesSearch
-);
-
-}
-);
-
-
-displayProducts(filtered);
-
-}
-
-
-/* =========================
-   CATEGORY BUTTONS
-========================= */
-
-function buildCategories() {
-
-const filterContainer =
-document.getElementById(
-"categoryFilters"
-);
-
-
-filterContainer.innerHTML = "";
-
-
-const allButton =
-document.createElement("button");
-
-allButton.className =
-"filter-button active";
-
-allButton.type =
-"button";
-
-allButton.dataset.category =
-"all";
-
-allButton.textContent =
-"All";
-
-
-filterContainer.appendChild(
-allButton
-);
-
-
-const categories =
-[...new Set(
-productsData
-.map(product =>
-getCategory(product)
-)
-)]
-.filter(
-category =>
-category &&
-category !== "Other"
-);
-
-
-categories
-.sort()
-.forEach(
-category => {
-
-const button =
-document.createElement("button");
-
-button.className =
-"filter-button";
-
-button.type =
-"button";
-
-button.dataset.category =
-category;
-
-button.textContent =
-category;
-
-
-filterContainer.appendChild(
-button
-);
-
-}
-);
-
-
-/*
-Category clicks.
-*/
-
-filterContainer
-.querySelectorAll(".filter-button")
-.forEach(
-button => {
-
-button.addEventListener(
-"click",
-function() {
-
-filterContainer
-.querySelectorAll(
-".filter-button"
-)
-.forEach(
-item =>
-item.classList.remove(
-"active"
-)
-);
-
-
-button.classList.add(
-"active"
-);
-
-
-currentCategory =
-button.dataset.category;
-
-
-filterProducts();
-
-}
-);
-
-}
-);
-
-
-/*
-If previous category
-doesn't exist anymore,
-reset it.
-*/
-
-currentCategory =
-"all";
-
-}
-
-
-/* =========================
-   LOAD PRODUCTS
-========================= */
+/* LOAD PRODUCTS */
 
 async function loadProducts() {
 
+/*
+Prevents two simultaneous
+Supabase requests from both
+creating/rendering cards.
+*/
+
+if (isLoadingProducts) {
+return;
+}
+
+isLoadingProducts = true;
+
+
 const container =
-document.getElementById(
-"products"
-);
-
-
-container.innerHTML = `
-
-<div class="empty-products">
-Loading available devices...
-</div>
-
-`;
+document.getElementById("products");
 
 
 try {
 
-const result =
+container.innerHTML = `
+<div class="empty-products">
+Loading available devices...
+</div>
+`;
+
+
+const { data, error } =
 await supabaseClient
 .from("products")
 .select("*")
-.order(
-"created_at",
-{
+.eq("available", true)
+.order("created_at", {
 ascending:false
-}
-);
-
-
-const data =
-result.data;
-
-const error =
-result.error;
+});
 
 
 if (error) {
 
 console.error(
-"SUPABASE PRODUCT ERROR:",
+"Supabase product error:",
 error
 );
 
-
 container.innerHTML = `
-
 <div class="empty-products">
-
 Unable to load products right now.
-
 <br><br>
 
-<span
-style="
-font-size:11px;
-color:#aaa;
-">
-Please refresh the page.
-</span>
+<a
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available phones."
+target="_blank"
+style="color:#b08a32;font-weight:800;">
+Contact us for current stock
+</a>
 
 </div>
-
 `;
 
 return;
@@ -2938,97 +2740,106 @@ return;
 
 
 /*
-Only publicly available
-products appear.
+DE-DUPLICATION FIX
+
+Supabase can return repeated
+rows if duplicate records exist.
+
+We keep only one card for each
+unique product ID.
 */
 
-productsData =
-(data || [])
-.filter(
-product =>
-product.available === true
-);
+const uniqueProducts = [];
+
+const seenIds = new Set();
 
 
-/*
-Build filters.
-*/
+(data || []).forEach(product => {
 
-buildCategories();
-
-
-/*
-Show newest products.
-*/
-
-displayFeatured();
+const id =
+getProductId(product);
 
 
-/*
-Show all products.
-*/
+if (seenIds.has(id)) {
 
-filterProducts();
-
+return;
 
 }
-catch(error) {
+
+
+seenIds.add(id);
+
+uniqueProducts.push(product);
+
+});
+
+
+productsData =
+uniqueProducts;
+
+
+/*
+Build filters only once after
+the fresh product list arrives.
+*/
+
+buildCategoryFilters();
+
+
+/*
+Render exactly one card per
+unique product.
+*/
+
+renderProducts();
+
+
+} catch(error) {
 
 console.error(
-"PRODUCT LOAD FAILED:",
+"Unexpected product loading error:",
 error
 );
 
-
 container.innerHTML = `
-
 <div class="empty-products">
-
-Unable to load products right now.
-
-<br><br>
-
-<a
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available phones."
-target="_blank"
-style="
-color:#b08a32;
-font-weight:800;
-">
-Contact us for current stock
-</a>
-
+Something went wrong while loading
+the collection.
 </div>
-
 `;
 
-}
+} finally {
+
+isLoadingProducts = false;
 
 }
 
+}
 
-/* =========================
-   SEARCH
-========================= */
 
-document
-.getElementById("productSearch")
-.addEventListener(
+/* SEARCH */
+
+const searchInput =
+document.getElementById(
+"productSearch"
+);
+
+searchInput.addEventListener(
 "input",
-function(event) {
+function() {
 
-currentSearch =
-event.target.value;
+searchTerm =
+this.value
+.toLowerCase()
+.trim();
 
-filterProducts();
+renderProducts();
 
 }
 );
 
 
-/* =========================
-   PRODUCT DETAILS
-========================= */
+/* OPEN DETAILS */
 
 function openProductDetails(product) {
 
@@ -3052,27 +2863,21 @@ image.alt =
 product.name || "Product";
 
 
-/*
-THUMBNAILS
-*/
+/* THUMBNAILS */
 
 const thumbnails =
 document.getElementById(
 "detailsThumbnails"
 );
 
-
-thumbnails.innerHTML =
-"";
+thumbnails.innerHTML = "";
 
 
 imageUrls.forEach(
 (url,index) => {
 
 const button =
-document.createElement(
-"button"
-);
+document.createElement("button");
 
 button.type =
 "button";
@@ -3085,12 +2890,11 @@ button.className =
 
 
 button.innerHTML = `
-
 <img
 src="${escapeHtml(url)}"
-alt="${escapeHtml(product.name || "Product")}"
->
-
+alt="${escapeHtml(
+product.name || "Product"
+)}">
 `;
 
 
@@ -3129,8 +2933,7 @@ thumbnails.appendChild(
 button
 );
 
-}
-);
+});
 
 
 thumbnails.style.display =
@@ -3139,19 +2942,14 @@ imageUrls.length > 1
 : "none";
 
 
-/*
-NAME
-*/
+/* DETAILS */
 
 document.getElementById(
 "detailsName"
 ).textContent =
-product.name || "Product";
+product.name ||
+"Product";
 
-
-/*
-CATEGORY
-*/
 
 document.getElementById(
 "detailsCategory"
@@ -3160,24 +2958,14 @@ product.category ||
 "AVAILABLE";
 
 
-/*
-PRICE
-*/
-
 document.getElementById(
 "detailsPrice"
 ).textContent =
 "₦" +
 Number(
 product.price || 0
-).toLocaleString(
-"en-NG"
-);
+).toLocaleString("en-NG");
 
-
-/*
-STORAGE
-*/
 
 document.getElementById(
 "detailsStorage"
@@ -3186,20 +2974,12 @@ product.storage ||
 "Not specified";
 
 
-/*
-BATTERY
-*/
-
 document.getElementById(
 "detailsBattery"
 ).textContent =
 product.battery ||
 "Not specified";
 
-
-/*
-CONDITION
-*/
 
 document.getElementById(
 "detailsCondition"
@@ -3208,9 +2988,7 @@ product.condition ||
 "Not specified";
 
 
-/*
-DESCRIPTION
-*/
+/* DESCRIPTION */
 
 const descriptionBox =
 document.getElementById(
@@ -3225,9 +3003,7 @@ document.getElementById(
 
 if (
 product.description &&
-String(
-product.description
-).trim()
+String(product.description).trim()
 ) {
 
 description.textContent =
@@ -3247,18 +3023,15 @@ descriptionBox.style.display =
 }
 
 
-/*
-STATUS
-*/
+/* STATUS */
 
 const status =
 document.getElementById(
 "detailsStatus"
 );
 
-if (
-product.available === true
-) {
+
+if (product.available === true) {
 
 status.textContent =
 "🟢 Available";
@@ -3277,19 +3050,15 @@ status.className =
 }
 
 
-/*
-WHATSAPP
-*/
+/* WHATSAPP */
 
 document.getElementById(
 "detailsWhatsapp"
 ).href =
-getWhatsAppLink(product);
+getWhatsappUrl(product);
 
 
-/*
-OPEN DETAILS
-*/
+/* SHOW DETAILS */
 
 document.body.classList.add(
 "details-open"
@@ -3310,9 +3079,7 @@ behavior:"instant"
 }
 
 
-/* =========================
-   CLOSE DETAILS
-========================= */
+/* CLOSE DETAILS */
 
 function closeProductDetails() {
 
@@ -3334,22 +3101,26 @@ behavior:"instant"
 }
 
 
-/* =========================
-   START
-========================= */
+/* INITIAL LOAD */
 
 loadProducts();
 
 
-/* =========================
-   REFRESH WHEN RETURNING
-========================= */
+/*
+Refresh when user returns
+to the browser tab.
+*/
 
 document.addEventListener(
 "visibilitychange",
-function() {
+() => {
 
-if (!document.hidden) {
+if (
+!document.hidden &&
+!document.body.classList.contains(
+"details-open"
+)
+) {
 
 loadProducts();
 
@@ -3358,13 +3129,13 @@ loadProducts();
 });
 
 
-/* =========================
-   BACK BUTTON
-========================= */
+/*
+Back button support.
+*/
 
 window.addEventListener(
 "popstate",
-function() {
+() => {
 
 closeProductDetails();
 
