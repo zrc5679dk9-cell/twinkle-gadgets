@@ -639,6 +639,12 @@ nav a:hover {
   background:
     radial-gradient(circle at 50% 45%,#e7dfcf,transparent 34%),
     linear-gradient(145deg,#f8f8f6,#e9e7e0);
+
+  /* SWIPE SUPPORT */
+  touch-action:pan-y;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
 }
 
 .details-image img {
@@ -648,6 +654,8 @@ nav a:hover {
   object-fit:contain;
   padding:35px;
   filter:drop-shadow(0 30px 30px rgba(0,0,0,.18));
+  pointer-events:none;
+  -webkit-user-drag:none;
 }
 
 .details-thumbnails {
@@ -1468,8 +1476,6 @@ or filter the collection by category.
 </div>
 
 
-<!-- SEARCH + FILTERS -->
-
 <div class="collection-controls">
 
 <div class="search-box">
@@ -1733,8 +1739,6 @@ We arrange delivery to customers across Nigeria.
 
 </section>
 
-
-<!-- CUSTOMER TRUST -->
 
 <section class="customer-trust">
 
@@ -2172,6 +2176,13 @@ let searchTerm = "";
 let isLoadingProducts = false;
 
 
+/* PRODUCT DETAILS SLIDER STATE */
+
+let currentDetailImages = [];
+
+let currentDetailImageIndex = 0;
+
+
 /* SAFE TEXT */
 
 function escapeHtml(value) {
@@ -2191,12 +2202,22 @@ return div.innerHTML;
 
 function getProductId(product) {
 
-if (product.id !== undefined && product.id !== null) {
+if (
+product.id !== undefined &&
+product.id !== null
+) {
+
 return String(product.id);
+
 }
 
-if (product.uuid !== undefined && product.uuid !== null) {
+if (
+product.uuid !== undefined &&
+product.uuid !== null
+) {
+
 return String(product.uuid);
+
 }
 
 return [
@@ -2277,7 +2298,8 @@ if (
 category &&
 !categories.some(
 item =>
-item.toLowerCase() === category.toLowerCase()
+item.toLowerCase() ===
+category.toLowerCase()
 )
 ) {
 
@@ -2298,9 +2320,11 @@ document.createElement("button");
 
 allButton.className =
 "filter-button" +
-(selectedCategory === "all"
+(
+selectedCategory === "all"
 ? " active"
-: "");
+: ""
+);
 
 allButton.dataset.category =
 "all";
@@ -2414,6 +2438,7 @@ const condition =
 String(product.condition || "")
 .toLowerCase();
 
+
 const matchesCategory =
 selectedCategory === "all" ||
 category ===
@@ -2445,14 +2470,6 @@ function renderProducts() {
 const container =
 document.getElementById("products");
 
-
-/*
-IMPORTANT:
-Always completely clear the
-existing product cards before
-rendering again.
-*/
-
 container.innerHTML = "";
 
 
@@ -2482,10 +2499,7 @@ return;
 }
 
 
-/*
-The first three newest products
-receive a Featured badge.
-*/
+/* FEATURED PRODUCTS */
 
 products.forEach(
 (product,index) => {
@@ -2536,7 +2550,8 @@ imageUrls.length > 1
 
 
 const featuredBadge =
-index < 3 && selectedCategory === "all"
+index < 3 &&
+selectedCategory === "all"
 ? `
 <div class="featured-badge">
 ★ Featured
@@ -2571,11 +2586,17 @@ ${photoCount}
 <div class="product-info">
 
 <div class="product-tag">
-${escapeHtml(product.category || "Available")}
+${escapeHtml(
+product.category ||
+"Available"
+)}
 </div>
 
 <h3>
-${escapeHtml(product.name || "Unnamed device")}
+${escapeHtml(
+product.name ||
+"Unnamed device"
+)}
 </h3>
 
 <div class="product-condition">
@@ -2625,18 +2646,11 @@ title="Enquire on WhatsApp">
 `;
 
 
-/*
-Card opens details.
-*/
+/* CARD CLICK */
 
 card.addEventListener(
 "click",
 function(event) {
-
-/*
-Don't open product details
-when WhatsApp is clicked.
-*/
 
 if (
 event.target.closest(
@@ -2656,12 +2670,13 @@ openProductDetails(product);
 container.appendChild(card);
 
 
-/* Animation */
+/* ANIMATION */
 
 requestAnimationFrame(() => {
 
 setTimeout(
-() => card.classList.add("show"),
+() =>
+card.classList.add("show"),
 index * 70
 );
 
@@ -2675,12 +2690,6 @@ index * 70
 /* LOAD PRODUCTS */
 
 async function loadProducts() {
-
-/*
-Prevents two simultaneous
-Supabase requests from both
-creating/rendering cards.
-*/
 
 if (isLoadingProducts) {
 return;
@@ -2725,7 +2734,7 @@ Unable to load products right now.
 <br><br>
 
 <a
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available phones."
+href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
 target="_blank"
 style="color:#b08a32;font-weight:800;">
 Contact us for current stock
@@ -2739,15 +2748,7 @@ return;
 }
 
 
-/*
-DE-DUPLICATION FIX
-
-Supabase can return repeated
-rows if duplicate records exist.
-
-We keep only one card for each
-unique product ID.
-*/
+/* DEDUPLICATION */
 
 const uniqueProducts = [];
 
@@ -2761,9 +2762,7 @@ getProductId(product);
 
 
 if (seenIds.has(id)) {
-
 return;
-
 }
 
 
@@ -2778,18 +2777,7 @@ productsData =
 uniqueProducts;
 
 
-/*
-Build filters only once after
-the fresh product list arrives.
-*/
-
 buildCategoryFilters();
-
-
-/*
-Render exactly one card per
-unique product.
-*/
 
 renderProducts();
 
@@ -2839,6 +2827,11 @@ renderProducts();
 );
 
 
+/* =====================================================
+   PRODUCT DETAILS
+   ===================================================== */
+
+
 /* OPEN DETAILS */
 
 function openProductDetails(product) {
@@ -2846,8 +2839,22 @@ function openProductDetails(product) {
 if (!product) return;
 
 
+/* PRODUCT IMAGES */
+
 const imageUrls =
 getProductImages(product);
+
+
+/*
+Store the images globally
+for the swipe controls.
+*/
+
+currentDetailImages =
+imageUrls;
+
+currentDetailImageIndex =
+0;
 
 
 const image =
@@ -2884,9 +2891,11 @@ button.type =
 
 button.className =
 "details-thumbnail" +
-(index === 0
+(
+index === 0
 ? " active"
-: "");
+: ""
+);
 
 
 button.innerHTML = `
@@ -2904,26 +2913,7 @@ function(event) {
 
 event.stopPropagation();
 
-
-image.src =
-url;
-
-
-document
-.querySelectorAll(
-".details-thumbnail"
-)
-.forEach(
-thumb =>
-thumb.classList.remove(
-"active"
-)
-);
-
-
-button.classList.add(
-"active"
-);
+showDetailImage(index);
 
 }
 );
@@ -3079,7 +3069,217 @@ behavior:"instant"
 }
 
 
-/* CLOSE DETAILS */
+/* =====================================================
+   CHANGE DETAIL IMAGE
+   ===================================================== */
+
+function showDetailImage(index) {
+
+if (!currentDetailImages.length) {
+return;
+}
+
+
+/* LOOP FROM LAST TO FIRST */
+
+if (index < 0) {
+
+index =
+currentDetailImages.length - 1;
+
+}
+
+
+/* LOOP FROM FIRST TO LAST */
+
+if (
+index >=
+currentDetailImages.length
+) {
+
+index = 0;
+
+}
+
+
+currentDetailImageIndex =
+index;
+
+
+const image =
+document.getElementById(
+"detailsImage"
+);
+
+
+image.src =
+currentDetailImages[index];
+
+
+/* UPDATE ACTIVE THUMBNAIL */
+
+const thumbnails =
+document.querySelectorAll(
+".details-thumbnail"
+);
+
+
+thumbnails.forEach(
+(thumb,i) => {
+
+thumb.classList.toggle(
+"active",
+i === index
+);
+
+});
+
+
+/*
+Automatically scroll the
+selected thumbnail into view.
+*/
+
+if (thumbnails[index]) {
+
+thumbnails[index].scrollIntoView({
+behavior:"smooth",
+block:"nearest",
+inline:"center"
+});
+
+}
+
+}
+
+
+/* =====================================================
+   MOBILE SWIPE
+   ===================================================== */
+
+let detailTouchStartX = 0;
+
+let detailTouchStartY = 0;
+
+let detailTouchEndX = 0;
+
+let detailTouchEndY = 0;
+
+
+const detailImageArea =
+document.querySelector(
+".details-image"
+);
+
+
+/* TOUCH START */
+
+detailImageArea.addEventListener(
+"touchstart",
+function(event) {
+
+if (
+!currentDetailImages.length
+) {
+
+return;
+
+}
+
+
+detailTouchStartX =
+event.changedTouches[0].screenX;
+
+detailTouchStartY =
+event.changedTouches[0].screenY;
+
+},
+{
+passive:true
+}
+);
+
+
+/* TOUCH END */
+
+detailImageArea.addEventListener(
+"touchend",
+function(event) {
+
+if (
+!currentDetailImages.length
+) {
+
+return;
+
+}
+
+
+detailTouchEndX =
+event.changedTouches[0].screenX;
+
+detailTouchEndY =
+event.changedTouches[0].screenY;
+
+
+const deltaX =
+detailTouchEndX -
+detailTouchStartX;
+
+const deltaY =
+detailTouchEndY -
+detailTouchStartY;
+
+
+/*
+Ignore tiny movements.
+
+Also ignore vertical swipes,
+so normal page scrolling still
+works properly.
+*/
+
+if (
+Math.abs(deltaX) < 45 ||
+Math.abs(deltaX) < Math.abs(deltaY)
+) {
+
+return;
+
+}
+
+
+/* SWIPE LEFT = NEXT PHOTO */
+
+if (deltaX < 0) {
+
+showDetailImage(
+currentDetailImageIndex + 1
+);
+
+}
+
+
+/* SWIPE RIGHT = PREVIOUS PHOTO */
+
+else {
+
+showDetailImage(
+currentDetailImageIndex - 1
+);
+
+}
+
+},
+{
+passive:true
+}
+);
+
+
+/* =====================================================
+   CLOSE DETAILS
+   ===================================================== */
 
 function closeProductDetails() {
 
@@ -3092,6 +3292,14 @@ document.getElementById(
 ).classList.remove(
 "active"
 );
+
+
+/* Reset slider state */
+
+currentDetailImages = [];
+
+currentDetailImageIndex = 0;
+
 
 window.scrollTo({
 top:0,
