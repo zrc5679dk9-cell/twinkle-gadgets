@@ -1331,47 +1331,26 @@ async function loadProducts() {
 
 async function toggleAvailability(id, currentlyAvailable) {
 
-  const newStatus = !currentlyAvailable;
+  const {
+    data: { session },
+    error: sessionError
+  } = await supabaseClient.auth.getSession();
 
-  const actionText = newStatus
-    ? "mark this product as AVAILABLE"
-    : "mark this product as SOLD";
-
-  const confirmed = confirm(
-    `Are you sure you want to ${actionText}?`
-  );
-
-  if (!confirmed) return;
-
-  try {
-
-    const { data, error } = await supabaseClient
-      .from("products")
-      .update({
-        available: newStatus
-      })
-      .eq("id", id)
-      .select();
-
-    if (error) {
-      console.error("Update error:", error);
-      alert(error.message);
-      return;
-    }
-
-    if (!data || data.length === 0) {
-      alert("Product was not updated. Please refresh and try again.");
-      return;
-    }
-
-    await loadProducts();
-
-  } catch (error) {
-
-    console.error(error);
-    alert(error.message);
-
+  if (sessionError) {
+    alert("Session error: " + sessionError.message);
+    return;
   }
+
+  if (!session) {
+    alert("NO ACTIVE SESSION — Supabase sees you as logged out.");
+    return;
+  }
+
+  alert(
+    "SESSION FOUND\n\n" +
+    "Email: " + session.user.email + "\n\n" +
+    "User ID: " + session.user.id
+  );
 
 }
 /* EDIT PRODUCT */
