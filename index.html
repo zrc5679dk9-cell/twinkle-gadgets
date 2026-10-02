@@ -120,35 +120,82 @@ nav a:hover{
   border-radius:30px;
 }
 
-/* ================= HERO ================= */
+/* ================= HERO SLIDESHOW ================= */
 
 .hero{
   min-height:92vh;
-  padding:125px 24px 70px;
-  background:
-    radial-gradient(circle at 75% 30%,rgba(176,138,50,.16),transparent 27%),
-    linear-gradient(#fafaf8,#f2f2ef);
-  display:flex;
-  align-items:center;
+  padding:68px 0 0;
+  background:#f5f5f2;
+  overflow:hidden;
+  position:relative;
+}
+
+.hero-slider{
+  position:relative;
+  width:100%;
+  min-height:calc(92vh - 68px);
   overflow:hidden;
 }
 
-.hero-inner{
-  max-width:1280px;
-  width:100%;
-  margin:auto;
-  display:grid;
-  grid-template-columns:.85fr 1.15fr;
+.hero-slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  visibility:hidden;
+  transform:scale(1.035);
+  transition:
+    opacity .9s ease,
+    transform 1.2s ease,
+    visibility .9s;
+  display:flex;
   align-items:center;
-  gap:30px;
+  justify-content:center;
 }
 
-.hero-copy{
+.hero-slide.active{
+  opacity:1;
+  visibility:visible;
+  transform:scale(1);
+}
+
+.hero-slide-bg{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at 72% 45%,
+      rgba(176,138,50,.18),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(255,255,255,.95),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #fafaf8 0%,
+      #f0efe9 100%
+    );
+}
+
+.hero-slide-content{
   position:relative;
-  z-index:2;
+  z-index:3;
+  width:min(1280px,100%);
+  min-height:calc(92vh - 68px);
+  padding:65px 55px 90px;
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  align-items:center;
+  gap:20px;
 }
 
-.eyebrow{
+.hero-slide-copy{
+  max-width:570px;
+}
+
+.hero-slide-eyebrow{
   color:var(--gold);
   text-transform:uppercase;
   letter-spacing:3px;
@@ -157,86 +204,143 @@ nav a:hover{
   margin-bottom:22px;
 }
 
-.hero h1{
-  font-size:clamp(55px,7vw,100px);
-  line-height:.9;
+.hero-slide-copy h1{
+  font-size:clamp(52px,7vw,92px);
+  line-height:.88;
   letter-spacing:-6px;
-  max-width:720px;
+  margin-bottom:25px;
 }
 
-.hero h1 span{
+.hero-slide-copy h1 span{
   color:var(--gold);
 }
 
-.hero p{
-  max-width:500px;
+.hero-slide-copy p{
+  max-width:480px;
   color:#666;
   font-size:16px;
   line-height:1.7;
-  margin:28px 0;
+  margin-bottom:28px;
 }
 
-.hero-buttons{
+.hero-slide-image{
+  height:580px;
   display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  position:relative;
 }
 
-.btn{
-  border:none;
-  border-radius:30px;
-  padding:14px 23px;
-  font-size:12px;
-  font-weight:800;
+.hero-slide-image::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  max-width:75vw;
+  max-height:75vw;
+  border-radius:50%;
+  background:
+    radial-gradient(
+      circle,
+      #fff 0%,
+      #e8e5dc 65%,
+      #d7d3c8 100%
+    );
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.12),
+    inset 0 0 70px rgba(255,255,255,.9);
+}
+
+.hero-slide-image img{
+  position:relative;
+  z-index:2;
+  width:min(470px,75%);
+  height:530px;
+  object-fit:contain;
+  filter:
+    drop-shadow(0 35px 25px rgba(0,0,0,.25));
+  animation:phoneFloat 5s ease-in-out infinite;
+}
+
+@keyframes phoneFloat{
+  0%,100%{
+    transform:translateY(0) rotate(-5deg);
+  }
+
+  50%{
+    transform:translateY(-13px) rotate(-3deg);
+  }
+}
+
+.hero-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:10;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
   cursor:pointer;
-  display:inline-flex;
+  font-size:22px;
+  display:flex;
   align-items:center;
   justify-content:center;
   transition:.25s;
 }
 
-.btn:hover{
-  transform:translateY(-2px);
-}
-
-.btn-black{
+.hero-arrow:hover{
   background:#080808;
   color:#fff;
 }
 
-.btn-outline{
-  border:1px solid #ccc;
-  background:rgba(255,255,255,.7);
+.hero-arrow.prev{
+  left:22px;
 }
 
-.hero-visual{
-  min-height:580px;
-  position:relative;
+.hero-arrow.next{
+  right:22px;
+}
+
+.hero-dots{
+  position:absolute;
+  z-index:10;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
   display:flex;
-  justify-content:center;
-  align-items:center;
+  gap:8px;
 }
 
-.hero-circle{
-  width:min(520px,80vw);
-  height:min(520px,80vw);
+.hero-dot{
+  width:7px;
+  height:7px;
+  border:0;
   border-radius:50%;
-  background:
-    radial-gradient(circle,#fff 0%,#e9e7df 65%,#d9d5ca 100%);
-  box-shadow:
-    0 40px 100px rgba(0,0,0,.12),
-    inset 0 0 70px rgba(255,255,255,.9);
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  background:#bbb;
+  padding:0;
+  cursor:pointer;
+  transition:.3s;
 }
 
-.hero-phone{
-  width:58%;
-  max-height:500px;
-  object-fit:contain;
-  filter:drop-shadow(0 35px 30px rgba(0,0,0,.25));
-  transform:rotate(-7deg);
+.hero-dot.active{
+  width:24px;
+  border-radius:10px;
+  background:#080808;
+}
+
+.hero-loading{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#888;
+  font-size:12px;
+  z-index:2;
 }
 
 /* ================= SECTIONS ================= */
@@ -831,16 +935,61 @@ body.details-open .normal-site{
     display:none;
   }
 
-  .hero-inner{
-    grid-template-columns:1fr;
-  }
-
   .hero{
-    padding-top:120px;
+    min-height:650px;
   }
 
-  .hero-visual{
-    min-height:420px;
+  .hero-slider{
+    min-height:650px;
+  }
+
+  .hero-slide-content{
+    grid-template-columns:1fr;
+    text-align:center;
+    padding:70px 25px 90px;
+  }
+
+  .hero-slide-copy{
+    max-width:600px;
+    margin:auto;
+  }
+
+  .hero-slide-copy h1{
+    font-size:57px;
+    letter-spacing:-4px;
+  }
+
+  .hero-slide-copy p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-slide-image{
+    height:330px;
+    margin-top:-15px;
+  }
+
+  .hero-slide-image::before{
+    width:300px;
+    height:300px;
+  }
+
+  .hero-slide-image img{
+    width:240px;
+    height:320px;
+  }
+
+  .hero-arrow{
+    width:38px;
+    height:38px;
+  }
+
+  .hero-arrow.prev{
+    left:12px;
+  }
+
+  .hero-arrow.next{
+    right:12px;
   }
 
   .products{
@@ -867,26 +1016,50 @@ body.details-open .normal-site{
   }
 
   .hero{
-    min-height:auto;
-    padding:120px 18px 50px;
+    padding-top:68px;
+    min-height:690px;
   }
 
-  .hero h1{
-    font-size:57px;
-    letter-spacing:-4px;
+  .hero-slider{
+    min-height:690px;
   }
 
-  .hero p{
-    font-size:14px;
+  .hero-slide-content{
+    padding:45px 20px 75px;
   }
 
-  .hero-visual{
-    min-height:350px;
+  .hero-slide-eyebrow{
+    margin-bottom:14px;
   }
 
-  .hero-circle{
-    width:320px;
-    height:320px;
+  .hero-slide-copy h1{
+    font-size:48px;
+    letter-spacing:-3px;
+    margin-bottom:18px;
+  }
+
+  .hero-slide-copy p{
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:20px;
+  }
+
+  .hero-slide-image{
+    height:330px;
+  }
+
+  .hero-slide-image::before{
+    width:280px;
+    height:280px;
+  }
+
+  .hero-slide-image img{
+    width:220px;
+    height:310px;
+  }
+
+  .hero-dots{
+    bottom:20px;
   }
 
   .section{
@@ -1031,68 +1204,38 @@ WhatsApp
 
 <div class="normal-site">
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="hero" id="iphone">
 
-<div class="hero-inner">
+<div class="hero-slider" id="heroSlider">
 
-<div class="hero-copy">
-
-<div class="eyebrow">
-TWINKLE GADGETS • LAGOS ISLAND
+<div class="hero-loading" id="heroLoading">
+Loading latest arrivals...
 </div>
 
-<h1>
-Your next
-<span>iPhone.</span>
-</h1>
+<button
+class="hero-arrow prev"
+type="button"
+onclick="heroPrev()">
+‹
+</button>
 
-<p>
-Premium smartphones and gadgets,
-carefully selected for you.
-Buy, sell, swap or upgrade with
-Twinkle Gadgets.
-</p>
+<button
+class="hero-arrow next"
+type="button"
+onclick="heroNext()">
+›
+</button>
 
-<div class="hero-buttons">
-
-<a class="btn btn-black" href="#collection">
-Shop Collection
-</a>
-
-<a
-class="btn btn-outline"
-href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'm%20looking%20for%20an%20iPhone."
-target="_blank">
-WhatsApp Us
-</a>
-
-</div>
-
-</div>
-
-
-<div class="hero-visual">
-
-<div class="hero-circle">
-
-<img
-class="hero-phone"
-id="heroPhone"
-src=""
-alt="Twinkle Gadgets iPhone">
-
-</div>
-
-</div>
+<div class="hero-dots" id="heroDots"></div>
 
 </div>
 
 </section>
 
 
-<!-- CATEGORIES -->
+<!-- ================= CATEGORIES ================= -->
 
 <section class="section">
 
@@ -1151,7 +1294,7 @@ then explore the latest stock available.
 </section>
 
 
-<!-- COLLECTION -->
+<!-- ================= COLLECTION ================= -->
 
 <section class="section" id="collection">
 
@@ -1206,7 +1349,7 @@ Loading available devices...
 </section>
 
 
-<!-- STATEMENT -->
+<!-- ================= STATEMENT ================= -->
 
 <section class="statement">
 
@@ -1227,7 +1370,7 @@ Great choices.
 </section>
 
 
-<!-- TRUST -->
+<!-- ================= TRUST ================= -->
 
 <section class="section trust" id="trust">
 
@@ -1315,7 +1458,7 @@ WhatsApp before making your decision.
 </section>
 
 
-<!-- STORE -->
+<!-- ================= STORE ================= -->
 
 <section class="section" id="location">
 
@@ -1399,7 +1542,7 @@ Chat on WhatsApp
 </section>
 
 
-<!-- CTA -->
+<!-- ================= CTA ================= -->
 
 <section class="cta">
 
@@ -1466,7 +1609,7 @@ WhatsApp
 </div>
 
 
-<!-- PRODUCT DETAILS -->
+<!-- ================= PRODUCT DETAILS ================= -->
 
 <section class="details" id="details">
 
@@ -1573,6 +1716,13 @@ let selectedCategory = "all";
 let searchTerm = "";
 
 
+/* ================= HERO STATE ================= */
+
+let heroProducts = [];
+let heroIndex = 0;
+let heroTimer = null;
+
+
 /* ================= HELPERS ================= */
 
 function escapeHtml(value){
@@ -1647,6 +1797,384 @@ encodeURIComponent(message);
 }
 
 
+/* ================= HERO SLIDESHOW ================= */
+
+function buildHeroSlides(){
+
+const slider =
+document.getElementById("heroSlider");
+
+const dots =
+document.getElementById("heroDots");
+
+const loading =
+document.getElementById("heroLoading");
+
+if(!slider)
+return;
+
+
+/*
+Use real product photos from Supabase.
+Newest available products appear first.
+*/
+
+heroProducts =
+productsData
+.filter(product =>
+getImages(product).length
+)
+.slice(0,6);
+
+
+if(!heroProducts.length){
+
+if(loading)
+loading.textContent =
+"Latest arrivals coming soon.";
+
+return;
+
+}
+
+
+if(loading)
+loading.remove();
+
+
+slider
+.querySelectorAll(".hero-slide")
+.forEach(slide =>
+slide.remove()
+);
+
+dots.innerHTML = "";
+
+heroIndex = 0;
+
+
+heroProducts.forEach((product,index) => {
+
+const images =
+getImages(product);
+
+const image =
+images[0];
+
+const price =
+Number(product.price || 0)
+.toLocaleString("en-NG");
+
+
+const slide =
+document.createElement("div");
+
+slide.className =
+"hero-slide" +
+(index === 0 ? " active" : "");
+
+
+slide.innerHTML = `
+
+<div class="hero-slide-bg"></div>
+
+<div class="hero-slide-content">
+
+<div class="hero-slide-copy">
+
+<div class="hero-slide-eyebrow">
+TWINKLE GADGETS • LAGOS ISLAND
+</div>
+
+<h1>
+${escapeHtml(product.name || "Your next iPhone")}
+<span>.</span>
+</h1>
+
+<p>
+${
+escapeHtml(
+product.description ||
+"Premium device. Carefully selected and ready for you."
+)
+}
+</p>
+
+<div class="hero-buttons">
+
+<button
+class="btn btn-black"
+type="button"
+data-hero-index="${index}">
+View Device
+</button>
+
+<a
+class="btn btn-outline"
+href="${whatsapp(product)}"
+target="_blank"
+rel="noopener">
+WhatsApp Us
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-slide-image">
+
+<img
+src="${escapeHtml(image)}"
+alt="${escapeHtml(product.name || "Product")}"
+loading="${index === 0 ? "eager" : "lazy"}">
+
+</div>
+
+</div>
+`;
+
+
+const viewButton =
+slide.querySelector(
+"[data-hero-index]"
+);
+
+viewButton.onclick = () => {
+
+openDetails(product);
+
+};
+
+
+slider.insertBefore(
+slide,
+slider.querySelector(".hero-arrow.prev")
+);
+
+
+const dot =
+document.createElement("button");
+
+dot.className =
+"hero-dot" +
+(index === 0 ? " active" : "");
+
+dot.type =
+"button";
+
+dot.setAttribute(
+"aria-label",
+"Show slide " + (index + 1)
+);
+
+dot.onclick = () => {
+
+heroGoTo(index);
+
+};
+
+dots.appendChild(dot);
+
+});
+
+
+startHeroSlideshow();
+
+}
+
+
+function heroGoTo(index){
+
+if(!heroProducts.length)
+return;
+
+const slides =
+document.querySelectorAll(
+".hero-slide"
+);
+
+const dots =
+document.querySelectorAll(
+".hero-dot"
+);
+
+
+slides.forEach(slide =>
+slide.classList.remove("active")
+);
+
+dots.forEach(dot =>
+dot.classList.remove("active")
+);
+
+
+heroIndex =
+(index + heroProducts.length)
+% heroProducts.length;
+
+
+if(slides[heroIndex])
+slides[heroIndex]
+.classList.add("active");
+
+if(dots[heroIndex])
+dots[heroIndex]
+.classList.add("active");
+
+
+restartHeroSlideshow();
+
+}
+
+
+function heroNext(){
+
+if(!heroProducts.length)
+return;
+
+heroGoTo(
+heroIndex + 1
+);
+
+}
+
+
+function heroPrev(){
+
+if(!heroProducts.length)
+return;
+
+heroGoTo(
+heroIndex - 1
+);
+
+}
+
+
+function startHeroSlideshow(){
+
+clearInterval(heroTimer);
+
+heroTimer =
+setInterval(() => {
+
+heroIndex++;
+
+if(
+heroIndex >=
+heroProducts.length
+){
+
+heroIndex = 0;
+
+}
+
+
+const slides =
+document.querySelectorAll(
+".hero-slide"
+);
+
+const dots =
+document.querySelectorAll(
+".hero-dot"
+);
+
+
+slides.forEach(slide =>
+slide.classList.remove("active")
+);
+
+dots.forEach(dot =>
+dot.classList.remove("active")
+);
+
+
+if(slides[heroIndex])
+slides[heroIndex]
+.classList.add("active");
+
+if(dots[heroIndex])
+dots[heroIndex]
+.classList.add("active");
+
+},5000);
+
+}
+
+
+function restartHeroSlideshow(){
+
+clearInterval(heroTimer);
+
+heroTimer =
+setInterval(() => {
+
+heroIndex++;
+
+if(
+heroIndex >=
+heroProducts.length
+){
+
+heroIndex = 0;
+
+}
+
+
+const slides =
+document.querySelectorAll(
+".hero-slide"
+);
+
+const dots =
+document.querySelectorAll(
+".hero-dot"
+);
+
+
+slides.forEach(slide =>
+slide.classList.remove("active")
+);
+
+dots.forEach(dot =>
+dot.classList.remove("active")
+);
+
+
+if(slides[heroIndex])
+slides[heroIndex]
+.classList.add("active");
+
+if(dots[heroIndex])
+dots[heroIndex]
+.classList.add("active");
+
+},5000);
+
+}
+
+
+/* Pause slideshow when user leaves tab */
+
+document.addEventListener(
+"visibilitychange",
+() => {
+
+if(document.hidden){
+
+clearInterval(heroTimer);
+
+}else{
+
+startHeroSlideshow();
+
+}
+
+});
+
+
 /* ================= FILTERS ================= */
 
 function buildFilters(){
@@ -1665,7 +2193,9 @@ String(product.category || "")
 if(
 category &&
 !categories.some(
-x => x.toLowerCase() === category.toLowerCase()
+x =>
+x.toLowerCase() ===
+category.toLowerCase()
 )
 ){
 
@@ -1711,7 +2241,8 @@ category;
 
 button.onclick = () => {
 
-selectedCategory = category;
+selectedCategory =
+category;
 
 updateFilters();
 
@@ -1817,8 +2348,11 @@ condition.includes(searchTerm);
 
 const categoryMatch =
 selectedCategory === "all" ||
-category === selectedCategory.toLowerCase() ||
-category.includes(selectedCategory.toLowerCase());
+category ===
+selectedCategory.toLowerCase() ||
+category.includes(
+selectedCategory.toLowerCase()
+);
 
 return searchMatch && categoryMatch;
 
@@ -1827,7 +2361,7 @@ return searchMatch && categoryMatch;
 }
 
 
-/* ================= RENDER ================= */
+/* ================= RENDER PRODUCTS ================= */
 
 function renderProducts(){
 
@@ -1867,8 +2401,6 @@ return;
 }
 
 
-/* newest first */
-
 products.forEach((product,index) => {
 
 const card =
@@ -1894,9 +2426,14 @@ card.innerHTML = `
 
 <div class="product-image">
 
-${index < 3 && selectedCategory === "all"
-? `<div class="badge">★ New Arrival</div>`
-: ""}
+${
+index < 3 &&
+selectedCategory === "all"
+? `<div class="badge">
+★ New Arrival
+</div>`
+: ""
+}
 
 ${
 image
@@ -1915,11 +2452,15 @@ Image unavailable
 <div class="product-info">
 
 <div class="product-category">
-${escapeHtml(product.category || "Available")}
+${escapeHtml(
+product.category || "Available"
+)}
 </div>
 
 <h3>
-${escapeHtml(product.name || "Unnamed device")}
+${escapeHtml(
+product.name || "Unnamed device"
+)}
 </h3>
 
 <div class="product-meta">
@@ -1929,9 +2470,12 @@ product.condition ||
 "Condition not specified"
 )}
 
-${product.storage
-? " • " + escapeHtml(product.storage)
-: ""}
+${
+product.storage
+? " • " +
+escapeHtml(product.storage)
+: ""
+}
 
 </div>
 
@@ -1976,7 +2520,9 @@ title="WhatsApp enquiry">
 `;
 
 
-card.addEventListener("click",event => {
+card.addEventListener(
+"click",
+event => {
 
 if(
 event.target.closest(".wa")
@@ -1997,7 +2543,8 @@ container.appendChild(card);
 requestAnimationFrame(() => {
 
 setTimeout(
-() => card.classList.add("show"),
+() =>
+card.classList.add("show"),
 index * 70
 );
 
@@ -2031,11 +2578,6 @@ if(error)
 throw error;
 
 
-/*
-Remove duplicate database rows
-using their actual ID.
-*/
-
 const seen =
 new Set();
 
@@ -2060,31 +2602,28 @@ buildFilters();
 
 renderProducts();
 
-
 /*
-Use first available product
-image for hero.
+Build the real-photo hero slideshow
+from the same Supabase products.
 */
 
-if(productsData.length){
+buildHeroSlides();
 
-const firstImages =
-getImages(productsData[0]);
-
-if(firstImages[0]){
-
-document.getElementById(
-"heroPhone"
-).src =
-firstImages[0];
-
-}
-
-}
 
 }catch(error){
 
 console.error(error);
+
+const loading =
+document.getElementById("heroLoading");
+
+if(loading){
+
+loading.textContent =
+"Latest arrivals coming soon.";
+
+}
+
 
 container.innerHTML = `
 <div style="
