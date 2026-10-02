@@ -1103,226 +1103,293 @@ async function loadProducts() {
   const list =
     document.getElementById("productList");
 
-
   list.innerHTML =
     "<p>Loading products...</p>";
 
 
-  const { data, error } =
-    await supabaseClient
-      .from("products")
-      .select("*")
-      .order("created_at", {
-        ascending: false
-      });
+  try {
+
+    const { data, error } =
+      await supabaseClient
+        .from("products")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
 
 
-  if (error) {
+    if (error) {
 
-    list.innerHTML =
-      "<p>" +
-      escapeHtml(error.message) +
-      "</p>";
+      console.error(
+        "PRODUCT LOAD ERROR:",
+        error
+      );
 
-    return;
+      list.innerHTML =
+        "<p>" +
+        escapeHtml(error.message) +
+        "</p>";
 
-  }
+      return;
 
-
-  const total =
-    data.length;
-
-
-  const available =
-    data.filter(
-      product => product.available === true
-    ).length;
+    }
 
 
-  const sold =
-    total - available;
+    console.log(
+      "ALL ADMIN PRODUCTS:",
+      data
+    );
 
 
-  document
-    .getElementById("totalCount")
-    .textContent =
-    total;
+    const total =
+      data.length;
 
 
-  document
-    .getElementById("availableCount")
-    .textContent =
-    available;
+    const available =
+      data.filter(
+        product =>
+          product.available === true
+      ).length;
 
 
-  document
-    .getElementById("soldCount")
-    .textContent =
-    sold;
+    const sold =
+      data.filter(
+        product =>
+          product.available === false
+      ).length;
 
 
-  if (!data.length) {
-
-    list.innerHTML =
-      "<p style='color:#777;font-size:13px;'>No products yet. Add your first product above.</p>";
-
-    return;
-
-  }
+    document
+      .getElementById("totalCount")
+      .textContent =
+      total;
 
 
-  list.innerHTML = "";
+    document
+      .getElementById("availableCount")
+      .textContent =
+      available;
 
 
-  data.forEach(product => {
-
-    const card =
-      document.createElement("div");
-
-
-    card.className =
-      "product";
+    document
+      .getElementById("soldCount")
+      .textContent =
+      sold;
 
 
-    const image =
-      product.image_url
+    if (!data.length) {
 
-      ? `
-        <img
-          src="${escapeHtml(product.image_url)}"
-          alt="${escapeHtml(product.name)}"
-        >
+      list.innerHTML =
         `
-
-      : `
-        <div
+        <p
           style="
-            height:210px;
-            background:#eee;
-            display:flex;
-            align-items:center;
-            justify-content:center;
             color:#777;
-            font-size:12px;
+            font-size:13px;
           "
         >
-          No photo
-        </div>
+          No products yet.
+          Add your first product above.
+        </p>
         `;
 
+      return;
 
-    const status =
-      product.available;
-
-
-    card.innerHTML = `
-
-      ${image}
-
-      <div class="product-info">
-
-        <div class="product-name">
-          ${escapeHtml(product.name)}
-        </div>
-
-        <div class="product-meta">
-
-          ${escapeHtml(product.storage || "")}
-
-          ${product.storage ? " • " : ""}
-
-          ${escapeHtml(product.condition || "")}
-
-        </div>
+    }
 
 
-        ${
-          product.battery
-          ? `
-            <div class="product-battery">
-              Battery: ${escapeHtml(product.battery)}
-            </div>
-            `
-          : ""
-        }
+    list.innerHTML = "";
 
 
-        <div class="product-price">
+    data.forEach(product => {
 
-          ₦${Number(
-            product.price || 0
-          ).toLocaleString("en-NG")}
-
-        </div>
+      const card =
+        document.createElement("div");
 
 
-        <div
-          class="status ${
-            status
-              ? "available"
-              : "sold"
-          }"
-        >
+      card.className =
+        "product";
+
+
+      const image =
+        product.image_url
+
+        ? `
+          <img
+            src="${escapeHtml(
+              product.image_url
+            )}"
+            alt="${escapeHtml(
+              product.name
+            )}"
+          >
+          `
+
+        : `
+          <div
+            style="
+              height:210px;
+              background:#eee;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              color:#777;
+              font-size:12px;
+            "
+          >
+            No photo
+          </div>
+          `;
+
+
+      const status =
+        product.available === true;
+
+
+      card.innerHTML = `
+
+        ${image}
+
+        <div class="product-info">
+
+          <div class="product-name">
+            ${escapeHtml(
+              product.name
+            )}
+          </div>
+
+
+          <div class="product-meta">
+
+            ${escapeHtml(
+              product.storage || ""
+            )}
+
+            ${
+              product.storage
+                ? " • "
+                : ""
+            }
+
+            ${escapeHtml(
+              product.condition || ""
+            )}
+
+          </div>
+
 
           ${
-            status
-              ? "● AVAILABLE"
-              : "● SOLD"
+            product.battery
+              ? `
+                <div class="product-battery">
+                  Battery:
+                  ${escapeHtml(
+                    product.battery
+                  )}
+                </div>
+                `
+              : ""
           }
 
-        </div>
+
+          <div class="product-price">
+
+            ₦${Number(
+              product.price || 0
+            ).toLocaleString("en-NG")}
+
+          </div>
 
 
-        <div class="product-actions">
-
-
-          <button
-            class="edit"
-            onclick="editProduct('${product.id}')"
-          >
-            Edit
-          </button>
-
-
-          <button
-            class="delete"
-            onclick="deleteProduct('${product.id}')"
-          >
-            Delete
-          </button>
-
-
-          <button
-            class="toggle ${
+          <div
+            class="status ${
               status
-                ? ""
-                : "sold-button"
+                ? "available"
+                : "sold"
             }"
-            onclick="toggleAvailability(
-              '${product.id}',
-              ${status}
-            )"
           >
 
             ${
               status
-                ? "Mark as Sold"
-                : "Mark as Available"
+                ? "● AVAILABLE"
+                : "● SOLD"
             }
 
-          </button>
+          </div>
 
+
+          <div class="product-actions">
+
+
+            <button
+              class="edit"
+              onclick="editProduct(
+                '${product.id}'
+              )"
+            >
+              Edit
+            </button>
+
+
+            <button
+              class="delete"
+              onclick="deleteProduct(
+                '${product.id}'
+              )"
+            >
+              Delete
+            </button>
+
+
+            <button
+              class="toggle ${
+                status
+                  ? ""
+                  : "sold-button"
+              }"
+              onclick="toggleAvailability(
+                '${product.id}',
+                ${status}
+              )"
+            >
+
+              ${
+                status
+                  ? "Mark as Sold"
+                  : "Mark as Available"
+              }
+
+            </button>
+
+
+          </div>
 
         </div>
 
-      </div>
-
-    `;
+      `;
 
 
-    list.appendChild(card);
+      list.appendChild(card);
 
-  });
+    });
+
+
+  } catch (error) {
+
+    console.error(
+      "Unexpected product error:",
+      error
+    );
+
+    list.innerHTML =
+      `
+      <p>
+        ${escapeHtml(
+          error.message
+        )}
+      </p>
+      `;
+
+  }
 
 }
 
