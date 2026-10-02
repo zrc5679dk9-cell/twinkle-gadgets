@@ -48,9 +48,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        NAVIGATION
-       ========================= */
+       ===================================================== */
 
     header {
       position: fixed;
@@ -134,9 +134,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        HERO
-       ========================= */
+       ===================================================== */
 
     .hero {
       min-height: 100vh;
@@ -284,9 +284,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        SECTIONS
-       ========================= */
+       ===================================================== */
 
     .section {
       max-width: 1200px;
@@ -325,9 +325,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        PRODUCTS
-       ========================= */
+       ===================================================== */
 
     .products {
       display: grid;
@@ -337,167 +337,22 @@
 
     .product {
       position: relative;
+      isolation: isolate;
       background: #ffffff;
       border: 1px solid rgba(0,0,0,.09);
       border-radius: 24px;
       overflow: hidden;
-      isolation: isolate;
+
+      transform-style: preserve-3d;
+      will-change: transform, box-shadow;
 
       transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        border-color .45s ease,
-        box-shadow .45s ease;
+        transform .55s cubic-bezier(.2,.8,.2,1),
+        border-color .4s ease,
+        box-shadow .55s ease;
 
       box-shadow: 0 8px 30px rgba(0,0,0,.035);
     }
-
-
-    /* =========================
-       PREMIUM SCROLL GLOW
-       ========================= */
-
-    .product::before {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      border-radius: inherit;
-      padding: 1px;
-
-      background:
-        linear-gradient(
-          120deg,
-          transparent 20%,
-          rgba(176,138,50,0) 35%,
-          rgba(212,179,90,.95) 48%,
-          rgba(255,255,255,1) 53%,
-          rgba(176,138,50,.75) 58%,
-          rgba(176,138,50,0) 72%,
-          transparent 82%
-        );
-
-      background-size: 250% 250%;
-
-      opacity: 0;
-
-      pointer-events: none;
-
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-
-      z-index: 10;
-    }
-
-
-    /* Soft light inside card */
-
-    .product::after {
-      content: "";
-      position: absolute;
-
-      width: 220px;
-      height: 220px;
-
-      left: 50%;
-      top: 45%;
-
-      transform: translate(-50%, -50%);
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(212,179,90,.30),
-          rgba(176,138,50,.12) 35%,
-          transparent 72%
-        );
-
-      filter: blur(28px);
-
-      opacity: 0;
-
-      pointer-events: none;
-
-      z-index: -1;
-    }
-
-
-    /* Product becomes active when scrolling into view */
-
-    .product.scroll-active {
-      transform:
-        translateY(-8px)
-        scale(1.015);
-
-      border-color:
-        rgba(176,138,50,.65);
-
-      box-shadow:
-        0 25px 60px rgba(0,0,0,.12),
-        0 0 35px rgba(176,138,50,.18);
-    }
-
-    .product.scroll-active::before {
-      opacity: 1;
-
-      animation:
-        liquidBorder 3s linear infinite;
-    }
-
-    .product.scroll-active::after {
-      opacity: 1;
-
-      animation:
-        productGlow 2.6s ease-in-out infinite;
-    }
-
-
-    /* Moving liquid light */
-
-    @keyframes liquidBorder {
-
-      0% {
-        background-position: 100% 0%;
-      }
-
-      50% {
-        background-position: 0% 100%;
-      }
-
-      100% {
-        background-position: 100% 0%;
-      }
-
-    }
-
-
-    /* Breathing glow */
-
-    @keyframes productGlow {
-
-      0%,
-      100% {
-        opacity: .35;
-
-        transform:
-          translate(-50%, -50%)
-          scale(.95);
-      }
-
-      50% {
-        opacity: .85;
-
-        transform:
-          translate(-50%, -50%)
-          scale(1.4);
-      }
-
-    }
-
-
-    /* Normal mouse hover remains */
 
     .product:hover {
       transform: translateY(-5px);
@@ -506,27 +361,136 @@
     }
 
 
+    /* GLASS REFLECTION */
+
+    .product::before {
+      content: "";
+      position: absolute;
+      z-index: 20;
+
+      top: -130%;
+      left: -85%;
+
+      width: 55%;
+      height: 330%;
+
+      pointer-events: none;
+
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,.05) 30%,
+        rgba(255,255,255,.60) 50%,
+        rgba(255,255,255,.08) 70%,
+        transparent 100%
+      );
+
+      transform: rotate(18deg);
+      opacity: 0;
+    }
+
+
+    /* PREMIUM GOLD GLASS GLOW */
+
+    .product .product-glow {
+      position: absolute;
+      inset: -2px;
+      z-index: -1;
+
+      border-radius: inherit;
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212,179,90,.55),
+          transparent 35%,
+          rgba(255,255,255,.5),
+          transparent 70%
+        );
+
+      filter: blur(16px);
+      opacity: 0;
+
+      transition:
+        opacity .5s ease;
+    }
+
+
+    /* ACTIVE SCROLL STATE */
+
+    .product.product-active {
+      transform:
+        translateY(-8px)
+        scale(1.018);
+
+      border-color: rgba(176,138,50,.58);
+
+      box-shadow:
+        0 25px 65px rgba(0,0,0,.13),
+        0 0 40px rgba(176,138,50,.16);
+    }
+
+    .product.product-active .product-glow {
+      opacity: 1;
+    }
+
+    .product.product-active::before {
+      animation: glassSweep 1.25s ease forwards;
+    }
+
+
+    @keyframes glassSweep {
+
+      0% {
+        left: -85%;
+        opacity: 0;
+      }
+
+      15% {
+        opacity: .9;
+      }
+
+      100% {
+        left: 145%;
+        opacity: 0;
+      }
+
+    }
+
+
+    /* PRODUCT IMAGE */
+
     .product-image {
       height: 350px;
 
       background:
-        radial-gradient(
-          circle at 50% 45%,
-          #e7dfcf,
-          transparent 34%
-        ),
-        linear-gradient(
-          145deg,
-          #f8f8f6,
-          #e9e7e0
-        );
+        radial-gradient(circle at 50% 45%, #e7dfcf, transparent 34%),
+        linear-gradient(145deg,#f8f8f6,#e9e7e0);
 
       display: flex;
       align-items: center;
       justify-content: center;
+
       position: relative;
 
-      z-index: 1;
+      transition:
+        background .6s ease;
+    }
+
+    .product.product-active .product-image {
+
+      background:
+        radial-gradient(
+          circle at 50% 42%,
+          rgba(212,179,90,.30),
+          transparent 32%
+        ),
+        linear-gradient(
+          145deg,
+          #ffffff,
+          #e9e7e0
+        );
     }
 
     .product-image::after {
@@ -540,6 +504,9 @@
       font-size: 9px;
       letter-spacing: 3px;
     }
+
+
+    /* PHONE */
 
     .phone {
       width: 112px;
@@ -562,21 +529,7 @@
 
       transition:
         transform .5s ease,
-        filter .5s ease;
-    }
-
-
-    /* Phone gets a subtle lift too */
-
-    .product.scroll-active .phone {
-      transform:
-        translateY(-5px)
-        scale(1.035);
-
-      filter:
-        drop-shadow(
-          0 15px 20px rgba(176,138,50,.15)
-        );
+        box-shadow .5s ease;
     }
 
     .phone::before {
@@ -588,21 +541,48 @@
       height: 7px;
 
       background: #111;
-
       border-radius: 10px;
 
       top: 9px;
       left: 50%;
 
-      transform:
-        translateX(-50%);
+      transform: translateX(-50%);
     }
+
+
+    /* FLOATING PHONE */
+
+    .product.product-active .phone {
+
+      animation:
+        phoneFloat 2.8s ease-in-out infinite;
+
+      box-shadow:
+        0 35px 70px rgba(0,0,0,.20),
+        0 0 25px rgba(212,179,90,.18);
+    }
+
+    @keyframes phoneFloat {
+
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(0deg);
+      }
+
+      50% {
+        transform:
+          translateY(-10px)
+          rotate(1deg);
+      }
+
+    }
+
+
+    /* PRODUCT INFO */
 
     .product-info {
       padding: 20px;
-      position: relative;
-      z-index: 2;
-      background: #fff;
     }
 
     .product-tag {
@@ -652,19 +632,24 @@
       white-space: nowrap;
 
       transition:
-        transform .2s,
-        color .2s;
+        transform .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
     }
 
     .product-button:hover {
       color: var(--gold-light);
-      transform: translateY(-1px);
+
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 8px 20px rgba(0,0,0,.15);
     }
 
 
-    /* =========================
+    /* =====================================================
        STATEMENT
-       ========================= */
+       ===================================================== */
 
     .statement {
       border-top: 1px solid rgba(0,0,0,.09);
@@ -696,9 +681,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        SERVICES
-       ========================= */
+       ===================================================== */
 
     .services {
       display: grid;
@@ -743,9 +728,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        TRUST
-       ========================= */
+       ===================================================== */
 
     .trust-section {
       background: #0b0b0b;
@@ -774,8 +759,7 @@
 
       background: rgba(255,255,255,.12);
 
-      border:
-        1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.12);
     }
 
     .trust-item {
@@ -787,7 +771,6 @@
       color: var(--gold-light);
 
       font-size: 50px;
-
       line-height: 1;
       font-weight: 800;
 
@@ -807,9 +790,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        LOCATION
-       ========================= */
+       ===================================================== */
 
     .location-grid {
       display: grid;
@@ -840,11 +823,9 @@
       color: var(--accent);
 
       text-transform: uppercase;
-
       letter-spacing: 2px;
 
       font-size: 10px;
-
       font-weight: 800;
     }
 
@@ -864,9 +845,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        CTA
-       ========================= */
+       ===================================================== */
 
     .cta {
       max-width: 1200px;
@@ -887,15 +868,13 @@
         ),
         #0b0b0b;
 
-      border:
-        1px solid rgba(176,138,50,.22);
+      border: 1px solid rgba(176,138,50,.22);
     }
 
     .cta-label {
       color: var(--gold-light);
 
       font-size: 10px;
-
       letter-spacing: 2.5px;
 
       font-weight: 800;
@@ -924,7 +903,6 @@
 
     .cta-actions {
       display: flex;
-
       justify-content: center;
 
       gap: 10px;
@@ -953,9 +931,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        FOOTER
-       ========================= */
+       ===================================================== */
 
     footer {
       background: #0b0b0b;
@@ -1024,9 +1002,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        TABLET
-       ========================= */
+       ===================================================== */
 
     @media (max-width: 900px) {
 
@@ -1049,9 +1027,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        PHONE
-       ========================= */
+       ===================================================== */
 
     @media (max-width: 600px) {
 
@@ -1065,7 +1043,9 @@
 
       .hero {
         min-height: 100vh;
-        padding: 145px 20px 70px;
+
+        padding:
+          145px 20px 70px;
       }
 
       .hero h1 {
@@ -1173,20 +1153,12 @@
       }
 
 
-      /* MOBILE GLOW */
+      /* MOBILE SCROLL EFFECT */
 
-      .product.scroll-active {
+      .product.product-active {
         transform:
           translateY(-5px)
-          scale(1.01);
-
-        box-shadow:
-          0 18px 40px rgba(0,0,0,.10),
-          0 0 25px rgba(176,138,50,.16);
-      }
-
-      .product.scroll-active::before {
-        animation-duration: 3.5s;
+          scale(1.012);
       }
 
 
@@ -1230,22 +1202,21 @@
     }
 
 
-    /* =========================
-       REDUCE MOTION ACCESSIBILITY
-       ========================= */
+    /* =====================================================
+       REDUCED MOTION
+       ===================================================== */
 
     @media (prefers-reduced-motion: reduce) {
 
-      html {
-        scroll-behavior: auto;
+      .product,
+      .product .phone,
+      .product::before {
+        animation: none !important;
+        transition: none !important;
       }
 
-      .product,
-      .phone,
-      .product::before,
-      .product::after {
-        transition: none;
-        animation: none !important;
+      .product.product-active {
+        transform: none;
       }
 
     }
@@ -1257,9 +1228,9 @@
 <body>
 
 
-  <!-- =========================
+  <!-- =====================================================
        NAVIGATION
-       ========================= -->
+       ===================================================== -->
 
   <header>
 
@@ -1312,9 +1283,9 @@
   </header>
 
 
-  <!-- =========================
+  <!-- =====================================================
        HERO
-       ========================= -->
+       ===================================================== -->
 
   <main>
 
@@ -1358,9 +1329,9 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================================
          PRODUCTS
-         ========================= -->
+         ===================================================== -->
 
     <section class="section" id="phones">
 
@@ -1393,8 +1364,12 @@
 
         <article class="product">
 
+          <div class="product-glow"></div>
+
           <div class="product-image">
+
             <div class="phone"></div>
+
           </div>
 
           <div class="product-info">
@@ -1435,8 +1410,12 @@
 
         <article class="product">
 
+          <div class="product-glow"></div>
+
           <div class="product-image">
+
             <div class="phone"></div>
+
           </div>
 
           <div class="product-info">
@@ -1477,8 +1456,12 @@
 
         <article class="product">
 
+          <div class="product-glow"></div>
+
           <div class="product-image">
+
             <div class="phone"></div>
+
           </div>
 
           <div class="product-info">
@@ -1520,9 +1503,9 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================================
          STATEMENT
-         ========================= -->
+         ===================================================== -->
 
     <div class="statement">
 
@@ -1542,9 +1525,9 @@
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          SERVICES
-         ========================= -->
+         ===================================================== -->
 
     <section class="section" id="services">
 
@@ -1666,9 +1649,9 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================================
          TRUST
-         ========================= -->
+         ===================================================== -->
 
     <section class="trust-section">
 
@@ -1759,9 +1742,9 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================================
          LOCATION
-         ========================= -->
+         ===================================================== -->
 
     <section class="section" id="location">
 
@@ -1847,9 +1830,9 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================================
          CTA
-         ========================= -->
+         ===================================================== -->
 
     <div class="cta">
 
@@ -1888,9 +1871,9 @@
   </main>
 
 
-  <!-- =========================
+  <!-- =====================================================
        FOOTER
-       ========================= -->
+       ===================================================== -->
 
   <footer>
 
@@ -1937,13 +1920,13 @@
   </footer>
 
 
-  <!-- =========================
+  <!-- =====================================================
        PRODUCT SCROLL ANIMATION
-       ========================= -->
+       ===================================================== -->
 
   <script>
 
-    const products =
+    const productCards =
       document.querySelectorAll(".product");
 
 
@@ -1957,13 +1940,13 @@
             if (entry.isIntersecting) {
 
               entry.target.classList.add(
-                "scroll-active"
+                "product-active"
               );
 
             } else {
 
               entry.target.classList.remove(
-                "scroll-active"
+                "product-active"
               );
 
             }
@@ -1973,15 +1956,15 @@
         },
 
         {
-          threshold: 0.45
+          threshold: 0.55
         }
 
       );
 
 
-    products.forEach((product) => {
+    productCards.forEach((card) => {
 
-      productObserver.observe(product);
+      productObserver.observe(card);
 
     });
 
