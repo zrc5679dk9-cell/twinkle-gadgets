@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Twinkle Gadgets | Premium Phones & Gadgets</title>
 
-<meta name="description"
-content="Twinkle Gadgets — premium smartphones, gadgets and professional repairs. Lagos Island with nationwide delivery.">
+<meta
+name="description"
+content="Twinkle Gadgets — premium smartphones, gadgets and professional repairs. Lagos Island with nationwide delivery."
+>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 :root{
   --black:#080808;
   --white:#fff;
@@ -45,9 +50,13 @@ a{
   text-decoration:none;
 }
 
-button,input{
+button,
+input{
   font:inherit;
 }
+
+
+/* ================= DELIVERY CARD ================= */
 
 .delivery-card{
   position:relative;
@@ -100,6 +109,7 @@ button,input{
 .delivery-content p{
   color:rgba(255,255,255,.8);
 }
+
 
 /* ================= HEADER ================= */
 
@@ -172,7 +182,8 @@ nav a:hover{
   border-radius:30px;
 }
 
-/* ================= HERO SLIDESHOW ================= */
+
+/* ================= HERO ================= */
 
 .hero{
   min-height:92vh;
@@ -352,6 +363,7 @@ nav a:hover{
   z-index:1;
 }
 
+
 /* ================= SECTIONS ================= */
 
 .section{
@@ -390,7 +402,8 @@ nav a:hover{
   line-height:1.7;
 }
 
-/* ================= CATEGORY SCROLLER ================= */
+
+/* ================= CATEGORY ================= */
 
 .category-scroll{
   display:flex;
@@ -434,6 +447,7 @@ nav a:hover{
   font-size:12px;
   font-weight:800;
 }
+
 
 /* ================= PRODUCT CONTROLS ================= */
 
@@ -485,6 +499,7 @@ nav a:hover{
   color:#fff;
   border-color:#080808;
 }
+
 
 /* ================= PRODUCTS ================= */
 
@@ -618,29 +633,97 @@ nav a:hover{
   font-size:16px;
 }
 
-/* ================= STATEMENT ================= */
 
-.statement{
-  background:#080808;
-  color:#fff;
-  padding:120px 24px;
-}
+/* ================= AIRPODS AD ================= */
 
-.statement-inner{
+.airpods-ad{
+  position:relative;
+  overflow:hidden;
+  min-height:560px;
+  margin:0 auto 80px;
   max-width:1280px;
-  margin:auto;
+  border-radius:45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:80px 24px;
+  color:#fff;
+  background:#080808;
 }
 
-.statement h2{
-  max-width:1050px;
-  font-size:clamp(42px,6vw,78px);
-  line-height:.95;
+.airpods-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+  transform:scale(1.02);
+  transition:transform 8s ease;
+}
+
+.airpods-ad:hover .airpods-bg{
+  transform:scale(1.06);
+}
+
+.airpods-overlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.12),
+      rgba(0,0,0,.72)
+    );
+}
+
+.airpods-content{
+  position:relative;
+  z-index:2;
+  max-width:650px;
+  color:#fff;
+}
+
+.airpods-brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  font-size:clamp(52px,7vw,88px);
+  line-height:1;
+  font-weight:900;
   letter-spacing:-5px;
+  text-shadow:0 5px 25px rgba(0,0,0,.35);
 }
 
-.statement h2 span{
-  color:var(--gold2);
+.apple-logo{
+  font-size:.78em;
+  font-weight:400;
+  letter-spacing:0;
 }
+
+.airpods-description{
+  max-width:500px;
+  margin:25px auto 0;
+  color:rgba(255,255,255,.82);
+  font-size:16px;
+  line-height:1.7;
+}
+
+.airpods-price{
+  margin-top:22px;
+  font-size:22px;
+  font-weight:800;
+}
+
+.airpods-button{
+  margin-top:25px;
+  background:#fff;
+  color:#111;
+}
+
 
 /* ================= TRUST ================= */
 
@@ -677,6 +760,7 @@ nav a:hover{
   font-size:13px;
   line-height:1.6;
 }
+
 
 /* ================= STORE ================= */
 
@@ -715,6 +799,7 @@ nav a:hover{
   font-size:13px;
 }
 
+
 /* ================= CTA ================= */
 
 .cta{
@@ -741,6 +826,7 @@ nav a:hover{
   color:#888;
   margin-bottom:28px;
 }
+
 
 /* ================= DETAILS ================= */
 
@@ -886,6 +972,7 @@ nav a:hover{
   white-space:pre-line;
 }
 
+
 /* ================= FOOTER ================= */
 
 footer{
@@ -934,6 +1021,7 @@ body.details-open .normal-site{
   display:none;
 }
 
+
 /* ================= MOBILE ================= */
 
 @media(max-width:950px){
@@ -966,7 +1054,9 @@ body.details-open .normal-site{
   .details-main-image{
     height:450px;
   }
+
 }
+
 
 @media(max-width:600px){
 
@@ -1079,14 +1169,6 @@ body.details-open .normal-site{
     flex:1;
   }
 
-  .statement{
-    padding:80px 20px;
-  }
-
-  .statement h2{
-    letter-spacing:-3px;
-  }
-
   .trust-grid{
     grid-template-columns:1fr;
   }
@@ -1124,97 +1206,6 @@ body.details-open .normal-site{
     font-size:44px;
     letter-spacing:-3px;
   }
-}
-
-/* ================= AIRPODS AD ================= */
-
-.airpods-ad{
-  position:relative;
-  overflow:hidden;
-  min-height:560px;
-  margin:0 auto 80px;
-  max-width:1280px;
-  border-radius:45px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:80px 24px;
-}
-
-.airpods-bg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:0;
-  transform:scale(1.02);
-  transition:transform 8s ease;
-}
-
-.airpods-ad:hover .airpods-bg{
-  transform:scale(1.06);
-}
-
-.airpods-overlay{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.12),
-      rgba(0,0,0,.72)
-    );
-}
-
-.airpods-content{
-  position:relative;
-  z-index:2;
-  max-width:650px;
-  color:#fff;
-}
-
-.airpods-brand{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
-  font-size:clamp(52px,7vw,88px);
-  line-height:1;
-  font-weight:900;
-  letter-spacing:-5px;
-  text-shadow:0 5px 25px rgba(0,0,0,.35);
-}
-
-.apple-logo{
-  font-size:.78em;
-  font-weight:400;
-  letter-spacing:0;
-}
-
-.airpods-description{
-  max-width:500px;
-  margin:25px auto 0;
-  color:rgba(255,255,255,.82);
-  font-size:16px;
-  line-height:1.7;
-}
-
-.airpods-price{
-  margin-top:22px;
-  font-size:22px;
-  font-weight:800;
-}
-
-.airpods-button{
-  margin-top:25px;
-  background:#fff;
-  color:#111;
-}
-
-@media(max-width:600px){
 
   .airpods-ad{
     min-height:500px;
@@ -1233,154 +1224,309 @@ body.details-open .normal-site{
   }
 
 }
+
+
+/* ================= SUPABASE ================= */
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- ================= HEADER ================= -->
+
 <header>
+
 <div class="nav">
 
-<a href="#" class="brand" onclick="closeDetails()">
-<div class="logo">TG</div>
-<div>TWINKLE GADGET<span>.</span></div>
+<a
+href="#"
+class="brand"
+onclick="closeDetails()">
+
+<div class="logo">
+TG
+</div>
+
+<div>
+TWINKLE GADGET<span>.</span>
+</div>
+
 </a>
 
+
 <nav>
-<a href="#iphone">iPhone</a>
-<a href="#collection">Collection</a>
-<a href="#trust">Why Twinkle</a>
-<a href="#location">Visit</a>
+
+<a href="#iphone">
+iPhone
+</a>
+
+<a href="#collection">
+Collection
+</a>
+
+<a href="#trust">
+Why Twinkle
+</a>
+
+<a href="#location">
+Visit
+</a>
+
 
 <a
 class="nav-whatsapp"
 href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'd%20like%20to%20make%20an%20enquiry."
 target="_blank">
+
 WhatsApp
+
 </a>
+
 </nav>
 
 </div>
+
 </header>
+
+
+<!-- ================= NORMAL SITE ================= -->
 
 <div class="normal-site">
 
+
 <!-- ================= HERO ================= -->
 
-<section class="hero" id="iphone">
+<section
+class="hero"
+id="iphone">
 
-<div class="hero-slideshow" id="heroSlideshow">
+<div
+class="hero-slideshow"
+id="heroSlideshow">
 
-<div class="hero-empty" id="heroEmpty">
+<div
+class="hero-empty"
+id="heroEmpty">
+
 Loading...
+
 </div>
 
 </div>
+
 
 <div class="hero-overlay"></div>
+
 <div class="hero-bottom-overlay"></div>
+
 
 <div class="hero-inner">
 
 <div class="hero-copy">
 
+
 <h1>
+
 Your next
 <span>iPhone.</span>
+
 </h1>
 
+
 <p>
+
 Premium smartphones and gadgets,
 carefully selected for you.
 Buy, sell, swap or upgrade with
 Twinkle Gadgets.
+
 </p>
+
 
 <div class="hero-buttons">
 
-<a class="btn btn-black" href="#collection">
+
+<a
+class="btn btn-black"
+href="#collection">
+
 Shop Collection
+
 </a>
+
 
 <a
 class="btn btn-outline"
 href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'm%20looking%20for%20an%20iPhone."
 target="_blank">
+
 WhatsApp Us
+
 </a>
 
-</div>
 
 </div>
 
 </div>
 
-<div class="hero-dots" id="heroDots"></div>
+</div>
+
+
+<div
+class="hero-dots"
+id="heroDots">
+</div>
+
 
 </section>
 
-<!-- CATEGORIES -->
+
+
+<!-- ================= CATEGORIES ================= -->
 
 <section class="section">
 
+
 <div class="section-top">
 
+
 <div>
-<div class="section-label">Explore</div>
+
+<div class="section-label">
+Explore
+</div>
+
 
 <h2 class="section-title">
 Shop by category.
 </h2>
+
 </div>
+
 
 <p class="section-description">
+
 Find your next device by category,
 then explore the latest stock available.
+
 </p>
 
+
 </div>
+
 
 <div class="category-scroll">
 
-<div class="category active" onclick="chooseCategory('all')">
-<div class="category-icon">✦</div>
-<div class="category-name">All Products</div>
+
+<div
+class="category active"
+onclick="chooseCategory('all')">
+
+<div class="category-icon">
+✦
 </div>
 
-<div class="category" onclick="chooseCategory('iphone')">
-<div class="category-icon"></div>
-<div class="category-name">iPhone</div>
+<div class="category-name">
+All Products
 </div>
 
-<div class="category" onclick="chooseCategory('samsung')">
-<div class="category-icon">S</div>
-<div class="category-name">Samsung</div>
 </div>
 
-<div class="category" onclick="chooseCategory('android')">
-<div class="category-icon">◉</div>
-<div class="category-name">Android</div>
+
+<div
+class="category"
+onclick="chooseCategory('iphone')">
+
+<div class="category-icon">
+
 </div>
 
-<div class="category" onclick="chooseCategory('gadgets')">
-<div class="category-icon">⌁</div>
-<div class="category-name">Gadgets</div>
+<div class="category-name">
+iPhone
 </div>
 
-<div class="category" onclick="chooseCategory('accessories')">
-<div class="category-icon">◌</div>
-<div class="category-name">Accessories</div>
 </div>
+
+
+<div
+class="category"
+onclick="chooseCategory('samsung')">
+
+<div class="category-icon">
+S
+</div>
+
+<div class="category-name">
+Samsung
+</div>
+
+</div>
+
+
+<div
+class="category"
+onclick="chooseCategory('android')">
+
+<div class="category-icon">
+◉
+</div>
+
+<div class="category-name">
+Android
+</div>
+
+</div>
+
+
+<div
+class="category"
+onclick="chooseCategory('gadgets')">
+
+<div class="category-icon">
+⌁
+</div>
+
+<div class="category-name">
+Gadgets
+</div>
+
+</div>
+
+
+<div
+class="category"
+onclick="chooseCategory('accessories')">
+
+<div class="category-icon">
+◌
+</div>
+
+<div class="category-name">
+Accessories
+</div>
+
+</div>
+
 
 </div>
 
 </section>
 
-<!-- COLLECTION -->
 
-<section class="section" id="collection">
+
+<!-- ================= COLLECTION ================= -->
+
+<section
+class="section"
+id="collection">
+
 
 <div class="section-top">
+
 
 <div>
 
@@ -1388,49 +1534,75 @@ then explore the latest stock available.
 Available Now
 </div>
 
+
 <h2 class="section-title">
 Latest arrivals.
 </h2>
 
 </div>
 
+
 <p class="section-description">
+
 Our current available stock.
 Tap any device to see the full details.
+
 </p>
+
 
 </div>
 
+
 <div class="controls">
+
 
 <input
 class="search"
 id="productSearch"
 type="search"
 placeholder="Search iPhone, Samsung, gadgets..."
-autocomplete="off">
+autocomplete="off"
+>
 
-<div class="filters" id="filters"></div>
+
+<div
+class="filters"
+id="filters">
+</div>
+
 
 </div>
 
-<div class="products" id="products">
 
-<div style="
+<div
+class="products"
+id="products">
+
+
+<div
+style="
 grid-column:1/-1;
 text-align:center;
 padding:70px;
-color:#777;">
+color:#777;
+">
+
 Loading available devices...
-</div>
 
 </div>
+
+
+</div>
+
 
 </section>
 
-<!-- STATEMENT -->
 
-<section class="statement airpods-ad">
+
+<!-- ================= AIRPODS AD ================= -->
+
+<section class="airpods-ad">
+
 
 <img
 src="https://tpasjsjofhxpslomciqd.supabase.co/storage/v1/object/public/homepage-images/Untitled%20folder/IMG_1446.webp"
@@ -1438,87 +1610,67 @@ alt="AirPods"
 class="airpods-bg"
 >
 
-<div class="airpods-overlay"></div>
+
+<div class="airpods-overlay">
+</div>
+
 
 <div class="airpods-content">
 
+
 <div class="airpods-brand">
-<span class="apple-logo"></span>
-<span>AirPods</span>
+
+<span class="apple-logo">
+
+</span>
+
+<span>
+AirPods
+</span>
+
 </div>
+
 
 <p class="airpods-description">
-Crystal-clear sound, a sleek design, and seamless switching between devices.
+
+Crystal-clear sound, a sleek design,
+and seamless switching between devices.
+
 </p>
 
+
 <div class="airpods-price">
+
 From ₦299,000
+
 </div>
+
 
 <a
 class="btn airpods-button"
 href="#collection">
+
 Shop now
+
 </a>
 
+
 </div>
+
 
 </section>
 
-<div class="statement-inner" style="
-position:relative;
-z-index:2;
-">
 
-<div class="section-label">
-AirPods
-</div>
 
-<h2>
-Crystal-clear sound,
-<span>made simple.</span>
-</h2>
+<!-- ================= TRUST ================= -->
 
-<p style="
-max-width:500px;
-color:rgba(255,255,255,.75);
-font-size:16px;
-line-height:1.7;
-margin-top:25px;
-">
-Crystal-clear sound, a sleek design, and seamless switching between devices.
-</p>
+<section
+class="section trust"
+id="trust">
 
-<div style="
-margin-top:25px;
-font-size:22px;
-font-weight:800;
-">
-From ₦299,000
-</div>
-
-<a
-class="btn"
-href="#collection"
-style="
-margin-top:25px;
-background:#fff;
-color:#111;
-">
-Shop now
-</a>
-
-</div>
-
-</section>
-
-</section>
-
-<!-- TRUST -->
-
-<section class="section trust" id="trust">
 
 <div class="section-top">
+
 
 <div>
 
@@ -1526,92 +1678,161 @@ Shop now
 Shop With Confidence
 </div>
 
+
 <h2 class="section-title">
 Why Twinkle.
 </h2>
 
 </div>
 
+
 <p class="section-description">
+
 A decade of experience helping customers
 find the right devices.
+
 </p>
 
+
 </div>
+
+
 
 <div class="trust-grid">
 
+
+<!-- 10 YEARS -->
+
 <div class="trust-card">
 
-<div class="trust-icon">◉</div>
+<div class="trust-icon">
+◉
+</div>
 
-<h3>10+ Years</h3>
+
+<h3>
+10+ Years
+</h3>
+
 
 <p>
+
 A decade of experience in smartphones,
 gadgets, repairs and device trading.
+
 </p>
 
 </div>
+
+
+
+<!-- LAGOS -->
 
 <div class="trust-card">
 
-<div class="trust-icon">⌂</div>
+<div class="trust-icon">
+⌂
+</div>
 
-<h3>Lagos Island</h3>
+
+<h3>
+Lagos Island
+</h3>
+
 
 <p>
+
 Visit us at Sangrous Shopping Plaza,
 Lagos Island.
+
 </p>
 
 </div>
+
+
+
+<!-- DELIVERY -->
 
 <div class="trust-card delivery-card">
 
-<img
-src=https://tpasjsjofhxpslomciqd.supabase.co/storage/v1/object/public/homepage-images/Untitled%20folder/IMG_1445.jpeg
-alt="Nationwide delivery">
 
-<div class="delivery-overlay"></div>
+<img
+src="https://tpasjsjofhxpslomciqd.supabase.co/storage/v1/object/public/homepage-images/Untitled%20folder/IMG_1445.jpeg"
+alt="Nationwide delivery"
+>
+
+
+<div class="delivery-overlay">
+</div>
+
 
 <div class="delivery-content">
 
-<div class="trust-icon">↗</div>
 
-<h3>Nationwide Delivery</h3>
+<div class="trust-icon">
+↗
+</div>
+
+
+<h3>
+Nationwide Delivery
+</h3>
+
 
 <p>
+
 We arrange delivery to customers
 across Nigeria.
+
 </p>
 
-</div>
 
 </div>
+
+
+</div>
+
+
+
+<!-- SUPPORT -->
 
 <div class="trust-card">
 
-<div class="trust-icon">💬</div>
+<div class="trust-icon">
+💬
+</div>
 
-<h3>Direct Support</h3>
+
+<h3>
+Direct Support
+</h3>
+
 
 <p>
+
 Ask about any device directly through
 WhatsApp before making your decision.
+
 </p>
 
 </div>
+
 
 </div>
 
 </section>
 
-<!-- STORE -->
 
-<section class="section" id="location">
+
+<!-- ================= STORE ================= -->
+
+<section
+class="section"
+id="location">
+
 
 <div class="section-top">
+
 
 <div>
 
@@ -1619,230 +1840,374 @@ WhatsApp before making your decision.
 Visit Us
 </div>
 
+
 <h2 class="section-title">
 See you in Lagos.
 </h2>
 
 </div>
 
+
 </div>
+
+
 
 <div class="store">
 
+
 <div class="store-card">
 
+
 <div>
+
 
 <div class="store-label">
 Our Store
 </div>
 
+
 <h3>
 Sangrous Shopping Plaza
 </h3>
+
 
 <p>
 Lagos Island, Lagos, Nigeria
 </p>
 
+
 </div>
+
 
 <a
 class="btn btn-black"
 href="https://www.google.com/maps/search/?api=1&query=Sangrous%20Shopping%20Plaza%20Lagos%20Island"
 target="_blank">
+
 Open Maps
+
 </a>
+
 
 </div>
 
+
+
 <div class="store-card">
 
+
 <div>
+
 
 <div class="store-label">
 Need a device?
 </div>
 
+
 <h3>
 Let's talk.
 </h3>
 
+
 <p>
+
 Tell us what you're looking for
 and we'll help you find it.
+
 </p>
 
+
 </div>
+
 
 <a
 class="btn btn-black"
 href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'm%20looking%20for%20a%20device."
 target="_blank">
+
 Chat on WhatsApp
+
 </a>
 
+
 </div>
+
 
 </div>
 
 </section>
 
-<!-- CTA -->
+
+
+<!-- ================= CTA ================= -->
 
 <section class="cta">
+
 
 <div class="section-label">
 Twinkle Gadgets
 </div>
 
+
 <h2>
 Your next device starts here.
 </h2>
 
+
 <p>
 Phones • Gadgets • Repairs • Buy • Sell • Swap
 </p>
+
 
 <a
 class="btn"
 style="background:#fff;color:#111;"
 href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I'd%20like%20to%20make%20an%20enquiry."
 target="_blank">
+
 Start a WhatsApp Enquiry
+
 </a>
+
 
 </section>
 
+
+
+<!-- ================= FOOTER ================= -->
+
 <footer>
+
 
 <div class="footer-inner">
 
+
 <div class="footer-brand">
+
 TWINKLE GADGET<span>.</span>
+
 </div>
+
 
 <div class="footer-links">
 
-<a href="#iphone">iPhone</a>
-<a href="#collection">Collection</a>
-<a href="#trust">Why Twinkle</a>
-<a href="#location">Location</a>
+
+<a href="#iphone">
+iPhone
+</a>
+
+
+<a href="#collection">
+Collection
+</a>
+
+
+<a href="#trust">
+Why Twinkle
+</a>
+
+
+<a href="#location">
+Location
+</a>
+
 
 <a
 href="https://instagram.com/twinkle_gadget"
 target="_blank">
+
 Instagram
+
 </a>
+
 
 <a
 href="https://wa.me/2349049388119"
 target="_blank">
+
 WhatsApp
+
 </a>
 
+
 </div>
 
+
 <div class="copy">
+
 © 2026 Twinkle Gadgets • Lagos Island, Nigeria • All rights reserved.
+
 </div>
+
 
 </div>
 
 </footer>
 
+
 </div>
 
-<!-- PRODUCT DETAILS -->
 
-<section class="details" id="details">
+<!-- ================= PRODUCT DETAILS ================= -->
+
+<section
+class="details"
+id="details">
+
 
 <div class="details-inner">
 
-<button class="back" onclick="closeDetails()">
+
+<button
+class="back"
+onclick="closeDetails()">
+
 ← Back to Collection
+
 </button>
+
 
 <div class="details-card">
 
+
 <div>
 
+
 <div class="details-main-image">
+
 
 <img
 id="detailsImage"
 src=""
-alt="Product">
+alt="Product"
+>
+
 
 </div>
 
-<div class="thumbs" id="thumbs"></div>
+
+<div
+class="thumbs"
+id="thumbs">
+</div>
+
 
 </div>
+
+
 
 <div class="details-info">
 
-<div class="category" id="detailsCategory">
+
+<div
+class="category"
+id="detailsCategory">
+
 AVAILABLE
+
 </div>
+
 
 <h1 id="detailsName">
 Product
 </h1>
 
-<div class="details-price" id="detailsPrice">
+
+<div
+class="details-price"
+id="detailsPrice">
+
 ₦0
+
 </div>
+
 
 <div class="specs">
 
-<div class="spec">
-<span>Storage</span>
-<strong id="detailsStorage">—</strong>
-</div>
 
 <div class="spec">
-<span>Battery Health</span>
-<strong id="detailsBattery">—</strong>
+
+<span>
+Storage
+</span>
+
+<strong id="detailsStorage">
+—
+</strong>
+
 </div>
+
 
 <div class="spec">
-<span>Condition</span>
-<strong id="detailsCondition">—</strong>
-</div>
+
+<span>
+Battery Health
+</span>
+
+<strong id="detailsBattery">
+—
+</strong>
 
 </div>
+
+
+<div class="spec">
+
+<span>
+Condition
+</span>
+
+<strong id="detailsCondition">
+—
+</strong>
+
+</div>
+
+
+</div>
+
 
 <div
 class="details-description"
 id="detailsDescription">
 </div>
 
+
 <a
 id="detailsWhatsapp"
 class="btn btn-black"
 href="#"
 target="_blank">
+
 💬 Enquire on WhatsApp
+
 </a>
 
-</div>
 
 </div>
+
+
+</div>
+
 
 </div>
 
 </section>
 
+
+
 <script>
+
 
 /* ================= SUPABASE ================= */
 
 const SUPABASE_URL =
 "https://tpasjsjofhxpslomciqd.supabase.co";
 
+
 const SUPABASE_KEY =
 "sb_publishable_T23aVAQOy6JSldACQSNkFQ_TGQSEVMX";
+
 
 const supabaseClient =
 supabase.createClient(
@@ -1850,15 +2215,23 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
+
+
 /* ================= STATE ================= */
 
 let productsData = [];
+
 let selectedCategory = "all";
+
 let searchTerm = "";
 
 let heroSlides = [];
+
 let heroIndex = 0;
+
 let heroTimer = null;
+
+
 
 /* ================= HELPERS ================= */
 
@@ -1874,6 +2247,8 @@ return div.innerHTML;
 
 }
 
+
+
 function getImages(product){
 
 if(
@@ -1887,6 +2262,7 @@ x => typeof x === "string" && x.trim()
 
 }
 
+
 if(
 typeof product.image_url === "string" &&
 product.image_url.trim()
@@ -1896,17 +2272,22 @@ return [product.image_url];
 
 }
 
+
 return [];
 
 }
+
+
 
 function getProductId(product){
 
 if(product.id != null)
 return String(product.id);
 
+
 if(product.uuid != null)
 return String(product.uuid);
+
 
 return [
 product.name || "",
@@ -1916,44 +2297,40 @@ product.created_at || ""
 
 }
 
+
+
 function whatsapp(product){
 
 const price =
 Number(product.price || 0)
 .toLocaleString("en-NG");
 
+
 const message =
 `Hello Twinkle Gadgets, I'm interested in the ${product.name || "device"}${product.storage ? " " + product.storage : ""} listed for ₦${price}.`;
+
 
 return "https://wa.me/2349049388119?text=" +
 encodeURIComponent(message);
 
 }
 
+
+
 /* ================= HERO PHOTO SLIDESHOW ================= */
-
-/*
-The slideshow looks ONLY for products created in the
-Admin Panel as "Hero Photo".
-
-It does not use normal product photos.
-*/
 
 async function loadHeroPhotos(){
 
 const slideshow =
 document.getElementById("heroSlideshow");
 
+
 const empty =
 document.getElementById("heroEmpty");
 
+
 try{
 
-/*
-Find Hero Photo entries in the products table.
-The name/category check makes sure normal products
-are not accidentally used.
-*/
 
 const {data,error} =
 await supabaseClient
@@ -1966,15 +2343,19 @@ await supabaseClient
 ascending:false
 });
 
+
 if(error)
 throw error;
 
+
 const photos = [];
+
 
 (data || []).forEach(product => {
 
 const images =
 getImages(product);
+
 
 images.forEach(url => {
 
@@ -1992,14 +2373,13 @@ photos.push(url.trim());
 
 });
 
-/*
-Also support a Hero Photo product where the exact
-product name is used.
-*/
 
 if(!photos.length){
 
-const {data:fallback,error:fallbackError} =
+const {
+data:fallback,
+error:fallbackError
+} =
 await supabaseClient
 .from("products")
 .select("*")
@@ -2007,6 +2387,7 @@ await supabaseClient
 .order("created_at",{
 ascending:false
 });
+
 
 if(!fallbackError){
 
@@ -2032,48 +2413,59 @@ photos.push(url.trim());
 
 }
 
+
 if(!photos.length){
 
-empty.textContent =
-"";
+empty.textContent = "";
 
 return;
 
 }
 
+
 heroSlides =
 photos;
 
+
 empty.remove();
+
 
 heroSlides.forEach((url,index) => {
 
 const img =
 document.createElement("img");
 
+
 img.className =
 "hero-slide" +
 (index === 0 ? " active" : "");
 
+
 img.src = url;
+
 
 img.alt =
 "Twinkle Gadgets";
 
+
 img.loading =
 index === 0 ? "eager" : "lazy";
+
 
 slideshow.appendChild(img);
 
 });
 
+
 buildHeroDots();
+
 
 if(heroSlides.length > 1){
 
 startHeroSlideshow();
 
 }
+
 
 }catch(error){
 
@@ -2082,31 +2474,38 @@ console.error(
 error
 );
 
-empty.textContent =
-"";
+
+empty.textContent = "";
 
 }
 
 }
+
+
 
 function buildHeroDots(){
 
 const dots =
 document.getElementById("heroDots");
 
+
 dots.innerHTML = "";
+
 
 heroSlides.forEach((_,index) => {
 
 const dot =
 document.createElement("button");
 
+
 dot.className =
 "hero-dot" +
 (index === 0 ? " active" : "");
 
+
 dot.type =
 "button";
+
 
 dot.onclick = () => {
 
@@ -2114,11 +2513,14 @@ showHeroSlide(index);
 
 };
 
+
 dots.appendChild(dot);
 
 });
 
 }
+
+
 
 function showHeroSlide(index){
 
@@ -2127,17 +2529,21 @@ document.querySelectorAll(
 ".hero-slide"
 );
 
+
 const dots =
 document.querySelectorAll(
 ".hero-dot"
 );
 
+
 if(!slides.length)
 return;
+
 
 heroIndex =
 (index + slides.length) %
 slides.length;
+
 
 slides.forEach((slide,i) => {
 
@@ -2147,6 +2553,7 @@ i === heroIndex
 );
 
 });
+
 
 dots.forEach((dot,i) => {
 
@@ -2159,9 +2566,12 @@ i === heroIndex
 
 }
 
+
+
 function startHeroSlideshow(){
 
 clearInterval(heroTimer);
+
 
 heroTimer =
 setInterval(() => {
@@ -2174,6 +2584,8 @@ heroIndex + 1
 
 }
 
+
+
 /* ================= FILTERS ================= */
 
 function buildFilters(){
@@ -2181,13 +2593,16 @@ function buildFilters(){
 const box =
 document.getElementById("filters");
 
+
 const categories = [];
+
 
 productsData.forEach(product => {
 
 const category =
 String(product.category || "")
 .trim();
+
 
 if(
 category &&
@@ -2202,16 +2617,21 @@ categories.push(category);
 
 });
 
+
 box.innerHTML = "";
+
 
 const all =
 document.createElement("button");
 
+
 all.className =
 "filter active";
 
+
 all.textContent =
 "All";
+
 
 all.onclick = () => {
 
@@ -2223,18 +2643,23 @@ renderProducts();
 
 };
 
+
 box.appendChild(all);
+
 
 categories.sort().forEach(category => {
 
 const button =
 document.createElement("button");
 
+
 button.className =
 "filter";
 
+
 button.textContent =
 category;
+
 
 button.onclick = () => {
 
@@ -2246,11 +2671,14 @@ renderProducts();
 
 };
 
+
 box.appendChild(button);
 
 });
 
 }
+
+
 
 function updateFilters(){
 
@@ -2270,6 +2698,8 @@ String(selectedCategory).toLowerCase()
 
 }
 
+
+
 function chooseCategory(category){
 
 selectedCategory =
@@ -2277,14 +2707,17 @@ category === "all"
 ? "all"
 : category;
 
+
 document
 .querySelectorAll(".category")
 .forEach(item =>
 item.classList.remove("active")
 );
 
+
 const categories =
 document.querySelectorAll(".category");
+
 
 categories.forEach(item => {
 
@@ -2300,7 +2733,9 @@ item.classList.add("active");
 
 });
 
+
 renderProducts();
+
 
 document
 .getElementById("collection")
@@ -2310,27 +2745,34 @@ behavior:"smooth"
 
 }
 
+
+
 /* ================= FILTER PRODUCTS ================= */
 
 function filteredProducts(){
 
 return productsData.filter(product => {
 
+
 const category =
 String(product.category || "")
 .toLowerCase();
+
 
 const name =
 String(product.name || "")
 .toLowerCase();
 
+
 const storage =
 String(product.storage || "")
 .toLowerCase();
 
+
 const condition =
 String(product.condition || "")
 .toLowerCase();
+
 
 const searchMatch =
 !searchTerm ||
@@ -2339,6 +2781,7 @@ category.includes(searchTerm) ||
 storage.includes(searchTerm) ||
 condition.includes(searchTerm);
 
+
 const categoryMatch =
 selectedCategory === "all" ||
 category === selectedCategory.toLowerCase() ||
@@ -2346,32 +2789,40 @@ category.includes(
 selectedCategory.toLowerCase()
 );
 
+
 return searchMatch && categoryMatch;
 
 });
 
 }
 
-/* ================= RENDER ================= */
+
+
+/* ================= RENDER PRODUCTS ================= */
 
 function renderProducts(){
 
 const container =
 document.getElementById("products");
 
+
 container.innerHTML = "";
+
 
 const products =
 filteredProducts();
 
+
 if(!products.length){
 
 container.innerHTML = `
+
 <div style="
 grid-column:1/-1;
 text-align:center;
 padding:70px 20px;
-color:#777;">
+color:#777;
+">
 
 No devices match your search.
 
@@ -2381,33 +2832,43 @@ No devices match your search.
 href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20stock."
 target="_blank"
 style="color:#b08a32;font-weight:800;">
+
 Ask us for available stock
+
 </a>
 
 </div>
+
 `;
 
 return;
 
 }
 
+
 products.forEach((product,index) => {
+
 
 const card =
 document.createElement("article");
 
+
 card.className =
 "product";
+
 
 const images =
 getImages(product);
 
+
 const image =
 images[0] || "";
+
 
 const price =
 Number(product.price || 0)
 .toLocaleString("en-NG");
+
 
 card.innerHTML = `
 
@@ -2432,15 +2893,27 @@ Image unavailable
 
 </div>
 
+
 <div class="product-info">
 
+
 <div class="product-category">
-${escapeHtml(product.category || "Available")}
+
+${escapeHtml(
+product.category || "Available"
+)}
+
 </div>
 
+
 <h3>
-${escapeHtml(product.name || "Unnamed device")}
+
+${escapeHtml(
+product.name || "Unnamed device"
+)}
+
 </h3>
+
 
 <div class="product-meta">
 
@@ -2449,11 +2922,14 @@ product.condition ||
 "Condition not specified"
 )}
 
-${product.storage
+${
+product.storage
 ? " • " + escapeHtml(product.storage)
-: ""}
+: ""
+}
 
 </div>
+
 
 <div class="product-meta">
 
@@ -2464,19 +2940,28 @@ product.battery ||
 
 </div>
 
+
 <div class="product-bottom">
 
+
 <div class="price">
+
 ₦${price}
+
 </div>
 
+
 <div class="product-actions">
+
 
 <button
 class="view"
 type="button">
+
 View
+
 </button>
+
 
 <a
 class="wa"
@@ -2484,17 +2969,25 @@ href="${whatsapp(product)}"
 target="_blank"
 rel="noopener"
 title="WhatsApp enquiry">
+
 💬
+
 </a>
 
-</div>
 
 </div>
 
+
 </div>
+
+
+</div>
+
 `;
 
+
 card.addEventListener("click",event => {
+
 
 if(
 event.target.closest(".wa")
@@ -2504,11 +2997,14 @@ return;
 
 }
 
+
 openDetails(product);
 
 });
 
+
 container.appendChild(card);
+
 
 requestAnimationFrame(() => {
 
@@ -2523,6 +3019,8 @@ index * 70
 
 }
 
+
+
 /* ================= LOAD PRODUCTS ================= */
 
 async function loadProducts(){
@@ -2530,7 +3028,9 @@ async function loadProducts(){
 const container =
 document.getElementById("products");
 
+
 try{
+
 
 const {data,error} =
 await supabaseClient
@@ -2541,63 +3041,82 @@ await supabaseClient
 ascending:false
 });
 
+
 if(error)
 throw error;
+
 
 const seen =
 new Set();
 
+
 productsData = [];
 
+
 (data || []).forEach(product => {
+
 
 const id =
 getProductId(product);
 
+
 if(seen.has(id))
 return;
 
+
 seen.add(id);
+
 
 productsData.push(product);
 
 });
 
+
 /*
-Do not allow the Hero Photo product itself
-to appear in the normal shop collection.
+Remove Hero Photo entries from
+the normal product collection.
 */
 
 productsData =
 productsData.filter(product => {
 
+
 const name =
 String(product.name || "")
 .toLowerCase();
 
+
 const category =
 String(product.category || "")
 .toLowerCase();
+
 
 return !name.includes("hero photo") &&
 !category.includes("hero photo");
 
 });
 
+
 buildFilters();
+
 
 renderProducts();
 
+
 }catch(error){
+
 
 console.error(error);
 
+
 container.innerHTML = `
+
 <div style="
 grid-column:1/-1;
 text-align:center;
 padding:70px 20px;
-color:#777;">
+color:#777;
+">
 
 Unable to load products right now.
 
@@ -2607,15 +3126,20 @@ Unable to load products right now.
 href="https://wa.me/2349049388119"
 target="_blank"
 style="color:#b08a32;font-weight:800;">
+
 Contact Twinkle Gadgets
+
 </a>
 
 </div>
+
 `;
 
 }
 
 }
+
+
 
 /* ================= SEARCH ================= */
 
@@ -2625,15 +3149,19 @@ document
 "input",
 event => {
 
+
 searchTerm =
 event.target.value
 .toLowerCase()
 .trim();
 
+
 renderProducts();
 
 }
 );
+
+
 
 /* ================= DETAILS ================= */
 
@@ -2642,42 +3170,57 @@ function openDetails(product){
 const images =
 getImages(product);
 
+
 const main =
 document.getElementById(
 "detailsImage"
 );
 
+
 main.src =
 images[0] || "";
+
 
 main.alt =
 product.name || "Product";
 
+
 const thumbs =
 document.getElementById("thumbs");
 
+
 thumbs.innerHTML = "";
+
 
 images.forEach((url,index) => {
 
+
 const button =
 document.createElement("button");
+
 
 button.className =
 "thumb" +
 (index === 0 ? " active" : "");
 
+
 button.innerHTML = `
+
 <img
 src="${escapeHtml(url)}"
 alt="">
+
 `;
+
 
 button.onclick = event => {
 
+
 event.stopPropagation();
 
+
 main.src = url;
+
 
 document
 .querySelectorAll(".thumb")
@@ -2685,13 +3228,16 @@ document
 x.classList.remove("active")
 );
 
+
 button.classList.add("active");
 
 };
 
+
 thumbs.appendChild(button);
 
 });
+
 
 document.getElementById(
 "detailsCategory"
@@ -2699,11 +3245,13 @@ document.getElementById(
 product.category ||
 "AVAILABLE";
 
+
 document.getElementById(
 "detailsName"
 ).textContent =
 product.name ||
 "Product";
+
 
 document.getElementById(
 "detailsPrice"
@@ -2712,11 +3260,13 @@ document.getElementById(
 Number(product.price || 0)
 .toLocaleString("en-NG");
 
+
 document.getElementById(
 "detailsStorage"
 ).textContent =
 product.storage ||
 "Not specified";
+
 
 document.getElementById(
 "detailsBattery"
@@ -2724,11 +3274,13 @@ document.getElementById(
 product.battery ||
 "Not specified";
 
+
 document.getElementById(
 "detailsCondition"
 ).textContent =
 product.condition ||
 "Not specified";
+
 
 document.getElementById(
 "detailsDescription"
@@ -2736,14 +3288,17 @@ document.getElementById(
 product.description ||
 "";
 
+
 document.getElementById(
 "detailsWhatsapp"
 ).href =
 whatsapp(product);
 
+
 document.body.classList.add(
 "details-open"
 );
+
 
 document.getElementById(
 "details"
@@ -2751,6 +3306,7 @@ document.getElementById(
 "active"
 );
 
+
 window.scrollTo({
 top:0,
 behavior:"instant"
@@ -2758,7 +3314,9 @@ behavior:"instant"
 
 }
 
-/* ================= CLOSE ================= */
+
+
+/* ================= CLOSE DETAILS ================= */
 
 function closeDetails(){
 
@@ -2766,11 +3324,13 @@ document.body.classList.remove(
 "details-open"
 );
 
+
 document.getElementById(
 "details"
 ).classList.remove(
 "active"
 );
+
 
 window.scrollTo({
 top:0,
@@ -2779,12 +3339,18 @@ behavior:"instant"
 
 }
 
+
+
 /* ================= START ================= */
 
 loadHeroPhotos();
+
 loadProducts();
+
 
 </script>
 
+
 </body>
+
 </html>
