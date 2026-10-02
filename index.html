@@ -231,8 +231,8 @@ nav a:hover {
   font-size:13px;
   font-weight:800;
   transition:.25s;
-  border:none;
   cursor:pointer;
+  border:none;
 }
 
 .button:hover {
@@ -438,8 +438,8 @@ nav a:hover {
   font-size:10px;
   font-weight:800;
   white-space:nowrap;
-  border:none;
   cursor:pointer;
+  border:none;
 }
 
 .product-button:hover {
@@ -458,7 +458,7 @@ nav a:hover {
 .product-details {
   display:none;
   min-height:100vh;
-  padding:140px 22px 100px;
+  padding:125px 22px 90px;
   background:var(--cream);
 }
 
@@ -471,58 +471,82 @@ nav a:hover {
   margin:auto;
 }
 
-.product-details-back {
+.back-button {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(0,0,0,.14);
+  background:rgba(255,255,255,.55);
+  padding:11px 17px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
   margin-bottom:35px;
+  transition:.25s;
 }
 
-.product-details-layout {
+.back-button:hover {
+  border-color:var(--accent);
+  color:var(--accent);
+  transform:translateX(-3px);
+}
+
+.details-card {
   display:grid;
   grid-template-columns:1.05fr .95fr;
-  gap:45px;
-  align-items:center;
+  gap:40px;
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:30px;
+  padding:25px;
+  box-shadow:0 20px 70px rgba(0,0,0,.06);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
 }
 
 .details-image {
-  min-height:560px;
-  border-radius:30px;
-  background:
-    radial-gradient(circle at 50% 45%,#e7dfcf,transparent 34%),
-    linear-gradient(145deg,#f8f8f6,#e9e7e0);
-  border:1px solid rgba(255,255,255,.8);
-  box-shadow:0 20px 70px rgba(0,0,0,.07);
+  min-height:550px;
+  border-radius:24px;
+  overflow:hidden;
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 45%,#e7dfcf,transparent 34%),
+    linear-gradient(145deg,#f8f8f6,#e9e7e0);
 }
 
 .details-image img {
   width:100%;
   height:100%;
-  max-height:620px;
+  max-height:650px;
   object-fit:contain;
   padding:35px;
-  filter:drop-shadow(0 30px 35px rgba(0,0,0,.18));
+  filter:drop-shadow(0 30px 30px rgba(0,0,0,.18));
 }
 
 .details-info {
-  padding:20px 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:20px 15px;
 }
 
 .details-tag {
   color:var(--accent);
   text-transform:uppercase;
-  letter-spacing:2.5px;
+  letter-spacing:2px;
   font-size:10px;
   font-weight:800;
-  margin-bottom:14px;
+  margin-bottom:10px;
 }
 
-.details-info h2 {
-  font-size:clamp(42px,6vw,72px);
+.details-info h1 {
+  font-size:clamp(36px,5vw,64px);
   line-height:.95;
-  letter-spacing:-4px;
-  margin-bottom:25px;
+  letter-spacing:-3px;
+  margin-bottom:20px;
 }
 
 .details-price {
@@ -534,38 +558,36 @@ nav a:hover {
 .details-status {
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding:8px 13px;
+  width:max-content;
+  padding:7px 12px;
   border-radius:30px;
-  background:rgba(0,0,0,.06);
-  font-size:11px;
+  font-size:10px;
   font-weight:800;
-  margin-bottom:30px;
+  margin-bottom:25px;
 }
 
-.status-dot {
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#22a447;
+.status-available {
+  background:rgba(35,150,75,.10);
+  color:#218c4b;
 }
 
-.status-dot.sold {
-  background:#d83232;
+.status-sold {
+  background:rgba(190,50,50,.10);
+  color:#b43131;
 }
 
 .details-specs {
-  border-top:1px solid rgba(0,0,0,.10);
-  border-bottom:1px solid rgba(0,0,0,.10);
-  margin-bottom:30px;
+  border-top:1px solid rgba(0,0,0,.09);
+  border-bottom:1px solid rgba(0,0,0,.09);
+  margin-bottom:25px;
 }
 
 .detail-row {
   display:flex;
   justify-content:space-between;
   gap:20px;
-  padding:15px 0;
-  border-bottom:1px solid rgba(0,0,0,.07);
+  padding:14px 0;
+  border-bottom:1px solid rgba(0,0,0,.06);
   font-size:13px;
 }
 
@@ -573,11 +595,11 @@ nav a:hover {
   border-bottom:none;
 }
 
-.detail-row span:first-child {
+.detail-label {
   color:#777;
 }
 
-.detail-row span:last-child {
+.detail-value {
   font-weight:700;
   text-align:right;
 }
@@ -588,8 +610,14 @@ nav a:hover {
   flex-wrap:wrap;
 }
 
-.details-actions .button {
+.details-whatsapp {
+  flex:1;
   min-width:180px;
+}
+
+.details-sold {
+  opacity:.5;
+  pointer-events:none;
 }
 
 /* STATEMENT */
@@ -895,9 +923,8 @@ footer {
     font-size:72px;
   }
 
-  .product-details-layout {
+  .details-card {
     grid-template-columns:1fr;
-    gap:30px;
   }
 
   .details-image {
@@ -992,41 +1019,6 @@ footer {
     font-size:9px;
   }
 
-  .product-details {
-    padding:120px 16px 70px;
-  }
-
-  .product-details-layout {
-    gap:20px;
-  }
-
-  .details-image {
-    min-height:330px;
-    border-radius:22px;
-  }
-
-  .details-image img {
-    padding:20px;
-  }
-
-  .details-info h2 {
-    font-size:44px;
-    letter-spacing:-3px;
-  }
-
-  .details-price {
-    font-size:24px;
-  }
-
-  .details-actions {
-    display:grid;
-    grid-template-columns:1fr;
-  }
-
-  .details-actions .button {
-    width:100%;
-  }
-
   .services {
     grid-template-columns:1fr;
   }
@@ -1060,6 +1052,48 @@ footer {
     margin-top:25px;
   }
 
+  .product-details {
+    padding:110px 16px 70px;
+  }
+
+  .details-card {
+    padding:10px;
+    border-radius:22px;
+    gap:10px;
+  }
+
+  .details-image {
+    min-height:330px;
+    border-radius:18px;
+  }
+
+  .details-image img {
+    padding:20px;
+  }
+
+  .details-info {
+    padding:20px 10px 25px;
+  }
+
+  .details-info h1 {
+    font-size:40px;
+    letter-spacing:-2px;
+  }
+
+  .details-price {
+    font-size:23px;
+  }
+
+}
+
+/* HIDE NORMAL SITE WHEN DETAILS IS OPEN */
+
+body.details-open .normal-site {
+  display:none;
+}
+
+body.details-open header {
+  position:fixed;
 }
 
 </style>
@@ -1071,7 +1105,7 @@ footer {
 
 <div class="nav">
 
-<a href="#" class="brand">
+<a href="#" class="brand" onclick="closeProductDetails()">
 
 <div class="logo">
 TG
@@ -1085,15 +1119,15 @@ TWINKLE GADGET<span>.</span>
 
 <nav>
 
-<a href="#phones">
+<a href="#phones" onclick="closeProductDetails()">
 Collection
 </a>
 
-<a href="#services">
+<a href="#services" onclick="closeProductDetails()">
 Services
 </a>
 
-<a href="#location">
+<a href="#location" onclick="closeProductDetails()">
 Visit
 </a>
 
@@ -1117,7 +1151,11 @@ Contact
 </header>
 
 
-<main id="mainContent">
+<!-- NORMAL WEBSITE -->
+
+<div class="normal-site">
+
+<main>
 
 <section class="hero">
 
@@ -1158,8 +1196,6 @@ WhatsApp Us
 
 </section>
 
-
-<!-- LIVE PRODUCTS -->
 
 <section class="section" id="phones">
 
@@ -1540,161 +1576,6 @@ target="_blank">
 </main>
 
 
-<!-- PRODUCT DETAILS VIEW -->
-
-<section
-class="product-details"
-id="productDetails">
-
-<div class="product-details-inner">
-
-<div class="product-details-back">
-
-<button
-class="button button-outline"
-onclick="backToCollection()">
-← Back to Collection
-</button>
-
-</div>
-
-
-<div class="product-details-layout">
-
-<div class="details-image">
-
-<img
-id="detailsImage"
-src=""
-alt="Product">
-
-</div>
-
-
-<div class="details-info">
-
-<div
-class="details-tag"
-id="detailsCategory">
-Available
-</div>
-
-<h2
-id="detailsName">
-Product
-</h2>
-
-<div
-class="details-price"
-id="detailsPrice">
-₦0
-</div>
-
-
-<div
-class="details-status"
-id="detailsStatus">
-
-<span
-class="status-dot"
-id="statusDot">
-</span>
-
-<span
-id="statusText">
-Available
-</span>
-
-</div>
-
-
-<div class="details-specs">
-
-<div class="detail-row">
-
-<span>
-Storage
-</span>
-
-<span
-id="detailsStorage">
-—
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span>
-Battery Health
-</span>
-
-<span
-id="detailsBattery">
-—
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span>
-Condition
-</span>
-
-<span
-id="detailsCondition">
-—
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span>
-Availability
-</span>
-
-<span
-id="detailsAvailability">
-Available
-</span>
-
-</div>
-
-</div>
-
-
-<div class="details-actions">
-
-<a
-class="button button-light"
-id="detailsWhatsapp"
-href="#"
-target="_blank">
-Enquire on WhatsApp
-</a>
-
-<button
-class="button button-outline"
-onclick="backToCollection()">
-Back to Collection
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
 <footer>
 
 <div class="footer-inner">
@@ -1739,6 +1620,136 @@ WhatsApp
 
 </footer>
 
+</div>
+
+
+<!-- PRODUCT DETAILS VIEW -->
+
+<section
+class="product-details"
+id="productDetails">
+
+<div class="product-details-inner">
+
+<button
+class="back-button"
+onclick="closeProductDetails()">
+← Back to Collection
+</button>
+
+
+<div class="details-card">
+
+<div class="details-image">
+
+<img
+id="detailsImage"
+src=""
+alt="Product">
+
+</div>
+
+
+<div class="details-info">
+
+<div
+class="details-tag"
+id="detailsCategory">
+AVAILABLE
+</div>
+
+<h1 id="detailsName">
+Product
+</h1>
+
+<div
+class="details-price"
+id="detailsPrice">
+₦0
+</div>
+
+<div
+class="details-status status-available"
+id="detailsStatus">
+🟢 Available
+</div>
+
+
+<div class="details-specs">
+
+<div class="detail-row">
+
+<span class="detail-label">
+Storage
+</span>
+
+<span
+class="detail-value"
+id="detailsStorage">
+—
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+Battery Health
+</span>
+
+<span
+class="detail-value"
+id="detailsBattery">
+—
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+Condition
+</span>
+
+<span
+class="detail-value"
+id="detailsCondition">
+—
+</span>
+
+</div>
+
+</div>
+
+
+<div class="details-actions">
+
+<a
+id="detailsWhatsapp"
+class="button button-light details-whatsapp"
+href="#"
+target="_blank">
+Enquire on WhatsApp
+</a>
+
+<button
+class="button button-outline"
+onclick="closeProductDetails()">
+Back to Collection
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
 
 <script>
 
@@ -1757,9 +1768,24 @@ SUPABASE_KEY
 );
 
 
-/* KEEP PRODUCTS AVAILABLE FOR DETAILS VIEW */
+/* STORE CURRENT PRODUCTS */
 
-let allProducts = [];
+let productsData = [];
+
+
+/* SAFE TEXT */
+
+function escapeHtml(value) {
+
+const div =
+document.createElement("div");
+
+div.textContent =
+value ?? "";
+
+return div.innerHTML;
+
+}
 
 
 /* LOAD PRODUCTS */
@@ -1773,7 +1799,6 @@ const { data, error } =
 await supabaseClient
 .from("products")
 .select("*")
-.eq("available", true)
 .order("created_at", {
 ascending:false
 });
@@ -1794,19 +1819,31 @@ return;
 }
 
 
-allProducts = data || [];
+/*
+Only show available products
+on the public collection.
+Sold products remain in
+Supabase for the admin/history.
+*/
+
+productsData =
+(data || []).filter(product =>
+product.available === true
+);
 
 
-if (!data || data.length === 0) {
+if (productsData.length === 0) {
 
 container.innerHTML = `
 <div class="empty-products">
 No devices available right now.<br>
+
 <a
 href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
 style="color:#b08a32;font-weight:800;">
 Contact us for current stock
 </a>
+
 </div>
 `;
 
@@ -1818,24 +1855,13 @@ return;
 container.innerHTML = "";
 
 
-data.forEach((product,index) => {
+productsData.forEach((product,index) => {
 
 const card =
 document.createElement("article");
 
 card.className =
 "product";
-
-
-/*
-CLICKING THE CARD OPENS DETAILS.
-*/
-
-card.onclick = function() {
-
-openProductDetails(product);
-
-};
 
 
 const image =
@@ -1855,7 +1881,7 @@ Number(product.price || 0)
 const battery =
 product.battery
 ? escapeHtml(product.battery)
-: "";
+: "Not specified";
 
 
 card.innerHTML = `
@@ -1877,8 +1903,10 @@ ${escapeHtml(product.name)}
 </h3>
 
 <div class="product-condition">
-${escapeHtml(product.condition || "")}
-${product.storage ? " • " + escapeHtml(product.storage) : ""}
+${escapeHtml(product.condition || "Condition not specified")}
+${product.storage
+? " • " + escapeHtml(product.storage)
+: ""}
 </div>
 
 <div class="product-battery">
@@ -1905,20 +1933,21 @@ View Details
 
 /*
 IMPORTANT:
-BUTTON ALSO OPENS DETAILS.
-It does NOT go to WhatsApp.
+The entire card opens
+the details page.
+
+The button does NOT
+go to WhatsApp anymore.
 */
 
-const viewButton =
-card.querySelector(".product-button");
-
-viewButton.onclick = function(event) {
-
-event.stopPropagation();
+card.addEventListener(
+"click",
+function() {
 
 openProductDetails(product);
 
-};
+}
+);
 
 
 container.appendChild(card);
@@ -1944,74 +1973,39 @@ function openProductDetails(product) {
 if (!product) return;
 
 
-/* SAVE PRODUCT */
-
-window.currentProduct =
-product;
-
-
-/* HIDE MAIN SITE */
-
-document.getElementById("mainContent").style.display =
-"none";
-
-
-/* HIDE FOOTER */
-
-document.querySelector("footer").style.display =
-"none";
-
-
-/* SHOW DETAILS */
-
-const details =
-document.getElementById("productDetails");
-
-details.classList.add("active");
-
-
 /* IMAGE */
 
 const image =
 document.getElementById("detailsImage");
 
-if (product.image_url) {
-
 image.src =
-product.image_url;
-
-image.style.display =
-"block";
-
-} else {
-
-image.removeAttribute("src");
-
-image.style.display =
-"none";
-
-}
-
+product.image_url || "";
 
 image.alt =
 product.name || "Product";
 
 
-/* CATEGORY */
-
-document.getElementById("detailsCategory").textContent =
-product.category || "Available";
-
-
 /* NAME */
 
-document.getElementById("detailsName").textContent =
+document.getElementById(
+"detailsName"
+).textContent =
 product.name || "Product";
+
+
+/* CATEGORY */
+
+document.getElementById(
+"detailsCategory"
+).textContent =
+product.category || "AVAILABLE";
 
 
 /* PRICE */
 
-document.getElementById("detailsPrice").textContent =
+document.getElementById(
+"detailsPrice"
+).textContent =
 "₦" +
 Number(product.price || 0)
 .toLocaleString("en-NG");
@@ -2019,84 +2013,94 @@ Number(product.price || 0)
 
 /* STORAGE */
 
-document.getElementById("detailsStorage").textContent =
+document.getElementById(
+"detailsStorage"
+).textContent =
 product.storage || "Not specified";
 
 
 /* BATTERY */
 
-document.getElementById("detailsBattery").textContent =
+document.getElementById(
+"detailsBattery"
+).textContent =
 product.battery || "Not specified";
 
 
 /* CONDITION */
 
-document.getElementById("detailsCondition").textContent =
+document.getElementById(
+"detailsCondition"
+).textContent =
 product.condition || "Not specified";
 
 
-/*
-AVAILABLE / SOLD
+/* STATUS */
 
-The public collection only loads available products,
-but this also supports sold products if one is opened
-from another source in the future.
-*/
+const status =
+document.getElementById(
+"detailsStatus"
+);
 
-const available =
+const isAvailable =
 product.available === true;
 
 
-const statusText =
-document.getElementById("statusText");
+if (isAvailable) {
 
-const statusDot =
-document.getElementById("statusDot");
+status.textContent =
+"🟢 Available";
 
-const detailsAvailability =
-document.getElementById("detailsAvailability");
-
-
-if (available) {
-
-statusText.textContent =
-"Available";
-
-detailsAvailability.textContent =
-"Available";
-
-statusDot.classList.remove("sold");
+status.className =
+"details-status status-available";
 
 } else {
 
-statusText.textContent =
-"Sold";
+status.textContent =
+"🔴 Sold";
 
-detailsAvailability.textContent =
-"Sold";
-
-statusDot.classList.add("sold");
+status.className =
+"details-status status-sold";
 
 }
 
 
 /* WHATSAPP */
 
-const message =
-encodeURIComponent(
-`Hello Twinkle Gadgets, I'm interested in the ${product.name}${product.storage ? " " + product.storage : ""}. Price: ₦${Number(product.price || 0).toLocaleString("en-NG")}.`
+const whatsapp =
+document.getElementById(
+"detailsWhatsapp"
 );
 
 
-const whatsapp =
-document.getElementById("detailsWhatsapp");
+const message =
+encodeURIComponent(
+`Hello Twinkle Gadgets, I'm interested in the ${product.name}${product.storage ? " " + product.storage : ""} listed for ₦${Number(product.price || 0).toLocaleString("en-NG")}.`
+);
+
 
 whatsapp.href =
 "https://wa.me/2349049388119?text=" +
 message;
 
 
-/* START AT TOP */
+/*
+Show details view
+and hide normal website.
+*/
+
+document.body.classList.add(
+"details-open"
+);
+
+document.getElementById(
+"productDetails"
+).classList.add(
+"active"
+);
+
+
+/* Start at top */
 
 window.scrollTo({
 top:0,
@@ -2106,43 +2110,24 @@ behavior:"instant"
 }
 
 
-/* BACK TO COLLECTION */
+/* CLOSE PRODUCT DETAILS */
 
-function backToCollection() {
+function closeProductDetails() {
 
-document.getElementById("productDetails")
-.classList.remove("active");
+document.body.classList.remove(
+"details-open"
+);
 
-
-document.getElementById("mainContent")
-.style.display =
-"block";
-
-
-document.querySelector("footer")
-.style.display =
-"block";
-
+document.getElementById(
+"productDetails"
+).classList.remove(
+"active"
+);
 
 window.scrollTo({
 top:0,
 behavior:"instant"
 });
-
-}
-
-
-/* SAFE TEXT */
-
-function escapeHtml(value) {
-
-const div =
-document.createElement("div");
-
-div.textContent =
-value ?? "";
-
-return div.innerHTML;
 
 }
 
@@ -2152,7 +2137,7 @@ return div.innerHTML;
 loadProducts();
 
 
-/* REFRESH WHEN USER RETURNS TO PAGE */
+/* REFRESH WHEN USER RETURNS */
 
 document.addEventListener(
 "visibilitychange",
@@ -2167,26 +2152,16 @@ loadProducts();
 });
 
 
-/*
-ALLOW BROWSER BACK BUTTON TO RETURN
-TO COLLECTION AFTER DETAILS VIEW.
-*/
+/* BACK BUTTON SUPPORT */
 
 window.addEventListener(
 "popstate",
 () => {
 
-if (
-document
-.getElementById("productDetails")
-.classList.contains("active")
-) {
-
-backToCollection();
-
-}
+closeProductDetails();
 
 });
+
 
 </script>
 
