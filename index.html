@@ -4,12 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Twinkle Gadgets | Phones & Gadgets</title>
+  <title>Twinkle Gadgets | Premium Phones & Gadgets</title>
 
   <meta name="description"
-        content="Twinkle Gadgets - Phones, gadgets, repairs, buy, sell and swap. Based at Sangrous Shopping Plaza, Lagos Island. Nationwide delivery available.">
+    content="Twinkle Gadgets — premium smartphones, gadgets, repairs and device trading. Lagos Island with nationwide delivery.">
 
   <style>
+    :root {
+      --black: #080808;
+      --dark: #101010;
+      --card: #151515;
+      --white: #f7f7f5;
+      --muted: #999;
+      --line: rgba(255,255,255,.1);
+      --accent: #c9a7ff;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,32 +31,37 @@
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f7f7f8;
-      color: #111;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+        "Helvetica Neue", Arial, sans-serif;
+      background: var(--black);
+      color: var(--white);
       line-height: 1.5;
+      overflow-x: hidden;
     }
 
     a {
+      color: inherit;
       text-decoration: none;
     }
 
-    /* HEADER */
+    /* NAVIGATION */
 
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
       z-index: 1000;
-      background: rgba(17, 17, 17, 0.96);
-      backdrop-filter: blur(12px);
-      color: white;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(8,8,8,.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
 
     .nav {
-      max-width: 1150px;
+      max-width: 1200px;
       margin: auto;
-      padding: 17px 20px;
+      padding: 17px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -55,518 +70,745 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-      color: white;
+      gap: 11px;
     }
 
-    .logo-mark {
+    .logo {
       width: 39px;
       height: 39px;
+      border: 1px solid rgba(255,255,255,.25);
       border-radius: 12px;
-      background: #b78cff;
-      color: #111;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      font-size: 12px;
       font-weight: 900;
-      font-size: 14px;
+      letter-spacing: -1px;
+      background: linear-gradient(145deg,#252525,#0e0e0e);
+      box-shadow: inset 0 1px rgba(255,255,255,.12);
     }
 
     .brand-name {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
-      letter-spacing: -0.5px;
+      letter-spacing: .5px;
     }
 
     .brand-name span {
-      color: #b78cff;
+      color: var(--accent);
     }
 
     nav {
       display: flex;
-      gap: 22px;
+      gap: 28px;
+      align-items: center;
     }
 
     nav a {
-      color: #ddd;
-      font-size: 14px;
-      font-weight: 600;
+      color: #bcbcbc;
+      font-size: 13px;
+      transition: .2s;
     }
 
     nav a:hover {
-      color: #b78cff;
+      color: white;
+    }
+
+    .nav-button {
+      padding: 10px 17px;
+      border-radius: 30px;
+      background: white;
+      color: black;
+      font-weight: 700;
     }
 
     /* HERO */
 
     .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 150px 22px 90px;
       background:
-        radial-gradient(circle at 85% 20%, rgba(183,140,255,0.25), transparent 30%),
-        #111;
-      color: white;
-      padding: 85px 20px 100px;
+        radial-gradient(
+          circle at 78% 35%,
+          rgba(146,92,220,.18),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 25% 70%,
+          rgba(255,255,255,.035),
+          transparent 28%
+        ),
+        var(--black);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.035);
+      right: -220px;
+      top: 120px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 430px;
+      height: 430px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,167,255,.06);
+      right: -130px;
+      top: 205px;
     }
 
     .hero-inner {
-      max-width: 1150px;
+      max-width: 1200px;
+      width: 100%;
       margin: auto;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 50px;
-      align-items: center;
+      position: relative;
+      z-index: 2;
     }
 
     .eyebrow {
-      color: #b78cff;
-      font-size: 13px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 3px;
       font-weight: 800;
-      letter-spacing: 2px;
       text-transform: uppercase;
+      margin-bottom: 23px;
     }
 
     .hero h1 {
-      font-size: clamp(46px, 7vw, 76px);
-      line-height: 0.98;
-      letter-spacing: -4px;
-      margin: 18px 0 22px;
-      max-width: 720px;
+      max-width: 850px;
+      font-size: clamp(52px, 9vw, 105px);
+      line-height: .9;
+      letter-spacing: -6px;
+      font-weight: 800;
     }
 
     .hero h1 span {
-      color: #b78cff;
+      color: #777;
+      display: block;
     }
 
-    .hero p {
-      color: #c9c9c9;
-      max-width: 570px;
-      font-size: 17px;
-      margin-bottom: 30px;
+    .hero-text {
+      max-width: 510px;
+      color: #aaa;
+      font-size: 16px;
+      margin: 30px 0;
     }
 
-    .buttons {
+    .hero-actions {
       display: flex;
+      gap: 12px;
       flex-wrap: wrap;
-      gap: 10px;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 21px;
+      padding: 14px 22px;
       border-radius: 30px;
-      background: #b78cff;
-      color: #111;
+      font-size: 13px;
       font-weight: 800;
-      font-size: 14px;
+      transition: transform .2s;
     }
 
-    .button.secondary {
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-light {
       background: white;
+      color: black;
     }
 
-    .button.dark {
-      background: #111;
+    .button-outline {
+      border: 1px solid rgba(255,255,255,.18);
       color: white;
+      background: rgba(255,255,255,.025);
     }
 
-    .hero-card {
-      background: linear-gradient(145deg, #242424, #151515);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 28px;
-      padding: 30px;
-      min-height: 340px;
+    .hero-meta {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+      gap: 30px;
+      margin-top: 65px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.09);
+      max-width: 650px;
     }
 
-    .hero-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .meta-item strong {
+      display: block;
+      font-size: 19px;
     }
 
-    .hero-card-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      background: #b78cff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #111;
-      font-size: 23px;
-      font-weight: 900;
-    }
-
-    .hero-card small {
-      color: #999;
-    }
-
-    .hero-card h2 {
-      font-size: 42px;
-      line-height: 1;
-      margin-top: 20px;
-    }
-
-    .hero-card p {
-      font-size: 14px;
-      margin: 8px 0 0;
-    }
-
-    /* GENERAL SECTIONS */
-
-    section {
-      max-width: 1150px;
-      margin: auto;
-      padding: 75px 20px;
-    }
-
-    .section-heading {
-      margin-bottom: 32px;
-    }
-
-    .section-heading small {
-      color: #8b5cf6;
-      font-weight: 800;
-      letter-spacing: 1.5px;
+    .meta-item span {
+      color: #777;
+      font-size: 11px;
       text-transform: uppercase;
-      font-size: 12px;
+      letter-spacing: 1px;
     }
 
-    .section-heading h2 {
-      font-size: clamp(30px, 5vw, 44px);
-      line-height: 1.05;
-      letter-spacing: -1.5px;
-      margin-top: 7px;
+    /* SECTIONS */
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 110px 22px;
     }
 
-    .section-heading p {
-      color: #666;
-      margin-top: 10px;
-      max-width: 600px;
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 45px;
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(34px,5vw,58px);
+      letter-spacing: -3px;
+      line-height: 1;
+    }
+
+    .section-description {
+      color: #777;
+      max-width: 420px;
+      font-size: 14px;
     }
 
     /* PRODUCTS */
 
     .products {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
     }
 
     .product {
-      background: white;
-      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
       overflow: hidden;
-      border: 1px solid #eee;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform .25s, border-color .25s;
     }
 
     .product:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.09);
+      transform: translateY(-5px);
+      border-color: rgba(201,167,255,.3);
     }
 
     .product-image {
-      height: 270px;
-      background: linear-gradient(145deg, #181818, #414141);
-      color: white;
+      height: 350px;
+      background:
+        radial-gradient(circle at 50% 45%, #3a3a3a, transparent 34%),
+        linear-gradient(145deg,#191919,#0d0d0d);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
     }
 
-    .phone-shape {
-      width: 100px;
-      height: 180px;
-      border: 5px solid #aaa;
-      border-radius: 19px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #bbb;
+    .product-image::after {
+      content: "TWINKLE";
+      position: absolute;
+      bottom: 17px;
+      left: 20px;
+      color: rgba(255,255,255,.18);
+      font-size: 9px;
+      letter-spacing: 3px;
+    }
+
+    .phone {
+      width: 112px;
+      height: 220px;
+      border: 4px solid #686868;
+      border-radius: 25px;
+      position: relative;
+      box-shadow: 0 30px 60px rgba(0,0,0,.5);
+      background: linear-gradient(145deg,#292929,#101010);
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      width: 35px;
+      height: 7px;
+      background: #111;
+      border-radius: 10px;
+      top: 9px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .product-info {
       padding: 20px;
     }
 
-    .product-info h3 {
-      font-size: 20px;
-      margin-bottom: 5px;
+    .product-tag {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 9px;
+      font-weight: 800;
     }
 
-    .condition {
+    .product h3 {
+      font-size: 19px;
+      margin: 6px 0 3px;
+    }
+
+    .product-condition {
       color: #777;
-      font-size: 13px;
-      margin-bottom: 13px;
+      font-size: 11px;
+    }
+
+    .product-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 17px;
+      gap: 7px;
     }
 
     .price {
-      font-size: 22px;
-      font-weight: 900;
-      margin-bottom: 17px;
+      font-size: 16px;
+      font-weight: 800;
     }
 
-    .buy-button {
-      display: block;
-      text-align: center;
-      background: #111;
-      color: white;
-      padding: 12px;
-      border-radius: 11px;
+    .product-button {
+      background: white;
+      color: black;
+      padding: 9px 11px;
+      border-radius: 20px;
+      font-size: 10px;
       font-weight: 800;
-      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    /* STATEMENT */
+
+    .statement {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 105px 22px;
+    }
+
+    .statement-inner {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .statement h2 {
+      max-width: 1050px;
+      font-size: clamp(35px,6vw,70px);
+      line-height: 1;
+      letter-spacing: -4px;
+    }
+
+    .statement h2 span {
+      color: #555;
     }
 
     /* SERVICES */
 
     .services {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(4,1fr);
+      gap: 14px;
     }
 
     .service {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      border: 1px solid #eee;
+      min-height: 220px;
+      padding: 26px;
+      background: #101010;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .service-icon {
-      font-size: 27px;
-      margin-bottom: 16px;
+    .service-number {
+      color: #555;
+      font-size: 12px;
     }
 
     .service h3 {
-      font-size: 18px;
+      font-size: 20px;
       margin-bottom: 7px;
     }
 
     .service p {
-      color: #666;
-      font-size: 14px;
+      color: #777;
+      font-size: 13px;
     }
 
     /* TRUST */
 
-    .trust {
-      background: #111;
-      color: white;
+    .trust-section {
+      background: #f2f2f0;
+      color: #111;
       max-width: none;
     }
 
     .trust-inner {
-      max-width: 1150px;
+      max-width: 1200px;
       margin: auto;
-    }
-
-    .trust .section-heading small {
-      color: #b78cff;
-    }
-
-    .trust .section-heading p {
-      color: #aaa;
     }
 
     .trust-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1px;
+      background: #d5d5d2;
+      border: 1px solid #d5d5d2;
     }
 
     .trust-item {
-      border: 1px solid #292929;
-      border-radius: 20px;
-      padding: 25px;
+      background: #f2f2f0;
+      padding: 38px;
     }
 
     .trust-number {
-      font-size: 38px;
-      font-weight: 900;
-      color: #b78cff;
-      margin-bottom: 5px;
+      font-size: 50px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -3px;
+      margin-bottom: 15px;
     }
 
     .trust-item h3 {
-      font-size: 17px;
+      font-size: 18px;
       margin-bottom: 5px;
     }
 
     .trust-item p {
-      color: #aaa;
-      font-size: 14px;
+      color: #777;
+      font-size: 13px;
     }
 
     /* LOCATION */
 
-    .location {
+    .location-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 18px;
     }
 
     .location-card {
-      background: white;
-      border-radius: 22px;
-      padding: 30px;
-      border: 1px solid #eee;
+      min-height: 280px;
+      border: 1px solid var(--line);
+      border-radius: 25px;
+      padding: 32px;
+      background: #101010;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .location-card .label {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 10px;
+      font-weight: 800;
     }
 
     .location-card h3 {
-      font-size: 22px;
-      margin-bottom: 10px;
+      font-size: 30px;
+      letter-spacing: -1px;
+      margin: 15px 0 7px;
     }
 
     .location-card p {
-      color: #666;
-      margin-bottom: 20px;
+      color: #777;
+      font-size: 13px;
     }
 
     /* CTA */
 
     .cta {
-      background: linear-gradient(135deg, #191919, #27202e);
-      color: white;
-      border-radius: 28px;
-      padding: 55px 30px;
+      max-width: 1200px;
+      margin: 0 auto 100px;
+      padding: 90px 30px;
       text-align: center;
-      max-width: 1110px;
-      margin: 10px auto 75px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 50% 0%,rgba(201,167,255,.16),transparent 35%),
+        #111;
+      border: 1px solid var(--line);
+    }
+
+    .cta-label {
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      font-weight: 800;
+      text-transform: uppercase;
     }
 
     .cta h2 {
-      font-size: clamp(32px, 6vw, 48px);
-      line-height: 1;
-      letter-spacing: -2px;
-      margin-bottom: 12px;
+      font-size: clamp(40px,7vw,75px);
+      line-height: .95;
+      letter-spacing: -4px;
+      margin: 18px auto;
+      max-width: 800px;
     }
 
     .cta p {
-      color: #c8c8c8;
-      margin-bottom: 25px;
+      color: #777;
+      margin-bottom: 28px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     /* FOOTER */
 
     footer {
-      background: #111;
-      color: #999;
-      padding: 40px 20px;
+      border-top: 1px solid var(--line);
+      padding: 40px 22px;
     }
 
     .footer-inner {
-      max-width: 1150px;
+      max-width: 1200px;
       margin: auto;
       display: flex;
       justify-content: space-between;
-      gap: 25px;
       flex-wrap: wrap;
+      gap: 25px;
     }
 
     .footer-brand {
-      color: white;
-      font-weight: 800;
       font-size: 18px;
+      font-weight: 800;
+    }
+
+    .footer-brand span {
+      color: var(--accent);
     }
 
     .footer-links {
       display: flex;
-      gap: 18px;
+      gap: 22px;
+      flex-wrap: wrap;
     }
 
     .footer-links a {
-      color: #aaa;
-      font-size: 14px;
+      color: #777;
+      font-size: 12px;
     }
 
     .copyright {
       width: 100%;
-      padding-top: 25px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
       margin-top: 10px;
-      border-top: 1px solid #292929;
-      font-size: 12px;
+      color: #555;
+      font-size: 11px;
     }
 
-    /* MOBILE */
+    /* TABLET */
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
 
       nav {
         display: none;
       }
 
-      .hero-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card {
-        min-height: 280px;
-      }
-
       .products {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,1fr);
       }
 
       .services {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .hero h1 {
+        font-size: 72px;
+      }
+    }
+
+    /* PHONE */
+
+    @media (max-width: 600px) {
+
+      .nav {
+        padding: 14px 17px;
+      }
+
+      .nav-button {
+        display: none;
+      }
+
+      .hero {
+        min-height: 100vh;
+        padding: 145px 20px 70px;
+      }
+
+      .hero h1 {
+        font-size: 57px;
+        letter-spacing: -4px;
+      }
+
+      .hero-text {
+        font-size: 15px;
+      }
+
+      .hero-meta {
+        gap: 18px;
+      }
+
+      .meta-item strong {
+        font-size: 16px;
+      }
+
+      .section {
+        padding: 75px 16px;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-description {
+        margin-top: 15px;
+      }
+
+      /*
+        TWO PRODUCTS PER ROW ON PHONE
+      */
+
+      .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .product {
+        border-radius: 17px;
+      }
+
+      .product-image {
+        height: 210px;
+      }
+
+      .phone {
+        width: 72px;
+        height: 145px;
+        border-width: 3px;
+        border-radius: 17px;
+      }
+
+      .phone::before {
+        width: 25px;
+        height: 5px;
+        top: 7px;
+      }
+
+      .product-image::after {
+        bottom: 10px;
+        left: 12px;
+        font-size: 7px;
+      }
+
+      .product-info {
+        padding: 14px;
+      }
+
+      .product-tag {
+        font-size: 7px;
+      }
+
+      .product h3 {
+        font-size: 16px;
+      }
+
+      .product-condition {
+        font-size: 9px;
+      }
+
+      .product-bottom {
+        display: block;
+        margin-top: 13px;
+      }
+
+      .price {
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      .product-button {
+        display: block;
+        text-align: center;
+        padding: 9px 5px;
+        font-size: 9px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
       }
 
       .trust-grid {
         grid-template-columns: 1fr;
       }
 
-      .location {
+      .location-grid {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (max-width: 560px) {
-
-      .hero {
-        padding: 65px 20px 75px;
+      .statement {
+        padding: 80px 20px;
       }
 
-      .hero h1 {
-        font-size: 48px;
+      .statement h2 {
+        letter-spacing: -2px;
+      }
+
+      .cta {
+        margin: 0 10px 70px;
+        padding: 70px 22px;
+      }
+
+      .cta h2 {
         letter-spacing: -3px;
       }
 
-      .products {
-        grid-template-columns: 1fr;
-      }
-
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      .product-image {
-        height: 300px;
-      }
-
-      .location-card {
-        padding: 24px;
+      .footer-inner {
+        display: block;
       }
 
       .footer-links {
-        width: 100%;
+        margin-top: 25px;
       }
     }
   </style>
 </head>
 
-
 <body>
 
-  <!-- HEADER -->
+  <!-- NAVIGATION -->
 
   <header>
 
@@ -574,7 +816,7 @@
 
       <a href="#" class="brand">
 
-        <div class="logo-mark">
+        <div class="logo">
           TG
         </div>
 
@@ -585,10 +827,31 @@
       </a>
 
       <nav>
-        <a href="#phones">Phones</a>
-        <a href="#services">Services</a>
-        <a href="#location">Location</a>
-        <a href="#contact">Contact</a>
+
+        <a href="#phones">
+          Collection
+        </a>
+
+        <a href="#services">
+          Services
+        </a>
+
+        <a href="#location">
+          Visit
+        </a>
+
+        <a href="https://instagram.com/twinkle_gadget"
+           target="_blank">
+          Instagram
+        </a>
+
+        <a
+          class="nav-button"
+          href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27d%20like%20to%20make%20an%20enquiry."
+          target="_blank">
+          Contact
+        </a>
+
       </nav>
 
     </div>
@@ -598,352 +861,392 @@
 
   <!-- HERO -->
 
-  <div class="hero">
+  <main>
 
-    <div class="hero-inner">
+    <section class="hero">
 
-      <div>
+      <div class="hero-inner">
 
         <div class="eyebrow">
-          Twinkle Gadgets
+          TWINKLE GADGETS • LAGOS
         </div>
 
         <h1>
-          Your trusted
-          <span>gadget plug.</span>
+          YOUR NEXT DEVICE.
+          <span>CHOSEN BETTER.</span>
         </h1>
 
-        <p>
-          Phones, gadgets, repairs and straightforward deals.
-          Buy, sell or swap with Twinkle Gadgets.
-          Nationwide delivery available.
+        <p class="hero-text">
+          Premium smartphones, gadgets and professional repairs.
+          Buy, sell or swap with a business built on 10 years of experience.
         </p>
 
-        <div class="buttons">
+        <div class="hero-actions">
 
           <a
-            class="button"
+            class="button button-light"
+            href="#phones">
+            Explore Collection
+          </a>
+
+          <a
+            class="button button-outline"
             href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27m%20interested%20in%20a%20phone."
             target="_blank">
             WhatsApp Us
           </a>
 
-          <a
-            class="button secondary"
-            href="#phones">
-            Shop Phones
-          </a>
+        </div>
+
+        <div class="hero-meta">
+
+          <div class="meta-item">
+            <strong>10+</strong>
+            <span>Years Experience</span>
+          </div>
+
+          <div class="meta-item">
+            <strong>Lagos</strong>
+            <span>Island Store</span>
+          </div>
+
+          <div class="meta-item">
+            <strong>Nigeria</strong>
+            <span>Delivery</span>
+          </div>
 
         </div>
 
       </div>
 
+    </section>
 
-      <div class="hero-card">
 
-        <div class="hero-card-top">
+    <!-- PRODUCTS -->
 
-          <div class="hero-card-icon">
-            TG
-          </div>
+    <section class="section" id="phones">
 
-          <small>
-            EST. 10 YEARS
-          </small>
-
-        </div>
+      <div class="section-header">
 
         <div>
 
-          <h2>
-            Phones.<br>
-            Gadgets.<br>
-            More.
+          <div class="section-label">
+            Featured Collection
+          </div>
+
+          <h2 class="section-title">
+            Current picks.
           </h2>
 
-          <p>
-            Lagos Island • Nationwide Delivery
-          </p>
-
         </div>
 
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- PHONES -->
-
-  <section id="phones">
-
-    <div class="section-heading">
-
-      <small>
-        Featured
-      </small>
-
-      <h2>
-        Phones you'll want.
-      </h2>
-
-      <p>
-        Our current product section. We'll replace these
-        placeholders with your real inventory and photos.
-      </p>
-
-    </div>
-
-
-    <div class="products">
-
-
-      <!-- PRODUCT 1 -->
-
-      <div class="product">
-
-        <div class="product-image">
-
-          <div class="phone-shape">
-            PRODUCT PHOTO
-          </div>
-
-        </div>
-
-        <div class="product-info">
-
-          <h3>
-            iPhone 13
-          </h3>
-
-          <div class="condition">
-            UK Used • 128GB
-          </div>
-
-          <div class="price">
-            ₦350,000
-          </div>
-
-          <a
-            class="buy-button"
-            href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27m%20interested%20in%20the%20iPhone%2013."
-            target="_blank">
-            Enquire on WhatsApp
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 2 -->
-
-      <div class="product">
-
-        <div class="product-image">
-
-          <div class="phone-shape">
-            PRODUCT PHOTO
-          </div>
-
-        </div>
-
-        <div class="product-info">
-
-          <h3>
-            iPhone 12
-          </h3>
-
-          <div class="condition">
-            UK Used • 128GB
-          </div>
-
-          <div class="price">
-            ₦300,000
-          </div>
-
-          <a
-            class="buy-button"
-            href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27m%20interested%20in%20the%20iPhone%2012."
-            target="_blank">
-            Enquire on WhatsApp
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 3 -->
-
-      <div class="product">
-
-        <div class="product-image">
-
-          <div class="phone-shape">
-            PRODUCT PHOTO
-          </div>
-
-        </div>
-
-        <div class="product-info">
-
-          <h3>
-            More Phones
-          </h3>
-
-          <div class="condition">
-            Ask about current stock
-          </div>
-
-          <div class="price">
-            Available
-          </div>
-
-          <a
-            class="buy-button"
-            href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
-            target="_blank">
-            See Available Phones
-          </a>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- SERVICES -->
-
-  <section id="services">
-
-    <div class="section-heading">
-
-      <small>
-        What we do
-      </small>
-
-      <h2>
-        More than just phones.
-      </h2>
-
-      <p>
-        From buying your next phone to repairing the one
-        you already have.
-      </p>
-
-    </div>
-
-
-    <div class="services">
-
-
-      <div class="service">
-
-        <div class="service-icon">
-          📱
-        </div>
-
-        <h3>
-          Phones
-        </h3>
-
-        <p>
-          New and quality used smartphones available.
+        <p class="section-description">
+          A preview of the devices available through Twinkle Gadgets.
+          We'll replace these with your real inventory and product photos.
         </p>
 
       </div>
 
 
-      <div class="service">
+      <div class="products">
 
-        <div class="service-icon">
-          🔄
-        </div>
 
-        <h3>
-          Buy / Sell / Swap
-        </h3>
+        <article class="product">
 
-        <p>
-          Looking to upgrade? Sell or swap your current phone.
-        </p>
+          <div class="product-image">
+            <div class="phone"></div>
+          </div>
+
+          <div class="product-info">
+
+            <div class="product-tag">
+              iPhone
+            </div>
+
+            <h3>
+              iPhone 13
+            </h3>
+
+            <div class="product-condition">
+              UK Used • 128GB
+            </div>
+
+            <div class="product-bottom">
+
+              <div class="price">
+                ₦350,000
+              </div>
+
+              <a
+                class="product-button"
+                href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27m%20interested%20in%20the%20iPhone%2013."
+                target="_blank">
+                Enquire
+              </a>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="product">
+
+          <div class="product-image">
+            <div class="phone"></div>
+          </div>
+
+          <div class="product-info">
+
+            <div class="product-tag">
+              iPhone
+            </div>
+
+            <h3>
+              iPhone 12
+            </h3>
+
+            <div class="product-condition">
+              UK Used • 128GB
+            </div>
+
+            <div class="product-bottom">
+
+              <div class="price">
+                ₦300,000
+              </div>
+
+              <a
+                class="product-button"
+                href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27m%20interested%20in%20the%20iPhone%2012."
+                target="_blank">
+                Enquire
+              </a>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="product">
+
+          <div class="product-image">
+            <div class="phone"></div>
+          </div>
+
+          <div class="product-info">
+
+            <div class="product-tag">
+              Available
+            </div>
+
+            <h3>
+              Find Your Device
+            </h3>
+
+            <div class="product-condition">
+              Ask about current stock
+            </div>
+
+            <div class="product-bottom">
+
+              <div class="price">
+                Available
+              </div>
+
+              <a
+                class="product-button"
+                href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20please%20send%20me%20your%20available%20phones."
+                target="_blank">
+                View Stock
+              </a>
+
+            </div>
+
+          </div>
+
+        </article>
+
 
       </div>
 
+    </section>
 
-      <div class="service">
 
-        <div class="service-icon">
-          🛠️
+    <!-- STATEMENT -->
+
+    <div class="statement">
+
+      <div class="statement-inner">
+
+        <div class="section-label">
+          The Twinkle Standard
         </div>
 
-        <h3>
-          Repairs
-        </h3>
-
-        <p>
-          Professional phone and gadget repair services.
-        </p>
+        <h2>
+          Phones worth buying.
+          <span>Service worth remembering.</span>
+        </h2>
 
       </div>
-
-
-      <div class="service">
-
-        <div class="service-icon">
-          🎧
-        </div>
-
-        <h3>
-          Gadgets
-        </h3>
-
-        <p>
-          Accessories and useful gadgets for your devices.
-        </p>
-
-      </div>
-
 
     </div>
 
-  </section>
 
+    <!-- SERVICES -->
 
-  <!-- TRUST -->
+    <section class="section" id="services">
 
-  <div class="trust">
+      <div class="section-header">
 
-    <div class="trust-inner">
+        <div>
 
-      <section>
+          <div class="section-label">
+            What We Do
+          </div>
 
-        <div class="section-heading">
-
-          <small>
-            Why Twinkle Gadgets
-          </small>
-
-          <h2>
-            Experience you can count on.
+          <h2 class="section-title">
+            More than a phone shop.
           </h2>
 
-          <p>
-            Serving customers with phones, gadgets and
-            repair services for 10 years.
+        </div>
+
+        <p class="section-description">
+          From your next smartphone to repairs and upgrades,
+          we've got your device covered.
+        </p>
+
+      </div>
+
+
+      <div class="services">
+
+
+        <div class="service">
+
+          <div class="service-number">
+            01
+          </div>
+
+          <div>
+
+            <h3>
+              Smartphones
+            </h3>
+
+            <p>
+              Quality smartphones selected for everyday use,
+              work, lifestyle and everything in between.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="service">
+
+          <div class="service-number">
+            02
+          </div>
+
+          <div>
+
+            <h3>
+              Buy • Sell • Swap
+            </h3>
+
+            <p>
+              Looking to upgrade? Trade in, sell or swap
+              your current device.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="service">
+
+          <div class="service-number">
+            03
+          </div>
+
+          <div>
+
+            <h3>
+              Repairs
+            </h3>
+
+            <p>
+              Professional phone and gadget repair services
+              from an experienced technician.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="service">
+
+          <div class="service-number">
+            04
+          </div>
+
+          <div>
+
+            <h3>
+              Gadgets
+            </h3>
+
+            <p>
+              Useful accessories and gadgets to complete
+              your setup.
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- TRUST -->
+
+    <section class="trust-section">
+
+      <div class="trust-inner">
+
+        <div class="section-header">
+
+          <div>
+
+            <div class="section-label">
+              Why Twinkle
+            </div>
+
+            <h2 class="section-title">
+              Built on experience.
+            </h2>
+
+          </div>
+
+          <p class="section-description">
+            A decade of working with phones and gadgets
+            in Lagos.
           </p>
 
         </div>
 
 
         <div class="trust-grid">
-
 
           <div class="trust-item">
 
@@ -952,11 +1255,12 @@
             </div>
 
             <h3>
-              Years Experience
+              Years in Business
             </h3>
 
             <p>
-              A decade in the phone and gadget business.
+              A decade of experience in phones, gadgets
+              and repairs.
             </p>
 
           </div>
@@ -965,7 +1269,25 @@
           <div class="trust-item">
 
             <div class="trust-number">
-              🇳🇬
+              01
+            </div>
+
+            <h3>
+              Lagos Island
+            </h3>
+
+            <p>
+              Visit us at Sangrous Shopping Plaza,
+              Lagos Island.
+            </p>
+
+          </div>
+
+
+          <div class="trust-item">
+
+            <div class="trust-number">
+              NG
             </div>
 
             <h3>
@@ -973,136 +1295,141 @@
             </h3>
 
             <p>
-              We deliver phones and gadgets across Nigeria.
+              We arrange delivery to customers across Nigeria.
             </p>
 
           </div>
-
-
-          <div class="trust-item">
-
-            <div class="trust-number">
-              3
-            </div>
-
-            <h3>
-              Buy • Sell • Swap
-            </h3>
-
-            <p>
-              Multiple ways to get the device you want.
-            </p>
-
-          </div>
-
 
         </div>
 
-      </section>
+      </div>
 
-    </div>
-
-  </div>
+    </section>
 
 
-  <!-- LOCATION -->
+    <!-- LOCATION -->
 
-  <section id="location">
+    <section class="section" id="location">
 
-    <div class="section-heading">
+      <div class="section-header">
 
-      <small>
-        Visit us
-      </small>
+        <div>
+
+          <div class="section-label">
+            Visit Twinkle
+          </div>
+
+          <h2 class="section-title">
+            Come see us.
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="location-grid">
+
+
+        <div class="location-card">
+
+          <div>
+
+            <div class="label">
+              Our Store
+            </div>
+
+            <h3>
+              Sangrous Shopping Plaza
+            </h3>
+
+            <p>
+              Lagos Island, Lagos, Nigeria
+            </p>
+
+          </div>
+
+          <a
+            class="button button-light"
+            href="https://www.google.com/maps/search/?api=1&query=Sangrous%20Shopping%20Plaza%20Lagos%20Island"
+            target="_blank">
+            Open Maps
+          </a>
+
+        </div>
+
+
+        <div class="location-card">
+
+          <div>
+
+            <div class="label">
+              Direct Contact
+            </div>
+
+            <h3>
+              Let's talk gadgets.
+            </h3>
+
+            <p>
+              WhatsApp us about a phone, repair,
+              gadget or swap.
+            </p>
+
+          </div>
+
+          <a
+            class="button button-light"
+            href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27d%20like%20to%20make%20an%20enquiry."
+            target="_blank">
+            Start a Conversation
+          </a>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <div class="cta">
+
+      <div class="cta-label">
+        Twinkle Gadgets
+      </div>
 
       <h2>
-        Find Twinkle Gadgets.
+        Your next device starts here.
       </h2>
 
-    </div>
+      <p>
+        Phones • Gadgets • Repairs • Buy • Sell • Swap
+      </p>
 
-
-    <div class="location">
-
-
-      <div class="location-card">
-
-        <h3>
-          📍 Lagos Island
-        </h3>
-
-        <p>
-          Sangrous Shopping Plaza<br>
-          Lagos Island, Lagos
-        </p>
+      <div class="cta-actions">
 
         <a
-          class="button dark"
-          href="https://www.google.com/maps/search/?api=1&query=Sangrous%20Shopping%20Plaza%20Lagos%20Island"
+          class="button button-light"
+          href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27m%20looking%20for%20a%20phone."
           target="_blank">
-          Open in Maps
+          WhatsApp Us
+        </a>
+
+        <a
+          class="button button-outline"
+          href="https://instagram.com/twinkle_gadget"
+          target="_blank">
+          @twinkle_gadget
         </a>
 
       </div>
 
-
-      <div class="location-card">
-
-        <h3>
-          📲 Talk to us
-        </h3>
-
-        <p>
-          Have a question about a phone, gadget,
-          repair or swap? Message us directly.
-        </p>
-
-        <a
-          class="button"
-          href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%20need%20some%20information."
-          target="_blank">
-          Chat on WhatsApp
-        </a>
-
-      </div>
-
-
     </div>
 
-  </section>
-
-
-  <!-- CTA -->
-
-  <div class="cta" id="contact">
-
-    <h2>
-      Looking for a phone?
-    </h2>
-
-    <p>
-      Tell us what you're looking for and we'll help you find it.
-    </p>
-
-    <div class="buttons" style="justify-content:center;">
-
-      <a
-        class="button"
-        href="https://wa.me/2349049388119?text=Hello%20Twinkle%20Gadgets%2C%20I%27m%20looking%20for%20a%20phone."
-        target="_blank">
-        WhatsApp Us
-      </a>
-
-      <a
-        class="button secondary"
-        href="https://instagram.com/twinkle_gadget"
-        target="_blank">
-        Instagram
-      </a>
-
-    </div>
-
-  </div>
+  </main>
 
 
   <!-- FOOTER -->
@@ -1112,17 +1439,21 @@
     <div class="footer-inner">
 
       <div class="footer-brand">
-        TWINKLE GADGETS
+        TWINKLE<span>.</span>
       </div>
 
       <div class="footer-links">
 
         <a href="#phones">
-          Phones
+          Collection
         </a>
 
         <a href="#services">
           Services
+        </a>
+
+        <a href="#location">
+          Location
         </a>
 
         <a href="https://instagram.com/twinkle_gadget"
@@ -1138,8 +1469,7 @@
       </div>
 
       <div class="copyright">
-        © 2026 Twinkle Gadgets. Lagos Island, Nigeria.
-        All rights reserved.
+        © 2026 Twinkle Gadgets • Lagos Island, Nigeria • All rights reserved.
       </div>
 
     </div>
